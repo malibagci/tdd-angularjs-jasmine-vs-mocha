@@ -1,3 +1,10 @@
 var ThesisApp = window.ThesisApp = angular.module('ThesisApp',
-  'ThesisApp.Controllers'
+  [
+    'ngRoute',
+    'ThesisApp.Controllers',
+    'ThesisApp.Directives',
+    'ThesisApp.Filters',
+    'ThesisApp.Routes',
+    'ThesisApp.Services'
+  ]
 )
