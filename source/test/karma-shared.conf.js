@@ -12,6 +12,7 @@ module.exports = function() {
     files: [
       // 3rd party code
       'app/scripts/lib/angular-1.2.14.min.js',
+      'app/scripts/lib/angular-route-1.2.14.min.js',
 
       // app specific code
       'app/scripts/config/config.js',

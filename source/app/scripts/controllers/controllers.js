@@ -1,8 +1,8 @@
 var ThesisControllers = angular.module('ThesisApp.Controllers', []);
 
-ThesisControllers.controller('TestCtrl', [
+ThesisControllers.controller('HomeCtrl', [
   '$scope',
   function($scope) {
-    console.log("TestCtrl here.");
+    console.log("HomeCtrl here.");
   }
 ]);

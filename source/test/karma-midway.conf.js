@@ -16,7 +16,7 @@ module.exports = function(config) {
     // 'test/midway/filters/filtersSpec.js',
     // 'test/midway/directives/directivesSpec.js',
     // 'test/midway/requestsSpec.js',
-    // 'test/midway/routesSpec.js',
+    'test/midway/routes.spec.js'
     // 'test/midway/**/*.js'
   ]);
 
