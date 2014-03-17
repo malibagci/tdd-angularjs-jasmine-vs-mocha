@@ -5,9 +5,22 @@ ThesisServices.service("TestService", function() {
 });
 
 ThesisServices.factory("TestFactory", function() {
-  console.log("TestFactory here.")
+  console.log("TestFactory here.");
 });
 
-// ThesisServices.provider("TestProvider", function() {
-//   console.log("TestProvider here.")
-// });
+ThesisServices.factory("$heroesFactory", function() {
+
+
+
+  return {
+    fetchHeroes: function() {
+
+    },
+    getHeroes: function() {
+      return {};
+    },
+    get: function() {
+
+    }
+  };
+});

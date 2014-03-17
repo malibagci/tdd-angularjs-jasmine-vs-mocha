@@ -11,13 +11,19 @@ describe("Midway: Testing Routes", function() {
   });
 
   it("should have a working home_path route", function() {
-    tester.visit("/", function() {
-      console.log("asd")
-      expect(tester.path()).to.equal('/asdasdasdasdasd');
+    console.log("at least i am here and i am here..");
+    tester.visit('/home', function() {
+      expect(tester.path()).to.equal('/home');
+      expect(tester.viewElement().html()).to.contain('welcome to my home page');
+
+      var scope = tester.viewScope();
+      expect(scope.title).to.equal('my home page');
+      done();
+      scope.apply();
     });
   });
 
-  it("should have a home_path route that should go to the HomeCtrl controller", 
+  xit("should have a home_path route that should go to the HomeCtrl controller", 
     function() {
       
   });

@@ -8,8 +8,12 @@ ThesisRoutes.config([
     // $locationProvider.hashPrefix("!");
 
     $routeProvider.when("/", {
+      redirectTo: "/home"
+    });
+
+    $routeProvider.when("home", {
       templateUrl: "views/templates/home.html",
-      controller: "HomeCtrl"
+        controller: "HomeCtrl"
     });
   }
 ]);
