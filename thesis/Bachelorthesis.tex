@@ -1,0 +1,107 @@
+\NeedsTeXFormat{LaTeX2e}
+\documentclass[12pt,a4paper]{article}
+\usepackage[includeheadfoot,margin=2.5cm]{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{floatflt}
+\usepackage{graphicx}
+\usepackage{color}
+\usepackage{subfig}
+\usepackage[english,ngerman]{babel}
+\usepackage{listings}
+\usepackage{url}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{titlesec}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{subfig}
+\usepackage[section]{placeins}
+\usepackage[smaller]{acronym}
+\usepackage[font=small,labelfont=bf]{caption}
+
+\lstdefinestyle{verbo}{
+    showstringspaces=false
+}
+
+\hyphenation{
+    %add manual hyphenation rules in the format: Fach-hoch-schule
+}
+
+%Hyphenation Settings
+%\clubpenalty=10000
+%\widowpenalty=10000
+%\displaywidowpenalty=10000
+%\brokenpenalty10000\relax
+
+\usepackage[authordate,bibencoding=auto,strict,noibid]{biblatex-chicago}
+
+\makeatletter
+\AtEveryBibitem{%
+  \global\undef\bbx@lasthash%
+  \clearfield{extrayear}}
+\makeatother
+
+\bibliography{Bibliography}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt plus 2pt minus 1pt}
+
+
+\titleformat{\paragraph}{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3} 
+
+\lstset{
+	language=C,
+	basicstyle=\ttfamily,
+	keywordstyle=\color{blue},
+	tabsize=4,
+	numbers=left,
+	numberstyle=\footnotesize
+%	morekeywords={*,auto}
+}
+
+\selectlanguage{ngerman}
+
+\begin{document}
+
+\input{Title}
+
+\pagestyle{headings}
+\pagenumbering{roman}
+
+\input{Affirmation}
+
+\newpage
+\input{Summary}
+
+\newpage
+\input{Abstract}
+
+\newpage
+\tableofcontents
+
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\include{Body}
+
+\input{Acronyms}
+
+\listoffigures
+\lstlistoflistings
+\listoftables
+
+
+\newpage
+
+\printbibliography
+
+\include{Attachment}
+
+\setlength{\parskip}{10pt}
+\end{document} 
