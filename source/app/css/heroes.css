@@ -1,0 +1,41 @@
+h1 {
+  margin-top: 50px;
+}
+
+#search-hero {
+  transition: all 300ms cubic-bezier(0.230, 1.000, 0.320, 1.000);
+  width: 200px;
+}
+
+#search-hero:focus {
+  width: 300px;
+}
+
+.hero {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: all 250ms linear;
+}
+
+.hero:hover {
+  opacity: 1;
+}
+
+.hero-lead {
+  position: absolute;
+  width: 100%;
+  color: white;
+  text-align: center;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+}
+
+.hero-lead span {
+  background-color: black;
+  width: 100%;
+  display: inline-block;
+  padding: 15px;
+}

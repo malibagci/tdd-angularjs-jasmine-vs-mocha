@@ -5,7 +5,7 @@ module.exports = function(config) {
 
   conf.files = conf.files.concat([
     //test files
-    './test/e2e/**/*.js'
+    './test/e2e/**/*.spec.js'
   ]);
 
   conf.proxies = {

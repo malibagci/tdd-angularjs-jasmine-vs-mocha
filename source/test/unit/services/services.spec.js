@@ -9,36 +9,36 @@ describe("Unit: Testing services", function() {
 
     it("should contain be present", 
       inject( function($heroesFactory) {
+
       expect($heroesFactory).not.to.equal(null);
     }));
 
     it("should work (contain certain functions)", 
       inject( ['$heroesFactory', function($heroesFactory) {
 
-      expect($heroesFactory.fetchHeroes).not.to.equal(undefined);
+      expect($heroesFactory.fetchHero).not.to.equal(undefined);
       expect($heroesFactory.getHeroes).not.to.equal(undefined);
       expect($heroesFactory.get).not.to.equal(undefined);
 
     }]));
 
-    it("should load heroes through $http", 
-      inject( ['$heroesFactory', function($heroesFactory) {
+    it("should load heroes through fetchHeroes", 
+      inject( ['$heroesFactory', '$http', function($heroesFactory, $http) {
 
-      var spy = sinon.spy( $heroesFactory.fetchHeroes );
+        console.log($http);
 
-      $heroesFactory.fetchHeroes();
-
-      spy.called.should.equal(true);
-
+      var spy = sinon.spy($http, "get");
+      $heroesFactory.fetchHero("Wolverine");
+      expect(spy.called).to.be.true;
+      spy.restore();
 
     }]));
 
-    it("should be able to return heroes", 
+    it("should be able to return heroes (async", 
       inject( ['$heroesFactory', function($heroesFactory){
 
-        var heroes;
-        heroes = $heroesFactory.getHeroes();
-        expect(heroes).not.to.equal(undefined);
+        var heroes = $heroesFactory.getHeroes();
+        expect(heroes.length).to.be.at.least(1);
 
     }]));
 

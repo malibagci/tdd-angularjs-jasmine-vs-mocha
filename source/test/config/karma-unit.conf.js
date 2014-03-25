@@ -14,5 +14,9 @@ module.exports = function(config) {
     'test/unit/**/*.spec.js'
   ]);
 
+  conf.frameworks = conf.frameworks.concat([
+    'sinon'
+  ]);
+
   config.set(conf);
 };

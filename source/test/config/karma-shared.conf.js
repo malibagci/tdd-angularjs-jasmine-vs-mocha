@@ -1,12 +1,12 @@
 module.exports = function() {
   return {
     basePath: '../../',
-    frameworks: ['mocha', 'chai', 'sinon'],
+    frameworks: ['mocha'],
     reporters: ['progress'],
     browsers: ['PhantomJS'],
-    autoWatch: true,
+    autoWatch: false,
 
-    singleRun: false,
+    singleRun: true,
     colors: true,
 
     files: [
