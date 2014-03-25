@@ -1,9 +1,74 @@
-% \autocite[]{McConnell:2004:CCS:1096143}.
+\section{Einführung}
+\label{Einführung}
+\subsection{Relevanz \& Problemstellung}
+Bessere Code-Qualität mit im Vergleich minimal erhöhtem Zeitaufwand ist ein
+erstrebenswertes Ergebnis, welches durch Test-driven Development (TDD) versucht
+wird, zu erreichen. Durch die Idee von TDD - nämlich kurze Iterationen von:
+\begin{enumerate}
+  \item Tests schreiben (ohne sich Gedanken über den tatsächlichen Code zu machen)
+  \item Tests ausführen und fehlschlagen lassen
+  \item Code implementieren
+  \item Tests ausführen und den Code eventuell weiter implementieren, bis die 
+  Tests nicht mehr fehlschlagen
+  \item Tests und Code refaktorieren
+  \item Tests erneut ausführen
+\end{enumerate}
+wird eine hohe Testabdeckung und ein sauberer Code durch das Refaktorieren 
+erzielt.
 
-\section{Test-Driven Development}
+AngularJS ist ein umfassendes MVC Framework und bringt viele eigene Komponenten
+mit sich, wie beispielsweise Direktiven und Services. Um test-driven mit 
+AngularJS entwickeln zu können, ist es wegen der Vielfalt der eigenen 
+Komponenten relevant, alle diese Komponenten testen zu können.
+
+Mit der Relevanz von TDD mit AngularJS geht die Problemstellung der Auswahl 
+eines passenden Testing Frameworks einher. Jasmine und Mocha sind zwei 
+JavaScript Testing Frameworks, welche sich für diese Aufgabenstellung anbieten. 
+Deshalb werden beide Frameworks in dieser Arbeit gegenüber gestellt und 
+analysiert, um die Unterschiede beziehungsweise die Vor- sowie Nachteile jedes der 
+Frameworks darstellen zu können.
+
+\subsection{Methoden}
+\subsubsection{Test-driven Development}
+Eine theoretische Erfassung von Test-driven Development (TDD) und was die
+Vor- und Nachteile von TDD verglichen mit anderen Entwicklungsmethoden sind, 
+ist grundlegend für den weiteren Inhalt der Arbeit. Andere Entwicklungsmethoden
+beinhaltet hier das Entwickeln ohne Testen sowie das Entwickeln und Testen im
+nachhinein.
+
+\subsubsection{AngularJS}
+AngularJS wird zusammen mit den dazugehörigen Komponenten theoretisch und
+praktisch dargestellt. Weitere Erläuterungen zu dem {\glqq 
+Model-View-Controller (MVC)\grqq} Design-Pattern werden zum Verständnis des
+Frameworks auch behandelt.
+Die Theorie und die Praxis arbeiten hier sehr dicht zusammen, um im Vorfeld
+alle Facetten des MVC-Frameworks abzuklären.
+
+\subsubsection{Testing Frameworks}
+Um abklären zu können, welches der beiden JavaScript Testing-Frameworks 
+{\glqq Jasmine\grqq} und {\glqq Mocha\grqq} besser geeignet ist, um alle
+Eigenschaften von AngularJS abzudecken, wird ein direkter theoretischer
+Vergleich der Frameworks und deren Eigenschaften erfolgen. Darüber hinaus wird 
+eine Applikation test-driven mit beiden Frameworks entwickelt. Die Applikation
+wird alle der relevanten Eigenschaften von AngularJS behandeln. Der 
+Entwicklungsprozess wird innerhalb der Arbeit dokumentiert.
+
+\subsection{Forschungsfrage}
+Wie ist der aktuelle Stand um AngularJS test-driven zu entwickeln und welches 
+der beiden JavaScript Testing-Frameworks {\glqq Jasmine\grqq} und {\glqq 
+Mocha\grqq} ist geeigneter für diesen Zweck?
+
+\subsection{Begrifflichkeit}
+ - Begrifflichkeit -
+
+\newpage
+\section{Entwicklungsprozess}
+\label{Entwicklungsprozess}
+
+\subsection{Test-Driven Development}
 \label{section:Test-Driven Development}
  - Einleitung TDD -
-\subsection{Die zwei Regeln von TDD}
+\subsubsection{Die zwei Regeln von TDD}
 Für das Arbeiten mit TDD gelten zwei simple Regeln \autocite[]{Beck:2003}.
 \begin{enumerate}
   \item Es wird nur neuer Code geschrieben, wenn einer der automatisierten Tests fehlschlägt.
@@ -55,7 +120,7 @@ Laut \cite{Beck:2003} werden diese Reaktionen durch TDD erreicht. Das große, er
 
 Weiters beschreibt Beck TDD als Bewusstsein der Lücke zwischen Programmierentscheidungen und Feedback sowie die Möglichkeiten um diese Lücke kontrollieren zu können.
 
-\subsection{Der TDD-Kreislauf}
+\subsubsection{Der TDD-Kreislauf}
 \begin{enumerate}
   \item \textbf{Test schreiben}:\newline
   Der Test sollte wiederspiegeln, wie ein/e EntwicklerIn sich die zukünftige Operation wünscht. Der Test ist eine Geschichte. Diese Geschichte soll alle möglichen Elemente beinhalten, welche notwendig sind um die richtigen Antworten für die Geschichte zu erhalten.
@@ -141,3 +206,77 @@ Nach dem dritten Schritt wird erneut der Test ausgeführt um zu garantieren, das
 Durch die Anwendung des TDD-Kreislaufs wurde hier \textit{sauberer} und \textit{funktionierender} Code produziert.
 
 % Wörter bis hier 1009 (36 Code)
+
+\subsection{Andere Entwicklungsmethoden}
+ - Andere Entwicklungsmethoden - 
+\subsection{Gegenüberstellung}
+ - Gegenüberstellung -
+
+\newpage
+\section{AngularJS}
+ - AngularJS -
+
+\subsection{Hintergründe}
+ - Hintergründe -
+\subsection{Anatomie von AngularJS}
+ - Anatomie von AngularJS -
+\subsection{Model-View-Controller Design Pattern}
+ - Model-View-Controller Design Pattern -
+\subsection{Komponenten}
+ - Komponenten -
+
+\subsubsection{Controller}
+ - Controller -
+\subsubsection{Directives}
+ - Directives -
+\subsubsection{Services}
+ - Services -
+\subsubsection{Dependency-Injection}
+ - Dependency-Injection -
+\subsubsection{Data-Binding}
+ - Data-Binding -
+
+\subsection{Entwickeln mit AngularJS}
+ - Entwickeln mit AngularJS -
+
+\newpage
+\section{Testing Frameworks}
+ - Testing Frameworks -
+
+\subsection{Jasmine}
+ - Jasmine -
+
+\subsubsection{Hintergründe}
+ - Hintergründe -
+\subsubsection{Funktionen}
+ - Funktionen -
+\subsubsection{Testen von asynchronem Javascript}
+ - Testen von asynchronem Javascript -
+
+\subsection{Mocha}
+ - Mocha -
+
+\subsubsection{Hintergründe}
+ - Hintergründe -
+\subsubsection{Funktionen}
+ - Funktionen -
+\subsubsection{Testen von asynchronem Javascript}
+ - Testen von asynchronem Javascript -
+
+\subsection{Gegenüberstellung}
+ - Gegenüberstellung -
+\newpage
+\section{Conclusio}
+ - Conclusio -
+
+\newpage
+\section{Ausblick}
+ - Ausblick -
+
+\nocite{Green:2013}
+\nocite{Kozlowski:2013}
+\nocite{Hahn:2013}
+\nocite{Zakas:2012}
+\nocite{MacCaw:2011}
+\nocite{Burnham:2011}
+\nocite{Gaertner:2012}
