@@ -135,7 +135,6 @@ Das Ziel dieser drei Schritte ist \glqq{clean code that works\grqq}, also \glqq{
 Folgendes Beispiel illustriert diesen Kreislauf anhand einer einfachen Implementierung für simple Addition.
 Die erläuternde Beispiele zu TDD werden in JavaScript verfasst, da sich diese Arbeit primär mit JavaScript und AngularJS befasst.
 Das Beispiel kann im referenziertem GitHub-Repository in dem Verzeichnis \glqq{source/simple-tests/step-1\grqq} gefunden werden.
-% Bis hier ~666 Wörter.
 
 Schritt 1: Test schreiben.
 Der erste einfache Test beschreibt eine Geschichte. In dieser Geschichte soll die Funktion \glqq{plus(arg1, arg2)\grqq} die zwei übergebenen Parameter addieren und ein Ergebnis zurückliefern. Für die einfachste Integer-Variante bedeutet das also: \glqq{1+1=2\grqq}
@@ -203,9 +202,98 @@ Nach dem dritten Schritt wird erneut der Test ausgeführt um zu garantieren, das
   \label{figure:tdd-simple-step-1-3}
 \end{figure}
 
-Durch die Anwendung des TDD-Kreislaufs wurde hier \textit{sauberer} und \textit{funktionierender} Code produziert.
+Durch die Anwendung des TDD-Kreislaufs wurde hier \textit{sauberer} und \textit{funktionierender} Code produziert.\newline\newline
 
-% Wörter bis hier 1009 (36 Code)
+\subsubsection{Test-Driven Development Patterns}
+\textbf{Red Bar Patterns}
+
+Diese Muster betreffen den ersten Teil des TDD-Kreislaufs: das Test Schreiben.
+Konkret behandeln sie die Fragen:
+\begin{itemize}
+  \item \glqq{Wann\grqq} sollen Tests geschrieben werden?
+  \item \glqq{Wo\grqq} sollen Tests geschrieben werden?
+  \item \glqq{Wann\grqq} soll mit dem Tests Schreiben \glqq{aufgehört\grqq} werden?
+\end{itemize}
+
+\textit{One Step Test}
+
+Bei TDD handelt es sich wie bereits erwähnt um einen Prozess, bei welchem in kleinen Schritten und Schritt für Schritt Software aus Tests geformt wird. In diesem Prozess ist es notwendig sich für die Reihenfolge der Test-Schritte (in weiterer Folge auch für die Reihenfolge, in welcher die Komponenten der Software entstehen soll) zu entscheiden.
+
+\cite{Beck:2003}[134] liefert auf die Frage \glqq{Welchen Test sollte ich als nächstes schreiben?\grqq} eine klare Antwort: Es gibt keine.
+Die Frage ist hinsichtlich der Anforderungen der Software (beziehungsweise deren Komponenten) sowie der/s Entwicklerin/s zu individuell.
+Beck gibt jedoch den Tipp, weder Tests mit einer offensichtlichen Implementierung, noch Tests, welche zu kompliziert erscheinen zu wählen.
+Man sollte Schritt für Schritt jene Tests wählen, bei welchen man sich wohlsten fühlt.
+Sollten nur zu komplizierte Probleme und Tests vorliegen müssen die Schritte verkleinert und somit das Szenario noch weiter unterteilt werden.
+
+Die Mechanik des \glqq{One Step Test\grqq}'s wird von \cite{Beck:2003}[134] mit \glqq{known to unknown\grqq} beschrieben.\newline\newline
+
+\textit{Starter Test}
+
+Mit welchem Test soll begonnen werden?
+
+Eines der Grundkonzepte von TDD besagt, dass die Konzentration immer nur auf dem aktuellen Problem und Test liegen soll. Diesem Konzept steht jedoch die Möglichkeit mit einem realistischen Test zu starten gegenüber. Bei dem Versuch einen realistischen Test zu schreiben, wird der Fokus sofort auf einige andere Fragen gelenkt. \glqq{Was ist der richtige Input?\grqq}, \glqq{Was ist das richtige Ergebnis?\grqq}, \glqq{Welche Parameter sind notwendig für Lösung des Problems?\grqq} oder \glqq{Wohin gehört dieser Test eigentlich?\grqq}. Man findet sich bei dem Schreiben realistischer Tests häufig dabei wieder über viele Probleme und Fragen auf einmal nachzudenken, verliert also den Fokus auf den aktuellen Test des aktuellen Problems.
+
+Ein realistischer Test bedeutet eine Verzögerung des Abstands der \glqq{Rot-Grün-Refactor\grqq} Zyklen - diese sollen jedoch möglichst kurz gehalten werden.
+Der erste Test, also der \glqq{Starter Test\grqq} soll so trivial wie möglich sein.
+
+\glqq{Start by testing a variant of an operation that doesn't do anything\grqq}, \cite{Beck:2003}[134].\newline\newline
+
+\textit{Learning Test}
+
+Wie bereits erwähnt geht es bei TDD nicht nur um eine möglichst hohe Test-Dichte, sondern ebenfalls um andere Faktoren, wie Design, Schätzbarkeit, sauberen Code, psychologische Auswirkungen, etc.
+
+Eine weitere Methode TDD einzusetzen betrifft das Lernen des Umgangs mit einer neuen API oder Bibliothek. Wenn man eine neue Bibliothek verwendet bietet es sich an, gegen diese Tests zu schreiben anstatt direkt Implementierungen damit vorzunehmen - ansonsten sollten keine Tests für externe Software mptwendig sein.\newline\newline
+
+\textit{Regression Test}
+
+Auch TDD kann keine 100\%-ige Fehler-Freiheit garantieren. Sollte ein Problem berichtet werden, ist der erste Schritt einen neuen Test für dieses Problem zu verfassen. Der Test muss den einfachsten Fall, welcher das Fehlverhalten hervorruft behandeln. Durch das nachträgliche absolvieren des TDD-Kreislaufs für das gemeldete Problem werden die gleichen Vorteile wie auch für direktes TDD erreicht.
+...\newline\newline
+
+\textbf{Green Bar Patterns}
+
+Die \glqq{Red Bar Patterns\grqq} helfen dabei die notwendigen Tests zu verfassen. Die \glqq{Green Bar Patterns\grqq} hingegen geben nun Ansätze, wie die geschriebenen und fehlschlagenden Tests schnellst möglich erfolgreich abgeschlossen werden können.\newline\newline
+
+\textit{Fake it ('til you make it)}
+
+Um die Abstände der \glqq{Rot-Grün-Refactor\grqq} Zyklen so gering wie möglich halten zu können wird immer die einfachste Variante aller möglichen Implementierungen verwendet: Eine Konstante zurück liefern.
+
+Nachdem der Test grün ist wird Schritt für Schritt die Implementierung richtig gestellt und die Konstante mit Variablen in einen Ausdruck gewandelt. Hier stellt sich jedoch die Frage \glqq{Wieso offensichtlich falschen Code schreiben?\grqq} - Um den Test schnell erfolgreich laufen lassen zu können.
+Laut \cite{Beck:2003}[152] hat dieses Muster zwei starke Effekte. Wenn der Test grün ist fühlt man sich sicher. Man kann sich voll und ganz auf das richtige Refaktorieren konzentrieren. Also einerseits erfüllt \glqq{Fake it\grqq} einen psychologischen Effekt. Andererseits hilft es bei der Abgrenzung von zukünftigen Problemen. Wie schon erwähnt dient TDD auch dazu den Fokus und die Konzentration immer bei dem aktuellen Problem zu halten. Als ersten Schritt eine Konstante zurück zu liefern unterstützt dabei die/den EntwicklerIn.
+
+BAIIISPÜÜÜÜL + Duplikation zwischen Test \& Implementierung removen undso.\newline\newline
+
+\textit{Triangulate}
+
+Ein weiterer Weg um schnell einen erfolgreichen Test zu erreichen ist \glqq{Triangulate\grqq}. Bei Triangulate geht es darum, nicht nur ein mögliches Ergebnis zu testen, sondern zwei oder mehrere Ergebnisse.
+
+Anhand des folgenden Beispielswird der direkte Unterschied zu \glqq{Fake it\grqq} erklärt.
+
+BAIIISPÜÜÜÜÜHL
+
+Bei Triangulate wird also nicht mittels direkter Eliminierung der Duplikation zwischen Test und Implementierung refaktoriert, sondern durch das Hinzufügen eines weiteren möglichen Ergebnisses.\newline\newline
+\newpage
+\textit{Obvious Implementation}
+
+Wie die bisherigen Beispiele für \glqq{Fake it\grqq} und \glqq{Triangulate\grqq} zeigen, handelt es sich dabei um wirklich kleine Schritte. Speziell anhand dieses Beispiels lässt sich das dritte Green Bar Patterns erklären: \glqq{Obvious Implementation\grqq}.
+
+Wenn eine Operation so einfach ist, wie in dem Beispiel, spricht nichts dagegen die offensichtliche Implementierung direkt zu verwenden.
+Wenn die Probleme allerdings komplizierter werden, ist es oft schwierig die Disziplinen \glqq{sauberer\grqq} und \glqq{funktionierend\grqq} gleichzeitig zu erreichen. Außerdem soll der Abstand zwischen den Zyklen möglichst gering gehalten werden, was bei einer offensichtlichen Lösung für ein großes Problem eventuell nicht eingehalten werden kann.
+
+BAISPÜÜÜÜHL\newline\newline
+
+\textit{One to many}
+
+Auch bei Operationen, welche eine Kollektion von Objekten benötigen, gilt: einfach und simpel starten - \glqq{one to many\grqq}\autocite{Beck:2003}[154].
+
+Zuerst erfolgt die Implementierung mit einem Objekt und erst wenn der Test erfolgreich war wird Schritt für Schritt die Kollektion übernommen.
+
+BEISPÜÜÜÜÜHL - Beachten: Änderungen Isolieren
+\newpage
+
+% 2168 - 2239 Wöter (36 Code)
+
+
+
 
 \subsection{Andere Entwicklungsmethoden}
  - Andere Entwicklungsmethoden - 
