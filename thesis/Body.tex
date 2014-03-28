@@ -62,13 +62,17 @@ Mocha\grqq} ist geeigneter für diesen Zweck?
  - Begrifflichkeit -
 
 \newpage
-\section{Entwicklungsprozess}
-\label{Entwicklungsprozess}
 
-\subsection{Test-Driven Development}
+\section{Test-Driven Development}
 \label{section:Test-Driven Development}
- - Einleitung TDD -
-\subsubsection{Die zwei Regeln von TDD}
+\begin{center}
+\glqq{\textit{Turning development upside-down}\grqq}\autocite[22]{Johansen:2011}
+\end{center}
+Traditionelle Entwicklungsmethoden stützen sich auf ein zuvor festgelegtes Konzept und eine passende Software-Architektur. Es wird so lange programmiert bis das Konzept durch Code und Architektur komplett abgebildet wird.
+
+Test-Driven Development (TDD) dreht diesen Entwicklungsprozess um. Es fokusiert sich auf die Frage \glqq{Welchen Code benötige ich, um das Problem zu lösen\grqq}. TDD fokusiert sich hingegen darauf, als erstes das Ziel zu definieren. Danach gilt es, das Ziel mit so simplen Code wie möglich zu erreichen. Durch diesen Ansatz wird sichergestellt, dass nicht mehr Code als benötigt geschrieben wird. Das primäre Ziel von TDD ist nicht Testen, es gibt also auch bei TDD keine Garantie, dass Grenzfälle besser getestet werden. Dadurch, dass TDD zur simpelst möglichen Lösung führen soll, werden exzessive Code-Ausschweifungen unterbunden und dadurch wird Software robuster.
+
+\subsection{Die zwei Regeln von TDD}
 Für das Arbeiten mit TDD gelten zwei simple Regeln \autocite[]{Beck:2003}.
 \begin{enumerate}
   \item Es wird nur neuer Code geschrieben, wenn einer der automatisierten Tests fehlschlägt.
@@ -95,6 +99,7 @@ Wenn es möglich ist, dieses theoretische Modell als Programmierungsstil umzuset
   \item Wenn die Anzahl von \textit{negativen Überaschungen} reduziert werden kann, wird der gesamte Entwicklungsprozess besser plan- und schätzbar.
   \item Da durch TDD sauberer Code entsteht, welcher zusätzlich durch Tests dokumentiert ist, kann die Kommunikation zwischen Software-EntwicklerInnen geschärft und klarer werden.
 \end{itemize}
+
 \subsection{Motivation: Angst {\&} Mut}
 \cite{Beck:2003} stellt folgende Behauptung auf: \newline
 \textit{TDD ist ein Weg um die Angst einer/s EntwicklerIn zurecht zu kommen}.
@@ -120,7 +125,7 @@ Laut \cite{Beck:2003} werden diese Reaktionen durch TDD erreicht. Das große, er
 
 Weiters beschreibt Beck TDD als Bewusstsein der Lücke zwischen Programmierentscheidungen und Feedback sowie die Möglichkeiten um diese Lücke kontrollieren zu können.
 
-\subsubsection{Der TDD-Kreislauf}
+\subsection{Der TDD-Kreislauf}
 \begin{enumerate}
   \item \textbf{Test schreiben}:\newline
   Der Test sollte wiederspiegeln, wie ein/e EntwicklerIn sich die zukünftige Operation wünscht. Der Test ist eine Geschichte. Diese Geschichte soll alle möglichen Elemente beinhalten, welche notwendig sind um die richtigen Antworten für die Geschichte zu erhalten.
@@ -204,8 +209,8 @@ Nach dem dritten Schritt wird erneut der Test ausgeführt um zu garantieren, das
 
 Durch die Anwendung des TDD-Kreislaufs wurde hier \textit{sauberer} und \textit{funktionierender} Code produziert.\newline\newline
 
-\subsubsection{Test-Driven Development Patterns}
-\textbf{Red Bar Patterns}
+\subsection{Test-Driven Development Patterns}
+\subsubsection{Red Bar Patterns}
 
 Diese Muster betreffen den ersten Teil des TDD-Kreislaufs: das Test Schreiben.
 Konkret behandeln sie die Fragen:
@@ -219,13 +224,13 @@ Konkret behandeln sie die Fragen:
 
 Bei TDD handelt es sich wie bereits erwähnt um einen Prozess, bei welchem in kleinen Schritten und Schritt für Schritt Software aus Tests geformt wird. In diesem Prozess ist es notwendig sich für die Reihenfolge der Test-Schritte (in weiterer Folge auch für die Reihenfolge, in welcher die Komponenten der Software entstehen soll) zu entscheiden.
 
-\cite{Beck:2003}[134] liefert auf die Frage \glqq{Welchen Test sollte ich als nächstes schreiben?\grqq} eine klare Antwort: Es gibt keine.
+\cite[134]{Beck:2003} liefert auf die Frage \glqq{Welchen Test sollte ich als nächstes schreiben?\grqq} eine klare Antwort: Es gibt keine.
 Die Frage ist hinsichtlich der Anforderungen der Software (beziehungsweise deren Komponenten) sowie der/s Entwicklerin/s zu individuell.
 Beck gibt jedoch den Tipp, weder Tests mit einer offensichtlichen Implementierung, noch Tests, welche zu kompliziert erscheinen zu wählen.
 Man sollte Schritt für Schritt jene Tests wählen, bei welchen man sich wohlsten fühlt.
 Sollten nur zu komplizierte Probleme und Tests vorliegen müssen die Schritte verkleinert und somit das Szenario noch weiter unterteilt werden.
 
-Die Mechanik des \glqq{One Step Test\grqq}'s wird von \cite{Beck:2003}[134] mit \glqq{known to unknown\grqq} beschrieben.\newline\newline
+Die Mechanik des \glqq{One Step Test\grqq}'s wird von \cite[134]{Beck:2003} mit \glqq{known to unknown\grqq} beschrieben.\newline\newline
 
 \textit{Starter Test}
 
@@ -236,7 +241,7 @@ Eines der Grundkonzepte von TDD besagt, dass die Konzentration immer nur auf dem
 Ein realistischer Test bedeutet eine Verzögerung des Abstands der \glqq{Rot-Grün-Refactor\grqq} Zyklen - diese sollen jedoch möglichst kurz gehalten werden.
 Der erste Test, also der \glqq{Starter Test\grqq} soll so trivial wie möglich sein.
 
-\glqq{Start by testing a variant of an operation that doesn't do anything\grqq}, \cite{Beck:2003}[134].\newline\newline
+\glqq{Start by testing a variant of an operation that doesn't do anything\grqq}, \cite[134]{Beck:2003}.\newline\newline
 
 \textit{Learning Test}
 
@@ -245,11 +250,11 @@ Wie bereits erwähnt geht es bei TDD nicht nur um eine möglichst hohe Test-Dich
 Eine weitere Methode TDD einzusetzen betrifft das Lernen des Umgangs mit einer neuen API oder Bibliothek. Wenn man eine neue Bibliothek verwendet bietet es sich an, gegen diese Tests zu schreiben anstatt direkt Implementierungen damit vorzunehmen - ansonsten sollten keine Tests für externe Software mptwendig sein.\newline\newline
 
 \textit{Regression Test}
+Wenn ein Fehler in einer Applikation auftritt, so ist eine Variante dieses Problem zu lösen direkt den Fehler zu finden, zu behen, zu überprüfen und damit den Fehler abzuhaken. Mit dieser Variante gib es allerdings keine Möglichkeit zu garantieren, dass dieser Fehler (durch Abhängigkeiten zu anderen Komponenten) nicht erneut auftritt.
 
-Auch TDD kann keine 100\%-ige Fehler-Freiheit garantieren. Sollte ein Problem berichtet werden, ist der erste Schritt einen neuen Test für dieses Problem zu verfassen. Der Test muss den einfachsten Fall, welcher das Fehlverhalten hervorruft behandeln. Durch das nachträgliche absolvieren des TDD-Kreislaufs für das gemeldete Problem werden die gleichen Vorteile wie auch für direktes TDD erreicht.
-...\newline\newline
+Auch TDD kann keine 100\%-ige Fehler-Freiheit garantieren. Sollte ein Problem berichtet werden, ist der erste Schritt einen neuen Test für dieses Problem zu verfassen. Der Test muss den einfachsten Fall, welcher das Fehlverhalten hervorruft behandeln. Durch das nachträgliche absolvieren des TDD-Kreislaufs wird sichergestellt, dass genau dieser Fehler nicht erneut auftritt.
 
-\textbf{Green Bar Patterns}
+\subsubsection{Green Bar Patterns}
 
 Die \glqq{Red Bar Patterns\grqq} helfen dabei die notwendigen Tests zu verfassen. Die \glqq{Green Bar Patterns\grqq} hingegen geben nun Ansätze, wie die geschriebenen und fehlschlagenden Tests schnellst möglich erfolgreich abgeschlossen werden können.\newline\newline
 
@@ -258,7 +263,7 @@ Die \glqq{Red Bar Patterns\grqq} helfen dabei die notwendigen Tests zu verfassen
 Um die Abstände der \glqq{Rot-Grün-Refactor\grqq} Zyklen so gering wie möglich halten zu können wird immer die einfachste Variante aller möglichen Implementierungen verwendet: Eine Konstante zurück liefern.
 
 Nachdem der Test grün ist wird Schritt für Schritt die Implementierung richtig gestellt und die Konstante mit Variablen in einen Ausdruck gewandelt. Hier stellt sich jedoch die Frage \glqq{Wieso offensichtlich falschen Code schreiben?\grqq} - Um den Test schnell erfolgreich laufen lassen zu können.
-Laut \cite{Beck:2003}[152] hat dieses Muster zwei starke Effekte. Wenn der Test grün ist fühlt man sich sicher. Man kann sich voll und ganz auf das richtige Refaktorieren konzentrieren. Also einerseits erfüllt \glqq{Fake it\grqq} einen psychologischen Effekt. Andererseits hilft es bei der Abgrenzung von zukünftigen Problemen. Wie schon erwähnt dient TDD auch dazu den Fokus und die Konzentration immer bei dem aktuellen Problem zu halten. Als ersten Schritt eine Konstante zurück zu liefern unterstützt dabei die/den EntwicklerIn.
+Laut \cite[152]{Beck:2003} hat dieses Muster zwei starke Effekte. Wenn der Test grün ist fühlt man sich sicher. Man kann sich voll und ganz auf das richtige Refaktorieren konzentrieren. Also einerseits erfüllt \glqq{Fake it\grqq} einen psychologischen Effekt. Andererseits hilft es bei der Abgrenzung von zukünftigen Problemen. Wie schon erwähnt dient TDD auch dazu den Fokus und die Konzentration immer bei dem aktuellen Problem zu halten. Als ersten Schritt eine Konstante zurück zu liefern unterstützt dabei die/den EntwicklerIn.
 
 BAIIISPÜÜÜÜL + Duplikation zwischen Test \& Implementierung removen undso.\newline\newline
 
@@ -283,7 +288,7 @@ BAISPÜÜÜÜHL\newline\newline
 
 \textit{One to many}
 
-Auch bei Operationen, welche eine Kollektion von Objekten benötigen, gilt: einfach und simpel starten - \glqq{one to many\grqq}\autocite{Beck:2003}[154].
+Auch bei Operationen, welche eine Kollektion von Objekten benötigen, gilt: einfach und simpel starten - \glqq{one to many\grqq}\autocite[154]{Beck:2003}.
 
 Zuerst erfolgt die Implementierung mit einem Objekt und erst wenn der Test erfolgreich war wird Schritt für Schritt die Kollektion übernommen.
 
@@ -292,7 +297,58 @@ BEISPÜÜÜÜÜHL - Beachten: Änderungen Isolieren
 
 % 2168 - 2239 Wöter (36 Code)
 
+\subsection{Testing}
+ - kurze Testing Einleitung - (verschiedene Varianten, verschommene Varianten durch ähnliche Bezeichnungen, (integration/e2e, etc.))
 
+\subsubsection{Unit-Tests}
+Ein Unit-Test ist Code, welcher produktiven Code testet. Er besteht aus bestimmten Objekten in bekannten Stati. Die Objekte, wie beispielsweise Funktionen, werden ausgeführt. Dnach werden sie inspiziert und/oder auf die Richtigkeit überprüft. Der produktive Code wird in Isolation getestet.
+
+Im Vergleich zu Integration-Tests ist es für Unit-Tests wichtig, dass sie isoliert ausgeführt werden - kein Test soll von einem anderen Test abhängig sein \autocite[4]{Johansen:2011}. Langsame Unit-Tests sind schlecht. EntwicklerInnen werden langsame Tests nicht so oft ausführen wie schnelle Tests. Insbesondere im Zusammenhang mit TDD bedeuten langsame Tests einen längeren Abstand zwischen den TDD Zyklen. EntwicklerInnen müssen lange auf Feedback warten und werden aus dem Zyklus gerissen.
+
+Unit-Tests können zu jeder Zeit ausgeführt werden.
+\begin{itemize}
+  \item Um bei einer fertigen Implementierung deren Korrektheit bestätigen.
+  \item Um bei Änderungen Fehler auszuschließen.
+  \item Um bei dem Hinzufügen von neuen Komponenten zu garantieren, dass das System noch vollständig und richtig funktioniert.
+\end{itemize}
+
+ - Abgrenzung von Unit-Tests -
+
+\subsubsection{Integration-Tests}
+Um beispielsweise eine Uhr zu testen, benötigt man beides, Unit- sowie Integration Tests. Unit-Tests sind für das Testen der einzelnen Zahnräder der Uhr zuständig. Diese werden isoliert auf ihre Korrektheit getestet. Integration-Tests hingegen testen, wie die Zähne der einzelnen Zahnräder ineinandergreifen und ob die Uhr als ganzes richtig funktioniert.
+
+Der Nachteil von Integrations-Tests ist, dass diese im Vergleich zu Unit-Tests eher langsam sind. In der Web-Entwicklung werden Integrations-Tests oft verwendet, um die korrekte Darstellung von Elementen sicherzustellen, oder um die Korrektheit der Routen der Web-Applikation zu testen. (Da fällt mir bestimmt auch noch was ein). Das Inspizieren der DOM verlangsam auch die Integrationstests.
+
+\subsubsection{Automatisiertes Testen in der Web-Entwicklung}
+Beim Entwickeln einer Web-Applikation gibt es ein Schema, welches jeder/m WebentwicklerIn bekannt ist. Man schreibt in einem Text-Editor oder in einer IDE Code, wechselt (ALT+TAB) auf den aktuellen Browser, erneuert die Seite (F5) und überprüft manuell den soeben geschriebenen Code. Dieses Schema ist sehr zeitintensiv, fehleranfällig und nicht reproduzierbar \autocite[3]{Johansen:2011}. Darüber hinaus reicht es oft nicht, den geschriebenen Code lediglich in einem Browser zu testen.
+
+Durch TDD wird dieses Schema vereinfacht. Die meisten Test-Runner (<- Begrifflichkeit), wie beispielsweise \glqq{Karma\grqq}, bieten Funkionalität an, um Dateien auf Änderungen zu überwachen. Sobald eine Änderung stattgefunden hat werden sofort alle Tests erneut ausgeführt. Viele Test-Runner bieten außerdem die Möglichkeit, in mehreren verschiedenen Browsern automatische Tests laufen zu lassen. Die Auswahl reicht von den gängigen Browsern \glqq{Google's Chrome\grqq}, \glqq{Mozilla's Firefox\grqq}, \glqq{Apple's Safari\grqq} und \glqq{Microsoft's Internet Explorer\grqq} über den bei Web-EntwicklerInnen beliebten \glqq{Google's Chrome Canary\grqq} bis hin zu \glqq{headless\grqq} Browsern (-> Begrifflichkeit) wie beispielsweise \glqq{PhantomJS\grqq}.
+
+Durch TDD und automatische Tests wird die Zeit für das manuelle Testen eingespart. Die Tests sind reproduzierbar und die Implementierungen sind weniger fehleranfällig. Das Ergebnis ist also ein effizienterer Entwicklungsprozess.
+
+In Kombination mit gewissen Frameworks, zum Beispiel Karma, kann darüber hinaus direktes automatisches Feedback für die/den EntwicklerIn durch das Überwachen der Dateien erreicht werden. Das manuelle Testen in verschiedenen Browsern wird ebenfalls von Karma übernommen.
+
+\subsection{Vorteile von TDD}
+\label{Vorteile von TDD}
+Die bisherigen Kapitel dieser Arbeit erläutern die Prozesse, Funktionsweisen, Auswirkungen sowie Pattern von TDD. Dieses Kapitel fasst die wichtigsten Vorteile von TDD zusammen.
+\begin{itemize}
+  \item \textbf{Funktionierender Code}\newline
+  Durch die hohe Test-Dichte wird die Fehleranfälligkeit verringert und die Stabilität der geschriebenen Software erhöht. Der TDD Zyklus \glqq{zwingt\grqq} EntwicklerInnen förmlich dazu, anhand von Tests vor der Implementierung darüber nachzudenken.
+  \item \textbf{Sauberer Code}\newline
+  Sauberer Code durch refactoring. Durch TDD wird refactoring automatisch in den Entwicklungsprozess integriert (siehe Green Bar Patterns). Durch die zuvor entstandenen Tests wird in diesem Schritt garantiert, dass sich durch das refactoren keine Bugs einschleichen. Weiters wird durch TDD die Wertschätzung des \glqq{Single Responsibility\grqq} Prinzips und die lose Kopplung der Komponenten gefördert\autocite[30]{Johansen:2011}.
+  \item \textbf{Psychologische Effekte}\newline
+  Das positive Feedback wirkt sich positiv auf das Stresslevel von EntwicklerInnen aus.
+  TDD hilft dabei sich nur auf das aktuelle Problem zu konzentrieren und sich von zukünftigen Problemen und Entscheidungen abzugrenzen.
+  \item \textbf{Dokumentation}\newline
+  Mit TDD wird Software aus Tests geformt. Tests wiederrum \glqq{erzählen\grqq} eine Geschichte. Sie spiegeln die Anforderungen und die vorgesehen Implementierung einer Komponente wieder. Tests können somit auch eine gewisse Dokumentationsfunktion erfüllen und zur besseren Verständnis von Software und einzelnen Komponenten beitragen.
+  \item \textbf{Produktivität}\newline
+  Das Hauptargument gegen TDD lautet: TDD benötigt Zeit und muss gelernt werden.
+  Ist TDD jedoch einmal gelernt und wird regelmäßig angewandt sorgt es durch alle bisher genannten Vorteile für einen Produktionsschub.
+\end{itemize}
+
+% Words in text: 3149
+% Words in headers: 82
+% Words in float captions: 22
 
 
 \subsection{Andere Entwicklungsmethoden}
