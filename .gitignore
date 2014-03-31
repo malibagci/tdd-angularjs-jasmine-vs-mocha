@@ -54,3 +54,4 @@ node_modules
 # personal stuff
 literature
 *.pdf
+*.run.xml
