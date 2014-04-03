@@ -220,8 +220,7 @@ Konkret behandeln sie die Fragen:
   \item \glqq{Wann\grqq} soll mit dem Tests Schreiben \glqq{aufgehört\grqq} werden?
 \end{itemize}
 
-\textit{One Step Test}
-
+\paragraph{One Step Test}
 Bei TDD handelt es sich wie bereits erwähnt um einen Prozess, bei welchem in kleinen Schritten und Schritt für Schritt Software aus Tests geformt wird. In diesem Prozess ist es notwendig sich für die Reihenfolge der Test-Schritte (in weiterer Folge auch für die Reihenfolge, in welcher die Komponenten der Software entstehen soll) zu entscheiden.
 
 \cite[134]{Beck:2003} liefert auf die Frage \glqq{Welchen Test sollte ich als nächstes schreiben?\grqq} eine klare Antwort: Es gibt keine.
@@ -230,10 +229,9 @@ Beck gibt jedoch den Tipp, weder Tests mit einer offensichtlichen Implementierun
 Man sollte Schritt für Schritt jene Tests wählen, bei welchen man sich wohlsten fühlt.
 Sollten nur zu komplizierte Probleme und Tests vorliegen müssen die Schritte verkleinert und somit das Szenario noch weiter unterteilt werden.
 
-Die Mechanik des \glqq{One Step Test\grqq}'s wird von \cite[134]{Beck:2003} mit \glqq{known to unknown\grqq} beschrieben.\newline\newline
+Die Mechanik des \glqq{One Step Test\grqq}'s wird von \cite[134]{Beck:2003} mit \glqq{known to unknown\grqq} beschrieben.
 
-\textit{Starter Test}
-
+\paragraph{Starter Test}
 Mit welchem Test soll begonnen werden?
 
 Eines der Grundkonzepte von TDD besagt, dass die Konzentration immer nur auf dem aktuellen Problem und Test liegen soll. Diesem Konzept steht jedoch die Möglichkeit mit einem realistischen Test zu starten gegenüber. Bei dem Versuch einen realistischen Test zu schreiben, wird der Fokus sofort auf einige andere Fragen gelenkt. \glqq{Was ist der richtige Input?\grqq}, \glqq{Was ist das richtige Ergebnis?\grqq}, \glqq{Welche Parameter sind notwendig für Lösung des Problems?\grqq} oder \glqq{Wohin gehört dieser Test eigentlich?\grqq}. Man findet sich bei dem Schreiben realistischer Tests häufig dabei wieder über viele Probleme und Fragen auf einmal nachzudenken, verliert also den Fokus auf den aktuellen Test des aktuellen Problems.
@@ -241,61 +239,67 @@ Eines der Grundkonzepte von TDD besagt, dass die Konzentration immer nur auf dem
 Ein realistischer Test bedeutet eine Verzögerung des Abstands der \glqq{Rot-Grün-Refactor\grqq} Zyklen - diese sollen jedoch möglichst kurz gehalten werden.
 Der erste Test, also der \glqq{Starter Test\grqq} soll so trivial wie möglich sein.
 
-\glqq{Start by testing a variant of an operation that doesn't do anything\grqq}, \cite[134]{Beck:2003}.\newline\newline
+\glqq{Start by testing a variant of an operation that doesn't do anything\grqq}, \cite[134]{Beck:2003}.
 
-\textit{Learning Test}
+\paragraph{Learning Test}
 
 Wie bereits erwähnt geht es bei TDD nicht nur um eine möglichst hohe Test-Dichte, sondern ebenfalls um andere Faktoren, wie Design, Schätzbarkeit, sauberen Code, psychologische Auswirkungen, etc.
 
 Eine weitere Methode TDD einzusetzen betrifft das Lernen des Umgangs mit einer neuen API oder Bibliothek. Wenn man eine neue Bibliothek verwendet bietet es sich an, gegen diese Tests zu schreiben anstatt direkt Implementierungen damit vorzunehmen - ansonsten sollten keine Tests für externe Software mptwendig sein.\newline\newline
 
-\textit{Regression Test}
+\paragraph{Regression Test}
 Wenn ein Fehler in einer Applikation auftritt, so ist eine Variante dieses Problem zu lösen direkt den Fehler zu finden, zu behen, zu überprüfen und damit den Fehler abzuhaken. Mit dieser Variante gib es allerdings keine Möglichkeit zu garantieren, dass dieser Fehler (durch Abhängigkeiten zu anderen Komponenten) nicht erneut auftritt.
 
 Auch TDD kann keine 100\%-ige Fehler-Freiheit garantieren. Sollte ein Problem berichtet werden, ist der erste Schritt einen neuen Test für dieses Problem zu verfassen. Der Test muss den einfachsten Fall, welcher das Fehlverhalten hervorruft behandeln. Durch das nachträgliche absolvieren des TDD-Kreislaufs wird sichergestellt, dass genau dieser Fehler nicht erneut auftritt.
 
 \subsubsection{Green Bar Patterns}
 
-Die \glqq{Red Bar Patterns\grqq} helfen dabei die notwendigen Tests zu verfassen. Die \glqq{Green Bar Patterns\grqq} hingegen geben nun Ansätze, wie die geschriebenen und fehlschlagenden Tests schnellst möglich erfolgreich abgeschlossen werden können.\newline\newline
+Die \glqq{Red Bar Patterns\grqq} helfen dabei die notwendigen Tests zu verfassen. Die \glqq{Green Bar Patterns\grqq} hingegen geben nun Ansätze, wie die geschriebenen und fehlschlagenden Tests schnellst möglich erfolgreich abgeschlossen werden können.
 
-\textit{Fake it ('til you make it)}
+\paragraph{Fake it ('til you make it)}
 
 Um die Abstände der \glqq{Rot-Grün-Refactor\grqq} Zyklen so gering wie möglich halten zu können wird immer die einfachste Variante aller möglichen Implementierungen verwendet: Eine Konstante zurück liefern.
 
 Nachdem der Test grün ist wird Schritt für Schritt die Implementierung richtig gestellt und die Konstante mit Variablen in einen Ausdruck gewandelt. Hier stellt sich jedoch die Frage \glqq{Wieso offensichtlich falschen Code schreiben?\grqq} - Um den Test schnell erfolgreich laufen lassen zu können.
 Laut \cite[152]{Beck:2003} hat dieses Muster zwei starke Effekte. Wenn der Test grün ist fühlt man sich sicher. Man kann sich voll und ganz auf das richtige Refaktorieren konzentrieren. Also einerseits erfüllt \glqq{Fake it\grqq} einen psychologischen Effekt. Andererseits hilft es bei der Abgrenzung von zukünftigen Problemen. Wie schon erwähnt dient TDD auch dazu den Fokus und die Konzentration immer bei dem aktuellen Problem zu halten. Als ersten Schritt eine Konstante zurück zu liefern unterstützt dabei die/den EntwicklerIn.
 
-BAIIISPÜÜÜÜL + Duplikation zwischen Test \& Implementierung removen undso.\newline\newline
+Beispiel + Duplikation zwischen Test \& Implementierung removen undso.
 
-\textit{Triangulate}
+\paragraph{Triangulate}
 
 Ein weiterer Weg um schnell einen erfolgreichen Test zu erreichen ist \glqq{Triangulate\grqq}. Bei Triangulate geht es darum, nicht nur ein mögliches Ergebnis zu testen, sondern zwei oder mehrere Ergebnisse.
 
 Anhand des folgenden Beispielswird der direkte Unterschied zu \glqq{Fake it\grqq} erklärt.
 
-BAIIISPÜÜÜÜÜHL
+Beispiel
 
-Bei Triangulate wird also nicht mittels direkter Eliminierung der Duplikation zwischen Test und Implementierung refaktoriert, sondern durch das Hinzufügen eines weiteren möglichen Ergebnisses.\newline\newline
-\newpage
-\textit{Obvious Implementation}
+Bei Triangulate wird also nicht mittels direkter Eliminierung der Duplikation zwischen Test und Implementierung refaktoriert, sondern durch das Hinzufügen eines weiteren möglichen Ergebnisses.
+
+\paragraph{Obvious Implementation}
 
 Wie die bisherigen Beispiele für \glqq{Fake it\grqq} und \glqq{Triangulate\grqq} zeigen, handelt es sich dabei um wirklich kleine Schritte. Speziell anhand dieses Beispiels lässt sich das dritte Green Bar Patterns erklären: \glqq{Obvious Implementation\grqq}.
 
 Wenn eine Operation so einfach ist, wie in dem Beispiel, spricht nichts dagegen die offensichtliche Implementierung direkt zu verwenden.
 Wenn die Probleme allerdings komplizierter werden, ist es oft schwierig die Disziplinen \glqq{sauberer\grqq} und \glqq{funktionierend\grqq} gleichzeitig zu erreichen. Außerdem soll der Abstand zwischen den Zyklen möglichst gering gehalten werden, was bei einer offensichtlichen Lösung für ein großes Problem eventuell nicht eingehalten werden kann.
 
-BAISPÜÜÜÜHL\newline\newline
+Beispiel
 
-\textit{One to many}
+\paragraph{One to many}
 
 Auch bei Operationen, welche eine Kollektion von Objekten benötigen, gilt: einfach und simpel starten - \glqq{one to many\grqq}\autocite[154]{Beck:2003}.
 
 Zuerst erfolgt die Implementierung mit einem Objekt und erst wenn der Test erfolgreich war wird Schritt für Schritt die Kollektion übernommen.
 
-BEISPÜÜÜÜÜHL - Beachten: Änderungen Isolieren
-\newpage
+Beispiel - Beachten: Änderungen Isolieren
 
-% 2168 - 2239 Wöter (36 Code)
+\subsubsection{Testing Patterns}
+\paragraph{Mocks}
+
+\paragraph{Stubs}
+
+\paragraph{Spies}
+
+
 
 \subsection{Testing}
  - kurze Testing Einleitung - (verschiedene Varianten, verschommene Varianten durch ähnliche Bezeichnungen, (integration/e2e, etc.))
@@ -346,11 +350,6 @@ Die bisherigen Kapitel dieser Arbeit erläutern die Prozesse, Funktionsweisen, A
   Ist TDD jedoch einmal gelernt und wird regelmäßig angewandt sorgt es durch alle bisher genannten Vorteile für einen Produktionsschub.
 \end{itemize}
 
-% Words in text: 3149
-% Words in headers: 82
-% Words in float captions: 22
-
-
 \subsection{Andere Entwicklungsmethoden}
  - Andere Entwicklungsmethoden - 
 \subsection{Gegenüberstellung}
@@ -387,13 +386,196 @@ Die bisherigen Kapitel dieser Arbeit erläutern die Prozesse, Funktionsweisen, A
 \section{Testing Frameworks}
  - Testing Frameworks -
 
-\subsection{Jasmine}
- - Jasmine -
+\subsection{Karma}
+ - Karma -
 
-\subsubsection{Hintergründe}
- - Hintergründe -
-\subsubsection{Funktionen}
- - Funktionen -
+\subsection{Jasmine}
+Jasmine ist ein Javascript Testing Framework, welches notwendige Funktionen wie Assertions, Matchers, Mocks und Spies anbietet. Es wurde prinzipiell für BDD (Begrifflichkeit) entworfern. Dies macht sich an der Benennung verschiedener Komponenten bemerkbar, zum Beispiel durch die für BDD-typische \glqq{expect\grqq}-Schreibweise für Tests (eine genauere Beschreibung von expect folgt in den nachvollgenden Kapiteln). Jasmine kann aber selbstverständlich auch für konventionelles Testen und auch für TDD verwendet werden. Auf der AngularJS Website wird Jasmine als Testing Framework für das Entwickeln mit dem MV*-Framework empfohlen \\autocite{AngularJS:Jasmine:2013}.
+
+\subsubsection{Keywords in Jasmine}
+Die Folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
+\begin{itemize}
+  \item \textbf{describe}:\newline
+        Mit \glqq{describe\grqq} wird in Jasmine eine neue Test \glqq{Suite\grqq} erstellt. Eine \glqq{Suite\grqq} ist eine Sammlung von Test-Spezifikationen. \glqq{describe\grqq} beschreibt die Suite in echter Sprache.
+\begin{lstlisting}[style=verbo]
+  describe('What the following test-specifications are about', 
+    function() {
+    ...
+  });
+\end{lstlisting}
+  \item \textbf{it}:\newline
+        Der \glqq{it\grqq}-Block befindet sich innerhalb der anonymen Funktion, welche describe übergeben wird. Er versteht sich als Spezifikation. In einer Suite können sich mehrere \glqq{it\grqq}-Blöcke befinden. Ebenso wie bei describe wird die it-Funktion mit echter Sprache beschrieben und eine anonyme Funktion wird ihr mitgegeben.
+\begin{lstlisting}[style=verbo]
+  describe('What the following test-specifications are about.', 
+    function() {
+    it('specifies what the following tests are about.', 
+      function() {
+      ...
+    });
+  });
+\end{lstlisting}
+  \item \textbf{expect}:\newline
+        Das \glqq{expect\grqq}-Keyword spiegeln den eigentlichen Test wieder. Man erwartet ein bestimmtes Ergebnis. Wenn das erwartete Ergebnis eintrtt, gilt der Test als bestanden, oder auch als \glqq{grün\grqq}. Sollte dies jedoch nicht der Fall sein, so ist der Test nicht bestanden und wird als \glqq{rot\grqq} bezeichnet. Tests, welche in der selben Spezifikation jedoch nach dem fehlgeschlagenem Test befinden, werden nicht mehr ausgeführt.
+\begin{lstlisting}[style=verbo]
+  describe('What the following test-specifications are about.', 
+    function() {
+    it('specifies what the following tests are about.', 
+      function() {
+      expect(true).toEqual(true);    // success
+      expect(false).toEqual(true);   // failure
+      expect(false).toEqual(false);  
+        // not executed, because the test before failed
+    });
+  });
+\end{lstlisting}
+\end{itemize}
+
+\subsubsection{Matchers}
+\glqq{Matchers\grqq} sind Funktionen, welche zwei Ausdrücke miteinander vergleichen. Das Ergebnis des Vergleichs führt entweder zu einem positivem Test oder bei einem negativem Test zu einem Abbruch der aktuellen Spezifikation. Jasmine wird bereits mit vielen nützlichen Matchers ausgeliefert und ermöglicht ebenfalls das Schreiben von benutzerdefinierten Matchers. Die Namen der Matchers von Jasmine sind alle sehr ausdrucksstark (nicht zuletzt, weil Jasmine als BDD-Testing-Framework designed wurde).
+
+\paragraph{toEqual}
+\glqq{toEqual\grqq} überprüft die \glqq{Gleichheit\grqq} zweier Ausdrücke. Hier findet jedoch keine Identitätsüberprüfung statt (siehe toBe). So würde der Aufruf
+\begin{lstlisting}[style=verbo]
+  expect(true).toEqual(true);
+\end{lstlisting}
+nicht zu einem Abbruch der Spezifikation führen. Der Aufruf
+\begin{lstlisting}[style=verbo]
+  expect([1,2]).toEqual([3,4]);
+\end{lstlisting}
+hingegen schon.
+
+\paragraph{toBe}
+Der Matcher \glqq{toBe\grqq} verhält sich ähnlich wie toEqual, mit dem Unterschied der Identitätsüberprüfung. toEqual ist Jasmines Äquivalent zu Javascripts \glqq{==\grqq} Operators, wobei toBe \glqq{===\grqq} entspricht. Das folgende Beispiel illustriert den Unterschied zwischen toEqual und toBe.
+
+\begin{lstlisting}[style=verbo]
+var foo = [1,2];
+var bar = [1,2];
+
+expect(foo).toEqual(bar); // success
+expect(foo).toBe(bar);    // failure
+expect(foo).toBe(foo);    // success
+\end{lstlisting}
+
+Da sich toBe auf den \glqq{===\grqq} Operator stützt, garantiert dieser Matcher \textit{nicht} die Identitätsgleichheit bei primitiven Javascript Typen - also nicht bei Numbers, Booleans und Strings. \glqq{===\grqq} sieht diese Primitive als idente Entitäten an \autocite[16]{Hahn:2013}.
+
+\paragraph{toBeTruthy, toBeFalsy}
+Wie auch bei den ersten zwei Matchern, entsprichen auch hier die Namen der Funktionalität. toBeTruthy evaluiert einen Ausdruck auf \glqq{true\grqq} und toBeFalsy auf \glqq{false\grqq}. Genau wie auch in Javascript entsprechen true und false nicht nur den gleichnamigen boolschen Ausdrücken. Als true gelten Beispielsweise auch \'Hello\' oder {}. Um sicher zu gehen, was nun true und was false ist, ist es einfacher darüber nachzudenken, was in Javascript false ist.
+\begin{itemize}
+  \item false
+  \item 0
+  \item \'\'
+  \item undefined (Achtung: die Variable \glqq{undefined\grqq} ist nicht immer nicht definiert)
+  \item null
+  \item NaN (Not a Number, zum Beispiel die Division durch 0)
+\end{itemize}
+Alles, was nicht falsch ist, ist wahr \autocite[17]{Hahn:2013}.
+\begin{lstlisting}[style=verbo]
+expect({}).toBeTruthy(); // success
+expect('').toBeFalsy();  // success
+\end{lstlisting}
+Eine weitere Schreibweise für diese Matcher wäre:
+\begin{lstlisting}[style=verbo]
+expect({}).toEqual(true);   // success
+expect('').toEqual(false);  // success
+\end{lstlisting}
+
+\paragraph{not}
+Dieser Matcher ist eine einfache Verneinung:
+\begin{lstlisting}[style=verbo]
+var foo = [1,2];
+var bar = [1,2];
+
+expect(foo).not.toBe(bar);   // success
+expect('').not.toBeTruthy(); // success
+\end{lstlisting}
+
+\paragraph{toContain}
+toContain überprüft ob ein Ausdruck in einem anderen enthalten ist. Dies funktioniert ebenso für Arrays, als auch für Strings.
+\begin{lstlisting}[style=verbo]
+expect([1,2]).toContain(2);           // success
+expect('foo bar').toContain('oo ba'); // success
+\end{lstlisting}
+
+\paragraph{toBeDefined, toBeUndefined}
+Diese Matcher überprüfen ob Variablen definiert sind oder nicht. Javascript hat eigene Definitionen darüber, was definiert ist und was nicht. \textbf{(http://bit.ly/14XHBU3 zusammenfassen)}
+
+Wichtig: Wenn eine Variable nicht deklariert wurde, so wird eine \glqq{ReferenceError\grqq}-Exception geworden. Alle Variablen, unabhängig ob definiert oder nicht, müssen deklariert werden.
+\begin{lstlisting}[style=verbo]
+var undefinedVariable;
+expect('Hello').toBeDefined();             // success
+expect(undefinedVariable).toBeDefined();   // failure
+expect(undefinedVariable).toBeUndefined(); // success
+
+expect(foo).toBeUndefined();               // ReferenceError
+\end{lstlisting}
+
+\paragraph{toBeNull}
+Auch die Funktionsweise dieses Matchers ist durch die ausdrucksstarke Namensgebung leicht verständlich. Er überprüft, ob ein Ausdruck \glqq{null\grqq} ist.
+\begin{lstlisting}[style=verbo]
+expect(null).toBeNull(); // success
+expect(0).toBeNull();    // failure
+\end{lstlisting}
+
+\paragraph{toBeNaN}
+toBeNan überprüft, ob ein Ausdruck NaN, also Not a Number ist.
+\begin{lstlisting}[style=verbo]
+expect(0/0).toBeNaN();            // success
+expect(parseInt(foo')).toBeNaN(); // success
+\end{lstlisting}
+
+Es gibt bereits eine eigene \glqq{isNaN\grqq} Funktion von Javascript. Diese evaluiert allerdings einige nicht-nummerische Typen als NaN (Strings, Objekte, Arrays). Jasmines toBeNaN evaluiert nur auf den Wert NaN.
+
+\begin{lstlisting}[style=verbo]
+expect({}).toBeNaN();           // failure
+expect(isNaN({})).toBeTruthy(); // success
+\end{lstlisting}
+
+\paragraph{toBeGreatherThan, toBeLessThan, toBeCloseTo}
+Die Matcher toBeGreatherThan und toBeLessThan überprüfen, ob ein Ausdruck größer, beziehungsweise kleiner als ein anderer Ausdruck ist. Das funktioniert für nummerische Typen und auch für Strings.
+
+\begin{lstlisting}[style=verbo]
+expect(1).toBeLessThan(2);         // success
+expect('b').toBeGreatherThan('a'); // success
+\end{lstlisting}
+
+toBeCloseTo hingegen überprüft, ob ein Ausdruck \glqq{nahe\grqq} einem zweiten ist. Die Nähe wird durch Dezimalstellen definiert. Die Dezimalstelle ist das zweite Argument von toBeCloseTo. Folgende Beispiele illustrieren die Funktionsweise von toBeCloseTo:
+
+\begin{lstlisting}[style=verbo]
+expect(1.11).toBeCloseTo(1.1, 0); // success - round to 1
+expect(1.11).toBeCloseTo(1.1, 1); // success - round to 1.1
+expect(1.11).toBeCloseTo(1.1, 2); // failure - round to 1.11
+\end{lstlisting}
+
+\paragraph{toMatch}
+toMatch überprüft ob ein Ausdruck mit einer übergebenen RegularExpression übereinstimmt.
+
+\begin{lstlisting}[style=verbo]
+expect('hello world').toMatch(/hello/); // success
+\end{lstlisting}
+
+\paragraph{toThrow}
+Dieser Matcher evaluiert, ob ein Ausdruck eine Exception wirft.
+
+\begin{lstlisting}[style=verbo]
+
+var functionToThrow = function() {
+  throw new Error();
+};
+
+expect(function() {
+  functionToThrow();
+}).toThrow(); // success
+\end{lstlisting}
+
+% Words 4077
+% Code 270
+
+\paragraph{Custom Matchers}
+
+\paragraph{Matching Class Names}
+
+\subsubsection{Spies}
+
 \subsubsection{Testen von asynchronem Javascript}
  - Testen von asynchronem Javascript -
 
