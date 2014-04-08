@@ -607,9 +607,6 @@ expect(function() {
 }).toThrow(); // success
 \end{lstlisting}
 
-% Words 4077
-% Code 270
-
 \paragraph{Custom Matchers}
 Die bereits mitgelieferten Matcher von Jasmine sind sehr nützlich, decken jedoch nicht alle denkbaren Vergleiche ab. Jasmine distanziert sich auch davon, exzessiv eine breite Masse an Matchers zu entwickeln (Quelle). Aus diesem Grund gibt es mit Jasmine die Möglichkeit eigene Matcher zu definieren. Die Definition dieser Matcher muss vor dem it-Block, vor welchem sie verwendet werden sollen.
 
@@ -798,9 +795,185 @@ Dieses Feature von Jasmine lässt auf den Typ eines Objektes prüfen - ähnlich 
 % Code: ~ 450
 
 \subsubsection{Spies}
+Alle bisherigen Tets betrafen die Vergleiche von mehreren Ausdrücken, es gab jedoch keine Möglichkeit das Verhalten von FUnktionen oder Objekten zu inspizieren. Um das zu erreichen liefert Jasmine Spies mit. Wie bereits im Kapitel \glqq{Mocks, Stubs \& Spies\grqq} erläutert, handelt es sich dabei um ein Fake Objekt, welches das echte Objekt ersetzt. Aufrufe auf das Fake Objekt werden aufgezeichnet und können am Ende inspiziert werden. Die nachfolgenden Beispiele beziehen sich auf \textit{http://jasmine.github.io/2.0/introduction.html}.
 
-\subsubsection{Testen von asynchronem Javascript}
- - Testen von asynchronem Javascript -
+\paragraph{spyOn}
+Um das gewünschte Objekt oder die gewünschte Funktion durch einen Spy zu ersetzen wird \glqq{spyOn\grqq} verwendet. Die Aufrufe auf den Spy werden mit \glqq{toHaveBeenCalled()\grqq} und \glqq{toHaveBeenCalledWith(args)\grqq} inspiziert.
+
+In dem folgenden beispiel wird mit forEach das echte Objekt erstellt und der Spy installiert. In den Testspezifikationen werden dann die Aufrufe auf den Spy inspiziert.
+
+\begin{lstlisting}[language=JavaScript]
+
+describe("A spy", function() {
+  var foo, bar = null;
+
+  beforeEach(function() {
+    foo = {
+      setBar: function(value) {
+        bar = value;
+      }
+    };
+
+    spyOn(foo, 'setBar');
+
+    foo.setBar(123);
+    foo.setBar(456, 'another param');
+  });
+
+  it("tracks that the spy was called", function() {
+    expect(foo.setBar).toHaveBeenCalled();
+  });
+
+  it("tracks all the arguments of its calls", function() {
+    expect(foo.setBar).toHaveBeenCalledWith(123);
+    expect(foo.setBar).toHaveBeenCalledWith(456, 'another param');
+  });
+});
+
+\end{lstlisting}
+
+\paragraph{and.callThrough}
+Da Spies die echte Implementierung des Objekts ersetzen, ist es eigentlich nach der Installation eines Spies nicht mehr möglich den Ergebnis-Status des Objekts zu ermitteln. Bei Jasmine gibt es allerdings die Funktion \glqq{and.callThrough\grqq}. Diese zeichnet wie auch normale Spies die Aufrufe auf und leitet diese zusätzlich an die echte Implementierung weiter. Hier wird das Fake Objekt also nicht mehr verwendet, um ein ressourcen-intensives Objekt zu ersetzen. Es stattdessen verwendet, um das Verhalten aufzuzeichnen und dieses sowie das Endergebenis des echten Objekts mit gewissen Erwartungen zu vergleichen.
+
+Das vorangehende Beispiel ohne and.callThrough würde das Inspizieren von bar nicht ermöglichen, da bar nie wirklich gesetzt wurde.
+\begin{lstlisting}[language=JavaScript]
+  ...
+
+  it("is not able to inspect bar", function() {
+    expect(bar).toEqual(456); // failure, bar is null
+  });
+});
+\end{lstlisting}
+
+Um den Wert von bar zu inspizieren wird and.callThrough verwendet.
+\begin{lstlisting}[language=JavaScript]
+describe("A spy", function() {
+  var foo, bar = null;
+
+  beforeEach(function() {
+    foo = {
+      setBar: function(value) {
+        bar = value;
+      }
+    };
+
+    spyOn(foo, 'setBar').and.callThrough();
+
+    foo.setBar(123);
+  });
+
+  // do spying stuff
+
+  it("is able to inspect bar", function() {
+    expect(bar).toEqual(123); // success
+  });
+
+});
+\end{lstlisting}
+
+\paragraph{and.returnValue}
+Mit \glqq{and.returnValue\grqq} kann sichergestellt werden, dass ein spezifischer Wert zurückgegebn wird. Dies kann beispielsweise hilfreich sein, um eine Komponente mit falschen Eingaben zu testen.
+
+\begin{lstlisting}[language=JavaScript]
+describe("A spy", function() {
+  var foo, bar = null;
+
+  beforeEach(function() {
+    foo = {
+      setBar: function(value) {
+        bar = value;
+      }
+      getBar: function() {
+        return bar;
+      }
+    };
+
+    spyOn(foo, 'getBar').and.returnValue(456);
+
+    foo.setBar(123);
+  });
+
+  // do spying stuff
+
+  it("is able to inspect bar", function() {
+    expect(bar).toEqual(123); // failure
+    expect(bar).toEqual(456); // success
+  });
+
+});
+\end{lstlisting}
+
+\paragraph{and.callFake}
+Mit einem Spy kann zusätzlich eine Fake Funktion angehängt werden. Mit \glqq{and.callFake\grqq} werden mehr Möglichkeiten eröffnet als mit and.returnValue. Es kann zum Beispiel ein Logger zwischengeschalten werden oder verwendet werden um zu überprüfen, dass ein bestimmter Callback ausgeführt wurde.
+
+\begin{lstlisting}[language=JavaScript]
+var getResource = function(id, callback) {
+  $.ajax({
+    type: "GET",
+    url: "/to/some/resource/" + id,
+    success: callback
+  });
+}
+
+describe("Spying on an ajax callback", function() {
+  it("shoiuld execute the callback function on success", function() {
+    spyOn($, "ajax").and.callFake( function(options) {
+      options.success();
+    });
+    var callback = jasmine.createSpy();
+    getResource(123, callback);
+    expect(callback).toHaveBeenCalled();
+  });
+});
+\end{lstlisting}
+
+\paragraph{jasmine.createSpy \& jasmine.createSpyObj}
+Wenn spyOn verwendet wird, wird immer eine bestehende Funktion oder ein bestehendes Objekt mit einem Spy ersetzt. Jasmine bietet zusätzlich die Möglichkeit auch ohne bereits existierenden Funktionen oder Objekten zu erstellen. Mit \glqq{jasmine.createSpy\grqq} für Funktionen und vice versa mit \glqq{jasmine.createSpyObj\grqq} für Objekte.
+
+\begin{lstlisting}[language=JavaScript]
+describe("A spy", function() {
+  var foo = "bar", bar = null;
+  var tape;
+
+  beforeEach(function() {
+    // preperation for jasmine.createSpy
+    getFoo = jasmine.createSpy("getFoo");
+    bar = getFoo();
+
+    // preperation jasmine.createSpyObj
+    tape = jasmine.createSpyObj('tape', ['play', 'pause', 'stop', 'rewind']);
+
+    tape.play();
+    tape.pause();
+    tape.rewind(0);
+
+  });
+
+  // test specification for jasmine.createSpy
+  it("should have called getFoo", function() {
+    expect(getFoo).toHaveBeenCalled();
+  });
+
+  // test specification for jasmine.createSpyObj
+  it("creates spies for each requested function", function() {
+    expect(tape.play).toBeDefined();
+    expect(tape.pause).toBeDefined();
+    expect(tape.stop).toBeDefined();
+    expect(tape.rewind).toBeDefined();
+  });
+
+  it("tracks that the spies were called", function() {
+    expect(tape.play).toHaveBeenCalled();
+    expect(tape.pause).toHaveBeenCalled();
+    expect(tape.rewind).toHaveBeenCalled();
+    expect(tape.stop).not.toHaveBeenCalled();
+  });
+
+});
+\end{lstlisting}
+
+Words: 5801
+Code: ~600
 
 \subsection{Mocha}
  - Mocha -
