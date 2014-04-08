@@ -295,14 +295,51 @@ Zuerst erfolgt die Implementierung mit einem Objekt und erst wenn der Test erfol
 
 Beispiel - Beachten: Änderungen Isolieren
 
-\subsubsection{Testing Patterns}
+\subsubsection{Mocks, Stubs \& Spies}
+In der Entwicklung werden Komponenten mit unterschiedlicher Komplexität verwendet. Es gilt allerdings alle Komponenten (insbesondere bei TDD) zu testen. Das bedeutet, dass manche Komponenten ressourcen-intensivere Objekte verwenden als andere. Viele ressourcen-intensive Objekte in einem Test zu verwenden wirkt sich negativ auf die Testdauer aus. Eine längere Testdauer führt dazu, dass diese Tests von EntwicklerInnen tendenziell seltener ausgeführt werden \autocite{Beck:2003}. Für das Entwickeln mittels TDD bedeutet es längere Rot-Grün-Refactor Phasen und verzögertes Feedback für die/den EntwicklerIn.
+
+Um langsame Tests zu vermeiden werden die ressourcen-intensiven Objekte oft durch \glqq{Fake Objects\grqq}, also gefälschte Objekte, ersetzt. Es gibt einige Varianten um Objekte für das Testen zu fälschen, die wichtigsten sind:
+
+\begin{itemize}
+  \item Mocks
+  \item Stubs
+  \item Spies
+\end{itemize}
+
+Die genannten Varianten verfolgen alle das selbe Zielt - das fälschen von Objekten - unterscheiden sich allerdings durch die zusätzliche Funktionalität und die Test-Mentalität (Fowler, 2007 - Quelle noch hinzufügen). Die folgenden Kapitel gehen näher auf jede Variante ein.
+
 \paragraph{Mocks}
+Mocks - oder auch \glqq{Mock Objects\grqq} - besitzen ein vorprogrammiertes Verhalten, eine vorprogrammierte Erwartung und eine vorprogrammierte Verhaltensüberprüfung \autocite[453]{Johansen:2011}. Darüber hinaus können diese Objekte vor deren Verwendung konfiguriert werden. Mocks werden verwendet, um das \textbf{Verhalten} eines Objektes zu überprüfen. Die Verwendung eines Mock Objektes läuft durch folgende Phasen \autocite[453]{Johansen:2011}:
+\begin{enumerate}
+  \item \textbf{Konfiguration}: \newline
+  Die verschiedenen Stati des Verhaltens wird gesetzt.
+  \item \textbf{Ausführung}: \newline
+  Das Mock Objekt wird mit der zu testenden Komponente ausgeführt.
+  \item \textbf{Verhaltensüberprüfung}: \newline
+  Die vorkonfigurierten Stati des ausgeführten Verhaltens werden überprüft.
+\end{enumerate}
+
+Ein klassisches Beispiel für ein ressourcen-intensives Objekt, welches durch ein Mock Objekt ersetzt werden kann, ist ein Datenbank-Objekt \autocite[144]{Beck:2003}. Bei der Verwendung eines Datenbank-Objekts kann es zu einer Verzögerung der Tests kommen. Gründe dafür können eine lange Dauer für das Starten der Datenbank oder eventuell ein anderer (entfernter) physischer Standort der Datenbank und somit zusätzliche Netzwerkverzögerung sein. Um diesen Faktoren vorzubeugen gibt es die Möglichkeit, eine Mock-Datenbank zu verwenden. Die Mock-Datenbank kann vor dem Test Konfiguriert werden. Die Konfiguration beinhaltet für eine Mock-Datenbank typischerweise eine erwartete Abfrage (\glqq{expectedQuery\grqq}) und ein erwartetes Ergebnis (\glqq{expectedResult\grqq}). Wird nun im weiteren Testverlauf eine falsche (beziehungsweise nicht erwartete) Abfrage an die Mock-Datenbank geschickt, oder das Ergebnis mit einem nicht erwarteten Wert verglichen, wirft die Mock-Datenbank eine Exception.
+
+Das manuelle Erstellen von Mocks ist nicht so einfach, wie beispielsweise das manuelle Erstellen von Stubs. In der Regel werden also third-party Mocks herangezogen. Die Mocks für JavaScript/AngularJS werden in Kapitel \glqq{AngularJS\grqq} genauer ausgeführt.
+
+\cite[145]{Beck:2003} merkt zu Mocks an, dass man durch deren Verwendung zusätzliche Risiken zu dem betreffenden Projekt hinzufügt. Wenn beispielsweise die extern produzierten Mocks fehlerhaft sind, so können Tests für eine Komponente bestehen, welche eigentlich ebenfalls fehlerhaft ist. Vice versa bedeutet dies, dass Tests fehlschlagen können, welche eine einwandfrei funktionierende Komponente betreffen.
+Um diese Risiken zu minimieren schlägt Beck vor, ein mal das Verhalten des richtigen Objekts mit jenem des gefälschten Objekts zu vergleichen.
 
 \paragraph{Stubs}
+\glqq{Stubs\grqq} ersetzen ebenfalls ressourcen-intensive durch gefälschte Objekte mit vorprogrammiertem Verhalten. Im Gegensatz zu den Mocks, besitzen diese allerdings keine Verhaltensüberprüfung. Stubs geben unabhängig von übergebenen Parametern einen spezifischen vorkonfigurierten Wert zurück, oder werfen bei fehlerhaftem Verhalten eine Exception \autocite[443]{Johansen:2011}. Sie ignorieren darüber hinaus alles, was außerhalb des Tests passiert (Fowler, 2007 - Quelle).
+
+Mit Stubs ist es also prinzipiell nicht möglich eine sofortige Verhaltensüberprüfung durchzuführen, sondern es wird isoliert der Rückgabewert überprüft. Um das Verhalten im nachhinein zu überprüfen, können manche Stubs Informationen über die einzelnen Aufrufe der Methoden des Stub Objekts aufzeichnen.
 
 \paragraph{Spies}
+Die dritte Variante von Fake Objects sind \glqq{Spies\grqq}. Spies werden verwendet, um zu überprüfen ob Methoden...
+\begin{itemize}
+  \item aufgerufen oder nicht aufgerufen werden.
+  \item in der korrekten Reihenfolge aufgerufen werden.
+  \item die korrekte Anzahl von Aufrufen erfolgt ist.
+\end{itemize}
 
-
+Spies werden oft durch Stubs, welche die Aufrufe aufzeichnen und danach überprüfen, implementiert.
 
 \subsection{Testing}
  - kurze Testing Einleitung - (verschiedene Varianten, verschommene Varianten durch ähnliche Bezeichnungen, (integration/e2e, etc.))
@@ -757,7 +794,7 @@ Dieses Feature von Jasmine lässt auf den Typ eines Objektes prüfen - ähnlich 
 
 \end{lstlisting}
 
-% Words in text: 4755
+% Words in text: 5350
 % Code: ~ 450
 
 \subsubsection{Spies}
@@ -787,7 +824,6 @@ Dieses Feature von Jasmine lässt auf den Typ eines Objektes prüfen - ähnlich 
 
 \nocite{Green:2013}
 \nocite{Kozlowski:2013}
-\nocite{Hahn:2013}
 \nocite{Zakas:2012}
 \nocite{MacCaw:2011}
 \nocite{Burnham:2011}
