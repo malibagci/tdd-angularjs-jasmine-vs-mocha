@@ -3,48 +3,28 @@
 \section{Einführung}
 \label{Einführung}
 \subsection{Relevanz \& Problemstellung}
-Bessere Code-Qualität mit im Vergleich minimal erhöhtem Zeitaufwand ist ein
-erstrebenswertes Ergebnis, welches durch Test-driven Development (TDD) versucht
-wird, zu erreichen. Durch die Idee von TDD - nämlich kurze Iterationen von:
+Bessere Code-Qualität mit vergleichbar minimal erhöhtem Zeitaufwand ist ein erstrebenswertes Ergebnis und das Zeil von Test-driven Development (TDD) Durch die Idee von TDD -- nämlich kurze Iterationen von:
 \begin{enumerate}
   \item Tests schreiben (ohne sich Gedanken über den tatsächlichen Code zu machen)
   \item Tests ausführen und fehlschlagen lassen
   \item Code implementieren
   \item Tests ausführen und den Code eventuell weiter implementieren, bis die 
   Tests nicht mehr fehlschlagen
-  \item Tests und Code refaktorieren
+  \item Tests und Code refactoren
   \item Tests erneut ausführen
 \end{enumerate}
-wird eine hohe Testabdeckung und ein sauberer Code durch das Refaktorieren 
-erzielt.
+wird eine hohe Testabdeckung und ein sauberer Code durch das Refactoring erzielt.
 
-AngularJS ist ein umfassendes MVC Framework und bringt viele eigene Komponenten
-mit sich, wie beispielsweise Direktiven und Services. Um test-driven mit 
-AngularJS entwickeln zu können, ist es wegen der Vielfalt der eigenen 
-Komponenten relevant, alle diese Komponenten testen zu können.
+AngularJS ist ein umfassendes Model-View-* (MV*) Framework und bringt viele eigene Komponenten mit sich, wie beispielsweise Direktiven und Services. Um test-driven mit AngularJS entwickeln zu können, ist es wegen der Vielfalt der eigenen Komponenten relevant, alle diese Komponenten testen zu können.
 
-Mit der Relevanz von TDD mit AngularJS geht die Problemstellung der Auswahl 
-eines passenden Testing Frameworks einher. Jasmine und Mocha sind zwei 
-JavaScript Testing Frameworks, welche sich für diese Aufgabenstellung anbieten. 
-Deshalb werden beide Frameworks in dieser Arbeit gegenüber gestellt und 
-analysiert, um die Unterschiede beziehungsweise die Vor- sowie Nachteile jedes der 
-Frameworks darstellen zu können.
+Aus der Relevanz von TDD mit AngularJS ergibt sich die Problemstellung der Auswahl eines passenden Testing Frameworks. Jasmine und Mocha sind zwei JavaScript Testing Frameworks, welche sich für diese Aufgabenstellung anbieten. Deshalb werden beide Frameworks in dieser Arbeit gegenüber gestellt und analysiert, um die Unterschiede beziehungsweise die Vor- und Nachteile der beiden Frameworks darstellen zu können.
 
-\subsection{Methoden}
+\subsection{Methodenüberblick}
 \subsubsection{Test-driven Development}
-Eine theoretische Erfassung von Test-driven Development (TDD) und was die
-Vor- und Nachteile von TDD verglichen mit anderen Entwicklungsmethoden sind, 
-ist grundlegend für den weiteren Inhalt der Arbeit. Andere Entwicklungsmethoden
-beinhaltet hier das Entwickeln ohne Testen sowie das Entwickeln und Testen im
-nachhinein.
+Eine theoretische Erfassung von Test-driven Development (TDD) ist grundlegend für den weiteren Inhalt der Arbeit.
 
 \subsubsection{AngularJS}
-AngularJS wird zusammen mit den dazugehörigen Komponenten theoretisch und
-praktisch dargestellt. Weitere Erläuterungen zu dem {\glqq 
-Model-View-Controller (MVC)\grqq} Design-Pattern werden zum Verständnis des
-Frameworks auch behandelt.
-Die Theorie und die Praxis arbeiten hier sehr dicht zusammen, um im Vorfeld
-alle Facetten des MVC-Frameworks abzuklären.
+AngularJS wird zusammen mit den dazugehörigen Komponenten theoretisch und praktisch dargestellt. Weitere Erläuterungen zu dem MVC Design-Pattern werden zum Verständnis desFrameworks behandelt. Theorie und Praxis arbeiten hier sehr dicht zusammen, um im Vorfeld alle Facetten des MVC-Frameworks abzuklären.
 
 \subsubsection{Testing Frameworks}
 Um abklären zu können, welches der beiden JavaScript Testing-Frameworks 
@@ -56,11 +36,9 @@ wird alle der relevanten Eigenschaften von AngularJS behandeln. Der
 Entwicklungsprozess wird innerhalb der Arbeit dokumentiert.
 
 \subsection{Forschungsfrage}
-Wie ist der aktuelle Stand um AngularJS test-driven zu entwickeln und welches 
-der beiden JavaScript Testing-Frameworks {\glqq Jasmine\grqq} und {\glqq 
-Mocha\grqq} ist geeigneter für diesen Zweck?
+Wie ist der aktuelle Stand der test-driven Entwicklung mit AngularJS und welches der beiden JavaScript Testing-Frameworks {\glqq Jasmine\grqq} und {\glqq Mocha\grqq} ist geeigneter für diesen Zweck?
 
-\subsection{Begrifflichkeit}
+\subsection{Definition relevanter Begrifflichkeit}
  - Begrifflichkeit -
 
 \newpage
@@ -68,83 +46,80 @@ Mocha\grqq} ist geeigneter für diesen Zweck?
 \section{Test-Driven Development}
 \label{section:Test-Driven Development}
 \begin{center}
-\glqq{\textit{Turning development upside-down}\grqq}\autocite[22]{Johansen:2011}
+\glqq{\textit{Turning development upside-down}\grqq} \autocite[22]{Johansen:2011}
 \end{center}
-Traditionelle Entwicklungsmethoden stützen sich auf ein zuvor festgelegtes Konzept und eine passende Software-Architektur. Es wird so lange programmiert bis das Konzept durch Code und Architektur komplett abgebildet wird.
+Traditionelle Entwicklungsmethoden stützen sich auf ein zuvor festgelegtes Konzept und eine passende Software-Architektur. Es wird so lange programmiert, bis das Konzept durch Code und Architektur komplett abgebildet wird.
 
-Test-Driven Development (TDD) dreht diesen Entwicklungsprozess um. Es fokusiert sich auf die Frage \glqq{Welchen Code benötige ich, um das Problem zu lösen\grqq}. TDD fokusiert sich hingegen darauf, als erstes das Ziel zu definieren. Danach gilt es, das Ziel mit so simplen Code wie möglich zu erreichen. Durch diesen Ansatz wird sichergestellt, dass nicht mehr Code als benötigt geschrieben wird. Das primäre Ziel von TDD ist nicht Testen, es gibt also auch bei TDD keine Garantie, dass Grenzfälle besser getestet werden. Dadurch, dass TDD zur simpelst möglichen Lösung führen soll, werden exzessive Code-Ausschweifungen unterbunden und dadurch wird Software robuster.
+Test-Driven Development (TDD) dreht diesen Entwicklungsprozess um. TDD fokussiert sich nicht auf die Frage \glqq{Welchen Code benötige ich, um das Problem zu lösen\grqq}, sondern darauf, zunächst das Ziel zu definieren. Danach gilt es, das Ziel mit so simplen Code wie möglich zu erreichen. Durch diesen Ansatz wird sichergestellt, dass nicht mehr Code als benötigt geschrieben wird. Das primäre Ziel von TDD ist nicht das Testen, daher gibt es auch bei TDD keine Garantie, dass Grenzfälle besser getestet werden. Dadurch, dass TDD zur möglichst einfachen Lösung führen soll, werden exzessive Code-Ausschweifungen unterbunden und dadurch wird Software robuster.
 
 \subsection{Die zwei Regeln von TDD}
 Für das Arbeiten mit TDD gelten zwei simple Regeln \autocite[]{Beck:2003}.
 \begin{enumerate}
   \item Es wird nur neuer Code geschrieben, wenn einer der automatisierten Tests fehlschlägt.
-  \item Dupplikationen werden eliminiert.
+  \item DuplikationenDuplikationen werden eliminiert.
 \end{enumerate}
-Durch die Anwendung dieser einfachen Regel ergeben sich folgende Implikationen.
+Durch die Anwendung dieser einfachen Regeln ergeben sich folgende Implikationen:
 \begin{itemize}
   \item Es entsteht funktionierender Code, welcher in Kombination mit den Tests sofortiges Feedback zwischen Programmierentscheidungen liefert.
-  \item Die Tests müssen von der/m EntwicklerIn selbst geschrieben werden. Die/Der EntwicklerIn kann selbstverständlich nicht auf Tester warten, denn sie/er ist abhängig von sfortigem Feedback um Programmierentscheidungen zu treffen.
+  \item Die Tests müssen von der/m EntwicklerIn selbst geschrieben werden. Die/Der EntwicklerIn kann nicht auf Tester warten, denn sie/er ist abhängig von sofortigem Feedback, um Programmierentscheidungen zu treffen.
   \item Die Entwicklungsumgebung muss auf jede Änderung schnell reagieren und das Feedback der Tests darstellen können.
-  \item Um das Testen einfach zu halten muss hoch kohäsiver Code mit leicht gekoppelten Komponenten geschrieben werden.
+  \item Um das Testen einfach zu halten, muss hoch kohäsiver Code mit leicht gekoppelten Komponenten geschrieben werden.
 \end{itemize}
-Durch die Regeln sowie die Implikationen ergeben sich drei Aufgaben in folgender Reihenfolge.
+Durch die Regeln sowie die Implikationen ergeben sich drei Aufgaben in folgender Reihenfolge:
 \begin{enumerate}
   \item \textbf{Rot}: Einen kleinen Test schreiben.\newline
-  Der kleine Test muss nicht erfolgreich durchgehen, ermuss auch noch nicht kompilieren.
+  Der kleine Test muss nicht erfolgreich abschließen, er muss auch noch nicht kompilieren.
   \item \textbf{Grün}: Den Test \textit{schnell} zum Laufen bringen.\newline
-  Hier werden die einfachsten Änderungen welche sinnvoll erscheinen am Code vorgenommen um den zuvor erstellten Test erfolgreich abschließen zu können.
-  \item \textbf{Refactor}: Alle Dupplikationen, welche durch das schnelle Hinzufügen von Code entstanden sind, eliminieren.
+  Hier werden die einfachsten Änderungen, welche sinnvoll erscheinen, am Code vorgenommen, um den zuvor erstellten Test erfolgreich abschließen zu können.
+  \item \textbf{Refactor}: Alle Duplikationen, welche durch das schnelle Hinzufügen von Code entstanden sind, eliminieren.
 \end{enumerate}
-Wenn es möglich ist, dieses theoretische Modell als Programmierungsstil umzusetzen, erhält man Code, welcher beinahe ausschließlich durch fehlgeschlagene Tests gefordert wurde. Die Anwendung dieses Programmierstils ergibt nicht nur die oben angeführten technischen, sondern ebenfalls soziale Implikationen.
+Wenn es möglich ist, dieses theoretische Modell als Programmierungsstil umzusetzen, erhält man Code, welcher beinahe ausschließlich durch fehlgeschlagene Tests erforderlich wurde. Die Anwendung dieses Programmierstils ergibt nicht nur die oben angeführten technischen, sondern ebenfalls soziale Implikationen.
 \begin{itemize}
-  \item Wenn die \textit{Fehlerdichte} möglichst gering gehalten werden kann, kann aus \textit{Qualitätssicherung} statt passiver zur aktiven Arbeit werden.
+  \item Wenn die \textit{Fehlerdichte} möglichst gering gehalten werden kann, kann aus \textit{Qualitätssicherung} aktive statt passive Arbeit werden.
   \item Wenn die Anzahl von \textit{negativen Überaschungen} reduziert werden kann, wird der gesamte Entwicklungsprozess besser plan- und schätzbar.
   \item Da durch TDD sauberer Code entsteht, welcher zusätzlich durch Tests dokumentiert ist, kann die Kommunikation zwischen Software-EntwicklerInnen geschärft und klarer werden.
 \end{itemize}
 
 \subsection{Motivation: Angst {\&} Mut}
 \cite{Beck:2003} stellt folgende Behauptung auf: \newline
-\textit{TDD ist ein Weg um die Angst einer/s EntwicklerIn zurecht zu kommen}.
+\textit{TDD ist ein Weg für EntwicklerInnen, um mit ihrer Angst besser umzugehen}.
 
-Hierbei geht es Beck um die legitime Angst einer/s EntwicklerIn \glqq{this-is-a-hard-problem-and-I-can't-see-the-end-from-the-beginning\grqq}. Durch diesen Ausdruck wird die Angst von einer zu großen und schwierigen Aufgabe erdrückt zu werden beschrieben.
-Wenn ein/e EntwicklerIn sich mit diesem Problem konfrontiert sieht ergeben sich aus der Angst folgende negative Reaktionen.
+Hierbei geht es Beck um die legitime Angst einer/s EntwicklerIn \glqq{this-is-a-hard-problem-and-I-can't-see-the-end-from-the-beginning\grqq}. Durch diesen Ausdruck wird die Angst von einer zu großen und schwierigen Aufgabe erdrückt zu werden, beschrieben. Wenn ein/e EntwicklerIn sich mit diesem Problem konfrontiert sieht, ergeben sich aus der Angst folgende negative Reaktionen:
 \begin{itemize}
   \item Angst macht EntwicklerInnen \textit{zögerlich}.
   \item Angst macht EntwicklerInnen \textit{weniger kommunikativ}.
   \item Angst macht EntwicklerInnen \textit{scheu} vor \textit{Feedback}.
   \item Angst macht EntwicklerInnen \textit{mürrisch}.
 \end{itemize}
-Diese Reaktionen wirken sich alle negative auf die Code-Qualität sowie auf die Lösung des Problems aus.
+Diese Reaktionen wirken sich alle negativ auf die Code-Qualität sowie auf die Lösung des Problems aus.
 
-Die richtigen Reaktionen wären jedoch folgende.
+Die richtigen Reaktionen wären jedoch folgende:
 \begin{itemize}
   \item EntwicklerInnen sollten nicht zögern, sondern schnell und konkret an einem gegebenem Problem \textit{lernen und wachsen}.
   \item EntwicklerInnen sollten nicht schweigen und sich zurückziehen, sondern \textit{klarer kommunizieren}.
   \item EntwicklerInnen sollten aktiv nach \textit{konstruktivem Feedback} suchen.
 \end{itemize}
 
-Laut \cite{Beck:2003} werden diese Reaktionen durch TDD erreicht. Das große, erdrückende und angst-fördernde Problem wird zuerst durch viele kleine Tests ausgedrückt. Jeder Test wird der Reihe nacht zum Laufen gebracht. Wenn einer der Tests läuft, weiß die/der EntwicklerIn auch, dass der Test sowie der zugehörige Code funktioniert. Sie/er bekommt positives Feedback und kann sich auf das nächste Problem konzentrieren, wird also nicht mehr abgelenkt. Sollte dieser Test durch weitere Änderungen am Code fehlschlagen bekommt die/der EntwicklerIn direktes Feedback. Durch kleine Iterationen und simple Schritte können Fehler einfach gefunden werden.
+Laut \cite{Beck:2003} werden diese Reaktionen durch TDD erreicht. Das große, erdrückende und angst-fördernde Problem wird zuerst durch viele kleine Tests ausgedrückt. Jeder Test wird der Reihe nach zum Laufen gebracht. Wenn einer der Tests läuft, weiß die/der EntwicklerIn auch, dass der Test sowie der zugehörige Code funktioniert. Sie/er bekommt positives Feedback und kann sich auf das nächste Problem konzentrieren, wird also nicht mehr abgelenkt. Sollte dieser Test durch weitere Änderungen am Code fehlschlagen, bekommt die/der EntwicklerIn direktes Feedback. Durch kleine Iterationen und simple Schritte können Fehler einfacher gefunden werden.
 
-Weiters beschreibt Beck TDD als Bewusstsein der Lücke zwischen Programmierentscheidungen und Feedback sowie die Möglichkeiten um diese Lücke kontrollieren zu können.
+Weiters beschreibt Beck TDD als Bewusstsein der Lücke zwischen Programmierentscheidungen und Feedback sowie die Möglichkeiten, um diese Lücke kontrollieren zu können.
 
 \subsection{Der TDD-Kreislauf}
 \begin{enumerate}
   \item \textbf{Test schreiben}:\newline
-  Der Test sollte wiederspiegeln, wie ein/e EntwicklerIn sich die zukünftige Operation wünscht. Der Test ist eine Geschichte. Diese Geschichte soll alle möglichen Elemente beinhalten, welche notwendig sind um die richtigen Antworten für die Geschichte zu erhalten.
+  Der Test sollte widerspiegeln, wie sich ein/e EntwicklerIn die zukünftige Operation wünscht und vorstellt. Der Test ist eine Geschichte. Diese Geschichte soll alle möglichen Elemente beinhalten, welche notwendig sind, um die richtigen Antworten für die Geschichte zu erhalten.
   \item \textbf{Test zum Laufen bringen}:\newline
-  Den Test \textit{schnell} zum Laufen bringen ist das Wichtigste. Wenn eine klare, saubere Lösung offensichtlich ist, dann spricht nichts dagegen diese auch zu implementieren. Wenn diese Lösung jedoch zu lange dauert, um den Test \textit{schnell} zum Laufen zu bringen - also das \glqq{grüne\grqq} Feedback verzögern - sollte eine Notitz erstellt werden und die Konzentration sofort wieder auf das eigentliche Problem gelenkt werden. Oft werden hier auch \glqq{Fake\grqq} Implementierungen angewendet.
+  Den Test \textit{schnell} zum Laufen bringen, ist das Wichtigste. Wenn eine klare, saubere Lösung offensichtlich ist, dann spricht nichts dagegen, diese auch zu implementieren. Wenn diese Lösung jedoch zu lange dauert, um den Test \textit{schnell} zum Laufen zu bringen -- also das \glqq{grüne\grqq} Feedback verzögern -- sollte eine Notitz erstellt und die Konzentration sofort wieder auf das eigentliche Problem gelenkt werden. Oft werden hier auch \glqq{Fake\grqq}-Implementierungen angewendet.
   \item \textbf{Es richtig machen}:\newline
   Schritt für Schritt können nun Duplikationen entfernt sowie etwaige \glqq{Fake\grqq} Implementierungen aus Schritt 2 behoben werden.
 \end{enumerate}
 
 Das Ziel dieser drei Schritte ist \glqq{clean code that works\grqq}, also \glqq{\textit{sauberen}, \textit{funktionierenden} Code\grqq} zu erhalten.
 
-Folgendes Beispiel illustriert diesen Kreislauf anhand einer einfachen Implementierung für simple Addition.
-Die erläuternde Beispiele zu TDD werden in JavaScript verfasst, da sich diese Arbeit primär mit JavaScript und AngularJS befasst.
-Das Beispiel kann im referenziertem GitHub-Repository in dem Verzeichnis \glqq{source/simple-tests/step-1\grqq} gefunden werden.
+Folgendes Beispiel illustriert diesen Kreislauf anhand einer einfachen Implementierung für simple Addition. Die erläuternden Beispiele zu TDD werden in JavaScript verfasst, da sich diese Arbeit primär mit JavaScript und AngularJS befasst. Das Beispiel kann im referenziertem GitHub-Repository in dem Verzeichnis \glqq{source/simple-tests/step-1\grqq} gefunden werden.
 
-Schritt 1: Test schreiben.
-Der erste einfache Test beschreibt eine Geschichte. In dieser Geschichte soll die Funktion \glqq{plus(arg1, arg2)\grqq} die zwei übergebenen Parameter addieren und ein Ergebnis zurückliefern. Für die einfachste Integer-Variante bedeutet das also: \glqq{1+1=2\grqq}
+\textbf{Schritt 1: Test schreiben.}\newline
+Der einfache Test beschreibt eine Geschichte. In dieser Geschichte soll die Funktion \glqq{plus(arg1, arg2)\grqq- die zwei übergebenen Parameter addieren und ein Ergebnis, wird die  die einfachste Integer-Variante bedeutet das also: folgendermaßen geändertzurückliefern. .Für \glqq{1+1=2\grqq}
 
 \begin{lstlisting}[language=JavaScript]
 describe("Calculus - Simple addition", function() {
@@ -161,15 +136,14 @@ Dieser Test wird per Kommandozeile im Browser \glqq{PhantomJS\grqq} ausgeführt.
 \begin{figure}[H]
   \centering
   \fbox{
-  \includegraphics[width=12cm]{images/tdd-simple-step-1-1.png}
+  \includegraphics[width=15cm]{images/tdd-simple-step-1-1.png}
   }
   \caption{Terminal Ausgabe des ersten Tests}
   \label{figure:tdd-simple-step-1-1}
 \end{figure}
 
-Schritt 2: Zum Laufen bringen.
-Um diesen Test möglichst schnell dazu zu bringen grünes Feedback zu geben, wird die einfachste und naiivste Implementierung verwendet.
-Die einfachste Variante bedeutet also eine Funktion zu definieren, welche zwei Parameter übernimmt und \glqq{2\grqq} zurückgibt.
+\textbf{Schritt 2: Test zum Laufen bringen.}\newline
+Um diesen Test möglichst schnell dazu zu bringen, grünes Feedback zu geben, wird die einfachste und naivste Implementierung verwendet. Die einfachste Variante bedeutet also, eine Funktion zu definieren, welche zwei Parameter übernimmt und \glqq{2\grqq} zurückgibt.
 
 \begin{lstlisting}[language=JavaScript]
 var plus = function(augend, addend) {
@@ -177,21 +151,20 @@ var plus = function(augend, addend) {
 };
 \end{lstlisting}
 
-Wir wissen an dieser Stelle natürlich, dass hier eine klare, saubere und offensichtliche Lösung existiert. Es spricht natürlich nichts dagegen diese hier auch anzuwenden, um jedoch auch den dritten Schritt illustrieren zu können, wird hier naiv vorgegangen.\newline
-Nach dieser naiven Implementierung ändert sich das Ergebnis des Tests von rot auf grün (siehe Abbildung 
-\ref{figure:tdd-simple-step-1-2}).
+Wir wissen an dieser Stelle, dass hier eine klare, saubere und offensichtliche Lösung existiert. Es spricht nichts dagegen, diese hier auch anzuwenden. Um jedoch auch den dritten Schritt illustrieren zu können, wird hier naiv vorgegangen.\newline
+Nach dieser naiven Implementierung ändert sich das Ergebnis des Tests von rot auf grün (siehe Abbildung \ref{figure:tdd-simple-step-1-2}).
 
 \begin{figure}[H]
   \centering
   \fbox{
-  \includegraphics[width=12cm]{images/tdd-simple-step-1-2.png}
+  \includegraphics[width=15cm]{images/tdd-simple-step-1-2.png}
   }
   \caption{Terminal Ausgabe des ersten Tests nach naiver Implementierung}
   \label{figure:tdd-simple-step-1-2}
 \end{figure}
 
-Schritt 3: Es richtig machen.
-Obwohl der Test nun bereits erfolgreich läuft, ist natürlich klar, dass diese naive Implementierung nicht korrekt ist. Es handelt sich um eine \glqq{Fake\grqq} Implementierung. Um nun die richtige Berechnung durchzuführen ändern wir die \glqq{plus(arg1, arg2)\grqq} Funktion folgendermaßen.
+\textbf{Schritt 3: Es richtig machen.}\newline
+Obwohl der Test nun bereits erfolgreich läuft, ist klar, dass diese naive Implementierung nicht korrekt ist. Es handelt sich um eine \glqq{Fake\grqq}-Implementierung. Um nun die richtige Berechnung durchzuführen, wird die Funktion \glqq{plus(arg1, arg2)\grqq} folgendermaßen geändert.
 
 \begin{lstlisting}[language=JavaScript]
 var plus = function(augend, addend) {
@@ -199,18 +172,18 @@ var plus = function(augend, addend) {
 };
 \end{lstlisting}
 
-Nach dem dritten Schritt wird erneut der Test ausgeführt um zu garantieren, dass das Korrigieren der naiven Implementierung auch funktioniert. Es wird ein positives Ergebnis erwartet (siehe Abbildung \ref{figure:tdd-simple-step-1-3}).
+Nach dem dritten Schritt wird der Test erneut ausgeführt, um zu garantieren, dass das Korrigieren der naiven Implementierung funktioniert. Es wird ein positives Ergebnis erwartet (siehe Abbildung \ref{figure:tdd-simple-step-1-3}).
 
 \begin{figure}[H]
   \centering
   \fbox{
-  \includegraphics[width=12cm]{images/tdd-simple-step-1-3.png}
+  \includegraphics[width=15cm]{images/tdd-simple-step-1-3.png}
   }
   \caption{Terminal Ausgabe des ersten Tests nach Richtigstellung der Implementierung}
   \label{figure:tdd-simple-step-1-3}
 \end{figure}
 
-Durch die Anwendung des TDD-Kreislaufs wurde hier \textit{sauberer} und \textit{funktionierender} Code produziert.
+Durch die Anwendung des TDD-Kreislaufs wurde \textit{sauberer} und \textit{funktionierender} Code produziert.
 
 \subsection{Test-Driven Development Patterns}
 \subsubsection{Red Bar Patterns}
@@ -223,82 +196,284 @@ Konkret behandeln sie die Fragen:
   \item \glqq{Wann\grqq} soll mit dem Tests Schreiben \glqq{aufgehört\grqq} werden?
 \end{itemize}
 
-\paragraph{One Step Test}
-Bei TDD handelt es sich wie bereits erwähnt um einen Prozess, bei welchem in kleinen Schritten und Schritt für Schritt Software aus Tests geformt wird. In diesem Prozess ist es notwendig sich für die Reihenfolge der Test-Schritte (in weiterer Folge auch für die Reihenfolge, in welcher die Komponenten der Software entstehen soll) zu entscheiden.
-
-\cite[134]{Beck:2003} liefert auf die Frage \glqq{Welchen Test sollte ich als nächstes schreiben?\grqq} eine klare Antwort: Es gibt keine.
-Die Frage ist hinsichtlich der Anforderungen der Software (beziehungsweise deren Komponenten) sowie der/s Entwicklerin/s zu individuell.
-Beck gibt jedoch den Tipp, weder Tests mit einer offensichtlichen Implementierung, noch Tests, welche zu kompliziert erscheinen zu wählen.
-Man sollte Schritt für Schritt jene Tests wählen, bei welchen man sich wohlsten fühlt.
-Sollten nur zu komplizierte Probleme und Tests vorliegen müssen die Schritte verkleinert und somit das Szenario noch weiter unterteilt werden.
-
-Die Mechanik des \glqq{One Step Test\grqq}'s wird von \cite[134]{Beck:2003} mit \glqq{known to unknown\grqq} beschrieben.
-
 \paragraph{Starter Test}
 Mit welchem Test soll begonnen werden?
 
-Eines der Grundkonzepte von TDD besagt, dass die Konzentration immer nur auf dem aktuellen Problem und Test liegen soll. Diesem Konzept steht jedoch die Möglichkeit mit einem realistischen Test zu starten gegenüber. Bei dem Versuch einen realistischen Test zu schreiben, wird der Fokus sofort auf einige andere Fragen gelenkt. \glqq{Was ist der richtige Input?\grqq}, \glqq{Was ist das richtige Ergebnis?\grqq}, \glqq{Welche Parameter sind notwendig für Lösung des Problems?\grqq} oder \glqq{Wohin gehört dieser Test eigentlich?\grqq}. Man findet sich bei dem Schreiben realistischer Tests häufig dabei wieder über viele Probleme und Fragen auf einmal nachzudenken, verliert also den Fokus auf den aktuellen Test des aktuellen Problems.
+Eines der Grundkonzepte von TDD besagt, dass die Konzentration immer nur auf dem aktuellen Problem und Test liegen soll. Diesem Konzept steht jedoch die Möglichkeit, mit einem realistischen Test zu starten, gegenüber. Bei dem Versuch, einen realistischen Test zu schreiben, wird der Fokus sofort auf einige andere Fragen gelenkt: \glqq{Was ist der richtige Input?\grqq}, \glqq{Was ist das richtige Ergebnis?\grqq}, \glqq{Welche Parameter sind notwendig für Lösung des Problems?\grqq} oder \glqq{Wohin gehört dieser Test eigentlich?\grqq}. Man findet sich bei dem Schreiben realistischer Tests häufig dabei wieder, über viele Probleme und Fragen auf einmal nachzudenken, verliert also den Fokus auf den aktuellen Test des aktuellen Problems.
 
-Ein realistischer Test bedeutet eine Verzögerung des Abstands der \glqq{Rot-Grün-Refactor\grqq} Zyklen - diese sollen jedoch möglichst kurz gehalten werden.
-Der erste Test, also der \glqq{Starter Test\grqq} soll so trivial wie möglich sein.
+Ein realistischer Test bedeutet eine Verzögerung des Abstands der \glqq{Rot-Grün-Refactor\grqq} Zyklen -- diese sollen jedoch möglichst kurz gehalten werden. Der erste Test, also der \glqq{Starter Test\grqq}, soll so trivial wie möglich sein.
 
-\glqq{Start by testing a variant of an operation that doesn't do anything\grqq}, \cite[134]{Beck:2003}.
+\glqq{Start by testing a variant of an operation that doesn't do anything\grqq} \autocite[134]{Beck:2003}.
+
+\paragraph{One Step Test}
+Bei TDD handelt es sich wie -- bereits erwähnt -- um einen Prozess, bei dem in kleinen Schritten Schritt für Schritt Software aus Tests geformt wird. In diesem Prozess ist es notwendig, sich für die Reihenfolge der Test-Schritte (in weiterer Folge auch für die Reihenfolge, in welcher die Komponenten der Software entstehen soll) zu entscheiden.
+
+\cite[134]{Beck:2003} liefert auf die Frage \glqq{Welchen Test sollte ich als nächstes schreiben?\grqq} eine klare Antwort: Es gibt keine.
+Die Frage ist hinsichtlich der Anforderungen der Software (beziehungsweise deren Komponenten) sowie der/s Entwicklerin/s zu individuell.
+Beck gibt jedoch den Tipp, weder Tests mit einer offensichtlichen Implementierung, noch Tests, welche zu kompliziert erscheinen, zu wählen. Man sollte Schritt für Schritt jene Tests wählen, bei denen man sich am wohlsten fühlt. Sollten nur zu komplizierte Probleme und Tests vorliegen, müssen die Schritte verkleinert und somit das Szenario noch weiter unterteilt werden.
+
+Die Mechanik des \glqq{One Step Test\grqq}'s wird von \cite[134]{Beck:2003} mit \glqq{known to unknown\grqq} beschrieben.
 
 \paragraph{Learning Test}
 
-Wie bereits erwähnt geht es bei TDD nicht nur um eine möglichst hohe Test-Dichte, sondern ebenfalls um andere Faktoren, wie Design, Schätzbarkeit, sauberen Code, psychologische Auswirkungen, etc.
+Wie bereits erwähnt, geht es bei TDD nicht nur um eine möglichst hohe Test-Dichte, sondern ebenfalls um andere Faktoren, wie Design, Schätzbarkeit, sauberen Code, psychologische Auswirkungen, etc.
 
-Eine weitere Methode TDD einzusetzen betrifft das Lernen des Umgangs mit einer neuen API oder Bibliothek. Wenn man eine neue Bibliothek verwendet bietet es sich an, gegen diese Tests zu schreiben anstatt direkt Implementierungen damit vorzunehmen - ansonsten sollten keine Tests für externe Software mptwendig sein.\newline\newline
+Eine weitere Methode, TDD einzusetzen, betrifft das Lernen des Umgangs mit einer neuen API oder Bibliothek. Wenn man eine neue Bibliothek verwendet, bietet es sich an, gegen diese Tests zu schreiben, anstatt direkt Implementierungen damit vorzunehmen -- ansonsten sollten keine Tests für externe Software notwendig sein.
 
 \paragraph{Regression Test}
-Wenn ein Fehler in einer Applikation auftritt, so ist eine Variante dieses Problem zu lösen direkt den Fehler zu finden, zu behen, zu überprüfen und damit den Fehler abzuhaken. Mit dieser Variante gib es allerdings keine Möglichkeit zu garantieren, dass dieser Fehler (durch Abhängigkeiten zu anderen Komponenten) nicht erneut auftritt.
+Wenn ein Fehler in einer Applikation auftritt, so ist eine Variante, dieses Problem zu lösen, direkt den Fehler zu finden, zu behen, zu überprüfen und damit den Fehler abzuhaken. Mit dieser Variante gibt es allerdings keine Möglichkeit, zu garantieren, dass dieser Fehler (durch Abhängigkeiten zu anderen Komponenten) nicht erneut auftritt.
 
-Auch TDD kann keine 100\%-ige Fehler-Freiheit garantieren. Sollte ein Problem berichtet werden, ist der erste Schritt einen neuen Test für dieses Problem zu verfassen. Der Test muss den einfachsten Fall, welcher das Fehlverhalten hervorruft behandeln. Durch das nachträgliche absolvieren des TDD-Kreislaufs wird sichergestellt, dass genau dieser Fehler nicht erneut auftritt.
+Auch TDD kann keine 100\%-ige Fehler-Freiheit garantieren. Sollte ein Problem berichtet werden, ist der erste Schritt, einen neuen Test für dieses Problem zu verfassen. Der Test muss den einfachsten Fall, welcher das Fehlverhalten hervorruft behandeln. Durch das nachträgliche Absolvieren des TDD-Kreislaufs wird sichergestellt, dass genau dieser Fehler nicht erneut auftritt.
 
 \subsubsection{Green Bar Patterns}
 
-Die \glqq{Red Bar Patterns\grqq} helfen dabei die notwendigen Tests zu verfassen. Die \glqq{Green Bar Patterns\grqq} hingegen geben nun Ansätze, wie die geschriebenen und fehlschlagenden Tests schnellst möglich erfolgreich abgeschlossen werden können.
+Die \glqq{Red Bar Patterns\grqq} helfen dabei, die notwendigen Tests zu verfassen. Die \glqq{Green Bar Patterns\grqq} hingegen geben nun Ansätze, wie die geschriebenen und fehlschlagenden Tests schnellst möglich erfolgreich abgeschlossen werden können.
 
 \paragraph{Fake it ('til you make it)}
 
-Um die Abstände der \glqq{Rot-Grün-Refactor\grqq} Zyklen so gering wie möglich halten zu können wird immer die einfachste Variante aller möglichen Implementierungen verwendet: Eine Konstante zurück liefern.
+Um die Abstände der \glqq{Rot-Grün-Refactor\grqq} Zyklen so gering wie möglich halten zu können, wird immer die einfachste Variante aller möglichen Implementierungen verwendet: Eine Konstante zurückgeben.
 
-Nachdem der Test grün ist wird Schritt für Schritt die Implementierung richtig gestellt und die Konstante mit Variablen in einen Ausdruck gewandelt. Hier stellt sich jedoch die Frage \glqq{Wieso offensichtlich falschen Code schreiben?\grqq} - Um den Test schnell erfolgreich laufen lassen zu können.
-Laut \cite[152]{Beck:2003} hat dieses Muster zwei starke Effekte. Wenn der Test grün ist fühlt man sich sicher. Man kann sich voll und ganz auf das richtige Refaktorieren konzentrieren. Also einerseits erfüllt \glqq{Fake it\grqq} einen psychologischen Effekt. Andererseits hilft es bei der Abgrenzung von zukünftigen Problemen. Wie schon erwähnt dient TDD auch dazu den Fokus und die Konzentration immer bei dem aktuellen Problem zu halten. Als ersten Schritt eine Konstante zurück zu liefern unterstützt dabei die/den EntwicklerIn.
+Nachdem der Test grün ist, wird Schritt für Schritt die Implementierung richtig gestellt und die Konstante mit Variablen in einen Ausdruck gewandelt. Hier stellt sich jedoch die Frage \glqq{Wieso offensichtlich falschen Code schreiben?\grqq} -- Die Antwort darauf lautet: \glqq{Um den Test schnell erfolgreich laufen lassen zu können.\grqq}
 
-Beispiel + Duplikation zwischen Test \& Implementierung removen undso.
+Laut \cite[152]{Beck:2003} hat dieses Muster zwei starke Effekte. Wenn der Test grün ist, fühlt man sich sicher. Man kann sich voll und ganz auf das richtige Refactoring konzentrieren. Also einerseits erfüllt \glqq{Fake it\grqq} einen psychologischen Effekt. Andererseits hilft es bei der Abgrenzung von zukünftigen Problemen. Wie schon erwähnt, dient TDD auch dazu, den Fokus und die Konzentration immer bei dem aktuellen Problem zu halten. Als ersten Schritt eine Konstante zurückzugeben, unterstützt die/den EntwicklerIn dabei.
+
+Das folgende Beispiel zeigt das Fake it pattern anhand einer einfach Addition von zwei Integern. Das Beispiel befindet sich im Verzeichnis \glqq{/source/simple-steps/green-bar-patters/fake-it/\grqq}
+
+\textbf{Schritt 1: Rot}
+\begin{lstlisting}[language=JavaScript]
+//
+// file: fakeIt.spec.js
+//
+describe("Simple calculator", function() {
+  it("should add 1 to 1 and return 2", function() {
+    expect(sum(1,1)).toEqual(2);
+  });
+});
+\end{lstlisting}
+Dieser Test endet natürlich rot, denn die Funktion \glqq{sum\grqq} wurde noch nicht definiert.
+
+\textbf{Schritt 2: Grün}
+\begin{lstlisting}[language=JavaScript]
+//
+// file: fakeIt.js
+//
+var sum = function(augend, addend) {
+  return 2;
+};
+\end{lstlisting}
+
+Fake it! -- die einfachste Variante um den geschrieben Test grün abzuschließen lautet: eine Konstante zurückgeben. Der Test schließt nun positiv ab.
+
+Anmerkung: der nächste Schritt wäre gewesen, nur die Funktion \glqq{sum\grqq} zu definieren - um Fake it zu demonstrieren, wurde dieser Schritt übersprungen.
+
+\textbf{Schritt 3: Refactor} \newline
+Im letzten Schritt wird die Duplikation, welche durch Fake it hinzugefügt wurde, entfernt. Es geht nicht um Duplikation innerhalb des Tests oder innerhalb des Produktionscodes, sondern es geht um die Duplikation von Tests und Produktionscode \textit{zusammen}. In Zeile 6 des Tests wird der erwartete Rückgabewert bestimmt -- in diesem Fall die Number \glqq{2\grqq}. In Zeile 5 des Produktionscodes wird ebenfalls die Number \glqq{2\grqq} verwendet. Diese Duplikation gilt es zu eliminieren.
+
+\begin{lstlisting}[language=JavaScript]
+//
+// file: fakeIt.js
+//
+var sum = function(augend, addend) {
+  return augend + addend;
+};
+\end{lstlisting}
+
+Nach dem refactoring wird der Test erneut ausgeführt, um sicher zu stellen, dass der Code funktioniert.
+
+Aus diesem Beispiel wird ersichtlich, dass es sich bei \glqq{Duplikation eliminieren\grqq} nicht immer nur um Duplikation innerhalb der Tests oder des Produktionscodes handelt, sondern um die Duplikation zwischen Tests und Produktionscode.
 
 \paragraph{Triangulate}
 
-Ein weiterer Weg um schnell einen erfolgreichen Test zu erreichen ist \glqq{Triangulate\grqq}. Bei Triangulate geht es darum, nicht nur ein mögliches Ergebnis zu testen, sondern zwei oder mehrere Ergebnisse.
+Im Beispiel von Fake it wurde durch das Eleminieren von Duplikation die Implementierung richtig gestellt. Ein anderer Weg, eine richtige Implementierung nach dem Fake it Pattern zu erreichen, ist \glqq{Triangulate\grqq}. Bei Triangulate geht es darum, nicht nur ein mögliches Ergebnis zu testen, sondern zwei oder mehrere Ergebnisse. Durch die genauere Spezifizierung des Tests wird die richtige Implementierung eingegrenzt.
 
-Anhand des folgenden Beispielswird der direkte Unterschied zu \glqq{Fake it\grqq} erklärt.
+Anhand des folgenden Beispiels wird die Funktionsweise von Triangulate erklärt. Das Beispiel befindet sich im Verzeichnis \glqq{/source/simple-steps/green-bar-patters/triangulate/\grqq}.
+Hier wird von Schritt 2 des Fake it Beispiels ausgegangen. Es wurde bereits ein Test geschrieben und der Produktionscode mittels Fake it dazu implementiert. Anstatt nun die Duplikation zwischen Tests und Produktionscode zu suchen wird Triangulate angewandt, um die richtige Implementierung zu erreichen.
 
-Beispiel
+\textbf{Schritt 3: Triangulate}
+\begin{lstlisting}[language=JavaScript]
+//
+// file: triangulate.spec.js
+//
+describe("Simple calculator", function() {
+  it("should add 1 to 1 and return 2", function() {
+    expect(sum(1,1)).toEqual(2);
+  });
+  // triangulate
+  it("should add 1 to 2 and return 3", function() {
+    expect(sum(1,2)).toEqual(3);
+  });
+});
+\end{lstlisting}
 
-Bei Triangulate wird also nicht mittels direkter Eliminierung der Duplikation zwischen Test und Implementierung refaktoriert, sondern durch das Hinzufügen eines weiteren möglichen Ergebnisses.
+Es wurde ein weiterer Test hinzugefügt, um die richtige Implementierung einzugrenzen. Da der neue Test fehlschlägt wird klar, dass die Fake it Implementierung nicht die richtige ist, um das gegebene Problem zu lösen. Nun gäbe es verschiedene Wege, den Test wieder grün abschließen zu können. Man könnte die Implementierung beispielsweise wie folgt ändern:
+
+\begin{lstlisting}[language=JavaScript]
+//
+// file: triangulate.js
+//
+var sum = function(augend, addend) {
+  if(addend == 2) {
+    return 3;
+  }
+  return 2;
+};
+\end{lstlisting}
+
+Durch die weitere Anwendung von Triangulate wird die richtige Implementierung weiter eingeschränkt.
+\begin{lstlisting}[language=JavaScript]
+//
+// file: triangulate.spec.js
+//
+describe("Simple calculator", function() {
+  it("should add 1 to 1 and return 2", function() {
+    expect(sum(1,1)).toEqual(2);
+  });
+  // triangulate
+  it("should add 1 to 2 and return 3", function() {
+    expect(sum(1,2)).toEqual(3);
+  });
+  // triangulate
+  it("should add 2 to 1 and return 3", function() {
+    expect(sum(2,1)).toEqual(3);
+  });
+});
+
+\end{lstlisting}
+Der Test schlägt fehl und somit ist wieder klar, dass es sich nicht um die korrekte Implementierung für das Problem handelt. Mit Triangulate kann man das Problem so weit einschränken, bis die richtige Lösung ersichtlich wird.
+\begin{lstlisting}[language=JavaScript]
+//
+// file: triangulate.js
+//
+var sum = function(augend, addend) {
+  return augend + addend;
+};
+\end{lstlisting}
 
 \paragraph{Obvious Implementation}
 
 Wie die bisherigen Beispiele für \glqq{Fake it\grqq} und \glqq{Triangulate\grqq} zeigen, handelt es sich dabei um wirklich kleine Schritte. Speziell anhand dieses Beispiels lässt sich das dritte Green Bar Patterns erklären: \glqq{Obvious Implementation\grqq}.
 
-Wenn eine Operation so einfach ist, wie in dem Beispiel, spricht nichts dagegen die offensichtliche Implementierung direkt zu verwenden.
-Wenn die Probleme allerdings komplizierter werden, ist es oft schwierig die Disziplinen \glqq{sauberer\grqq} und \glqq{funktionierend\grqq} gleichzeitig zu erreichen. Außerdem soll der Abstand zwischen den Zyklen möglichst gering gehalten werden, was bei einer offensichtlichen Lösung für ein großes Problem eventuell nicht eingehalten werden kann.
-
-Beispiel
+Wenn eine Operation so einfach ist, wie in dem Beispiel, spricht nichts dagegen, die offensichtliche Implementierung direkt zu verwenden.
+Wenn die Probleme allerdings komplizierter werden, ist es oft schwierig die Disziplinen \glqq{sauber\grqq} und \glqq{funktionierend\grqq} gleichzeitig zu erreichen. Außerdem soll der Abstand zwischen den Zyklen möglichst gering gehalten werden, was bei einer offensichtlichen Lösung für ein großes Problem eventuell nicht eingehalten werden kann.
 
 \paragraph{One to many}
 
 Auch bei Operationen, welche eine Kollektion von Objekten benötigen, gilt: einfach und simpel starten - \glqq{one to many\grqq}\autocite[154]{Beck:2003}.
 
-Zuerst erfolgt die Implementierung mit einem Objekt und erst wenn der Test erfolgreich war wird Schritt für Schritt die Kollektion übernommen.
+Zuerst erfolgt die Implementierung mit einem Objekt und erst wenn der Test erfolgreich war, wird Schritt für Schritt die Kollektion übernommen.
 
-Beispiel - Beachten: Änderungen Isolieren
+Das nächste Beispiel soll die Implementierung für \glqq{sum\grqq} erweitern. Es soll möglich sein, nicht nur zwei Numbers, sondern eine beliebige Anzahl von Numbers, zu addieren. Das Beispiel befindet sich im Verzeichnis \glqq{/source/simple-tests/green-bar-patterns/one-to-many/\grqq} und geht von der korrekten Implementierung von \glqq{sum\grqq} des Fake it Beispiels aus.
+
+\begin{lstlisting}[language=JavaScript]
+//
+// file: oneToMany.spec.js
+//
+describe("Simple calculator", function() {
+  it("should add 1 to 1 and return 2", function() {
+    expect(sum(1,1)).toEqual(2);
+  });
+});
+\end{lstlisting}
+\begin{lstlisting}[language=JavaScript]
+//
+// file: oneToMany.js
+//
+var sum = function(augend, addend) {
+  return augend + addend;
+};
+\end{lstlisting}
+
+Da mit TDD kein Code geschrieben wird, ohne das ein Test fehlschlägt, wird das neue Problem mit einem Test gestartet.
+
+\begin{lstlisting}[language=JavaScript]
+//
+// file: oneToMany.spec.js
+//
+describe("Simple calculator", function() {
+  it("should add 1 to 1 and return 2", function() {
+    expect(sum(1,1)).toEqual(2);
+  });
+
+  it("should sum up 1, 1 and 1 and return 3", function() {
+    expect(sum([1,1,1])).toEqual(3);
+  });
+});
+
+\end{lstlisting}
+
+Der erste Test bleibt grün, der neue Test jedoch schlägt fehl. Bei einem roten Test wird implementiert. Hierbei gilt es, Änderungen zu isolieren, dass heißt, die aktuelle Implementierung noch nicht direkt zu ändern, denn der erste Test bestätigt uns, dass diese korrekt funktioniert.
+
+\begin{lstlisting}[language=JavaScript]
+//
+// file: oneToMany.js
+//
+var sum = function(augend, addend) {
+
+  if(augend instanceof Array && typeof(addend) === 'undefined') {
+    return 3;
+  }
+
+  return augend + addend;
+};
+\end{lstlisting}
+
+Die Änderung des Produktionscode erfolgte isoliert und wurde mit Fake it implementiert, um schnell in einen grünen Status zu kommen. Da es sich hier um eine offensichtliche Lösung handelt, wird nun nicht mehr trianguliert, sondern direkt die Lösung implementiert.
+
+\begin{lstlisting}[language=JavaScript]
+//
+// file: oneToMany.js
+//
+
+var sum = function(augend, addend) {
+
+  if(augend instanceof Array && typeof(addend) === 'undefined') {
+    var sum = 0;
+    for(var i = 0; i < augend.length; ++i) {
+      sum += augend[i];
+    }
+    return sum;
+  }
+
+  return augend + addend;
+};
+\end{lstlisting}
+
+Die Änderung wurde isoliert vom Ausgangscode implementiert. Da die Änderung jedoch auch den Ausgangscode ersetzen kann, kann diese nun komplett für die Funktion \glqq{sum\grqq} übernommen werden. Da die neue Implementierung mit einer Array arbeitet und nicht mehr mit zwei Numbers als Parameter, muss der erste Test ebenfalls angepasst werden.
+
+\begin{lstlisting}[language=JavaScript]
+//
+// file: oneToMany.spec.js
+//
+describe("Simple calculator", function() {
+  // updated test after changing implementation
+  it("should add 1 to 1 and return 2", function() {
+    expect(sum([1,1])).toEqual(2);
+  });
+
+  it("should sum up 1, 1 and 1 and return 3", function() {
+    expect(sum([1,1,1])).toEqual(3);
+  });
+});
+\end{lstlisting}
+
+\begin{lstlisting}[language=JavaScript]
+//
+// file: oneToMany.js
+//
+
+var sum = function(numbersToSumUp) {
+    var sumToReturn = 0;
+    for(var i = 0; i < numbersToSumUp.length; ++i) {
+      sumToReturn += numbersToSumUp[i];
+    }
+    return sumToReturn;
+};
+\end{lstlisting}
 
 \subsubsection{Mocks, Stubs \& Spies}
-In der Entwicklung werden Komponenten mit unterschiedlicher Komplexität verwendet. Es gilt allerdings alle Komponenten (insbesondere bei TDD) zu testen. Das bedeutet, dass manche Komponenten ressourcen-intensivere Objekte verwenden als andere. Viele ressourcen-intensive Objekte in einem Test zu verwenden wirkt sich negativ auf die Testdauer aus. Eine längere Testdauer führt dazu, dass diese Tests von EntwicklerInnen tendenziell seltener ausgeführt werden \autocite{Beck:2003}. Für das Entwickeln mittels TDD bedeutet es längere Rot-Grün-Refactor Phasen und verzögertes Feedback für die/den EntwicklerIn.
+In der Entwicklung werden Komponenten mit unterschiedlicher Komplexität verwendet. Es gilt allerdings, alle Komponenten (insbesondere bei TDD) zu testen. Das bedeutet, dass manche Komponenten ressourcen-intensivere Objekte verwenden als andere. Viele ressourcen-intensive Objekte in einem Test zu verwenden, wirkt sich negativ auf die Testdauer aus. Eine längere Testdauer führt dazu, dass diese Tests von EntwicklerInnen tendenziell seltener ausgeführt werden \autocite[4]{Johansen:2011}. Für das Entwickeln mittels TDD bedeutet es längere Rot-Grün-Refactor Phasen und verzögertes Feedback für die/den EntwicklerIn.
 
-Um langsame Tests zu vermeiden werden die ressourcen-intensiven Objekte oft durch \glqq{Fake Objects\grqq}, also gefälschte Objekte, ersetzt. Es gibt einige Varianten um Objekte für das Testen zu fälschen, die wichtigsten sind:
+Um langsame Tests zu vermeiden, werden die ressourcen-intensiven Objekte oft durch \glqq{Fake Objects\grqq}, also gefälschte Objekte, ersetzt. Es gibt einige Varianten,tra um Objekte für das Testen zu fälschen, die wichtigsten sind:
 
 \begin{itemize}
   \item Mocks
@@ -306,71 +481,71 @@ Um langsame Tests zu vermeiden werden die ressourcen-intensiven Objekte oft durc
   \item Spies
 \end{itemize}
 
-Die genannten Varianten verfolgen alle das selbe Zielt - das fälschen von Objekten - unterscheiden sich allerdings durch die zusätzliche Funktionalität und die Test-Mentalität (Fowler, 2007 - Quelle noch hinzufügen). Die folgenden Kapitel gehen näher auf jede Variante ein.
+Die genannten Varianten verfolgen alle das selbe Ziel - das Fälschen von Objekten - unterscheiden sich allerdings durch die zusätzliche Funktionalität und die Test-Mentalität (Fowler, 2007 - Quelle noch hinzufügen, Mentalität genauer erläutern). Die folgenden Kapitel gehen näher auf jede Variante ein.
 
 \paragraph{Mocks}
-Mocks - oder auch \glqq{Mock Objects\grqq} - besitzen ein vorprogrammiertes Verhalten, eine vorprogrammierte Erwartung und eine vorprogrammierte Verhaltensüberprüfung \autocite[453]{Johansen:2011}. Darüber hinaus können diese Objekte vor deren Verwendung konfiguriert werden. Mocks werden verwendet, um das \textbf{Verhalten} eines Objektes zu überprüfen. Die Verwendung eines Mock Objektes läuft durch folgende Phasen \autocite[453]{Johansen:2011}:
+\glqq{Mocks\grqq} - oder auch \glqq{Mock Objects/Pseudo-Objekte\grqq} - besitzen ein vorprogrammiertes Verhalten, eine vorprogrammierte Erwartung und eine vorprogrammierte Verhaltensüberprüfung \autocite[453]{Johansen:2011}. Darüber hinaus können diese Objekte vor deren Verwendung konfiguriert werden. Mocks werden verwendet, um das \textbf{Verhalten} eines Objektes zu überprüfen. Die Verwendung eines Mock Objektes läuft durch folgende Phasen \autocite[453]{Johansen:2011}:
 \begin{enumerate}
   \item \textbf{Konfiguration}: \newline
-  Die verschiedenen Stati des Verhaltens wird gesetzt.
+  Die verschiedenen Stati des Verhaltens werden gesetzt.
   \item \textbf{Ausführung}: \newline
   Das Mock Objekt wird mit der zu testenden Komponente ausgeführt.
   \item \textbf{Verhaltensüberprüfung}: \newline
   Die vorkonfigurierten Stati des ausgeführten Verhaltens werden überprüft.
 \end{enumerate}
 
-Ein klassisches Beispiel für ein ressourcen-intensives Objekt, welches durch ein Mock Objekt ersetzt werden kann, ist ein Datenbank-Objekt \autocite[144]{Beck:2003}. Bei der Verwendung eines Datenbank-Objekts kann es zu einer Verzögerung der Tests kommen. Gründe dafür können eine lange Dauer für das Starten der Datenbank oder eventuell ein anderer (entfernter) physischer Standort der Datenbank und somit zusätzliche Netzwerkverzögerung sein. Um diesen Faktoren vorzubeugen gibt es die Möglichkeit, eine Mock-Datenbank zu verwenden. Die Mock-Datenbank kann vor dem Test Konfiguriert werden. Die Konfiguration beinhaltet für eine Mock-Datenbank typischerweise eine erwartete Abfrage (\glqq{expectedQuery\grqq}) und ein erwartetes Ergebnis (\glqq{expectedResult\grqq}). Wird nun im weiteren Testverlauf eine falsche (beziehungsweise nicht erwartete) Abfrage an die Mock-Datenbank geschickt, oder das Ergebnis mit einem nicht erwarteten Wert verglichen, wirft die Mock-Datenbank eine Exception.
+Ein klassisches Beispiel für ein ressourcen-intensives Objekt, welches durch ein Mock Objekt ersetzt werden kann, ist ein Datenbank-Objekt \autocite[144]{Beck:2003}. Bei der Verwendung eines Datenbank-Objekts kann es zu einer Verzögerung der Tests kommen. Gründe dafür können eine lange Dauer für das Starten der Datenbank oder eventuell ein anderer (entfernter) physischer Standort der Datenbank und somit zusätzliche Netzwerkverzögerung sein. Um diesen Faktoren vorzubeugen gibt es die Möglichkeit, eine Mock-Datenbank zu verwenden. Die Mock-Datenbank kann vor dem Test konfiguriert werden. Die Konfiguration beinhaltet für eine Mock-Datenbank typischerweise eine erwartete Abfrage (\glqq{expectedQuery\grqq}) und ein erwartetes Ergebnis (\glqq{expectedResult\grqq}). Wird nun im weiteren Testverlauf eine falsche (beziehungsweise nicht erwartete) Abfrage an die Mock-Datenbank geschickt, oder das Ergebnis mit einem nicht erwarteten Wert verglichen, wirft die Mock-Datenbank eine Exception.
 
 Das manuelle Erstellen von Mocks ist nicht so einfach, wie beispielsweise das manuelle Erstellen von Stubs. In der Regel werden also third-party Mocks herangezogen. Die Mocks für JavaScript/AngularJS werden in Kapitel \glqq{AngularJS\grqq} genauer ausgeführt.
 
-\cite[145]{Beck:2003} merkt zu Mocks an, dass man durch deren Verwendung zusätzliche Risiken zu dem betreffenden Projekt hinzufügt. Wenn beispielsweise die extern produzierten Mocks fehlerhaft sind, so können Tests für eine Komponente bestehen, welche eigentlich ebenfalls fehlerhaft ist. Vice versa bedeutet dies, dass Tests fehlschlagen können, welche eine einwandfrei funktionierende Komponente betreffen.
-Um diese Risiken zu minimieren schlägt Beck vor, ein mal das Verhalten des richtigen Objekts mit jenem des gefälschten Objekts zu vergleichen.
+\cite[145]{Beck:2003} merkt zu Mocks an, dass man durch deren Verwendung zusätzliche Risiken zu dem betreffenden Projekt hinzufügt. Wenn beispielsweise die extern produzierten Mocks fehlerhaft sind, so können Tests für eine Komponente grün abschließen, welche eigentlich ebenfalls fehlerhaft ist. Vice versa bedeutet dies, dass Tests fehlschlagen können, welche eine einwandfrei funktionierende Komponente betreffen.
+Um diese Risiken zu minimieren, schlägt Beck vor, ein Mal das Verhalten des richtigen Objekts mit jenem des gefälschten Objekts zu vergleichen.
 
 \paragraph{Stubs}
-\glqq{Stubs\grqq} ersetzen ebenfalls ressourcen-intensive durch gefälschte Objekte mit vorprogrammiertem Verhalten. Im Gegensatz zu den Mocks, besitzen diese allerdings keine Verhaltensüberprüfung. Stubs geben unabhängig von übergebenen Parametern einen spezifischen vorkonfigurierten Wert zurück, oder werfen bei fehlerhaftem Verhalten eine Exception \autocite[443]{Johansen:2011}. Sie ignorieren darüber hinaus alles, was außerhalb des Tests passiert (Fowler, 2007 - Quelle).
+\glqq{Stubs\grqq} ersetzen ebenfalls ressourcen-intensive durch gefälschte Objekte mit vorprogrammiertem Verhalten. Im Gegensatz zu den Mocks besitzen diese allerdings keine Verhaltensüberprüfung. Stubs geben unabhängig von übergebenen Parametern einen spezifischen vorkonfigurierten Wert zurück, oder werfen bei fehlerhaftem Verhalten eine Exception \autocite[443]{Johansen:2011}. Sie ignorieren darüber hinaus alles, was außerhalb des Tests passiert (Fowler, 2007 - Quelle).
 
-Mit Stubs ist es also prinzipiell nicht möglich eine sofortige Verhaltensüberprüfung durchzuführen, sondern es wird isoliert der Rückgabewert überprüft. Um das Verhalten im nachhinein zu überprüfen, können manche Stubs Informationen über die einzelnen Aufrufe der Methoden des Stub Objekts aufzeichnen.
+Mit Stubs ist es also prinzipiell nicht möglich, eine sofortige Verhaltensüberprüfung durchzuführen, sondern es wird isoliert der Rückgabewert überprüft. Um das Verhalten im Nachhinein zu überprüfen, können manche Stubs Informationen über die einzelnen Aufrufe der Methoden des Stub Objekts aufzeichnen.
 
 \paragraph{Spies}
-Die dritte Variante von Fake Objects sind \glqq{Spies\grqq}. Spies werden verwendet, um zu überprüfen ob Methoden...
+Die dritte Variante von Fake Objects sind \glqq{Spies\grqq}. Spies -- oder auch Spione -- werden verwendet, um zu überprüfen ob Methoden...
 \begin{itemize}
-  \item aufgerufen oder nicht aufgerufen werden.
-  \item in der korrekten Reihenfolge aufgerufen werden.
-  \item die korrekte Anzahl von Aufrufen erfolgt ist.
+  \item ... aufgerufen oder nicht aufgerufen werden.
+  \item ... in der korrekten Reihenfolge aufgerufen werden.
+  \item ... die korrekte Anzahl von Aufrufen erfolgt ist.
 \end{itemize}
 
 Spies werden oft durch Stubs, welche die Aufrufe aufzeichnen und danach überprüfen, implementiert.
 
 \subsection{Testing}
- - kurze Testing Einleitung - (verschiedene Varianten, verschommene Varianten durch ähnliche Bezeichnungen, (integration/e2e, etc.))
+% - kurze Testing Einleitung - (verschiedene Varianten, verschommene Varianten durch ähnliche Bezeichnungen, (integration/e2e, etc.))
 
 \subsubsection{Unit-Tests}
-Ein Unit-Test ist Code, welcher produktiven Code testet. Er besteht aus bestimmten Objekten in bekannten Stati. Die Objekte, wie beispielsweise Funktionen, werden ausgeführt. Dnach werden sie inspiziert und/oder auf die Richtigkeit überprüft. Der produktive Code wird in Isolation getestet.
+Ein Unit-Test ist Code, der produktiven Code testet. Er besteht aus bestimmten Objekten in bekannten Stati. Die Objekte, wie beispielsweise Funktionen, werden ausgeführt. Danach werden sie inspiziert und/oder auf die Richtigkeit überprüft. Der produktive Code wird in Isolation getestet.
 
-Im Vergleich zu Integration-Tests ist es für Unit-Tests wichtig, dass sie isoliert ausgeführt werden - kein Test soll von einem anderen Test abhängig sein \autocite[4]{Johansen:2011}. Langsame Unit-Tests sind schlecht. EntwicklerInnen werden langsame Tests nicht so oft ausführen wie schnelle Tests. Insbesondere im Zusammenhang mit TDD bedeuten langsame Tests einen längeren Abstand zwischen den TDD Zyklen. EntwicklerInnen müssen lange auf Feedback warten und werden aus dem Zyklus gerissen.
+Im Vergleich zu Integration-Tests ist es für Unit-Tests wichtig, dass sie isoliert ausgeführt werden -- kein Test soll von einem anderen Test abhängig sein \autocite[4]{Johansen:2011}. Langsame Unit-Tests wirken sich negativ auf das Testen sowie den TDD-Prozess aus. EntwicklerInnen werden langsame Tests nicht so oft ausführen wie schnelle Tests. Insbesondere im Zusammenhang mit TDD bedeuten langsame Tests einen längeren Abstand zwischen den TDD Zyklen. EntwicklerInnen müssen lange auf Feedback warten und werden aus dem Zyklus gerissen.
 
-Unit-Tests können zu jeder Zeit ausgeführt werden.
+Unit-Tests können zu jeder Zeit ausgeführt werden, ...
 \begin{itemize}
-  \item Um bei einer fertigen Implementierung deren Korrektheit bestätigen.
-  \item Um bei Änderungen Fehler auszuschließen.
-  \item Um bei dem Hinzufügen von neuen Komponenten zu garantieren, dass das System noch vollständig und richtig funktioniert.
+  \item ... um bei einer fertigen Implementierung deren Korrektheit bestätigen.
+  \item ... um bei Änderungen Fehler auszuschließen.
+  \item ... um bei dem Hinzufügen von neuen Komponenten zu garantieren, dass das System noch vollständig und richtig funktioniert.
 \end{itemize}
 
- - Abgrenzung von Unit-Tests -
+ % - Abgrenzung von Unit-Tests -
 
 \subsubsection{Integration-Tests}
-Um beispielsweise eine Uhr zu testen, benötigt man beides, Unit- sowie Integration Tests. Unit-Tests sind für das Testen der einzelnen Zahnräder der Uhr zuständig. Diese werden isoliert auf ihre Korrektheit getestet. Integration-Tests hingegen testen, wie die Zähne der einzelnen Zahnräder ineinandergreifen und ob die Uhr als ganzes richtig funktioniert.
+Um beispielsweise eine Uhr zu testen, benötigt man beides, Unit- sowie Integration-Tests. Unit-Tests sind für das Testen der einzelnen Zahnräder der Uhr zuständig. Diese werden isoliert auf ihre Korrektheit getestet. Integration-Tests hingegen testen, wie die Zähne der einzelnen Zahnräder ineinandergreifen und ob die Uhr als ganzes richtig funktioniert.
 
-Der Nachteil von Integrations-Tests ist, dass diese im Vergleich zu Unit-Tests eher langsam sind. In der Web-Entwicklung werden Integrations-Tests oft verwendet, um die korrekte Darstellung von Elementen sicherzustellen, oder um die Korrektheit der Routen der Web-Applikation zu testen. (Da fällt mir bestimmt auch noch was ein). Das Inspizieren der DOM verlangsam auch die Integrationstests.
+Der Nachteil von Integrations-Tests ist, dass diese im Vergleich zu Unit-Tests eher langsam sind. Mit Integration-Tests können Verbindungen und Abhängigkeiten zwischen einzelnen Komponenten getestet werden. In der Web-Entwicklung werden Integration-Tests oft verwendet, um die korrekte Darstellung von Elementen sicherzustellen, oder um die Korrektheit der Routen der Web-Applikation zu testen. 
+%(Da fällt mir bestimmt auch noch was ein). 
+Das Inspizieren der DOM verlangsamt auch die Integrationstests.
 
 \subsubsection{Automatisiertes Testen in der Web-Entwicklung}
 Beim Entwickeln einer Web-Applikation gibt es ein Schema, welches jeder/m WebentwicklerIn bekannt ist. Man schreibt in einem Text-Editor oder in einer IDE Code, wechselt (ALT+TAB) auf den aktuellen Browser, erneuert die Seite (F5) und überprüft manuell den soeben geschriebenen Code. Dieses Schema ist sehr zeitintensiv, fehleranfällig und nicht reproduzierbar \autocite[3]{Johansen:2011}. Darüber hinaus reicht es oft nicht, den geschriebenen Code lediglich in einem Browser zu testen.
 
-Durch TDD wird dieses Schema vereinfacht. Die meisten Test-Runner (<- Begrifflichkeit), wie beispielsweise \glqq{Karma\grqq}, bieten Funkionalität an, um Dateien auf Änderungen zu überwachen. Sobald eine Änderung stattgefunden hat werden sofort alle Tests erneut ausgeführt. Viele Test-Runner bieten außerdem die Möglichkeit, in mehreren verschiedenen Browsern automatische Tests laufen zu lassen. Die Auswahl reicht von den gängigen Browsern \glqq{Google's Chrome\grqq}, \glqq{Mozilla's Firefox\grqq}, \glqq{Apple's Safari\grqq} und \glqq{Microsoft's Internet Explorer\grqq} über den bei Web-EntwicklerInnen beliebten \glqq{Google's Chrome Canary\grqq} bis hin zu \glqq{headless\grqq} Browsern (-> Begrifflichkeit) wie beispielsweise \glqq{PhantomJS\grqq}.
+Durch TDD wird dieses Schema vereinfacht. Die meisten Test-Runner (<- Begrifflichkeit), wie beispielsweise \glqq{Karma\grqq}, bieten Funkionalität an, um Dateien auf Änderungen zu überwachen. Sobald eine Änderung stattgefunden hat, werden sofort alle Tests erneut ausgeführt. Viele Test-Runner bieten außerdem die Möglichkeit, in mehreren verschiedenen Browsern automatische Tests laufen zu lassen. Die Auswahl reicht von den gängigen Browsern \glqq{Google's Chrome\grqq}, \glqq{Mozilla's Firefox\grqq}, \glqq{Apple's Safari\grqq} und \glqq{Microsoft's Internet Explorer\grqq} über den bei Web-EntwicklerInnen beliebten \glqq{Google's Chrome Canary\grqq} bis hin zu \glqq{headless\grqq} Browsern (-> Begrifflichkeit) wie beispielsweise \glqq{PhantomJS\grqq}.
 
 Durch TDD und automatische Tests wird die Zeit für das manuelle Testen eingespart. Die Tests sind reproduzierbar und die Implementierungen sind weniger fehleranfällig. Das Ergebnis ist also ein effizienterer Entwicklungsprozess.
-
-In Kombination mit gewissen Frameworks, zum Beispiel Karma, kann darüber hinaus direktes automatisches Feedback für die/den EntwicklerIn durch das Überwachen der Dateien erreicht werden. Das manuelle Testen in verschiedenen Browsern wird ebenfalls von Karma übernommen.
 
 \subsection{Vorteile von TDD}
 \label{Vorteile von TDD}
@@ -379,15 +554,15 @@ Die bisherigen Kapitel dieser Arbeit erläutern die Prozesse, Funktionsweisen, A
   \item \textbf{Funktionierender Code}\newline
   Durch die hohe Test-Dichte wird die Fehleranfälligkeit verringert und die Stabilität der geschriebenen Software erhöht. Der TDD Zyklus \glqq{zwingt\grqq} EntwicklerInnen förmlich dazu, anhand von Tests vor der Implementierung darüber nachzudenken.
   \item \textbf{Sauberer Code}\newline
-  Sauberer Code durch refactoring. Durch TDD wird refactoring automatisch in den Entwicklungsprozess integriert (siehe Green Bar Patterns). Durch die zuvor entstandenen Tests wird in diesem Schritt garantiert, dass sich durch das refactoren keine Bugs einschleichen. Weiters wird durch TDD die Wertschätzung des \glqq{Single Responsibility\grqq} Prinzips und die lose Kopplung der Komponenten gefördert\autocite[30]{Johansen:2011}.
+  Durch TDD wird refactoring automatisch in den Entwicklungsprozess integriert (siehe Green Bar Patterns). Als Ergebnis erhält man sauberen Code. Durch die zuvor entstandenen Tests wird in diesem Schritt garantiert, dass sich durch das refactoren keine Bugs einschleichen. Weiters wird durch TDD die Wertschätzung des \glqq{Single Responsibility\grqq} Prinzips und die lose Kopplung der Komponenten gefördert \autocite[30]{Johansen:2011}.
   \item \textbf{Psychologische Effekte}\newline
   Das positive Feedback wirkt sich positiv auf das Stresslevel von EntwicklerInnen aus.
-  TDD hilft dabei sich nur auf das aktuelle Problem zu konzentrieren und sich von zukünftigen Problemen und Entscheidungen abzugrenzen.
+  TDD hilft dabei, sich nur auf das aktuelle Problem zu konzentrieren und sich von zukünftigen Problemen und Entscheidungen abzugrenzen.
   \item \textbf{Dokumentation}\newline
-  Mit TDD wird Software aus Tests geformt. Tests wiederrum \glqq{erzählen\grqq} eine Geschichte. Sie spiegeln die Anforderungen und die vorgesehen Implementierung einer Komponente wieder. Tests können somit auch eine gewisse Dokumentationsfunktion erfüllen und zur besseren Verständnis von Software und einzelnen Komponenten beitragen.
+  Mit TDD wird Software aus Tests geformt. Tests wiederum \glqq{erzählen\grqq} eine Geschichte. Sie spiegeln die Anforderungen und die vorgesehen Implementierung einer Komponente wider. Tests können somit auch eine gewisse Dokumentationsfunktion erfüllen und zur besseren Verständnis von Software und einzelnen Komponenten beitragen.
   \item \textbf{Produktivität}\newline
   Das Hauptargument gegen TDD lautet: TDD benötigt Zeit und muss gelernt werden.
-  Ist TDD jedoch einmal gelernt und wird regelmäßig angewandt sorgt es durch alle bisher genannten Vorteile für einen Produktionsschub.
+  Ist TDD jedoch einmal gelernt und wird regelmäßig angewandt, sorgt es durch alle bisher genannten Vorteile für einen Produktionsschub.
 \end{itemize}
 
 \subsection{Andere Entwicklungsmethoden}
@@ -430,13 +605,13 @@ Die bisherigen Kapitel dieser Arbeit erläutern die Prozesse, Funktionsweisen, A
  - Karma -
 
 \subsection{Jasmine}
-Jasmine ist ein Javascript Testing Framework, welches notwendige Funktionen wie Assertions, Matchers, Mocks und Spies anbietet. Es wurde prinzipiell für BDD (Begrifflichkeit) entworfern. Dies macht sich an der Benennung verschiedener Komponenten bemerkbar, zum Beispiel durch die für BDD-typische \glqq{expect\grqq}-Schreibweise für Tests (eine genauere Beschreibung von expect folgt in den nachvollgenden Kapiteln). Jasmine kann aber selbstverständlich auch für konventionelles Testen und auch für TDD verwendet werden. Auf der AngularJS Website wird Jasmine als Testing Framework für das Entwickeln mit dem MV*-Framework empfohlen % \autocite{AngularJS:Jasmine:2013}.
+Jasmine ist ein Javascript Testing Framework, welches notwendige Funktionen wie Assertions, Matchers, Mocks und Spies anbietet. Es wurde prinzipiell für BDD (Begrifflichkeit) entworfen. Dies macht sich an der Benennung verschiedener Komponenten bemerkbar, zum Beispiel durch die für BDD-typische \glqq{expect\grqq}-Schreibweise für Tests (eine genauere Beschreibung von expect folgt in den nachfolgenden Kapiteln). Jasmine kann aber selbstverständlich auch für konventionelles Testen und für TDD verwendet werden. Auf der AngularJS Website wird Jasmine als Testing Framework für das Entwickeln mit dem MV*-Framework empfohlen (Quelle {AngularJS:Jasmine:2013} noch raussuchen).
 
 \subsubsection{Keywords in Jasmine}
-Die Folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
+Die folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
 \begin{itemize}
   \item \textbf{describe}:\newline
-        Mit \glqq{describe\grqq} wird in Jasmine eine neue Test \glqq{Suite\grqq} erstellt. Eine \glqq{Suite\grqq} ist eine Sammlung von Test-Spezifikationen. \glqq{describe\grqq} beschreibt die Suite in echter Sprache.
+        Mit \glqq{describe\grqq} wird in Jasmine eine neue Test \glqq{Suite\grqq} erstellt. Eine \glqq{Suite\grqq} ist eine Sammlung von Test-Spezifikationen. \glqq{describe\grqq} beschreibt die Suite in natürlicher Sprache.
 \begin{lstlisting}[language=JavaScript]
   describe('What the following test-specifications are about', 
     function() {
@@ -444,7 +619,7 @@ Die Folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
   });
 \end{lstlisting}
   \item \textbf{it}:\newline
-        Der \glqq{it\grqq}-Block befindet sich innerhalb der anonymen Funktion, welche describe übergeben wird. Er versteht sich als Spezifikation. In einer Suite können sich mehrere \glqq{it\grqq}-Blöcke befinden. Ebenso wie bei describe wird die it-Funktion mit echter Sprache beschrieben und eine anonyme Funktion wird ihr mitgegeben.
+        Der \glqq{it\grqq}-Block befindet sich innerhalb der anonymen Funktion, welche describe übergeben wird. Er versteht sich als Spezifikation. In einer Suite können sich mehrere \glqq{it\grqq}-Blöcke befinden. Ebenso wie bei describe wird die it-Funktion mit natürlicher Sprache beschrieben und eine anonyme Funktion wird ihr mitgegeben.
 \begin{lstlisting}[language=JavaScript]
   describe('What the following test-specifications are about.', 
     function() {
@@ -455,7 +630,7 @@ Die Folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
   });
 \end{lstlisting}
   \item \textbf{expect}:\newline
-        Das \glqq{expect\grqq}-Keyword spiegeln den eigentlichen Test wieder. Man erwartet ein bestimmtes Ergebnis. Wenn das erwartete Ergebnis eintrtt, gilt der Test als bestanden, oder auch als \glqq{grün\grqq}. Sollte dies jedoch nicht der Fall sein, so ist der Test nicht bestanden und wird als \glqq{rot\grqq} bezeichnet. Tests, welche in der selben Spezifikation jedoch nach dem fehlgeschlagenem Test befinden, werden nicht mehr ausgeführt.
+        Das \glqq{expect\grqq}-Keyword spiegelt den eigentlichen Test wider. Man erwartet ein bestimmtes Ergebnis. Wenn das erwartete Ergebnis eintritt, gilt der Test als bestanden, oder auch als \glqq{grün\grqq}. Sollte dies jedoch nicht der Fall sein, so ist der Test nicht bestanden und wird als \glqq{rot\grqq} bezeichnet. Tests, welche sich in der selben Spezifikation jedoch nach dem fehlgeschlagenem Test befinden, werden nicht mehr ausgeführt.
 \begin{lstlisting}[language=JavaScript]
   describe('What the following test-specifications are about.', 
     function() {
@@ -470,11 +645,11 @@ Die Folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
 \end{lstlisting}
 \end{itemize}
 
-\subsubsection{Matchers}
-\glqq{Matchers\grqq} sind Funktionen, welche zwei Ausdrücke miteinander vergleichen. Das Ergebnis des Vergleichs führt entweder zu einem positivem Test oder bei einem negativem Test zu einem Abbruch der aktuellen Spezifikation. Jasmine wird bereits mit vielen nützlichen Matchers ausgeliefert und ermöglicht ebenfalls das Schreiben von benutzerdefinierten Matchers. Die Namen der Matchers von Jasmine sind alle sehr ausdrucksstark (nicht zuletzt, weil Jasmine als BDD-Testing-Framework designed wurde).
+\subsubsection{Matcher}
+\glqq{Matcher\grqq} sind Funktionen, welche zwei Ausdrücke miteinander vergleichen. Das Ergebnis des Vergleichs führt entweder zu einem positivem Test oder bei einem negativem Test zum Abbruch der aktuellen Spezifikation. Jasmine wird bereits mit vielen nützlichen Matcher ausgeliefert und ermöglicht auch das Schreiben von benutzerdefinierten Matcher. Die Namen der Matchers von Jasmine sind alle sehr ausdrucksstark (nicht zuletzt, weil Jasmine als BDD-Testing-Framework designed wurde).
 
 \paragraph{toEqual}
-\glqq{toEqual\grqq} überprüft die \glqq{Gleichheit\grqq} zweier Ausdrücke. Hier findet jedoch keine Identitätsüberprüfung statt (siehe toBe). So würde der Aufruf
+\glqq{toEqual\grqq} überprüft die \glqq{Gleichheit\grqq} zweier Ausdrücke. Hier findet jedoch keine Identitätsüberprüfung statt (siehe Kapitel \glqq{toBe\grqq}). So würde der Aufruf
 \begin{lstlisting}[language=JavaScript]
   expect(true).toEqual(true);
 \end{lstlisting}
@@ -496,10 +671,10 @@ expect(foo).toBe(bar);    // failure
 expect(foo).toBe(foo);    // success
 \end{lstlisting}
 
-Da sich toBe auf den \glqq{===\grqq} Operator stützt, garantiert dieser Matcher \textit{nicht} die Identitätsgleichheit bei primitiven Javascript Typen - also nicht bei Numbers, Booleans und Strings. \glqq{===\grqq} sieht diese Primitive als idente Entitäten an \autocite[16]{Hahn:2013}.
+Da sich toBe auf den \glqq{===\grqq} Operator stützt, garantiert dieser Matcher \textit{nicht} die Identitätsgleichheit bei primitiven Javascript Typen - also nicht bei Numbers, Booleans und Strings. Der \glqq{===\grqq} Operator sieht diese Primitive als idente Entitäten an \autocite[16]{Hahn:2013}.
 
 \paragraph{toBeTruthy, toBeFalsy}
-Wie auch bei den ersten zwei Matchern, entsprichen auch hier die Namen der Funktionalität. toBeTruthy evaluiert einen Ausdruck auf \glqq{true\grqq} und toBeFalsy auf \glqq{false\grqq}. Genau wie auch in Javascript entsprechen true und false nicht nur den gleichnamigen boolschen Ausdrücken. Als true gelten Beispielsweise auch \'Hello\' oder {}. Um sicher zu gehen, was nun true und was false ist, ist es einfacher darüber nachzudenken, was in Javascript false ist.
+Wie auch bei den ersten zwei Matcher, entsprechen auch hier die Namen der Funktionalität. toBeTruthy evaluiert einen Ausdruck auf \glqq{true\grqq} und toBeFalsy auf \glqq{false\grqq}. Genau wie auch in Javascript entsprechen true und false nicht nur den gleichnamigen boolschen Ausdrücken. Als true gelten beispielsweise auch "'Hello"' oder \{\}. Um sicher zu gehen, was nun true und was false ist, ist es einfacher darüber nachzudenken, was in Javascript false ist.
 \begin{itemize}
   \item false
   \item 0
@@ -508,7 +683,7 @@ Wie auch bei den ersten zwei Matchern, entsprichen auch hier die Namen der Funkt
   \item null
   \item NaN (Not a Number, zum Beispiel die Division durch 0)
 \end{itemize}
-Alles, was nicht falsch ist, ist wahr \autocite[17]{Hahn:2013}.
+\glqq{\textit{Alles, was nicht false ist, ist true.}\grqq} \autocite[17]{Hahn:2013}.
 \begin{lstlisting}[language=JavaScript]
 expect({}).toBeTruthy(); // success
 expect('').toBeFalsy();  // success
@@ -537,9 +712,9 @@ expect('foo bar').toContain('oo ba'); // success
 \end{lstlisting}
 
 \paragraph{toBeDefined, toBeUndefined}
-Diese Matcher überprüfen ob Variablen definiert sind oder nicht. Javascript hat eigene Definitionen darüber, was definiert ist und was nicht. \textbf{(http://bit.ly/14XHBU3 zusammenfassen)}
+Diese Matcher überprüfen ob Objekte definiert sind oder nicht. Sie halten sich dabei an den in ECMA-Script definierten Richtlinien für \glqq{defined\grqq} und \glqq{undefined\grqq} (\textit{http://www.ecma-international.org/ecma-262/5.1/}).
 
-Wichtig: Wenn eine Variable nicht deklariert wurde, so wird eine \glqq{ReferenceError\grqq}-Exception geworden. Alle Variablen, unabhängig ob definiert oder nicht, müssen deklariert werden.
+Wichtig: Wenn eine Variable nicht deklariert wurde, so wird eine \glqq{ReferenceError\grqq}-Exception geworfen. Alle Variablen, unabhängig ob definiert oder nicht, müssen deklariert werden.
 \begin{lstlisting}[language=JavaScript]
 var undefinedVariable;
 expect('Hello').toBeDefined();             // success
@@ -607,8 +782,8 @@ expect(function() {
 }).toThrow(); // success
 \end{lstlisting}
 
-\paragraph{Custom Matchers}
-Die bereits mitgelieferten Matcher von Jasmine sind sehr nützlich, decken jedoch nicht alle denkbaren Vergleiche ab. Jasmine distanziert sich auch davon, exzessiv eine breite Masse an Matchers zu entwickeln (Quelle). Aus diesem Grund gibt es mit Jasmine die Möglichkeit eigene Matcher zu definieren. Die Definition dieser Matcher muss vor dem it-Block, vor welchem sie verwendet werden sollen.
+\paragraph{Custom Matcher}
+Die bereits mitgelieferten Matcher von Jasmine sind sehr nützlich, decken jedoch nicht alle denkbaren Vergleiche ab. Jasmine distanziert sich auch davon, exzessiv eine breite Masse an Matchers zu entwickeln (Quelle). Aus diesem Grund gibt es mit Jasmine die Möglichkeit, eigene Matcher zu definieren. Die Definition dieser Matcher muss vor dem it-Block, vor welchem sie verwendet werden sollen, erfolgen.
 
 Dies kann beispielsweise wie folgt implementiert werden.
 
@@ -633,14 +808,14 @@ describe('My test-suite' function() {
 });
 \end{lstlisting}
 
-Die Custom Matcher bestehen aus drei wichtigen Teilen:
+Custom Matcher bestehen aus drei wichtigen Teilen:
 \begin{itemize}
   \item \textbf{this.message}: \newline
   this.message wird ausgeführt, wenn der Matcher fehlschlägt. Hier ist also eine Fehlermeldung mit dem erwarteten und dem richtigen Ergebnis sinnvoll.
   \item \textbf{this.actual}: \newline
   this.actual ist jener Wert, welcher der vorhergehenden expect-Funktion übergeben wurde.
   \item \textbf{return expression}: \newline
-  In der return Anweisung wird nun der eigentliche Vergleich ausgeführt. Wenn beispielsweise der Matcher \glqq{toBeGreatherThanTen\grqq} implementiert werden soll so wäre die return Anweisung:
+  In der return Anweisung wird nun der eigentliche Vergleich ausgeführt. Wenn beispielsweise der Matcher \glqq{toBeGreatherThanTen\grqq} implementiert werden soll, so wäre die return Anweisung:
 \begin{lstlisting}[language=JavaScript]
 return this.actual > 10;
 \end{lstlisting}
@@ -648,7 +823,7 @@ return this.actual > 10;
 \end{itemize}
 
 
-Bei den bisherigen Matchern war die Funktionalität oft einfach durch die Namensgebung erkennbar. Bei einem Matcher jedoch ist meiner Meinung nach nicht auf den ersten Blick erkennbar, was dieser vergleichen/matchen soll.
+Bei den bisherigen Matchern war die Funktionalität oft einfach durch die Namensgebung erkennbar. Laut \cite[21]{Hahn} ist jedoch bei einem Matcher nicht auf den ersten Blick erkennbar, was dieser vergleichen/matchen soll.
 
 \begin{lstlisting}[language=JavaScript]
 expect(MATH.PI).toBeCloseTo(3.1, 1); // success
@@ -664,7 +839,7 @@ expect(Math.PI).toBeCloseTo(3.14, 2); // success: 3.14 == 3.14
 
 \begin{lstlisting}[language=JavaScript]
 
-  describe('', function() {
+  describe('...', function() {
 
     beforeEach( function() {
 
@@ -695,7 +870,7 @@ expect(Math.PI).toBeCloseTo(3.14, 2); // success: 3.14 == 3.14
 
 \subsubsection{Weitere Jasmine Features}
 \paragraph{Nested Suites}
-Durch TDD werden schnell viele Tests geschrieben. Wenn nun eine größere Komponente zum Beispiel 20-30 Tests benötigt, so kann man hier eventuell die Übersicht über die Struktur und Logik der Komponente verlieren (da die Tests die Komponente beschreiben). Eine Geschichte besitzt ebenfalls eine Struktur, welche hilft, diese besser zu verstehen. Tests erzählen im besten Fall eine Geschichte über die Komponente \autocite{Beck:2003}.
+Durch TDD werden in kurzer Zeit viele Tests geschrieben. Wenn nun eine größere Komponente zum Beispiel 20-30 Tests benötigt, so kann man hier eventuell die Übersicht über die Struktur und Logik der Komponente verlieren (da die Tests die Komponente beschreiben). Eine Geschichte besitzt ebenfalls eine Struktur, welche dabei hilft, diese besser zu verstehen. Tests erzählen im besten Fall eine Geschichte über die Komponente \autocite[11]{Beck:2003}.
 
 Um die Tests nach der richtigen Logik gliedern zu können, ist es mit Jasmine möglich, sogenannte \glqq{Nested Test-Suites\grqq}, also \glqq{verschachtelte Test-Sammlungen\grqq}, zu erstellen.
 
@@ -723,7 +898,7 @@ Da Jasmine jedoch kein TDD-Framework ist, ist es jedoch mit sehr einfachen Mitte
 describe('Skipping is bad', function() {
 
   xdescribe('skipping whole suites is not better', function() { ... });
-  xit('TDD-EVAL', function() { ... });
+  xit('evil, evil', function() { ... });
 
 });
 \end{lstlisting}
@@ -733,9 +908,9 @@ Screenshot (Run x Tests, x passed, x skipped, x failed).
 
 \paragraph{beforeEach und afterEach}
 
-Mit \glqq{beforeEach\grqq} und \glqq{afterEach\grqq} kann eine anonyme Funktion vor und nach jedem it-Block oder vor und nach jeder Nested Suite ausgeführt werden. Dies ist nützlich um (Mock) Objekte, welche von mehreren Spezifikationen verwendet werden, vorzubereiten oder nach deren Verwendung zurückzusetzen.
+Mit \glqq{beforeEach\grqq} und \glqq{afterEach\grqq} kann eine anonyme Funktion vor und nach jedem it-Block oder vor und nach jeder Nested Suite ausgeführt werden. Dies ist nützlich, um (Mock) Objekte, welche von mehreren Spezifikationen verwendet werden, vorzubereiten oder nach deren Verwendung zurückzusetzen.
 
-\cite[23]{Hahn:2013} beschreibt eine Variante um ein Objekt mittels beforeEach vorzubereiten wie folgt.
+\cite[23]{Hahn:2013} beschreibt eine Variante, um ein Objekt mittels beforeEach vorzubereiten wie folgt.
 \begin{lstlisting}[language=JavaScript]
 
 describe('Employee suite', function() {
@@ -757,7 +932,7 @@ describe('Employee suite', function() {
 
 \end{lstlisting}
 
-Eine weitere Variante, welche nicht genannt wird, um dies zu erreichen ist folgende.
+Eine weitere Variante, welche nicht genannt wird, um dies zu erreichen, ist folgende.
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -776,12 +951,12 @@ describe('Employee suite', function() {
 });
 \end{lstlisting}
 
-Wie bereits in vorhergehenden Kapiteln beschrieben, sollen alle Tests isoliert ablaufen und kein Test soll von einem anderen abhängig sein. Wenn nun ein vorbereitetes Objekt von einem Test verwendet und verändert wird, so ist es wichtig dieses auch wieder in den richtigen Ausgangsstatus zurückzusetzen. Dafür kann afterEach verwendet werden. afterEach wird nach jeder Spezifikation oder Nested Test Suite in der jeweiligen (Nested) Test Suite ausgeführt.
+Wie bereits in vorhergehenden Kapiteln beschrieben, sollen alle Tests isoliert ablaufen und kein Test soll von einem anderen abhängig sein. Wenn nun ein vorbereitetes Objekt von einem Test verwendet und verändert wird, so ist es wichtig, dieses auch wieder in den richtigen Ausgangsstatus zurückzusetzen. Dafür kann afterEach verwendet werden. afterEach wird nach jeder Spezifikation oder Nested Test Suite in der jeweiligen (Nested) Test Suite ausgeführt.
 
 Kurzes Beispiel zu afterEach.
 
 \paragraph{jasmine.any}
-Dieses Feature von Jasmine lässt auf den Typ eines Objektes prüfen - ähnlich wie JavaScripts instanceof Operator.
+Dieses Feature von Jasmine ermöglicht es, den Typ eines Objekts zu überprüfen - ähnlich wie JavaScripts instanceof Operator.
 \begin{lstlisting}[language=JavaScript]
 
   expect(MATH.random()).toEqual(jasmine.any(Number));
@@ -795,12 +970,12 @@ Dieses Feature von Jasmine lässt auf den Typ eines Objektes prüfen - ähnlich 
 % Code: ~ 450
 
 \subsubsection{Spies}
-Alle bisherigen Tets betrafen die Vergleiche von mehreren Ausdrücken, es gab jedoch keine Möglichkeit das Verhalten von FUnktionen oder Objekten zu inspizieren. Um das zu erreichen liefert Jasmine Spies mit. Wie bereits im Kapitel \glqq{Mocks, Stubs \& Spies\grqq} erläutert, handelt es sich dabei um ein Fake Objekt, welches das echte Objekt ersetzt. Aufrufe auf das Fake Objekt werden aufgezeichnet und können am Ende inspiziert werden. Die nachfolgenden Beispiele beziehen sich auf \textit{http://jasmine.github.io/2.0/introduction.html}.
+Alle bisherigen Tests betrafen die Vergleiche von mehreren Ausdrücken, es gab jedoch keine Möglichkeit, das Verhalten von Funktionen oder Objekten zu inspizieren. Um das zu erreichen, liefert Jasmine Spies mit. Wie bereits im Kapitel \glqq{Mocks, Stubs \& Spies\grqq} erläutert, handelt es sich dabei um ein Fake Objekt, welches das echte Objekt ersetzt. Aufrufe auf das Fake Objekt werden aufgezeichnet und können am Ende inspiziert werden. Die nachfolgenden Beispiele beziehen sich großteils auf \textit{http://jasmine.github.io/2.0/introduction.html}.
 
 \paragraph{spyOn}
-Um das gewünschte Objekt oder die gewünschte Funktion durch einen Spy zu ersetzen wird \glqq{spyOn\grqq} verwendet. Die Aufrufe auf den Spy werden mit \glqq{toHaveBeenCalled()\grqq} und \glqq{toHaveBeenCalledWith(args)\grqq} inspiziert.
+Um das gewünschte Objekt oder die gewünschte Funktion durch einen Spy zu ersetzen, wird \glqq{spyOn\grqq} verwendet. Die Aufrufe auf den Spy werden mit \glqq{toHaveBeenCalled()\grqq} und \glqq{toHaveBeenCalledWith(args)\grqq} inspiziert.
 
-In dem folgenden beispiel wird mit forEach das echte Objekt erstellt und der Spy installiert. In den Testspezifikationen werden dann die Aufrufe auf den Spy inspiziert.
+In dem folgenden Beispiel wird mit forEach das echte Objekt erstellt und der Spy installiert. In den Testspezifikationen werden dann die Aufrufe auf den Spy inspiziert.
 
 \begin{lstlisting}[language=JavaScript]
 
@@ -833,9 +1008,9 @@ describe("A spy", function() {
 \end{lstlisting}
 
 \paragraph{and.callThrough}
-Da Spies die echte Implementierung des Objekts ersetzen, ist es eigentlich nach der Installation eines Spies nicht mehr möglich den Ergebnis-Status des Objekts zu ermitteln. Bei Jasmine gibt es allerdings die Funktion \glqq{and.callThrough\grqq}. Diese zeichnet wie auch normale Spies die Aufrufe auf und leitet diese zusätzlich an die echte Implementierung weiter. Hier wird das Fake Objekt also nicht mehr verwendet, um ein ressourcen-intensives Objekt zu ersetzen. Es stattdessen verwendet, um das Verhalten aufzuzeichnen und dieses sowie das Endergebenis des echten Objekts mit gewissen Erwartungen zu vergleichen.
+Da Spies die echte Implementierung des Objekts ersetzen, ist es nach der Installation eines Spies nicht mehr möglich, den Ergebnis-Status des Objekts zu ermitteln. Bei Jasmine gibt es allerdings die Funktion \glqq{and.callThrough\grqq}. Diese zeichnet wie auch normale Spies die Aufrufe auf und leitet diese zusätzlich an die echte Implementierung weiter. Hier wird das Fake Objekt also nicht mehr verwendet, um ein ressourcen-intensives Objekt zu ersetzen. Es wird stattdessen verwendet, um das Verhalten aufzuzeichnen und dieses sowie das Endergebenis des echten Objekts mit gewissen Erwartungen zu vergleichen.
 
-Das vorangehende Beispiel ohne and.callThrough würde das Inspizieren von bar nicht ermöglichen, da bar nie wirklich gesetzt wurde.
+Das vorangehende Beispiel ohne and.callThrough würde das Inspizieren von \glqq{bar\grqq} nicht ermöglichen, da \glqq{bar\grqq} nie wirklich gesetzt wurde.
 \begin{lstlisting}[language=JavaScript]
   ...
 
@@ -872,7 +1047,7 @@ describe("A spy", function() {
 \end{lstlisting}
 
 \paragraph{and.returnValue}
-Mit \glqq{and.returnValue\grqq} kann sichergestellt werden, dass ein spezifischer Wert zurückgegebn wird. Dies kann beispielsweise hilfreich sein, um eine Komponente mit falschen Eingaben zu testen.
+Mit \glqq{and.returnValue\grqq} kann sichergestellt werden, dass ein spezifischer Wert zurückgegeben wird. Dies kann beispielsweise hilfreich sein, um eine Komponente mit falschen Eingaben zu testen.
 
 \begin{lstlisting}[language=JavaScript]
 describe("A spy", function() {
@@ -904,7 +1079,7 @@ describe("A spy", function() {
 \end{lstlisting}
 
 \paragraph{and.callFake}
-Mit einem Spy kann zusätzlich eine Fake Funktion angehängt werden. Mit \glqq{and.callFake\grqq} werden mehr Möglichkeiten eröffnet als mit and.returnValue. Es kann zum Beispiel ein Logger zwischengeschalten werden oder verwendet werden um zu überprüfen, dass ein bestimmter Callback ausgeführt wurde.
+Mit einem Spy kann zusätzlich eine Fake Funktion angehängt werden. Mit \glqq{and.callFake\grqq} werden mehr Möglichkeiten eröffnet als mit and.returnValue. Es kann zum Beispiel ein Logger zwischengeschalten werden. Oder es kann verwendet werden, um zu überprüfen, dass ein bestimmter Callback ausgeführt wurde.
 
 \begin{lstlisting}[language=JavaScript]
 var getResource = function(id, callback) {
@@ -916,7 +1091,7 @@ var getResource = function(id, callback) {
 }
 
 describe("Spying on an ajax callback", function() {
-  it("shoiuld execute the callback function on success", function() {
+  it("should execute the callback function on success", function() {
     spyOn($, "ajax").and.callFake( function(options) {
       options.success();
     });
@@ -928,7 +1103,7 @@ describe("Spying on an ajax callback", function() {
 \end{lstlisting}
 
 \paragraph{jasmine.createSpy \& jasmine.createSpyObj}
-Wenn spyOn verwendet wird, wird immer eine bestehende Funktion oder ein bestehendes Objekt mit einem Spy ersetzt. Jasmine bietet zusätzlich die Möglichkeit auch ohne bereits existierenden Funktionen oder Objekten zu erstellen. Mit \glqq{jasmine.createSpy\grqq} für Funktionen und vice versa mit \glqq{jasmine.createSpyObj\grqq} für Objekte.
+Wenn spyOn verwendet wird, wird immer eine bestehende Funktion oder ein bestehendes Objekt mit einem Spy ersetzt. Jasmine bietet zusätzlich die Möglichkeit, auch ohne bereits existierenden Funktionen oder Objekten, Spies zu erstellen. Mit \glqq{jasmine.createSpy\grqq} für Funktionen und vice versa mit \glqq{jasmine.createSpyObj\grqq} für Objekte.
 
 \begin{lstlisting}[language=JavaScript]
 describe("A spy", function() {
@@ -972,7 +1147,7 @@ describe("A spy", function() {
 });
 \end{lstlisting}
 
-Words: 5801
+Words: 5708
 Code: ~600
 
 \subsection{Mocha}
