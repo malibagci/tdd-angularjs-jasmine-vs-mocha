@@ -3,37 +3,37 @@
 \section{Einführung}
 \label{Einführung}
 \subsection{Relevanz \& Problemstellung}
-Bessere Code-Qualität mit vergleichbar minimal erhöhtem Zeitaufwand ist ein erstrebenswertes Ergebnis und das Zeil von Test-driven Development (TDD) Durch die Idee von TDD -- nämlich kurze Iterationen von:
-\begin{enumerate}
-  \item Tests schreiben (ohne sich Gedanken über den tatsächlichen Code zu machen)
-  \item Tests ausführen und fehlschlagen lassen
-  \item Code implementieren
-  \item Tests ausführen und den Code eventuell weiter implementieren, bis die 
-  Tests nicht mehr fehlschlagen
-  \item Tests und Code refactoren
-  \item Tests erneut ausführen
-\end{enumerate}
-wird eine hohe Testabdeckung und ein sauberer Code durch das Refactoring erzielt.
+% Bessere Code-Qualität mit vergleichbar minimal erhöhtem Zeitaufwand ist ein erstrebenswertes Ergebnis und das Zeil von Test-driven Development (TDD) Durch die Idee von TDD -- nämlich kurze Iterationen von:
+% \begin{enumerate}
+%   \item Tests schreiben (ohne sich Gedanken über den tatsächlichen Code zu machen)
+%   \item Tests ausführen und fehlschlagen lassen
+%   \item Code implementieren
+%   \item Tests ausführen und den Code eventuell weiter implementieren, bis die 
+%   Tests nicht mehr fehlschlagen
+%   \item Tests und Code refactoren
+%   \item Tests erneut ausführen
+% \end{enumerate}
+% wird eine hohe Testabdeckung und ein sauberer Code durch das Refactoring erzielt.
 
-AngularJS ist ein umfassendes Model-View-* (MV*) Framework und bringt viele eigene Komponenten mit sich, wie beispielsweise Direktiven und Services. Um test-driven mit AngularJS entwickeln zu können, ist es wegen der Vielfalt der eigenen Komponenten relevant, alle diese Komponenten testen zu können.
+% AngularJS ist ein umfassendes Model-View-* (MV*) Framework und bringt viele eigene Komponenten mit sich, wie beispielsweise Direktiven und Services. Um test-driven mit AngularJS entwickeln zu können, ist es wegen der Vielfalt der eigenen Komponenten relevant, alle diese Komponenten testen zu können.
 
-Aus der Relevanz von TDD mit AngularJS ergibt sich die Problemstellung der Auswahl eines passenden Testing Frameworks. Jasmine und Mocha sind zwei JavaScript Testing Frameworks, welche sich für diese Aufgabenstellung anbieten. Deshalb werden beide Frameworks in dieser Arbeit gegenüber gestellt und analysiert, um die Unterschiede beziehungsweise die Vor- und Nachteile der beiden Frameworks darstellen zu können.
+% Aus der Relevanz von TDD mit AngularJS ergibt sich die Problemstellung der Auswahl eines passenden Testing Frameworks. Jasmine und Mocha sind zwei JavaScript Testing Frameworks, welche sich für diese Aufgabenstellung anbieten. Deshalb werden beide Frameworks in dieser Arbeit gegenüber gestellt und analysiert, um die Unterschiede beziehungsweise die Vor- und Nachteile der beiden Frameworks darstellen zu können.
 
 \subsection{Methodenüberblick}
 \subsubsection{Test-driven Development}
-Eine theoretische Erfassung von Test-driven Development (TDD) ist grundlegend für den weiteren Inhalt der Arbeit.
+% Eine theoretische Erfassung von Test-driven Development (TDD) ist grundlegend für den weiteren Inhalt der Arbeit.
 
 \subsubsection{AngularJS}
-AngularJS wird zusammen mit den dazugehörigen Komponenten theoretisch und praktisch dargestellt. Weitere Erläuterungen zu dem MVC Design-Pattern werden zum Verständnis desFrameworks behandelt. Theorie und Praxis arbeiten hier sehr dicht zusammen, um im Vorfeld alle Facetten des MVC-Frameworks abzuklären.
+% AngularJS wird zusammen mit den dazugehörigen Komponenten theoretisch und praktisch dargestellt. Weitere Erläuterungen zu dem MVC Design-Pattern werden zum Verständnis desFrameworks behandelt. Theorie und Praxis arbeiten hier sehr dicht zusammen, um im Vorfeld alle Facetten des MVC-Frameworks abzuklären.
 
 \subsubsection{Testing Frameworks}
-Um abklären zu können, welches der beiden JavaScript Testing-Frameworks 
-{\glqq Jasmine\grqq} und {\glqq Mocha\grqq} besser geeignet ist, um alle
-Eigenschaften von AngularJS abzudecken, wird ein direkter theoretischer
-Vergleich der Frameworks und deren Eigenschaften erfolgen. Darüber hinaus wird 
-eine Applikation test-driven mit beiden Frameworks entwickelt. Die Applikation
-wird alle der relevanten Eigenschaften von AngularJS behandeln. Der 
-Entwicklungsprozess wird innerhalb der Arbeit dokumentiert.
+% Um abklären zu können, welches der beiden JavaScript Testing-Frameworks 
+% {\glqq Jasmine\grqq} und {\glqq Mocha\grqq} besser geeignet ist, um alle
+% Eigenschaften von AngularJS abzudecken, wird ein direkter theoretischer
+% Vergleich der Frameworks und deren Eigenschaften erfolgen. Darüber hinaus wird 
+% eine Applikation test-driven mit beiden Frameworks entwickelt. Die Applikation
+% wird alle der relevanten Eigenschaften von AngularJS behandeln. Der 
+% Entwicklungsprozess wird innerhalb der Arbeit dokumentiert.
 
 \subsection{Forschungsfrage}
 Wie ist der aktuelle Stand der test-driven Entwicklung mit AngularJS und welches der beiden JavaScript Testing-Frameworks {\glqq Jasmine\grqq} und {\glqq Mocha\grqq} ist geeigneter für diesen Zweck?
@@ -48,24 +48,24 @@ Wie ist der aktuelle Stand der test-driven Entwicklung mit AngularJS und welches
 \begin{center}
 \glqq{\textit{Turning development upside-down}\grqq} \autocite[22]{Johansen:2011}
 \end{center}
-Traditionelle Entwicklungsmethoden stützen sich auf ein zuvor festgelegtes Konzept und eine passende Software-Architektur. Es wird so lange programmiert, bis das Konzept durch Code und Architektur komplett abgebildet wird.
+Traditionelle Entwicklungsmethoden -- wie zum Beispiel das Wasserfallmodell -- stützen sich auf ein zuvor festgelegtes Konzept und eine passende Software-Architektur. Es wird so lange programmiert, bis das Konzept durch Code und Architektur komplett abgebildet wird.
 
-Test-Driven Development (TDD) dreht diesen Entwicklungsprozess um. TDD fokussiert sich nicht auf die Frage \glqq{Welchen Code benötige ich, um das Problem zu lösen\grqq}, sondern darauf, zunächst das Ziel zu definieren. Danach gilt es, das Ziel mit so simplen Code wie möglich zu erreichen. Durch diesen Ansatz wird sichergestellt, dass nicht mehr Code als benötigt geschrieben wird. Das primäre Ziel von TDD ist nicht das Testen, daher gibt es auch bei TDD keine Garantie, dass Grenzfälle besser getestet werden. Dadurch, dass TDD zur möglichst einfachen Lösung führen soll, werden exzessive Code-Ausschweifungen unterbunden und dadurch wird Software robuster.
+Test-Driven Development (TDD) dreht diesen Entwicklungsprozess um. TDD fokussiert sich nicht auf die Frage \glqq{Welchen Code benötige ich, um das Problem zu lösen\grqq}, sondern darauf, zunächst das Ziel zu definieren. Danach gilt es, das Ziel mit so simplen Code wie möglich zu erreichen. Durch diesen Ansatz wird sichergestellt, dass nicht mehr Code als benötigt geschrieben wird. Das Ziel von TDD ist nicht nur das Testen, daher gibt es auch bei TDD keine Garantie, dass Grenzfälle besser getestet werden. Dadurch, dass TDD zur möglichst einfachen Lösung führen soll, werden exzessive Code-Ausschweifungen unterbunden und dadurch wird Software robuster.
 
 \subsection{Die zwei Regeln von TDD}
 Für das Arbeiten mit TDD gelten zwei simple Regeln \autocite[]{Beck:2003}.
 \begin{enumerate}
   \item Es wird nur neuer Code geschrieben, wenn einer der automatisierten Tests fehlschlägt.
-  \item DuplikationenDuplikationen werden eliminiert.
+  \item Duplikationen werden eliminiert.
 \end{enumerate}
 Durch die Anwendung dieser einfachen Regeln ergeben sich folgende Implikationen:
 \begin{itemize}
   \item Es entsteht funktionierender Code, welcher in Kombination mit den Tests sofortiges Feedback zwischen Programmierentscheidungen liefert.
-  \item Die Tests müssen von der/m EntwicklerIn selbst geschrieben werden. Die/Der EntwicklerIn kann nicht auf Tester warten, denn sie/er ist abhängig von sofortigem Feedback, um Programmierentscheidungen zu treffen.
+  \item Die Tests müssen von der/m EntwicklerIn selbst geschrieben werden. Die/Der EntwicklerIn kann nicht auf TesterInnen warten, denn sie/er ist abhängig von sofortigem Feedback, um Programmierentscheidungen zu treffen.
   \item Die Entwicklungsumgebung muss auf jede Änderung schnell reagieren und das Feedback der Tests darstellen können.
   \item Um das Testen einfach zu halten, muss hoch kohäsiver Code mit leicht gekoppelten Komponenten geschrieben werden.
 \end{itemize}
-Durch die Regeln sowie die Implikationen ergeben sich drei Aufgaben in folgender Reihenfolge:
+Durch die Regeln sowie die Implikationen ergeben sich drei Aufgaben in folgender Reihenfolge \autocite{Beck:2003}:
 \begin{enumerate}
   \item \textbf{Rot}: Einen kleinen Test schreiben.\newline
   Der kleine Test muss nicht erfolgreich abschließen, er muss auch noch nicht kompilieren.
@@ -76,7 +76,7 @@ Durch die Regeln sowie die Implikationen ergeben sich drei Aufgaben in folgender
 Wenn es möglich ist, dieses theoretische Modell als Programmierungsstil umzusetzen, erhält man Code, welcher beinahe ausschließlich durch fehlgeschlagene Tests erforderlich wurde. Die Anwendung dieses Programmierstils ergibt nicht nur die oben angeführten technischen, sondern ebenfalls soziale Implikationen.
 \begin{itemize}
   \item Wenn die \textit{Fehlerdichte} möglichst gering gehalten werden kann, kann aus \textit{Qualitätssicherung} aktive statt passive Arbeit werden.
-  \item Wenn die Anzahl von \textit{negativen Überaschungen} reduziert werden kann, wird der gesamte Entwicklungsprozess besser plan- und schätzbar.
+  \item Wenn die Anzahl von \textit{negativen Überraschungen} reduziert werden kann, wird der gesamte Entwicklungsprozess besser plan- und schätzbar.
   \item Da durch TDD sauberer Code entsteht, welcher zusätzlich durch Tests dokumentiert ist, kann die Kommunikation zwischen Software-EntwicklerInnen geschärft und klarer werden.
 \end{itemize}
 
@@ -84,7 +84,7 @@ Wenn es möglich ist, dieses theoretische Modell als Programmierungsstil umzuset
 \cite{Beck:2003} stellt folgende Behauptung auf: \newline
 \textit{TDD ist ein Weg für EntwicklerInnen, um mit ihrer Angst besser umzugehen}.
 
-Hierbei geht es Beck um die legitime Angst einer/s EntwicklerIn \glqq{this-is-a-hard-problem-and-I-can't-see-the-end-from-the-beginning\grqq}. Durch diesen Ausdruck wird die Angst von einer zu großen und schwierigen Aufgabe erdrückt zu werden, beschrieben. Wenn ein/e EntwicklerIn sich mit diesem Problem konfrontiert sieht, ergeben sich aus der Angst folgende negative Reaktionen:
+Hierbei geht es Beck um die legitime Angst einer/s EntwicklerIn \glqq{this-is-a-hard-problem-and-I-can't-see-the-end-from-the-beginning\grqq} \autocite{Beck:2003}. Durch diesen Ausdruck wird die Angst von einer zu großen und schwierigen Aufgabe erdrückt zu werden, beschrieben. Wenn ein/e EntwicklerIn sich mit diesem Problem konfrontiert sieht, ergeben sich aus der Angst folgende negative Reaktionen:
 \begin{itemize}
   \item Angst macht EntwicklerInnen \textit{zögerlich}.
   \item Angst macht EntwicklerInnen \textit{weniger kommunikativ}.
@@ -100,34 +100,32 @@ Die richtigen Reaktionen wären jedoch folgende:
   \item EntwicklerInnen sollten aktiv nach \textit{konstruktivem Feedback} suchen.
 \end{itemize}
 
-Laut \cite{Beck:2003} werden diese Reaktionen durch TDD erreicht. Das große, erdrückende und angst-fördernde Problem wird zuerst durch viele kleine Tests ausgedrückt. Jeder Test wird der Reihe nach zum Laufen gebracht. Wenn einer der Tests läuft, weiß die/der EntwicklerIn auch, dass der Test sowie der zugehörige Code funktioniert. Sie/er bekommt positives Feedback und kann sich auf das nächste Problem konzentrieren, wird also nicht mehr abgelenkt. Sollte dieser Test durch weitere Änderungen am Code fehlschlagen, bekommt die/der EntwicklerIn direktes Feedback. Durch kleine Iterationen und simple Schritte können Fehler einfacher gefunden werden.
+Laut \cite{Beck:2003} werden diese Reaktionen durch TDD erreicht. Das große, erdrückende und angst-fördernde Problem wird zuerst durch viele kleine Tests ausgedrückt. Jeder Test wird der Reihe nach zum Laufen gebracht. Wenn einer der Tests bestanden wird, weiß die/der EntwicklerIn auch, dass der Test sowie der zugehörige Code funktioniert. Sie/er bekommt positives Feedback und kann sich auf das nächste Problem konzentrieren, wird also nicht mehr abgelenkt. Sollte dieser Test durch weitere Änderungen am Code fehlschlagen, bekommt die/der EntwicklerIn direktes Feedback. Durch kleine Iterationen und simple Schritte können Fehler einfacher gefunden werden.
 
 Weiters beschreibt Beck TDD als Bewusstsein der Lücke zwischen Programmierentscheidungen und Feedback sowie die Möglichkeiten, um diese Lücke kontrollieren zu können.
 
 \subsection{Der TDD-Kreislauf}
 \begin{enumerate}
-  \item \textbf{Test schreiben}:\newline
+  \item \textbf{Test schreiben - Rot}:\newline
   Der Test sollte widerspiegeln, wie sich ein/e EntwicklerIn die zukünftige Operation wünscht und vorstellt. Der Test ist eine Geschichte. Diese Geschichte soll alle möglichen Elemente beinhalten, welche notwendig sind, um die richtigen Antworten für die Geschichte zu erhalten.
-  \item \textbf{Test zum Laufen bringen}:\newline
+  \item \textbf{Test bestehen - Grün}:\newline
   Den Test \textit{schnell} zum Laufen bringen, ist das Wichtigste. Wenn eine klare, saubere Lösung offensichtlich ist, dann spricht nichts dagegen, diese auch zu implementieren. Wenn diese Lösung jedoch zu lange dauert, um den Test \textit{schnell} zum Laufen zu bringen -- also das \glqq{grüne\grqq} Feedback verzögern -- sollte eine Notitz erstellt und die Konzentration sofort wieder auf das eigentliche Problem gelenkt werden. Oft werden hier auch \glqq{Fake\grqq}-Implementierungen angewendet.
-  \item \textbf{Es richtig machen}:\newline
-  Schritt für Schritt können nun Duplikationen entfernt sowie etwaige \glqq{Fake\grqq} Implementierungen aus Schritt 2 behoben werden.
+  \item \textbf{Es richtig machen - Refactor}:\newline
+  Schritt für Schritt können nun Duplikationen entfernt sowie etwaige \glqq{Fake\grqq} Implementierungen aus Schritt 2 behoben werden (siehe Kapitel \glqq{Fake it\grqq}).
 \end{enumerate}
 
 Das Ziel dieser drei Schritte ist \glqq{clean code that works\grqq}, also \glqq{\textit{sauberen}, \textit{funktionierenden} Code\grqq} zu erhalten.
 
-Folgendes Beispiel illustriert diesen Kreislauf anhand einer einfachen Implementierung für simple Addition. Die erläuternden Beispiele zu TDD werden in JavaScript verfasst, da sich diese Arbeit primär mit JavaScript und AngularJS befasst. Das Beispiel kann im referenziertem GitHub-Repository in dem Verzeichnis \glqq{source/simple-tests/step-1\grqq} gefunden werden.
+Folgendes Beispiel illustriert diesen Kreislauf anhand einer einfachen Implementierung für simple Addition. Die erläuternden Beispiele zu TDD werden in JavaScript verfasst, da sich diese Arbeit primär mit JavaScript und AngularJS befasst. Das Beispiel kann im referenziertem GitHub-Repository in dem Verzeichnis \glqq{source/simple-tests/step-1\grqq} gefunden werden. (Der Teil mit Github-Repo und Beschreibung der Tests kommt noch in die Einleitung).
 
 \textbf{Schritt 1: Test schreiben.}\newline
-Der einfache Test beschreibt eine Geschichte. In dieser Geschichte soll die Funktion \glqq{plus(arg1, arg2)\grqq- die zwei übergebenen Parameter addieren und ein Ergebnis, wird die  die einfachste Integer-Variante bedeutet das also: folgendermaßen geändertzurückliefern. .Für \glqq{1+1=2\grqq}
+Der einfache Test beschreibt eine Geschichte. In dieser Geschichte soll die Funktion \glqq{plus\grqq} zwei Zahlen addieren und das Ergebnis zurückgeben. Für die einfachste Integer-Variante bedeutet das also: \glqq{1+1=2\grqq}
 
 \begin{lstlisting}[language=JavaScript]
 describe("Calculus - Simple addition", function() {
-
   it("should add 1 to 1 and return 2", function() {
     expect(plus(1,1)).toEqual(2);
   });
-
 });
 \end{lstlisting}
 
@@ -151,7 +149,7 @@ var plus = function(augend, addend) {
 };
 \end{lstlisting}
 
-Wir wissen an dieser Stelle, dass hier eine klare, saubere und offensichtliche Lösung existiert. Es spricht nichts dagegen, diese hier auch anzuwenden. Um jedoch auch den dritten Schritt illustrieren zu können, wird hier naiv vorgegangen.\newline
+Es existiert hier eine klare, saubere und offensichtliche Lösung und es spricht nichts dagegen, diese hier auch anzuwenden. Um jedoch auch den dritten Schritt illustrieren zu können, wird hier naiv vorgegangen.\newline
 Nach dieser naiven Implementierung ändert sich das Ergebnis des Tests von rot auf grün (siehe Abbildung \ref{figure:tdd-simple-step-1-2}).
 
 \begin{figure}[H]
@@ -199,14 +197,21 @@ Konkret behandeln sie die Fragen:
 \paragraph{Starter Test}
 Mit welchem Test soll begonnen werden?
 
-Eines der Grundkonzepte von TDD besagt, dass die Konzentration immer nur auf dem aktuellen Problem und Test liegen soll. Diesem Konzept steht jedoch die Möglichkeit, mit einem realistischen Test zu starten, gegenüber. Bei dem Versuch, einen realistischen Test zu schreiben, wird der Fokus sofort auf einige andere Fragen gelenkt: \glqq{Was ist der richtige Input?\grqq}, \glqq{Was ist das richtige Ergebnis?\grqq}, \glqq{Welche Parameter sind notwendig für Lösung des Problems?\grqq} oder \glqq{Wohin gehört dieser Test eigentlich?\grqq}. Man findet sich bei dem Schreiben realistischer Tests häufig dabei wieder, über viele Probleme und Fragen auf einmal nachzudenken, verliert also den Fokus auf den aktuellen Test des aktuellen Problems.
+Eines der Grundkonzepte von TDD besagt, dass die Konzentration immer nur auf dem aktuellen Problem und Test liegen soll. Diesem Konzept steht jedoch die Möglichkeit mit einem realistischen Test zu starten gegenüber. Bei dem Versuch, einen realistischen Test zu schreiben, wird der Fokus sofort auf einige andere Fragen gelenkt: 
+\begin{itemize}
+  \item \glqq{Was ist der richtige Input?\grqq}
+  \item \glqq{Was ist das richtige Ergebnis?\grqq}
+  \item \glqq{Welche Parameter sind notwendig für Lösung des Problems?\grqq}
+  \item \glqq{Wohin gehört dieser Test eigentlich?\grqq}
+\end{itemize}
+Man findet sich bei dem Schreiben realistischer Tests häufig dabei wieder, über viele Probleme und Fragen auf einmal nachzudenken, verliert also den Fokus auf den aktuellen Test des aktuellen Problems.
 
 Ein realistischer Test bedeutet eine Verzögerung des Abstands der \glqq{Rot-Grün-Refactor\grqq} Zyklen -- diese sollen jedoch möglichst kurz gehalten werden. Der erste Test, also der \glqq{Starter Test\grqq}, soll so trivial wie möglich sein.
 
 \glqq{Start by testing a variant of an operation that doesn't do anything\grqq} \autocite[134]{Beck:2003}.
 
 \paragraph{One Step Test}
-Bei TDD handelt es sich wie -- bereits erwähnt -- um einen Prozess, bei dem in kleinen Schritten Schritt für Schritt Software aus Tests geformt wird. In diesem Prozess ist es notwendig, sich für die Reihenfolge der Test-Schritte (in weiterer Folge auch für die Reihenfolge, in welcher die Komponenten der Software entstehen soll) zu entscheiden.
+Bei TDD handelt es sich wie um einen Prozess, bei dem in kleinen Schritten Software aus Tests geformt wird. In diesem Prozess ist es notwendig, sich für die Reihenfolge der Test-Schritte (in weiterer Folge auch für die Reihenfolge, in welcher die Komponenten der Software entstehen soll) zu entscheiden.
 
 \cite[134]{Beck:2003} liefert auf die Frage \glqq{Welchen Test sollte ich als nächstes schreiben?\grqq} eine klare Antwort: Es gibt keine.
 Die Frage ist hinsichtlich der Anforderungen der Software (beziehungsweise deren Komponenten) sowie der/s Entwicklerin/s zu individuell.
@@ -216,14 +221,14 @@ Die Mechanik des \glqq{One Step Test\grqq}'s wird von \cite[134]{Beck:2003} mit 
 
 \paragraph{Learning Test}
 
-Wie bereits erwähnt, geht es bei TDD nicht nur um eine möglichst hohe Test-Dichte, sondern ebenfalls um andere Faktoren, wie Design, Schätzbarkeit, sauberen Code, psychologische Auswirkungen, etc.
+Wie bereits erwähnt, geht es bei TDD nicht nur um eine möglichst hohe Test-Dichte, sondern ebenfalls um andere Faktoren, wie Design, zeitliche Schätzbarkeit, sauberen Code, psychologische Auswirkungen, etc.
 
-Eine weitere Methode, TDD einzusetzen, betrifft das Lernen des Umgangs mit einer neuen API oder Bibliothek. Wenn man eine neue Bibliothek verwendet, bietet es sich an, gegen diese Tests zu schreiben, anstatt direkt Implementierungen damit vorzunehmen -- ansonsten sollten keine Tests für externe Software notwendig sein.
+Eine weitere Methode TDD einzusetzen betrifft das Lernen des Umgangs mit einer neuen API oder Bibliothek. Wenn man eine neue Bibliothek verwendet, bietet es sich an, gegen diese Tests zu schreiben, anstatt direkt Implementierungen damit vorzunehmen -- ansonsten sollten keine Tests für externe Software notwendig sein.
 
 \paragraph{Regression Test}
 Wenn ein Fehler in einer Applikation auftritt, so ist eine Variante, dieses Problem zu lösen, direkt den Fehler zu finden, zu behen, zu überprüfen und damit den Fehler abzuhaken. Mit dieser Variante gibt es allerdings keine Möglichkeit, zu garantieren, dass dieser Fehler (durch Abhängigkeiten zu anderen Komponenten) nicht erneut auftritt.
 
-Auch TDD kann keine 100\%-ige Fehler-Freiheit garantieren. Sollte ein Problem berichtet werden, ist der erste Schritt, einen neuen Test für dieses Problem zu verfassen. Der Test muss den einfachsten Fall, welcher das Fehlverhalten hervorruft behandeln. Durch das nachträgliche Absolvieren des TDD-Kreislaufs wird sichergestellt, dass genau dieser Fehler nicht erneut auftritt.
+Auch TDD kann keine 100\%-ige Fehler-Freiheit garantieren. Sollte ein Problem berichtet werden, ist der erste Schritt, einen neuen Test für dieses Problem zu verfassen. Der Test muss den einfachsten Fall, welcher das Fehlverhalten hervorruft, behandeln. Durch das nachträgliche Absolvieren des TDD-Kreislaufs wird sichergestellt, dass genau dieser Fehler nicht erneut auftritt.
 
 \subsubsection{Green Bar Patterns}
 
@@ -237,7 +242,7 @@ Nachdem der Test grün ist, wird Schritt für Schritt die Implementierung richti
 
 Laut \cite[152]{Beck:2003} hat dieses Muster zwei starke Effekte. Wenn der Test grün ist, fühlt man sich sicher. Man kann sich voll und ganz auf das richtige Refactoring konzentrieren. Also einerseits erfüllt \glqq{Fake it\grqq} einen psychologischen Effekt. Andererseits hilft es bei der Abgrenzung von zukünftigen Problemen. Wie schon erwähnt, dient TDD auch dazu, den Fokus und die Konzentration immer bei dem aktuellen Problem zu halten. Als ersten Schritt eine Konstante zurückzugeben, unterstützt die/den EntwicklerIn dabei.
 
-Das folgende Beispiel zeigt das Fake it pattern anhand einer einfach Addition von zwei Integern. Das Beispiel befindet sich im Verzeichnis \glqq{/source/simple-steps/green-bar-patters/fake-it/\grqq}
+Das folgende Beispiel zeigt das Fake it Pattern anhand einer einfachen Addition von zwei Zahlen. Das Beispiel befindet sich im Verzeichnis \glqq{/source/simple-steps/green-bar-patters/fake-it/\grqq}
 
 \textbf{Schritt 1: Rot}
 \begin{lstlisting}[language=JavaScript]
@@ -284,7 +289,7 @@ Aus diesem Beispiel wird ersichtlich, dass es sich bei \glqq{Duplikation elimini
 
 \paragraph{Triangulate}
 
-Im Beispiel von Fake it wurde durch das Eleminieren von Duplikation die Implementierung richtig gestellt. Ein anderer Weg, eine richtige Implementierung nach dem Fake it Pattern zu erreichen, ist \glqq{Triangulate\grqq}. Bei Triangulate geht es darum, nicht nur ein mögliches Ergebnis zu testen, sondern zwei oder mehrere Ergebnisse. Durch die genauere Spezifizierung des Tests wird die richtige Implementierung eingegrenzt.
+Im Beispiel von Fake it wurde durch das Eliminieren von Duplikation die Implementierung richtig gestellt. Ein anderer Weg, eine richtige Implementierung nach dem Fake it Pattern zu erreichen, ist \glqq{Triangulate\grqq}. Bei Triangulate geht es darum, nicht nur ein mögliches Ergebnis zu testen, sondern zwei oder mehrere Ergebnisse. Durch die genauere Spezifizierung des Tests wird die richtige Implementierung eingegrenzt.
 
 Anhand des folgenden Beispiels wird die Funktionsweise von Triangulate erklärt. Das Beispiel befindet sich im Verzeichnis \glqq{/source/simple-steps/green-bar-patters/triangulate/\grqq}.
 Hier wird von Schritt 2 des Fake it Beispiels ausgegangen. Es wurde bereits ein Test geschrieben und der Produktionscode mittels Fake it dazu implementiert. Anstatt nun die Duplikation zwischen Tests und Produktionscode zu suchen wird Triangulate angewandt, um die richtige Implementierung zu erreichen.
@@ -319,7 +324,7 @@ var sum = function(augend, addend) {
 };
 \end{lstlisting}
 
-Durch die weitere Anwendung von Triangulate wird die richtige Implementierung weiter eingeschränkt.
+Durch die weitere Anwendung von Triangulate wird die richtige Implementierung weiter eingeschränkt:
 \begin{lstlisting}[language=JavaScript]
 //
 // file: triangulate.spec.js
@@ -354,15 +359,15 @@ var sum = function(augend, addend) {
 Wie die bisherigen Beispiele für \glqq{Fake it\grqq} und \glqq{Triangulate\grqq} zeigen, handelt es sich dabei um wirklich kleine Schritte. Speziell anhand dieses Beispiels lässt sich das dritte Green Bar Patterns erklären: \glqq{Obvious Implementation\grqq}.
 
 Wenn eine Operation so einfach ist, wie in dem Beispiel, spricht nichts dagegen, die offensichtliche Implementierung direkt zu verwenden.
-Wenn die Probleme allerdings komplizierter werden, ist es oft schwierig die Disziplinen \glqq{sauber\grqq} und \glqq{funktionierend\grqq} gleichzeitig zu erreichen. Außerdem soll der Abstand zwischen den Zyklen möglichst gering gehalten werden, was bei einer offensichtlichen Lösung für ein großes Problem eventuell nicht eingehalten werden kann.
+Wenn die Probleme allerdings komplizierter werden, ist es oft schwierig die Eigenschaften \glqq{sauber\grqq} und \glqq{funktionierend\grqq} gleichzeitig zu erreichen. Außerdem soll der Abstand zwischen den Zyklen möglichst gering gehalten werden, was bei einer offensichtlichen Lösung für ein großes Problem eventuell nicht eingehalten werden kann.
 
 \paragraph{One to many}
 
-Auch bei Operationen, welche eine Kollektion von Objekten benötigen, gilt: einfach und simpel starten - \glqq{one to many\grqq}\autocite[154]{Beck:2003}.
+Auch bei Operationen welche eine Kollektion von Objekten benötigen gilt: einfach und simpel starten - \glqq{one to many\grqq} \autocite[154]{Beck:2003}.
 
 Zuerst erfolgt die Implementierung mit einem Objekt und erst wenn der Test erfolgreich war, wird Schritt für Schritt die Kollektion übernommen.
 
-Das nächste Beispiel soll die Implementierung für \glqq{sum\grqq} erweitern. Es soll möglich sein, nicht nur zwei Numbers, sondern eine beliebige Anzahl von Numbers, zu addieren. Das Beispiel befindet sich im Verzeichnis \glqq{/source/simple-tests/green-bar-patterns/one-to-many/\grqq} und geht von der korrekten Implementierung von \glqq{sum\grqq} des Fake it Beispiels aus.
+Das nächste Beispiel soll die Implementierung für \glqq{sum\grqq} erweitern. Es soll möglich sein, nicht nur zwei Zahlen, sondern eine beliebige Anzahl von Zahlen, zu addieren. Das Beispiel befindet sich im Verzeichnis \glqq{/source/simple-tests/green-bar-patterns/one-to-many/\grqq} und geht von der korrekten Implementierung von \glqq{sum\grqq} des Fake it Beispiels aus.
 
 \begin{lstlisting}[language=JavaScript]
 //
@@ -1151,8 +1156,8 @@ describe("A spy", function() {
 });
 \end{lstlisting}
 
-Words: 5708
-Code: ~600
+Words: 6440
+Code: ~900
 
 \subsection{Mocha}
  - Mocha -
