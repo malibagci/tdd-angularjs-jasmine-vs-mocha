@@ -581,10 +581,55 @@ Die bisherigen Kapitel dieser Arbeit erläutern die Prozesse, Funktionsweisen, A
 
 \newpage
 \section{AngularJS}
- - AngularJS -
+\label{AngularJS}
+Die Anfänge von AngularJS können laut \cite{Green:2013} bis ins Jahr 2009 zurück verfolgt werden. Anhang eines Projekts namens \glqq{Google Feedback\grqq} wollte der Schaffer der Open-Source Bibliothek -- Misko Hevery -- diese seinen MitarbeiterInnen vorstellen. Er behauptete das gesamte Projekt, welches bis zu diesem Zeitpunkt aus circa 17.000 Zeilen Frontend-Code bestand, innerhalb von zwei Wochen neu schrieben zu können. Nach drei Wochen und 1.500 Zeilen Code war Hevery fertig.
 
-\subsection{Hintergründe}
- - Hintergründe -
+Nach diesem Erfolg wurde ein Team rund um das Projekt Angular gebildet, um Heverys Konzepte umzusetzen und zu verbessern. Daraus entstand das heute bekannte JavaScript MV* Framework AngularJS. Entwickelt wurde und wird es sowohl von Google Teams als auch von der Open-Source Community.
+
+Dieses Kapitel stellt die Konzepte, auf welchen Angular beruht, und die Anatomie von Angular vor.
+
+\subsection{Konzepte}
+Die folgenden Konzepte wurden von erfolgreichen Vorbildern aus anderen Enticklungsumgebungen auf die Verwendung mit HTML, Browsern und anderen Web-Standards übertragen. Sie beziehen sich auf \cite[2-6]{Green:2013}.
+
+\subsubsection{Client-Side Templates}
+Viele Web-Applikationen erstellen das anzuzeigende HTML Dokument durch vorgefertige Templates, welche am Server mit zusätzlichen Daten befüllt werden, und anschließend an den Client zur Anzeige im Browser geschickt werden.
+
+Angular unterscheidet sich von dieser Herangehensweise. Templates und Daten werden an den Browser geschickt und erst dort zusammengeführt und angezeigt. Der Server dient somit nur mehr als statischer Ressourcen Lieferant der Templates und dafür, die von den Templates benötigten Daten zu liefern.
+
+\subsubsection{Model View Controller (MVC)}
+Die Kern-Idee von MVC ist eine klare und saubere Trennung der Daten (der \textit{Models}) der Applikationslogik (der \textit{Controllers}) sowie der Präsentation (den \textit{Views}) zu erreichen. Die View erhält die anzuzeigenden Daten vom Model und präsentiert diese. Bei Interaktionen durch BenutzerInnen (zum Beispiel durch Klicks) antwortet der Controller, indem er das Model ändert. Das Model wiederrum benachrichtigt die View, dass Änderungen vorliegen.
+
+Für Angular bedeutet dies:
+\begin{enumerate}
+  \item Das \glqq{Document Object Model (DOM)\grqq} ist die \textit{View}.
+  \item JavaScript Klassen sind die \textit{Controller}.
+  \item Die \textit{Model-Daten} werden in JavaScript Objekt-Eigenschaften gespeichert.
+\end{enumerate}
+
+Einige Gründe für die Verwendung von MVC-Frameworks sind:
+\begin{enumerate}
+  \item Eine organisierte und klare Struktur.
+  \item Die Zusammenarbeit durch viele beitragende Mitarbeiterinnen wird vereinfacht, da die Applikation Richtlinien eines bekannten Patterns folgt.
+  \item MVC hilft, eine Applikation leichter zu erweitern, zu warten und zu testen.
+\end{enumerate}
+
+\subsubsection{Data-Binding}
+Vor AJAX war es üblich ein \glqq{User-Interace (UI)\grqq} zu erstellen, indem Daten und HTML am Server verschmelzt und abschließend an den Browser zur Darstellung auszuliefern werden. So wurde das UI den NutzerInnen präsentiert. Bibliotheken wie \glqq{jQuery\grqq} erweitern dies und ermöglichen es, nur einzelne Teile des UIs vom Client aus zu aktualisieren. Neue Daten können vom Server beantragt und anschließend damit durch DOM-Manipulation das UI aktualisiert werden.
+
+Diese Methode, um Daten zu aktualisieren, ist durchaus gängig, birgt aber folgende Problematik: Wenn neue Daten angefordert werden, muss sicher gestellt werden, dass die Daten in den korrekten Status für das UI (die Präsentation) sowie für die betreffenden JavaScript Objekt-Eigenschaften gesetzt werden.
+
+Angular löst dieses Problem durch \glqq{(Two-way) Data-Binding\grqq}. Im UI wird definiert, welche Teile zu welchen JavaScript Objekt.Eigenschaften gehören. Ändern sich nun die Daten an einer Stelle -- egal ob im UI oder in der Objekt-Eigenschaft -- so wird automatisch synchronisiert. Dadurch werden DOM-Zugriffe und Event-Handler wie beispielsweise \glqq{onChange()\grqq} eliminiert. Werden neue Daten von Server angefragt, so müssen diese lediglich in die betreffende JavaScript Objekt-Eigenschaft gesetzt werden und das Data-Binding sorgt dafür, dass das UI dementsprechend synchronisiert wird.
+
+\subsubsection{Dependency Injection}
+Angulars Dependency Injection System folgt dem Design Pattern \glqq{Law of Demeter\grqq}, welches auch unter \glqq{Principle of least Knowledge\grqq} bekannt ist. Es müssen keine Abhängigkeiten erstellt werden (wie zum Beispiel \glqq{Klasse foo benötigt Abhängigkeiten zu den Modulen bar und foobar\grqq}), sondern die Klassen fragen direkt nach den Modulen, welche sie benötigen.
+
+Zur Illustration: In jedem Controller existiert ein \glqq{\$scope\grqq}-Objekt (siehe Kapitel x), welches für das Two-way Data-Binding zuständig ist. Dieses Objekt muss nicht von EntwicklerInnen erstellt werden, es wird dem Controller nur als Argument übergeben. So wird keine Abhängigkeit erstellt, sondern viel mehr nach dem \$scope-Objekt gefragt. Dadurch wird garantiert, dass sich der Controller um nichts anderes (zum Beispiel Data-Binding) als seine Zuständigkeiten kümmern muss (Principle of least Knowledge).
+
+\subsubsection{Directives}
+Zur Zeit wird intensiv am Standard für \glqq{Web-Components\grqq} gearbeitet. Eine Komponente von Web-Components ist \glqq{Custom-Elements\grqq} Es handelt sich dabei um eigene HTML-Elemente beziehungsweise eigene HTML-Templates.
+
+Angular ermöglicht es bereits jetzt eigene Elemente beziehungsweise eigene HTML-Templates zu erstellen -- mit Directives. Angular besitzt viele Directives, um das Gestalten des UIs zu vereinfachen.
+
 \subsection{Anatomie von AngularJS}
  - Anatomie von AngularJS -
 \subsection{Model-View-Controller Design Pattern}
@@ -1158,6 +1203,8 @@ describe("A spy", function() {
 
 Words: 6440
 Code: ~900
+
+Words: 7166
 
 \subsection{Mocha}
  - Mocha -
