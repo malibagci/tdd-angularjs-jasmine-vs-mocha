@@ -1,21 +1,28 @@
-<div ng-include="'partials/navbar'"></div>
-
-<div class="jumbotron">
-  <h1>'Allo, 'Allo!</h1>
-  <p class="lead">
-    <img src="images/yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
-</div>
-
-<div class="row marketing">
-  <div ng-repeat="thing in awesomeThings">
-      <h4>{{thing.name}}</h4>
-      <p>{{thing.info}}</p>
+<progressbar class="progress-striped active" value="100" type="info"
+    ng-show="searching">
+  Searching
+</progressbar>
+<div class="ng-hide alert alert-warning alert-dismissable"
+    ng-bind="'No results found.'" ng-show="noResults"></div>
+<h2 class="ng-hide" ng-show="searchResults">Search Results</h2>
+<div class="row ng-hide" ng-show="searchResults">
+  <div class="col-xs-3" ng-repeat="hero in searchResults">
+    <div class="thumbnail">
+      <img ng-src="{{hero.thumbnail.path}}.{{hero.thumbnail.extension}}"></img>
+      <div class="caption">
+        <h3>{{hero.name}}</h3>
+      </div>
+    </div>
   </div>
 </div>
-
-<div class="footer">
-  <p>♥ from the Yeoman team</p>
+<h2>Favorites</h2>
+<div class="row">
+  <div class="col-xs-3" ng-repeat="hero in heroes">
+    <div class="thumbnail">
+      <img ng-src="{{hero.thumbnail.path}}.{{hero.thumbnail.extension}}"></img>
+      <div class="caption">
+        <h3>{{hero.name}}</h3>
+      </div>
+    </div>
+  </div>
 </div>
