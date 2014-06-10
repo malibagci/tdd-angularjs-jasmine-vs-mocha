@@ -7,10 +7,6 @@ angular.module('marvelSuperHeroesApp')
     $scope.searchResults = HeroesService.searchResults;
     $scope.noResults = false;
 
-    $scope.$on('heroesChanged', function(event, heroes) {
-      $scope.heroes = heroes;
-    });
-
     $scope.$on('searchResultsChanged', function(event, searchResults) {
       $scope.searchResults = searchResults;
     });
@@ -22,5 +18,17 @@ angular.module('marvelSuperHeroesApp')
     $scope.$on('searchNoResults', function(event, noResults) {
       $scope.noResults = noResults;
     });
+
+    $scope.save = function(hero) {
+      if(hero.favorite) {
+        // delete
+        hero.favorite = false;
+        HeroesService.delete(hero);
+      } else {
+        // create
+        hero.favorite = true;
+        HeroesService.save(hero);
+      }
+    };
 
   });

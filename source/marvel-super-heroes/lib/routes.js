@@ -11,7 +11,15 @@ module.exports = function(app) {
   // Server API Routes
   app.route('/api/awesomeThings')
     .get(api.awesomeThings);
-  
+
+  app.route('/api/heroes')
+    .get(api.heroes)
+    .post(api.createHero);
+
+  app.route('/api/heroes/:id')
+    .delete(api.deleteHero)
+    .get(api.hero);
+
 
   // All undefined api routes should return a 404
   app.route('/api/*')

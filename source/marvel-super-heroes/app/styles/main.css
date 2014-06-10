@@ -90,10 +90,19 @@ body {
 
 .thumbnail {
   position: relative;
-  cursor: pointer;
   opacity: 0.8;
   -webkit-transition: opacity .75s ease-in-out;
   transition: opacity .75s ease-in-out;
+}
+
+.thumbnail.pointer {
+  cursor: pointer;
+}
+
+.thumbnail button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .thumbnail .caption {
@@ -112,13 +121,53 @@ body {
 
 .thumbnail .caption h3 {
   padding-right: 15px;
+  opacity: 0;
+  -webkit-transition: opacity .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
 }
 
 .thumbnail:hover {
   opacity: 1;
 }
 
+.thumbnail:hover .caption h3 {
+  opacity: 1;
+}
+
 .thumbnail:hover .caption {
-  /*opacity: 1;*/
   height: 74px;
+}
+
+.hero {
+  opacity: 1;
+}
+
+.hero.ng-move,
+.hero.ng-enter,
+.hero.ng-leave {
+  -webkit-transition: opacity .5s ease-in-out;
+  transition: opacity .5s ease-in-out;
+}
+
+.hero.ng-leave,
+.hero.ng-move.ng-move-active,
+.hero.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+.hero.ng-leave.ng-leave-active,
+.hero.ng-move,
+.hero.ng-enter {
+  opacity: 0;
+}
+
+.navbar-form {
+  position: relative;
+}
+
+.navbar-form span.reset {
+  position: absolute;
+  right: 25px;
+  top: 10px;
+  cursor: pointer;
 }

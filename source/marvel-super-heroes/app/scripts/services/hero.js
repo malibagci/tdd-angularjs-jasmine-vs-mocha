@@ -32,26 +32,10 @@ angular.module('marvelSuperHeroesApp')
 
     // Public API here
     return {
-      init: function (callback) {
-        // init heroes list
-        var favoriteHeroes = ['Thor', 'Wolverine', 'Magneto', 'Storm',
-          'Hulk', 'Iron Man', 'Spider-Man'];
-        var heroPromise;
-        var heroes = [];
-
-        angular.forEach( favoriteHeroes, function(heroName) {
-          heroPromise = fetchHero('name', heroName);
-          heroPromise.then( function(result) {
-            heroes.push(result['0']);
-            callback(heroes);
-          });
-        });
-      },
       search: function(heroName, callback) {
         var searchPromise;
-        var searchResults = [];
 
-        searchPromise = fetchHero("nameStartsWith", heroName);
+        searchPromise = fetchHero('nameStartsWith', heroName);
         searchPromise.then( function(result) {
           callback(result);
         });

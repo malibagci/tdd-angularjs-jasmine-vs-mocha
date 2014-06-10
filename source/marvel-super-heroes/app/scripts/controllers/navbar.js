@@ -7,15 +7,21 @@ angular.module('marvelSuperHeroesApp')
       { 'title': 'About', 'link': '/about' },
       { 'title': 'Contact', 'link': '/contact' }
     ];
-    $scope.searchString = "";
+    $scope.searchString = '';
 
     $scope.isActive = function(route) {
       return route === $location.path();
     };
 
 
-    $scope.$watch( "searchString", function(searchValue) {
+    $scope.$watch( 'searchString', function(searchValue) {
       HeroesService.searchForHero(searchValue);
     });
+
+    $scope.$watch( function() {
+      return HeroesService.searching;
+    }, function(value){
+      console.log(value);
+    }, true);
 
   });
