@@ -10,10 +10,16 @@
     <div class="thumbnail" ng-class="{'favorite':hero.favorite}">
       <img ng-src="{{hero.thumbnail.path}}.{{hero.thumbnail.extension}}"></img>
       <button ng-click="save(hero)" class="btn" ng-class="{'btn-danger':hero.favorite, 'btn-default':!hero.favorite}">
-        <span class="glyphicon glyphicon-star"></span>
+        <span class="glyphicon glyphicon-star"
+          ng-class="{'glyphicon-star':hero.favorite, 'glyphicon-star-empty':!hero.favorite}"></span>
         <span ng-if="hero.favorite" ng-bind="'Remove from favorites'"></span>
         <span ng-if="!hero.favorite" ng-bind="'Add to favorites'"></span>
       </button>
+      <a ng-href="hero/{{hero.id}}" class="btn btn-default details"
+          ng-if="hero.favorite">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        <span ng-bind="'View details'"></span>
+      </a>
       <div class="caption">
         <h3 ng-bind="hero.name"></h3>
       </div>
@@ -29,6 +35,10 @@
         <span class="glyphicon glyphicon-star"></span>
         <span ng-bind="'Remove from favorites'"></span>
       </button>
+      <a ng-href="hero/{{hero.id}}" class="btn btn-default details">
+        <span class="glyphicon glyphicon-info-sign"></span>
+        <span ng-bind="'View details'"></span>
+      </a>
       <div class="caption">
         <h3 ng-bind="hero.name"></h3>
       </div>

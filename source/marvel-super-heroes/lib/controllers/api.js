@@ -2,7 +2,10 @@
 
 var mongoose = require('mongoose'),
     Thing = mongoose.model('Thing'),
-    HeroModel = mongoose.model('Hero');
+    HeroModel = mongoose.model('Hero'),
+    ComicModel = mongoose.model('Comic'),
+    EventModel = mongoose.model('Event'),
+    SeriesModel = mongoose.model('Series');
 
 /**
  * Get awesome things
@@ -65,7 +68,6 @@ exports.createHero = function (req, res) {
 };
 
 exports.hero = function (req, res){
-  console.log("REQUEST")
   return HeroModel.findOne({'id': req.params.id}, function (err, hero) {
     if (!err) {
       return res.send(hero);
@@ -86,5 +88,135 @@ exports.deleteHero = function (req, res){
         console.log(err);
       }
     });
+  });
+};
+
+exports.createComic = function(req, res) {
+  var comic;
+  console.log("POST: " + req.body.title);
+
+  ComicModel.findOne({'resourceURI': req.body.resourceURI}, function(err, doc){
+    if(doc) {
+      console.log("comic " + doc.title + " is already stored in db");
+      comic = doc;
+    } else {
+      console.log("new comic " + req.body.title);
+      comic = new ComicModel({
+        resourceURI: req.body.resourceURI,
+        title: req.body.title,
+        thumbnail: req.body.thumbnail
+      });
+
+      comic.save(function (err) {
+        if (!err) {
+          return console.log("created");
+        } else {
+          return console.log(err);
+        }
+      });
+    }
+  });
+
+  return res.send(comic);
+};
+
+exports.comic = function(req, res) {
+  console.log("fetching item with title " + req.params.title);
+  return ComicModel.findOne({'resourceURI': req.params.resourceURI}, function (err, comic) {
+    if (!err) {
+      if(comic) {
+        return res.send(comic);
+      } else {
+        return res.send({notAvailable: true});
+      }
+    } else {
+      return console.log(err);
+    }
+  });
+};
+
+exports.createEventEntry = function(req, res) {
+  var eventEntry;
+  console.log("POST: " + req.body.title);
+
+  ComicModel.findOne({'resourceURI': req.body.resourceURI}, function(err, doc){
+    if(doc) {
+      console.log("event " + doc.title + " is already stored in db");
+      eventEntry = doc;
+    } else {
+      console.log("new event " + req.body.title);
+      eventEntry = new EventModel({
+        resourceURI: req.body.resourceURI,
+        title: req.body.title,
+        thumbnail: req.body.thumbnail
+      });
+
+      eventEntry.save(function (err) {
+        if (!err) {
+          return console.log("created");
+        } else {
+          return console.log(err);
+        }
+      });
+    }
+  });
+
+  return res.send(eventEntry);
+};
+
+exports.eventEntry = function(req, res) {
+  return EventModel.findOne({'resourceURI': req.params.resourceURI}, function (err, eventEntry) {
+    if (!err) {
+      if(eventEntry) {
+        return res.send(eventEntry);
+      } else {
+        return res.send({notAvailable: true});
+      }
+    } else {
+      return console.log(err);
+    }
+  });
+};
+
+exports.createSeries = function(req, res) {
+  var series;
+  console.log("POST: " + req.body.name);
+
+  SeriesModel.findOne({'resourceURI': req.body.resourceURI}, function(err, doc){
+    if(doc) {
+      console.log("series " + doc.title + " is already stored in db");
+      series = doc;
+    } else {
+      console.log("new series " + req.body.title);
+      series = new SeriesModel({
+        resourceURI: req.body.resourceURI,
+        title: req.body.title,
+        thumbnail: req.body.thumbnail
+      });
+
+      series.save(function (err) {
+        if (!err) {
+          return console.log("created");
+        } else {
+          return console.log(err);
+        }
+      });
+    }
+  });
+
+  return res.send(series);
+};
+
+exports.series = function(req, res) {
+  return SeriesModel.findOne({'resourceURI': req.params.resourceURI}, function (err, series) {
+    if (!err) {
+      if(series) {
+        return res.send(series);
+      } else {
+        return res.send({notAvailable: true});
+      }
+    } else {
+      return console.log(err);
+    }
   });
 };

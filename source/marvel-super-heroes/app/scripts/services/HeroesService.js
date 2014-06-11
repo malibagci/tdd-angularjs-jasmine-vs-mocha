@@ -1,15 +1,17 @@
 'use strict';
 
 angular.module('marvelSuperHeroesApp')
-  .service('HeroesService', function HeroesService(HeroFactory, $rootScope, $resource) {
+  .service('HeroesService', function HeroesService(HeroSearchFactory, $rootScope, $resource) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
     this.heroes = [];
+
     var searchResults = [];
     var Hero = $resource('/api/heroes/:id');
 
     var service = this;
 
+    // init favorite heroes from db
     Hero.query(function(apiHeroes) {
       angular.forEach(apiHeroes, function(hero) {
         service.heroes.push(hero);
@@ -22,7 +24,7 @@ angular.module('marvelSuperHeroesApp')
         $rootScope.$broadcast('searchResultsChanged', searchResults);
       } else {
         $rootScope.$broadcast('searching', true);
-        HeroFactory.search( name, function(result) {
+        HeroSearchFactory.search( name, function(result) {
           searchResults = result;
           angular.forEach(searchResults, function(result) {
             angular.forEach(service.heroes, function(hero) {
@@ -57,6 +59,10 @@ angular.module('marvelSuperHeroesApp')
           service.heroes.splice(index, 1);
         }
       });
+    };
+
+    this.get = function(id) {
+      return Hero.get({id: id});
     }
 
   });

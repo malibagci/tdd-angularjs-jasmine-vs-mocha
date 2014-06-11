@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('marvelSuperHeroesApp')
-  .factory('HeroFactory', function ($http, $q) {
+  .factory('HeroSearchFactory', function HeroSearchFactory($http, $q) {
     // Service logic
     // ...
 
-    var apikey = '2c2005fe9fbd2c427f438b7f39591276';
+    var apikey = '28969060faef0943a7c866a98e465269';
 
     var fetchHero = function(searchMethod, searchVal) {
 
@@ -30,6 +30,26 @@ angular.module('marvelSuperHeroesApp')
       return deferred.promise;
     };
 
+    var fetchItem = function(resourceURI) {
+      var deferred = $q.defer();
+      var fetch = $http(
+        {
+          method: 'GET',
+          url: resourceURI + "?apikey=" + apikey
+        }
+      )
+
+      fetch.success( function(data) {
+        deferred.resolve(data.data.results);
+      });
+
+      fetch.error( function(data) {
+        deferred.resolve(data);
+      });
+
+      return deferred.promise;
+    }
+
     // Public API here
     return {
       search: function(heroName, callback) {
@@ -40,6 +60,15 @@ angular.module('marvelSuperHeroesApp')
           callback(result);
         });
 
+      },
+
+      getItemByResourceURI: function(resourceURI, callback) {
+        var searchPromise;
+
+        searchPromise = fetchItem(resourceURI);
+        searchPromise.then( function(result) {
+          callback(result["0"]);
+        });
       }
     };
   });

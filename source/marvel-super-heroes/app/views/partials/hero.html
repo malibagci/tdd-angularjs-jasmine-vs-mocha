@@ -1,0 +1,47 @@
+<div class="xol-xs-12 hero">
+  <div class="jumbotron">
+    <h1>{{hero.name}}</h1>
+    <button ng-click="delete(hero)" class="btn btn-danger">
+      <span class="glyphicon glyphicon-star"></span>
+      <span ng-bind="'Remove from favorites'"></span>
+    </button>
+    <p>{{hero.description}}</p>
+  </div>
+  <div class="row">
+    <div class="col-xs-6">
+      <img class="thumbnail" ng-src="{{hero.thumbnail.path}}.{{hero.thumbnail.extension}}"></img>
+      <span class="label label-default">Modified: {{hero.modified | date:'medium'}}</span>
+    </div>
+    <div class="col-xs-6">
+
+    </div>
+  </div>
+  <div class="row">
+    <h2>Random comics</h2>
+    <div class="thumbnail comic col-xs-2" ng-repeat="comic in comics track by $index">
+      <img ng-src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}"></img>
+      <div class="caption">
+        <h6>{{comic.title}}</h6>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h2>Random events</h2>
+    <div class="thumbnail event col-xs-2" ng-repeat="event in events track by $index">
+      <img ng-src="{{event.thumbnail.path}}.{{event.thumbnail.extension}}"></img>
+      <div class="caption">
+        <h6>{{event.title}}</h6>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <h2>Random series</h2>
+    <div class="thumbnail series col-xs-2" ng-repeat="seriesItem in series track by $index">
+      <img ng-src="{{seriesItem.thumbnail.path}}.{{seriesItem.thumbnail.extension}}"></img>
+      <div class="caption">
+        <h6>{{seriesItem.title}}</h6>
+      </div>
+    </div>
+  </div>
+
+</div>

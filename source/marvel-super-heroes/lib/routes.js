@@ -20,6 +20,24 @@ module.exports = function(app) {
     .delete(api.deleteHero)
     .get(api.hero);
 
+  app.route('/api/comics')
+    .post(api.createComic);
+
+
+  app.route('/api/comics/:resourceURI')
+    .get(api.comic);
+
+  app.route('/api/events')
+    .post(api.createEventEntry);
+
+  app.route('/api/events/:resourceURI')
+    .get(api.eventEntry);
+
+  app.route('/api/series')
+    .post(api.createSeries);
+
+  app.route('/api/series/:resourceURI')
+    .get(api.series);
 
   // All undefined api routes should return a 404
   app.route('/api/*')

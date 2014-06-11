@@ -48,7 +48,7 @@
                 <a ng-href="{{item.link}}">{{item.title}}</a>
             </li>
           </ul>
-          <form class="navbar-form navbar-right">
+          <form class="navbar-form navbar-right" ng-show="showSearchField">
             <input type="text" class="form-control" placeholder="Search by name..." ng-model="searchString">
             <span class="reset glyphicon glyphicon-remove pull-right"
               ng-click="searchString=''" ng-show="searchString!=''"></span>
@@ -59,7 +59,15 @@
 
 
     <!-- Add your site or application content here -->
-    <div class="container" ng-view=""></div>
+    <div class="view-container container">
+      <div class="view" ng-view></div>
+
+      <div class="row">
+        <div class="col-xs-12 well well-sm">
+          Data provided by Marvel. © 2014 Marvel
+        </div>
+      </div>
+    </div>
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -84,9 +92,11 @@
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/navbar.js"></script>
-        <script src="scripts/services/heroesservice.js"></script>
-        <script src="scripts/services/hero.js"></script>
-        <script src="scripts/controllers/heroes.js"></script>
+        <script src="scripts/services/HeroSearchFactory.js"></script>
+        <script src="scripts/services/HeroesService.js"></script>
+        <script src="scripts/services/HeroService.js"></script>
+        <script src="scripts/controllers/HeroesCtrl.js"></script>
+        <script src="scripts/controllers/HeroCtrl.js"></script>
         <!-- endbuild -->
 </body>
 </html>

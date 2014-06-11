@@ -8,6 +8,7 @@ angular.module('marvelSuperHeroesApp')
       { 'title': 'Contact', 'link': '/contact' }
     ];
     $scope.searchString = '';
+    $scope.showSearchField = true;
 
     $scope.isActive = function(route) {
       return route === $location.path();
@@ -19,9 +20,16 @@ angular.module('marvelSuperHeroesApp')
     });
 
     $scope.$watch( function() {
-      return HeroesService.searching;
-    }, function(value){
-      console.log(value);
-    }, true);
+      return HeroesService.heroes;
+    }, function(new_heroes, old_heroes) {
+      // reset search
+      $scope.searchString = '';
+    }, true)
+
+    $scope.$watch( function() {
+      return $location.path();
+    }, function(path) {
+      $scope.showSearchField = (path === "/");
+    });
 
   });

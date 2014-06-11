@@ -14,6 +14,10 @@ angular.module('marvelSuperHeroesApp', [
         templateUrl: 'partials/main',
         controller: 'HeroesCtrl'
       })
+      .when('/hero/:id', {
+        templateUrl: 'partials/hero',
+        controller: 'HeroCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

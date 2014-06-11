@@ -43,7 +43,6 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
-  text-align: center;
   border-bottom: 1px solid #e5e5e5;
 }
 .jumbotron .btn {
@@ -99,10 +98,14 @@ body {
   cursor: pointer;
 }
 
-.thumbnail button {
+.thumbnail button, .thumbnail a.details {
   position: absolute;
   top: 10px;
   right: 10px;
+}
+
+.thumbnail a.details {
+  top: 50px;
 }
 
 .thumbnail .caption {
@@ -170,4 +173,67 @@ body {
   right: 25px;
   top: 10px;
   cursor: pointer;
+}
+
+.hero img {
+  max-width: 100%;
+}
+
+.hero h6 {
+  padding-right: 15px;
+}
+
+.view {
+  width: 100%;
+}
+
+.view.ng-enter {
+  -webkit-animation: fade-in 1.1s;
+  animation: fade-in 1.1s;
+  z-index: 100;
+}
+
+.view.ng-leave {
+  -webkit-animation: fade-out .5s;
+  animation: fade-out .5s;
+  z-index: 99;
+}
+
+.comic img, .events img, .series img {
+  max-height: 185px;
+}
+
+.hero .jumbotron {
+  position: relative;
+}
+
+.hero .jumbotron button {
+  font-size: 14px;
+  position: absolute;
+  right: 15px;
+  top: 15px;
+}
+
+/* Keyframes */
+
+@-webkit-keyframes fade-in {
+    0%   {opacity: 0;}
+    50%  {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+@keyframes fade-in {
+  0%   {opacity: 0;}
+  50%  {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-webkit-keyframes fade-out {
+    from {opacity: 1;}
+    to   {opacity: 0;}
+}
+
+@keyframes fade-out {
+  from {opacity: 1;}
+  to   {opacity: 0;}
 }
