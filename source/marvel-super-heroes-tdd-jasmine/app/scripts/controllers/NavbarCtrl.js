@@ -4,5 +4,7 @@
 
 angular.module( 'app.controllers' )
   .controller( 'NavbarCtrl', function($scope) {
-    
+
+    $scope.searchResults = [];
+
   });
