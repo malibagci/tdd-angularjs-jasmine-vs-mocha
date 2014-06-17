@@ -54,4 +54,13 @@ describe( 'Testing HeroesCtrl Controller:', function() {
 
   });
 
+  describe( 'Add a hero to favorites:', function() {
+
+    it( 'should have a addToFavorites function', function() {
+      expect(scope.addToFavorites).toBeDefined();
+      expect(scope.addToFavorites).toEqual(jasmine.any(Function));
+    });
+
+  });
+
 });
