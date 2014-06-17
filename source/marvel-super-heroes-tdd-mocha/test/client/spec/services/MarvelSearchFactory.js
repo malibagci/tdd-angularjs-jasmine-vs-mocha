@@ -24,6 +24,11 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
     assert.isFunction(MarvelSearchFactory.search);
   });
 
+  test( 'if it holds a reset function', function() {
+    assert.isDefined(MarvelSearchFactory.reset);
+    assert.isFunction(MarvelSearchFactory.reset);
+  });
+
   suite( 'Searching:', function() {
 
     var $httpBackend;
