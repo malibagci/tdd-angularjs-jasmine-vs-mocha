@@ -1,4 +1,4 @@
-// test/client/app/route.js
+// test/client/spec/app/route.js
 
 suite('Testing App Routes:', function() {
 

@@ -1,3 +1,5 @@
+// test/client/spec/app/app.js
+
 suite( 'Testing: App Module', function() {
 
   var module;
