@@ -11,7 +11,14 @@ angular.module( 'app.services' )
       factory.heroes.push(hero);
     };
 
-    factory.remove = function() {};
+    factory.remove = function(id) {
+      angular.forEach(factory.heroes, function(hero, index) {
+        if(hero.id === id) {
+          factory.heroes.splice(index, 1);
+          return;
+        }
+      });
+    };
 
     return factory;
 
