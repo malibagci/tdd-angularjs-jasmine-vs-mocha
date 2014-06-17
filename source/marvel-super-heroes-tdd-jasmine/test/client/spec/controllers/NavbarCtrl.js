@@ -5,6 +5,8 @@ describe( 'Testing NavbarCtrl Controller:', function() {
   var NavbarCtrl,
     scope;
 
+  beforeEach( module('marvelSuperHeroesApp') );
+
   beforeEach( inject( function($controller, $rootScope) {
     scope = $rootScope.$new();
     NavbarCtrl = $controller( 'NavbarCtrl', {
