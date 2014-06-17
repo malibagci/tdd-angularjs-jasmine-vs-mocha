@@ -26,9 +26,23 @@ describe( 'Testing HeroesFactory Service', function() {
       expect(HeroesFactory.save).toEqual(jasmine.any(Function));
     });
 
+    it( 'should push a given hero when "save" is called', function() {
+
+      expect(HeroesFactory.heroes.length).toEqual(0);
+
+      HeroesFactory.save({
+        id: 1,
+          name: 'Hulk',
+          thumbnail: {
+            path: 'path_to_thumbnail',
+            extension: 'extension_of_thumbnail'
+          }
+      });
+
+      expect(HeroesFactory.heroes.length).toEqual(1);
+
+    });
+
   });
-
-
-
 
 });
