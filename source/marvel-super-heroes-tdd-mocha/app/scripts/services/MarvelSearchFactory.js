@@ -22,5 +22,7 @@ angular.module( 'app.services' )
       });
     };
 
+    factory.reset = function() {};
+
     return factory;
   });
