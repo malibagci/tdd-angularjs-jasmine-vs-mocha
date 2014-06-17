@@ -24,6 +24,10 @@ describe( 'Testing modules:', function() {
       expect(hasModule('ngRoute')).toBeTruthy();
     });
 
+    it( 'should have a registered dependency to app.controllers', function() {
+      expect(hasModule('app.controllers')).toBeTruthy();
+    });
+
   });
 
 });
