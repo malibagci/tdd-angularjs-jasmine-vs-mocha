@@ -67,6 +67,16 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
     });
 
+    it( 'should push results of a GET Request in the searchResults array', 
+      function() {
+
+        expect(MarvelSearchFactory.searchResults.length).toEqual(0);
+        MarvelSearchFactory.search();
+        $httpBackend.flush();
+        expect(MarvelSearchFactory.searchResults.length).toEqual(2);
+
+    });
+
 
   });
 
