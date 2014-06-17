@@ -8,7 +8,9 @@ angular.module( 'app.controllers' )
     $scope.searchString = '';
 
     $scope.$watch( 'searchString', function(value) {
-      MarvelSearchFactory.search();
+      if(value.length >= 4) {
+        MarvelSearchFactory.search();
+      }
     });
 
   });
