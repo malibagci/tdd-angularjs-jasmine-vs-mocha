@@ -24,6 +24,11 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
     expect(MarvelSearchFactory.search).toEqual(jasmine.any(Function));
   });
 
+  it( 'should hold a reset function', function() {
+    expect(MarvelSearchFactory.reset).toBeDefined();
+    expect(MarvelSearchFactory.reset).toEqual(jasmine.any(Function));
+  });
+
   describe( 'Testing Marvel-API Search', function() {
 
     var $httpBackend;
