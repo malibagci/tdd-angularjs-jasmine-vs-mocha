@@ -18,7 +18,7 @@ describe( 'Testing routes:', function() {
     });
 
     it( 'should have a the correct templateUrl ("partial/heroes")', function() {
-      expect($route.routes['/'].templateUrl).toEqual('partial/heroes');
+      expect($route.routes['/'].templateUrl).toEqual('partials/heroes');
     });
 
   });
