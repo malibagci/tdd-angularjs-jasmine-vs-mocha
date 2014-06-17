@@ -1,15 +1,16 @@
-suite('Mocha with TDD interface', function(){
-  setup(function(){
-    console.log("setup here");
+suite( 'Testing: App Module', function() {
+
+  var module;
+
+  setup( function() {
+    module = angular.module( 'marvelSuperHeroesApp' );
   });
 
-  suite('Chai Assertion Style: "Assert"', function(){
-    test('should assert true to be ok', function(){
-      assert.ok(true, 'everything is ok');
-    });
+  test( 'should validate that the module "marvelSuperHeroesApp" is present', 
+    function() {
+
+      assert.isDefined(module);
+
   });
 
-  teardown(function(){
-    console.log("teardown here");
-  });
 });
