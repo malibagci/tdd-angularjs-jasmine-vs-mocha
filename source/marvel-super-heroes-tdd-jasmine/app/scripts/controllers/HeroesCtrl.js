@@ -9,4 +9,6 @@ angular.module( 'app.controllers' )
     $scope.isSearching = MarvelSearchFactory.isSearching;
     $scope.heroes = [];
 
+    $scope.addToFavorites = function() {};
+
   });
