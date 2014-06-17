@@ -77,6 +77,19 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
     });
 
+    it( 'should have results with names, ids and thumbnails after searching',
+      function() {
+
+        MarvelSearchFactory.search();
+        $httpBackend.flush();
+        expect(MarvelSearchFactory.searchResults[0].name)
+          .toEqual(jasmine.any(String));
+        expect(MarvelSearchFactory.searchResults[0].id)
+          .toEqual(jasmine.any(Number));
+        expect(MarvelSearchFactory.searchResults[0].thumbnail)
+          .toEqual(jasmine.any(Object));
+    });
+
 
   });
 
