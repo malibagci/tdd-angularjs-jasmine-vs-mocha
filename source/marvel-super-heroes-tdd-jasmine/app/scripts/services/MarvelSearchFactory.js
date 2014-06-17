@@ -2,7 +2,7 @@
 
 'use strict';
 
-angular.module( 'marvelSuperHeroesApp' )
+angular.module( 'app.services' )
   .factory( 'MarvelSearchFactory', function() {
 
     var factory = {};

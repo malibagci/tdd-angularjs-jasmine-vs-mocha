@@ -28,6 +28,10 @@ describe( 'Testing modules:', function() {
       expect(hasModule('app.controllers')).toBeTruthy();
     });
 
+    it( 'should have a registered dependency to app.services', function() {
+      expect(hasModule('app.services')).toBeTruthy();
+    });
+
   });
 
 });
