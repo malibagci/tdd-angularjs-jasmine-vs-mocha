@@ -111,6 +111,14 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
     });
 
+    it( 'should set the isSearching flag to true, when search is called', 
+      function() {
+        expect(MarvelSearchFactory.isSearching).toBeFalsy();
+        MarvelSearchFactory.search();
+        expect(MarvelSearchFactory.isSearching).toBeTruthy();
+
+    });
+
 
   });
 
