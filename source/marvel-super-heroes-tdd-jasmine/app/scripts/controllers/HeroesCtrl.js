@@ -2,5 +2,5 @@
 
 'use strict';
 
-angular.module( 'marvelSuperHeroesApp' )
+angular.module( 'app.controllers' )
   .controller( 'HeroesCtrl', function() {});

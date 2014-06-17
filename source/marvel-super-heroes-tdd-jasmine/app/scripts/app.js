@@ -1,7 +1,10 @@
 'use strict';
 
+angular.module( 'app.controllers', [] );
+
 angular.module('marvelSuperHeroesApp', [
-  'ngRoute'
+  'ngRoute',
+  'app.controllers'
 ]).config( function($routeProvider) {
   $routeProvider.when('/', {
     templateUrl: 'partials/heroes',
