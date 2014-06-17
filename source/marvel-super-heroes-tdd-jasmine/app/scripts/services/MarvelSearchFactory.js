@@ -7,6 +7,8 @@ angular.module( 'app.services' )
 
     var factory = {};
 
+    factory.searchResults = [];
+
     return factory;
 
   });
