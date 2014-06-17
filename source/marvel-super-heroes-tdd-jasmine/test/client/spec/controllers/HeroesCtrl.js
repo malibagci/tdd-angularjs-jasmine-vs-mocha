@@ -3,14 +3,17 @@
 describe( 'Testing HeroesCtrl Controller:', function() {
 
   var HeroesCtrl,
-    scope;
+    scope,
+    MarvelSearchFactory;
 
   beforeEach( module('marvelSuperHeroesApp') );
 
-  beforeEach( inject( function($controller, $rootScope) {
+  beforeEach( inject( function($controller, $rootScope, _MarvelSearchFactory_) {
     scope = $rootScope.$new();
+    MarvelSearchFactory = _MarvelSearchFactory_;
     HeroesCtrl = $controller( 'HeroesCtrl', {
-      $scope: scope
+      $scope: scope,
+      MarvelSearchFactory: MarvelSearchFactory
     });
   }));
 
@@ -21,6 +24,24 @@ describe( 'Testing HeroesCtrl Controller:', function() {
   it( 'should hold a "searchResults" array in its scope', function() {
     expect(scope.searchResults).toBeDefined();
     expect(scope.searchResults).toEqual(jasmine.any(Array));
+  });
+
+  it( 'should update the searchResults array, when the searchResults of the ' +
+    'MarvelSearchFactory has been changed', function() {
+
+      expect(scope.searchResults.length).toEqual(0);
+
+      MarvelSearchFactory.searchResults.push({
+        id: 1,
+        name: 'Hulk',
+        thumbnail: {
+          path: 'path_to_thumbnail',
+          extension: 'extension_of_thumbnail'
+        }
+      });
+
+      expect(scope.searchResults.length).toEqual(1);
+
   });
 
 });
