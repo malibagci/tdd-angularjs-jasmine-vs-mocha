@@ -30,8 +30,8 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
   });
 
   it( 'should hold a isSearching flag', function() {
-    expect(MarvelSearchFactory.flag).toBeDefined();
-    expect(MarvelSearchFactory.flag).toEqual(jasmine.any(Boolean));
+    expect(MarvelSearchFactory.isSearching).toBeDefined();
+    expect(MarvelSearchFactory.isSearching).toEqual(jasmine.any(Boolean));
   });
 
   describe( 'Testing Marvel-API Search', function() {

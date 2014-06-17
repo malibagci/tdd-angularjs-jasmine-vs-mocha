@@ -9,6 +9,8 @@ angular.module( 'app.services' )
     var apikey = "28969060faef0943a7c866a98e465269";
 
     factory.searchResults = [];
+    factory.isSearching = false;
+
     factory.search = function() {
 
       var request = $http({
