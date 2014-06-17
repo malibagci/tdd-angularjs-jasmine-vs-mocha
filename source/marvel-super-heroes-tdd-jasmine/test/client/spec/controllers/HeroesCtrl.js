@@ -31,6 +31,11 @@ describe( 'Testing HeroesCtrl Controller:', function() {
     expect(scope.isSearching).toEqual(jasmine.any(Boolean));
   });
 
+  it( 'should hold a "heroes" array in its scope', function() {
+    expect(scope.heroes).toBeDefined();
+    expect(scope.heroes).toEqual(jasmine.any(Array));
+  });
+
   it( 'should update the searchResults array, when the searchResults of the ' +
     'MarvelSearchFactory has been changed', function() {
 
