@@ -783,7 +783,7 @@ Foo.delete({fooId: 42}) // DELETE request to '/foo/42'
 \section{Testing Frameworks}
 
 \subsection{Jasmine}
-Jasmine ist ein Javascript Testing Framework, welches notwendige Funktionen wie Assertions, Matchers, Mocks und Spies anbietet. Es wurde prinzipiell für BDD (Begrifflichkeit) entworfen. Dies macht sich an der Benennung verschiedener Komponenten bemerkbar, zum Beispiel durch die für BDD-typische \glqq{expect\grqq}-Schreibweise für Tests (eine genauere Beschreibung von expect folgt in den nachfolgenden Kapiteln). Jasmine kann aber selbstverständlich auch für konventionelles Testen und für TDD verwendet werden. Auf der AngularJS Website wird Jasmine als Testing Framework für das Entwickeln mit dem MV*-Framework empfohlen (Quelle {AngularJS:Jasmine:2013} noch raussuchen).
+Jasmine ist ein Javascript Testing Framework, welches notwendige Funktionen wie Assertions, Matchers, Mocks und Spies anbietet. Es wurde prinzipiell für BDD (Begrifflichkeit) entworfen. Dies macht sich an der Benennung verschiedener Komponenten bemerkbar, zum Beispiel durch die für BDD-typische \glqq{expect\grqq}-Schreibweise für Tests (eine genauere Beschreibung von expect folgt in den nachfolgenden Kapiteln). Jasmine kann aber selbstverständlich auch für konventionelles Testen und für TDD verwendet werden. Auf der AngularJS Website wird für Test-Beispielen Jasmine verwendet \autocite{Angular:Testing}.
 
 \subsubsection{Keywords in Jasmine}
 Die folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
@@ -791,7 +791,7 @@ Die folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
   \item \textbf{describe}:\newline
         Mit \glqq{describe\grqq} wird in Jasmine eine neue Test \glqq{Suite\grqq} erstellt. Eine \glqq{Suite\grqq} ist eine Sammlung von Test-Spezifikationen. \glqq{describe\grqq} beschreibt die Suite in natürlicher Sprache.
 \begin{lstlisting}[language=JavaScript]
-  describe('What the following test-specifications are about', 
+  describe('What the following test-specifications are about',
     function() {
     ...
   });
@@ -799,9 +799,9 @@ Die folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
   \item \textbf{it}:\newline
         Der \glqq{it\grqq}-Block befindet sich innerhalb der anonymen Funktion, welche describe übergeben wird. Er versteht sich als Spezifikation. In einer Suite können sich mehrere \glqq{it\grqq}-Blöcke befinden. Ebenso wie bei describe wird die it-Funktion mit natürlicher Sprache beschrieben und eine anonyme Funktion wird ihr mitgegeben.
 \begin{lstlisting}[language=JavaScript]
-  describe('What the following test-specifications are about.', 
+  describe('What the following test-specifications are about.',
     function() {
-    it('specifies what the following tests are about.', 
+    it('specifies what the following tests are about.',
       function() {
       ...
     });
@@ -810,155 +810,68 @@ Die folgenden Keywords beziehen sich auf \cite[5-8]{Hahn:2013}.
   \item \textbf{expect}:\newline
         Das \glqq{expect\grqq}-Keyword spiegelt den eigentlichen Test wider. Man erwartet ein bestimmtes Ergebnis. Wenn das erwartete Ergebnis eintritt, gilt der Test als bestanden, oder auch als \glqq{grün\grqq}. Sollte dies jedoch nicht der Fall sein, so ist der Test nicht bestanden und wird als \glqq{rot\grqq} bezeichnet. Tests, welche sich in der selben Spezifikation jedoch nach dem fehlgeschlagenem Test befinden, werden nicht mehr ausgeführt.
 \begin{lstlisting}[language=JavaScript]
-  describe('What the following test-specifications are about.', 
+  describe('What the following test-specifications are about.',
     function() {
-    it('specifies what the following tests are about.', 
+    it('specifies what the following tests are about.',
       function() {
       expect(true).toEqual(true);    // success
       expect(false).toEqual(true);   // failure
-      expect(false).toEqual(false);  
+      expect(false).toEqual(false);
         // not executed, because the test before failed
     });
   });
 \end{lstlisting}
+
+\item \textbf{jasmine.any} ermöglicht es, den Typ eines Objekts zu überprüfen - ähnlich wie JavaScripts instanceof Operator.
+
 \end{itemize}
 
 \subsubsection{Matcher}
-\glqq{Matcher\grqq} sind Funktionen, welche zwei Ausdrücke miteinander vergleichen. Das Ergebnis des Vergleichs führt entweder zu einem positivem Test oder bei einem negativem Test zum Abbruch der aktuellen Spezifikation. Jasmine wird bereits mit vielen nützlichen Matcher ausgeliefert und ermöglicht auch das Schreiben von benutzerdefinierten Matcher. Die Namen der Matchers von Jasmine sind alle sehr ausdrucksstark (nicht zuletzt, weil Jasmine als BDD-Testing-Framework designed wurde).
+\glqq{Matcher\grqq} sind Funktionen, welche zwei Ausdrücke miteinander vergleichen. Das Ergebnis des Vergleichs führt entweder zu einem positivem Test oder bei einem negativem Test zum Abbruch der aktuellen Spezifikation. Jasmine wird bereits mit vielen nützlichen Matcher ausgeliefert und ermöglicht auch das Schreiben von benutzerdefinierten Matcher.
 
-\paragraph{toEqual}
-\glqq{toEqual\grqq} überprüft die \glqq{Gleichheit\grqq} zweier Ausdrücke. Hier findet jedoch keine Identitätsüberprüfung statt (siehe Kapitel \glqq{toBe\grqq}). So würde der Aufruf
-\begin{lstlisting}[language=JavaScript]
-  expect(true).toEqual(true);
-\end{lstlisting}
-nicht zu einem Abbruch der Spezifikation führen. Der Aufruf
-\begin{lstlisting}[language=JavaScript]
-  expect([1,2]).toEqual([3,4]);
-\end{lstlisting}
-hingegen schon.
+Folgende Matcher sind standardmäßig vorhanden:
 
-\paragraph{toBe}
-Der Matcher \glqq{toBe\grqq} verhält sich ähnlich wie toEqual, mit dem Unterschied der Identitätsüberprüfung. toEqual ist Jasmines Äquivalent zu Javascripts \glqq{==\grqq} Operators, wobei toBe \glqq{===\grqq} entspricht. Das folgende Beispiel illustriert den Unterschied zwischen toEqual und toBe.
-
-\begin{lstlisting}[language=JavaScript]
-var foo = [1,2];
-var bar = [1,2];
-
-expect(foo).toEqual(bar); // success
-expect(foo).toBe(bar);    // failure
-expect(foo).toBe(foo);    // success
-\end{lstlisting}
-
-Da sich toBe auf den \glqq{===\grqq} Operator stützt, garantiert dieser Matcher \textit{nicht} die Identitätsgleichheit bei primitiven Javascript Typen - also nicht bei Numbers, Booleans und Strings. Der \glqq{===\grqq} Operator sieht diese Primitive als idente Entitäten an \autocite[16]{Hahn:2013}.
-
-\paragraph{toBeTruthy, toBeFalsy}
-Wie auch bei den ersten zwei Matcher, entsprechen auch hier die Namen der Funktionalität. toBeTruthy evaluiert einen Ausdruck auf \glqq{true\grqq} und toBeFalsy auf \glqq{false\grqq}. Genau wie auch in Javascript entsprechen true und false nicht nur den gleichnamigen boolschen Ausdrücken. Als true gelten beispielsweise auch "'Hello"' oder \{\}. Um sicher zu gehen, was nun true und was false ist, ist es einfacher darüber nachzudenken, was in Javascript false ist.
 \begin{itemize}
-  \item false
-  \item 0
-  \item "'"'
-  \item undefined (Achtung: die Variable \glqq{undefined\grqq} ist nicht immer nicht definiert)
-  \item null
-  \item NaN (Not a Number, zum Beispiel die Division durch 0)
+  \item \textbf{toEqual} überprüft die \glqq{Gleichheit\grqq} zweier Ausdrücke. Hier findet jedoch keine Identitätsüberprüfung statt (siehe Kapitel \glqq{toBe\grqq}).
+
+  \item \textbf{toBe} verhält sich ähnlich wie toEqual, mit dem Unterschied der Identitätsüberprüfung. toEqual ist Jasmines Äquivalent zu Javascripts \glqq{==\grqq} Operators, wobei toBe \glqq{===\grqq} entspricht. Da sich toBe auf den \glqq{===\grqq} Operator stützt, garantiert dieser Matcher \textit{nicht} die Identitätsgleichheit bei primitiven Javascript Typen - also nicht bei Numbers, Booleans und Strings. Der \glqq{===\grqq} Operator sieht diese Primitive als idente Entitäten an \autocite[16]{Hahn:2013}.
+
+  \item \textbf{toBeTruthy, toBeFalsy}\newline
+  toBeTruthy evaluiert einen Ausdruck auf \glqq{true\grqq} und toBeFalsy auf \glqq{false\grqq}. Genau wie auch in Javascript entsprechen true und false nicht nur den gleichnamigen boolschen Ausdrücken. Als true gelten beispielsweise auch "'Foo"' oder \{\}. Um sicher zu gehen, was nun true und was false ist, ist es einfacher darüber nachzudenken, was in Javascript false ist, denn \glqq{\textit{alles, was nicht false ist, ist true.}\grqq} \autocite[17]{Hahn:2013}.
+  False ist:
+    \begin{itemize}
+      \item false
+      \item 0
+      \item "'"'
+      \item undefined (Achtung: die Variable \glqq{undefined\grqq} ist nicht immer nicht definiert)
+      \item null
+      \item NaN (Not a Number, zum Beispiel die Division durch 0)
+    \end{itemize}
+
+  \item \textbf{not} ist eine einfache Verneinung und wird vor einem weiteren Matcher aufgerufen.
+  \begin{lstlisting}[language=JavaScript]
+    expect(true).not.toBeFalsy();   // success
+  \end{lstlisting}
+
+  \item \textbf{toBeDefined, toBeUndefined} überprüfen ob Objekte definiert sind oder nicht. Sie halten sich dabei an den in ECMA-Script definierten Richtlinien für \glqq{defined\grqq} und \glqq{undefined\grqq} (\textit{http://www.ecma-international.org/ecma-262/5.1/}).
+
+  Wichtig: Wenn eine Variable nicht deklariert wurde, so wird eine \glqq{ReferenceError\grqq}-Exception geworfen. Alle Variablen, unabhängig ob definiert oder nicht, müssen deklariert werden.
+
+  \item \textbf{toBeNull} überprüft, ob ein Ausdruck \glqq{null\grqq} ist.
+
+  \item \textbf{toBeNaN} überprüft, ob ein Ausdruck NaN, also Not a Number ist.
+  Es gibt bereits eine eigene \glqq{isNaN\grqq} Funktion von Javascript. Diese evaluiert allerdings einige nicht-nummerische Typen als NaN (Strings, Objekte, Arrays). Jasmines toBeNaN evaluiert nur auf den Wert NaN.
+
+  \item \textbf{toBeGreatherThan, toBeLessThan} überprüfen, ob ein Ausdruck größer, beziehungsweise kleiner als ein anderer Ausdruck ist. Das funktioniert für nummerische Typen und auch für Strings.
+
+  \item \textbf{toBeCloseTo} überprüft, ob ein Ausdruck \glqq{nahe\grqq} einem zweiten ist. Die Nähe wird durch Dezimalstellen definiert. Die Dezimalstelle ist das zweite Argument von toBeCloseTo. Die genaue Funktionsweise von toBeCloseTo wird im Kapitel \glqq{Custom Matcher\grqq} illustriert.
+
+  \item \textbf{toMatch} überprüft, ob ein Ausdruck mit einer übergebenen RegularExpression übereinstimmt.
+
+  \item \textbf{toThrow} evaluiert, ob ein Ausdruck eine Exception wirft.
+
+
 \end{itemize}
-\glqq{\textit{Alles, was nicht false ist, ist true.}\grqq} \autocite[17]{Hahn:2013}.
-\begin{lstlisting}[language=JavaScript]
-expect({}).toBeTruthy(); // success
-expect('').toBeFalsy();  // success
-\end{lstlisting}
-Eine weitere Schreibweise für diese Matcher wäre:
-\begin{lstlisting}[language=JavaScript]
-expect({}).toEqual(true);   // success
-expect('').toEqual(false);  // success
-\end{lstlisting}
-
-\paragraph{not}
-Dieser Matcher ist eine einfache Verneinung:
-\begin{lstlisting}[language=JavaScript]
-var foo = [1,2];
-var bar = [1,2];
-
-expect(foo).not.toBe(bar);   // success
-expect('').not.toBeTruthy(); // success
-\end{lstlisting}
-
-\paragraph{toContain}
-toContain überprüft ob ein Ausdruck in einem anderen enthalten ist. Dies funktioniert ebenso für Arrays, als auch für Strings.
-\begin{lstlisting}[language=JavaScript]
-expect([1,2]).toContain(2);           // success
-expect('foo bar').toContain('oo ba'); // success
-\end{lstlisting}
-
-\paragraph{toBeDefined, toBeUndefined}
-Diese Matcher überprüfen ob Objekte definiert sind oder nicht. Sie halten sich dabei an den in ECMA-Script definierten Richtlinien für \glqq{defined\grqq} und \glqq{undefined\grqq} (\textit{http://www.ecma-international.org/ecma-262/5.1/}).
-
-Wichtig: Wenn eine Variable nicht deklariert wurde, so wird eine \glqq{ReferenceError\grqq}-Exception geworfen. Alle Variablen, unabhängig ob definiert oder nicht, müssen deklariert werden.
-\begin{lstlisting}[language=JavaScript]
-var undefinedVariable;
-expect('Hello').toBeDefined();             // success
-expect(undefinedVariable).toBeDefined();   // failure
-expect(undefinedVariable).toBeUndefined(); // success
-
-expect(foo).toBeUndefined();               // ReferenceError
-\end{lstlisting}
-
-\paragraph{toBeNull}
-Auch die Funktionsweise dieses Matchers ist durch die ausdrucksstarke Namensgebung leicht verständlich. Er überprüft, ob ein Ausdruck \glqq{null\grqq} ist.
-\begin{lstlisting}[language=JavaScript]
-expect(null).toBeNull(); // success
-expect(0).toBeNull();    // failure
-\end{lstlisting}
-
-\paragraph{toBeNaN}
-toBeNan überprüft, ob ein Ausdruck NaN, also Not a Number ist.
-\begin{lstlisting}[language=JavaScript]
-expect(0/0).toBeNaN();            // success
-expect(parseInt('foo')).toBeNaN(); // success
-\end{lstlisting}
-
-Es gibt bereits eine eigene \glqq{isNaN\grqq} Funktion von Javascript. Diese evaluiert allerdings einige nicht-nummerische Typen als NaN (Strings, Objekte, Arrays). Jasmines toBeNaN evaluiert nur auf den Wert NaN.
-
-\begin{lstlisting}[language=JavaScript]
-expect({}).toBeNaN();           // failure
-expect(isNaN({})).toBeTruthy(); // success
-\end{lstlisting}
-
-\paragraph{toBeGreatherThan, toBeLessThan, toBeCloseTo}
-Die Matcher toBeGreatherThan und toBeLessThan überprüfen, ob ein Ausdruck größer, beziehungsweise kleiner als ein anderer Ausdruck ist. Das funktioniert für nummerische Typen und auch für Strings.
-
-\begin{lstlisting}[language=JavaScript]
-expect(1).toBeLessThan(2);         // success
-expect('b').toBeGreatherThan('a'); // success
-\end{lstlisting}
-
-toBeCloseTo hingegen überprüft, ob ein Ausdruck \glqq{nahe\grqq} einem zweiten ist. Die Nähe wird durch Dezimalstellen definiert. Die Dezimalstelle ist das zweite Argument von toBeCloseTo. Folgende Beispiele illustrieren die Funktionsweise von toBeCloseTo:
-
-\begin{lstlisting}[language=JavaScript]
-expect(1.11).toBeCloseTo(1.1, 0); // success - round to 1
-expect(1.11).toBeCloseTo(1.1, 1); // success - round to 1.1
-expect(1.11).toBeCloseTo(1.1, 2); // failure - round to 1.11
-\end{lstlisting}
-
-\paragraph{toMatch}
-toMatch überprüft ob ein Ausdruck mit einer übergebenen RegularExpression übereinstimmt.
-
-\begin{lstlisting}[language=JavaScript]
-expect('hello world').toMatch(/hello/); // success
-\end{lstlisting}
-
-\paragraph{toThrow}
-Dieser Matcher evaluiert, ob ein Ausdruck eine Exception wirft.
-
-\begin{lstlisting}[language=JavaScript]
-
-var functionToThrow = function() {
-  throw new Error();
-};
-
-expect(function() {
-  functionToThrow();
-}).toThrow(); // success
-\end{lstlisting}
 
 \paragraph{Custom Matcher}
 Die bereits mitgelieferten Matcher von Jasmine sind sehr nützlich, decken jedoch nicht alle denkbaren Vergleiche ab. Jasmine distanziert sich auch davon, exzessiv eine breite Masse an Matchers zu entwickeln (Quelle). Aus diesem Grund gibt es mit Jasmine die Möglichkeit, eigene Matcher zu definieren. Die Definition dieser Matcher muss vor dem it-Block, vor welchem sie verwendet werden sollen, erfolgen.
@@ -1027,7 +940,7 @@ expect(Math.PI).toBeCloseTo(3.14, 2); // success: 3.14 == 3.14
           this.message = function() {
             var lower = base - distance;
             var upper = base + distance;
-            return 'Expected ' + this.actual + ' to be between ' + 
+            return 'Expected ' + this.actual + ' to be between ' +
               lower + ' and ' + upper + ' (inclusive).';
           }
 
@@ -1044,7 +957,7 @@ expect(Math.PI).toBeCloseTo(3.14, 2); // success: 3.14 == 3.14
 
   });
 
-\end{lstlisting} 
+\end{lstlisting}
 
 \subsubsection{Weitere Jasmine Features}
 \paragraph{Nested Suites}
@@ -1071,84 +984,38 @@ describe('Huge component Foo', function() {
 
 Da Jasmine jedoch kein TDD-Framework ist, ist es jedoch mit sehr einfachen Mitteln möglich. Durch das Voranstellen eines \glqq{x\grqq} vor die Keywords describe oder it werden diese einfach ausgelassen.
 
-\begin{lstlisting}[language=JavaScript]
-
-describe('Skipping is bad', function() {
-
-  xdescribe('skipping whole suites is not better', function() { ... });
-  xit('evil, evil', function() { ... });
-
-});
-\end{lstlisting}
-
-Die übersprungenen Tests werden im Abschlussbericht von Jasmine auch als solche dargestellt:
-Screenshot (Run x Tests, x passed, x skipped, x failed).
-
 \paragraph{beforeEach und afterEach}
 
 Mit \glqq{beforeEach\grqq} und \glqq{afterEach\grqq} kann eine anonyme Funktion vor und nach jedem it-Block oder vor und nach jeder Nested Suite ausgeführt werden. Dies ist nützlich, um (Mock) Objekte, welche von mehreren Spezifikationen verwendet werden, vorzubereiten oder nach deren Verwendung zurückzusetzen.
 
-\cite[23]{Hahn:2013} beschreibt eine Variante, um ein Objekt mittels beforeEach vorzubereiten wie folgt.
-\begin{lstlisting}[language=JavaScript]
+\begin{lstlisting}
 
-describe('Employee suite', function() {
+describe('Before/after each syntax', function() {
 
-  var employee;
+  var myMock;
+
   beforeEach( function() {
-    employee = new Employee;
+    // setup phase of the following tests
+    // initialize and configure myMock
   });
 
-  it('has a name', funtion() {
-    expect(employee.name).toBeDefined();
-  });
+  // it should do something..
 
-  it('has a role', funtion() {
-    expect(employee.role).toBeDefined();
+  afterEach( function() {
+    // teardown phase of the tests
+    // reset myMock
   });
 
 });
 
-\end{lstlisting}
-
-Eine weitere Variante, welche nicht genannt wird, um dies zu erreichen, ist folgende.
-
-\begin{lstlisting}[language=JavaScript]
-
-describe('Employee suite', function() {
-
-  beforeEach( function() {
-    this.employee = new Employee;
-  });
-
-  it('has a name', funtion() {
-    expect(this.employee.name).toBeDefined();
-  });
-
-  ...
-
-});
 \end{lstlisting}
 
 Wie bereits in vorhergehenden Kapiteln beschrieben, sollen alle Tests isoliert ablaufen und kein Test soll von einem anderen abhängig sein. Wenn nun ein vorbereitetes Objekt von einem Test verwendet und verändert wird, so ist es wichtig, dieses auch wieder in den richtigen Ausgangsstatus zurückzusetzen. Dafür kann afterEach verwendet werden. afterEach wird nach jeder Spezifikation oder Nested Test Suite in der jeweiligen (Nested) Test Suite ausgeführt.
 
-Kurzes Beispiel zu afterEach.
-
-\paragraph{jasmine.any}
-Dieses Feature von Jasmine ermöglicht es, den Typ eines Objekts zu überprüfen - ähnlich wie JavaScripts instanceof Operator.
-\begin{lstlisting}[language=JavaScript]
-
-  expect(MATH.random()).toEqual(jasmine.any(Number));
-  expect('foo').toEqual(jasmine.any(String));
-  expect(new CustomObject)
-    .toEqual(jasmine.any(CustomObject));
-
-\end{lstlisting}
-
-% Words in text: 5350
-% Code: ~ 450
+beforeEach und afterEach entsprechen den \glqq{Setup\grqq}- und \glqq{Teardown\grqq}-Phasen eines Tests.
 
 \subsubsection{Spies}
-Alle bisherigen Tests betrafen die Vergleiche von mehreren Ausdrücken, es gab jedoch keine Möglichkeit, das Verhalten von Funktionen oder Objekten zu inspizieren. Um das zu erreichen, liefert Jasmine Spies mit. Wie bereits im Kapitel \glqq{Mocks, Stubs \& Spies\grqq} erläutert, handelt es sich dabei um ein Fake Objekt, welches das echte Objekt ersetzt. Aufrufe auf das Fake Objekt werden aufgezeichnet und können am Ende inspiziert werden. Die nachfolgenden Beispiele beziehen sich großteils auf \textit{http://jasmine.github.io/2.0/introduction.html}.
+Alle bisherigen Tests betrafen die Vergleiche von mehreren Ausdrücken, es gab jedoch keine Möglichkeit, das Verhalten von Funktionen oder Objekten zu inspizieren. Um das zu erreichen, liefert Jasmine Spies mit. Wie bereits im Kapitel \glqq{Mocks, Stubs \& Spies\grqq} erläutert, handelt es sich dabei um ein Fake Objekt, welches das echte Objekt ersetzt. Aufrufe auf das Fake Objekt werden aufgezeichnet und können am Ende inspiziert werden. Die nachfolgenden Beispiele beziehen sich großteils auf \cite{Jasmine}.
 
 \paragraph{spyOn}
 Um das gewünschte Objekt oder die gewünschte Funktion durch einen Spy zu ersetzen, wird \glqq{spyOn\grqq} verwendet. Die Aufrufe auf den Spy werden mit \glqq{toHaveBeenCalled()\grqq} und \glqq{toHaveBeenCalledWith(args)\grqq} inspiziert.
@@ -1200,60 +1067,47 @@ Das vorangehende Beispiel ohne and.callThrough würde das Inspizieren von \glqq{
 
 Um den Wert von bar zu inspizieren wird and.callThrough verwendet.
 \begin{lstlisting}[language=JavaScript]
-describe("A spy", function() {
-  var foo, bar = null;
+
+...
 
   beforeEach(function() {
-    foo = {
-      setBar: function(value) {
-        bar = value;
-      }
-    };
+    ...
 
     spyOn(foo, 'setBar').and.callThrough();
 
     foo.setBar(123);
   });
 
-  // do spying stuff
-
   it("is able to inspect bar", function() {
     expect(bar).toEqual(123); // success
   });
 
-});
+...
+
 \end{lstlisting}
 
 \paragraph{and.returnValue}
 Mit \glqq{and.returnValue\grqq} kann sichergestellt werden, dass ein spezifischer Wert zurückgegeben wird. Dies kann beispielsweise hilfreich sein, um eine Komponente mit falschen Eingaben zu testen.
 
 \begin{lstlisting}[language=JavaScript]
-describe("A spy", function() {
-  var foo, bar = null;
+
+...
 
   beforeEach(function() {
-    foo = {
-      setBar: function(value) {
-        bar = value;
-      }
-      getBar: function() {
-        return bar;
-      }
-    };
+    ...
 
     spyOn(foo, 'getBar').and.returnValue(456);
 
     foo.setBar(123);
   });
 
-  // do spying stuff
-
   it("is able to inspect bar", function() {
     expect(bar).toEqual(123); // failure
     expect(bar).toEqual(456); // success
   });
 
-});
+...
+
 \end{lstlisting}
 
 \paragraph{and.callFake}
@@ -1282,53 +1136,6 @@ describe("Spying on an ajax callback", function() {
 
 \paragraph{jasmine.createSpy \& jasmine.createSpyObj}
 Wenn spyOn verwendet wird, wird immer eine bestehende Funktion oder ein bestehendes Objekt mit einem Spy ersetzt. Jasmine bietet zusätzlich die Möglichkeit, auch ohne bereits existierenden Funktionen oder Objekten, Spies zu erstellen. Mit \glqq{jasmine.createSpy\grqq} für Funktionen und vice versa mit \glqq{jasmine.createSpyObj\grqq} für Objekte.
-
-\begin{lstlisting}[language=JavaScript]
-describe("A spy", function() {
-  var foo = "bar", bar = null;
-  var tape;
-
-  beforeEach(function() {
-    // preperation for jasmine.createSpy
-    getFoo = jasmine.createSpy("getFoo");
-    bar = getFoo();
-
-    // preperation jasmine.createSpyObj
-    tape = jasmine.createSpyObj('tape', ['play', 'pause', 'stop', 'rewind']);
-
-    tape.play();
-    tape.pause();
-    tape.rewind(0);
-
-  });
-
-  // test specification for jasmine.createSpy
-  it("should have called getFoo", function() {
-    expect(getFoo).toHaveBeenCalled();
-  });
-
-  // test specification for jasmine.createSpyObj
-  it("creates spies for each requested function", function() {
-    expect(tape.play).toBeDefined();
-    expect(tape.pause).toBeDefined();
-    expect(tape.stop).toBeDefined();
-    expect(tape.rewind).toBeDefined();
-  });
-
-  it("tracks that the spies were called", function() {
-    expect(tape.play).toHaveBeenCalled();
-    expect(tape.pause).toHaveBeenCalled();
-    expect(tape.rewind).toHaveBeenCalled();
-    expect(tape.stop).not.toHaveBeenCalled();
-  });
-
-});
-\end{lstlisting}
-
-Words: 6440
-Code: ~900
-
-Words: 7166
 
 \subsection{Mocha}
  - Mocha -
