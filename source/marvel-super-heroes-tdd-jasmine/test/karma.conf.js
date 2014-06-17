@@ -19,6 +19,9 @@ module.exports = function(config) {
       // third party libraries
       'app/bower_components/angular/angular.js',
 
+      // app-specific files
+      'app/scripts/**/*.js',
+
       // test-specific files
       'test/client/spec/**/*.js'
     ],
