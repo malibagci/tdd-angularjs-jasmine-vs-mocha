@@ -630,33 +630,157 @@ Zur Zeit wird intensiv am Standard für \glqq{Web-Components\grqq} gearbeitet. E
 
 Angular ermöglicht es bereits jetzt eigene Elemente beziehungsweise eigene HTML-Templates zu erstellen -- mit Directives. Angular besitzt viele Directives, um das Gestalten des UIs zu vereinfachen.
 
-\subsection{Anatomie von AngularJS}
- - Anatomie von AngularJS -
-\subsection{Model-View-Controller Design Pattern}
- - Model-View-Controller Design Pattern -
 \subsection{Komponenten}
- - Komponenten -
+\subsubsection{\$scope}
+In jeder Angular Applikation existiert ein \$rootScope Objekt. Scopes sind hierarchisch aufgebaut und der \$rootScope ist der root-Knoten der Hierarchie. Alle weiteren erstellten Scopes sind \glqq{child\grqq}-Scopes. Diese können manuell erstellt werden (\$rootScope.\$new()), dies übernimmt allerdings Angular automatisch, wenn ein neuer Controller erstellt wird.
+
+Ein Scope Objekt ist ein Objekt, welches auf ein Applikations-Model referenziert. Es wird in der Angular Dokumentation als \glqq{der Kleber zwischen einem Controller und einer View\grqq} \autocite{Angular:Scope} bezeichnet. Das Scope Objekt trägt einerseits Sorge dafür, dass Änderungen am Applikations-Model an alle beteiligten Views und/oder Controller propagiert werden, und andererseits, dass alle Änderungen überwacht werden (Two-Way Data-Binding).
+
+Diese Aktionen (propagieren und überwachen) können auch manuell ausgeführt werden:
+\begin{itemize}
+  \item \$scope.\$apply() propagiert Änderungen des Applikations-Models
+  \item \$scope.\$watch() überwacht Änderungen des Applikations-Models
+\end{itemize}
 
 \subsubsection{Controller}
- - Controller -
-\subsubsection{Directives}
- - Directives -
-\subsubsection{Services}
- - Services -
-\subsubsection{Dependency-Injection}
- - Dependency-Injection -
-\subsubsection{Data-Binding}
- - Data-Binding -
+Ein Angular Controller ist eine JavaScript Konstruktor Funktion, welche ein Angular Scope Objekt als Argument erwartet. Ein Controller kann manuell erstellt werden oder durch Angular Mark-Up an die DOM angehängt werden (<div ng-controller='FooCtrl'></div>). Bei der zweiten Variante wird automatisch ein Child-Scope für diesen Controller erstellt.
 
-\subsection{Entwickeln mit AngularJS}
- - Entwickeln mit AngularJS -
+Controller sollen laut \cite{Angular:Controller} für folgende Aktionen verwendet, beziehungsweise nicht verwendet werden:
+
+Controller sollen verwendet werden um...
+\begin{itemize}
+  \item ... den initialen Status eines Models des Scopes zu setzen.
+  \item ... ein gewisses Verhalten des SCopes zu definieren (beispielsweise um auf Aktionen einer/s NutzerIn reagieren zu können)
+\end{itemize}
+
+Controller sollen jedoch ausdrücklich nicht verwendet werden (Seperation of Concerns) um...
+\begin{itemize}
+  \item ... die DOM zu manipulieren (für DOM-Manipulationen sind entweder Angulars Data-Binding oder Angular Directives zuständig).
+  \item ... NutzerInnen-Eingaben zu formatieren (dafür sind Angular Form Controls \autocite{Angular:Forms} zuständig).
+  \item ... Ausgaben zu filtern (um Ausgaben zu filtern sollen Angular Filters verwendet werden -- siehe Kapitel x.x Filter).
+  \item ... Code oder Objekt-Stati mit anderen Controllern zu teilen (Angular Services sind für diese Zwecke geeignet).
+\end{itemize}
+
+\paragraph{Das Testen eines Angular Controllers}
+Um einen Controller testen zu können, muss diese manuell erstellt werden. Dafür kann der Angular Service \glqq{\$controller\grqq} verwendet werden \autocite{Angular:ControllerTest}. Bei der Erstellung muss darauf geachtet werden, dass alle notwendigen Parameter (zum Beispiel ein Scope Objekt oder ein benötigter Service) übergeben werden.
+
+\subsubsection{Filter}
+Angular Filter sind für die korrekte Formatierung einer Ausgabe zuständig. Sie können entweder direkt in einer View verwendet werden, oder von Controllern, Services und Direktiven instanziiert werden (das jeweilige Modul erhält den Filter durch Dependency Injection).
+
+Angular wird bereits mit einigen nützlichen Filtern ausgeliefert. Beispielsweise der \glqq{date\grqq}-Filter \autocite{Angular:FilterDate}:
+
+\begin{lstlisting}
+
+<!-- formats a JavaScript date object to a human readable date -->
+{{myDate | filter: 'MM/dd/yyyy'}}
+
+\end{lstlisting}
+
+\subsubsection{Services}
+Ein Angular Service wird verwendet, um Code oder verschiedene Stati über eine Angular Applikation teilen zu können. Sie werden über Angulars Dependency Injection instanziiert.
+
+Folgendes Beispiel verdeutlicht die Funktionsweise und Verwendung von Services:
+
+Controller \glqq{FooCtrl\grqq} und Controller \glqq{BarCtrl\grqq} sind beide abhängig von dem Status des Models \glqq{FooBar\grqq}. Es wird ein Service \glqq{FooBarService\grqq} erstellt, um den Status teilen zu können. Die Controller verwenden den Service via Dependency Injection:
+
+\begin{lstlisting}
+
+angular.module('App', []).
+  service('FooBarService', function(FooBarService) {
+    this.fooBar = false;
+
+    this.setFooBar = function(state) {
+      this.fooBar = state;
+    }
+  }).
+  controller('FooCtrl', function(FooCtrl, FooBarService) {
+    $scope.fooBar = FooBarService.fooBar;
+  }).
+  controller('BarCtrl', function(BarCtrl, FooBarService) {
+    $scope.fooBar = FooBarService.fooBar;
+  });
+
+\end{lstlisting}
+
+Wenn nun der \glqq{FooCtrl\grqq} Controller \glqq{FooBarService.setFooBar(true)\grqq} aufruft, so wird automatisch der \$scope des \glqq{BarCtrl\grqq} Controllers aktualisiert.
+
+Laut \cite{Angular:Services} sind Services...
+\begin{itemize}
+  \item \glqq{träge\grqq} (lazily) instanziiert -- Angular instanziiert einen Service nur dann, wenn eine Komponente diesen via Dependency Injection erfordert.
+  \item Singletons -- jede Komponente, welche den Service verwendet, erhält eine Referenz zu einer einzigen Instanz des Service.
+\end{itemize}
+
+Angular \glqq{Services\grqq} können in drei verschiedene Typen von Services unterteilt werden:
+\begin{itemize}
+  \item Services
+  \item Factories
+  \item Providers
+\end{itemize}
+
+\newpage
+Die Typen unterscheiden sich in folgenden Eigenschaften:
+\begin{center}
+    \begin{tabular}{ p{9cm} | l | l | l}
+    \textbf{Eigenschaft} & \textbf{Factory} & \textbf{Service} & \textbf{Provider} \\ \hline
+    verwendet \glqq{type-friendly\grqq} Injection & Nein & Ja & Nein \\ \hline
+    verfügbar während der config-Phase & Nein & Nein & Ja \\ \hline
+    kann Funktionen/Primitive erstellen & Ja & Nein & Ja \\
+    \end{tabular}
+\end{center}
+
+Aufgrund dieser Unterschiede, werden Services verwendet, um Objekte eines BenutzerInnen-definierten Typs zu erstellen. Factories werden hingegen verwendet, um Primitive JavaScript Typen und Funktionen zu erstellen. Wenn der Service global und während der config-Phase konfigurierbar sein soll, werden Providers verwendet (config-Phase: module('App', []).config(...)).
+
+\paragraph{Das Testen eines Angular Services}
+Um einen Service in einem Test zu instanziieren zu können, muss die Dependency Injection manuell durchgeführt werden. Um dies zu erreichen wird der Angular Service \glqq{\$injector\grqq} verwendet \autocite{Angular:Injector}.
+
+\newpage
+\subsection{Zusätzliche Angular Komponenten, welche relevant für diese Arbeit sind}
+\begin{itemize}
+  \item \textbf{\$route}...\linebreak
+      ... ist laut \cite{Angular:ServiceRoute} zuständig für das Routing einer Angular Applikation. \$route verlinkt eine Route mit einer View und einem Controller. Es kann mit Hilfe des \$routeProviders während der config-Phase konfiguriert werden:
+
+      \begin{lstlisting}
+angular.module('App', []).config( function($routeProvider) {
+  $routeProvider.when('/foo', {
+    templateUrl: 'foo_template',
+    controller: 'FooCtrl'
+  });
+});
+      \end{lstlisting}
+
+  \item \textbf{\$http}...\linebreak
+      ... ist ein \glqq{... Kern-Angular Service, welcher die Kommunikation mit entfernten HTTP Servern erleichtert... \grqq} \autocite{Angular:ServiceHTTP}. Der Service nimmt als Argument ein Objekt entgegen, welches alle Informationen über den anstehenden HTTP-Request beinhaltet und liefert ein JavaScript Promise-Objekt zurück. Das Promise-Objekt verfügt über die HTTP-spezifischen Methoden \glqq{success()\grqq} und \glqq{error()\grqq}.
+
+      \begin{lstlisting}
+$http({method: 'GET', url: '/foo/bar'}).
+  success( function(data) {
+    // request was successfull
+  }).
+  error( function(data) {
+    // request failed
+  });
+      \end{lstlisting}
+
+      \paragraph{Das Testen des \$http-Services}
+      Da beim Testen kein tatsächlicher HTTP-Request abgesetzt werden soll, wird Angular mit einem Mock \glqq{\$httpBackend\grqq} ausgeliefert \autocite{Angular:MockHTTPBackend}. Dieser kann in der Test-Phase so konfiguriert werden, dass er einen spezifischen Request erwartet und einen definierten Response zurückliefert. Wenn ein Request abgesetzt wird, welcher nicht vom \$httpBackend-Mock erwartet wird, so kommt es zu einem fehlgeschlagenen Test. Wenn der erwartete Request abgesetzt wurde, wird vom Mock der definierte Response zurückgegeben und dieser kann im Test inspiziert werden.
+
+  \newpage
+  \item \textbf{\$resource}...\linebreak
+      ... ist eine \glqq{Factory, welche ein resource-Objekt erstellt und es gestattet, einfach mit einem RESTful Server zu interagieren\grqq} \autocite{Angular:ServiceResource}.
+
+      \begin{lstlisting}
+var Foo = $resource('/foo/:fooId', {fooId: '@id'});
+
+Foo.query()             // GET request to '/foo'
+Foo.save({})            // POST request to 'foo'
+Foo.get({fooId: 42})    // GET request to '/foo/42'
+Foo.delete({fooId: 42}) // DELETE request to '/foo/42'
+      \end{lstlisting}
+
+\end{itemize}
 
 \newpage
 \section{Testing Frameworks}
- - Testing Frameworks -
-
-\subsection{Karma}
- - Karma -
 
 \subsection{Jasmine}
 Jasmine ist ein Javascript Testing Framework, welches notwendige Funktionen wie Assertions, Matchers, Mocks und Spies anbietet. Es wurde prinzipiell für BDD (Begrifflichkeit) entworfen. Dies macht sich an der Benennung verschiedener Komponenten bemerkbar, zum Beispiel durch die für BDD-typische \glqq{expect\grqq}-Schreibweise für Tests (eine genauere Beschreibung von expect folgt in den nachfolgenden Kapiteln). Jasmine kann aber selbstverständlich auch für konventionelles Testen und für TDD verwendet werden. Auf der AngularJS Website wird Jasmine als Testing Framework für das Entwickeln mit dem MV*-Framework empfohlen (Quelle {AngularJS:Jasmine:2013} noch raussuchen).
@@ -877,7 +1001,7 @@ return this.actual > 10;
 \end{itemize}
 
 
-Bei den bisherigen Matchern war die Funktionalität oft einfach durch die Namensgebung erkennbar. Laut \cite[21]{Hahn} ist jedoch bei einem Matcher nicht auf den ersten Blick erkennbar, was dieser vergleichen/matchen soll.
+Bei den bisherigen Matchern war die Funktionalität oft einfach durch die Namensgebung erkennbar. Laut \cite[21]{Hahn:2013} ist jedoch bei einem Matcher nicht auf den ersten Blick erkennbar, was dieser vergleichen/matchen soll.
 
 \begin{lstlisting}[language=JavaScript]
 expect(MATH.PI).toBeCloseTo(3.1, 1); // success
