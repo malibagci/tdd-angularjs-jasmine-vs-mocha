@@ -22,9 +22,12 @@ exports.awesomeThings = function(req, res) {
 
 exports.heroes = function(req, res) {
   return HeroModel.find(function (err, heroes) {
+    console.log("ihi")
     if (!err) {
+      console.log("aha")
       return res.json(heroes);
     } else {
+      console.log("uhu")
       return res.send(err);
     }
   });

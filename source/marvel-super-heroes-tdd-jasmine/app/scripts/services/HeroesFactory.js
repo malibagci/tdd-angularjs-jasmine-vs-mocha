@@ -4,7 +4,7 @@ angular.module( 'app.services' )
   .factory( 'HeroesFactory', function HeroesFactory($resource) {
 
     var factory = {};
-    var HeroResource = $resource('/heroes/:id');
+    var HeroResource = $resource('/api/heroes/:id');
 
     factory.heroes = [];
 

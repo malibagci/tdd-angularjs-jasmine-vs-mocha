@@ -3,9 +3,12 @@
 'use strict';
 
 angular.module( 'app.services' )
-  .factory( 'MarvelSearchFactory', function MarvelSearchFactory($http) {
+  .service( 'MarvelSearchFactory', function MarvelSearchFactory($http, $rootScope) {
 
     var factory = {};
+
+    // var service = this;
+
     var apikey = "28969060faef0943a7c866a98e465269";
 
     factory.searchResults = [];
@@ -23,6 +26,7 @@ angular.module( 'app.services' )
 
       request.success( function(data) {
         factory.isSearching = false;
+        factory.reset();
         angular.forEach(data.data.results, function(result) {
           factory.searchResults.push(result);
         });

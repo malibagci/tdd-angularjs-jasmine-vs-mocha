@@ -12,6 +12,11 @@ angular.module( 'app.controllers' )
 
       $scope.addToFavorites = function(hero) {
         HeroesFactory.save(hero);
+        MarvelSearchFactory.reset();
+      };
+
+      $scope.removeFromFavorites = function(id) {
+        HeroesFactory.remove(id);
       };
 
   });

@@ -12,7 +12,7 @@ describe( 'Testing HeroesFactory Service', function() {
     $httpBackend = _$httpBackend_;
 
     // initial request fires each test (but is only tested when flush is called)
-    $httpBackend.expectGET('/heroes').respond('');
+    $httpBackend.expectGET('/api/heroes').respond('');
   }));
 
   it( 'should be present', function() {
@@ -24,7 +24,7 @@ describe( 'Testing HeroesFactory Service', function() {
     expect(HeroesFactory.heroes).toEqual(jasmine.any(Array));
   });
 
-  it( 'should make an initial request to /heroes', function() {
+  it( 'should make an initial request to /api/heroes', function() {
 
     $httpBackend.flush();
 
@@ -59,7 +59,7 @@ describe( 'Testing HeroesFactory Service', function() {
     });
 
     it( 'should make a POST Request when save is called', function() {
-      $httpBackend.expectPOST('/heroes').respond('');
+      $httpBackend.expectPOST('/api/heroes').respond('');
       HeroesFactory.save(hero);
       $httpBackend.flush();
     });
@@ -92,7 +92,7 @@ describe( 'Testing HeroesFactory Service', function() {
     });
 
     it( 'should make a DELETE Request when remove is called', function() {
-      $httpBackend.expectDELETE('/heroes/1').respond('');
+      $httpBackend.expectDELETE('/api/heroes/1').respond('');
       HeroesFactory.remove(1);
       $httpBackend.flush();
     });
