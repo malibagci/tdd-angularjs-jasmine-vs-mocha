@@ -20,6 +20,7 @@ module.exports = function(config) {
         'test/mocha.conf.js',
 
         // third party libraries
+        'node_modules/chai-spies/chai-spies.js',
         'app/bower_components/angular/angular.js',
         'app/bower_components/angular-route/angular-route.js',
         'app/bower_components/angular-mocks/angular-mocks.js',
