@@ -113,9 +113,20 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
     it( 'should set the isSearching flag to true, when search is called', 
       function() {
+
         expect(MarvelSearchFactory.isSearching).toBeFalsy();
         MarvelSearchFactory.search();
         expect(MarvelSearchFactory.isSearching).toBeTruthy();
+
+    });
+
+    it( 'should set the isSearching flag to false, when the search is finished', 
+      function() {
+        
+        expect(MarvelSearchFactory.isSearching).toBeFalsy();
+        MarvelSearchFactory.search();
+        $httpBackend.flush();
+        expect(MarvelSearchFactory.isSearching).toBeFalsy();
 
     });
 
