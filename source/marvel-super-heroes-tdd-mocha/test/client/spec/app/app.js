@@ -28,4 +28,9 @@ suite( 'Testing: App Module', function() {
       assert.ok(hasModule('app.controllers'));
   });
 
+  test( 'if the app has a registered dependency to "app.services"', 
+    function() {
+      assert.ok(hasModule('app.services'));
+  });
+
 });
