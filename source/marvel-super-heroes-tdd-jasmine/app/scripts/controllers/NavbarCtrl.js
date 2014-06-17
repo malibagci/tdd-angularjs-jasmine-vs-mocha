@@ -10,6 +10,8 @@ angular.module( 'app.controllers' )
     $scope.$watch( 'searchString', function(value) {
       if(value.length >= 4) {
         MarvelSearchFactory.search();
+      } else {
+        MarvelSearchFactory.reset();
       }
     });
 

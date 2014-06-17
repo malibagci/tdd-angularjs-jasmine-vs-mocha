@@ -52,7 +52,7 @@ describe( 'Testing NavbarCtrl Controller:', function() {
   it( 'should call "reset", when the inputString is smaller than 4 characters', 
     function() {
 
-      spyOn(MarvelSearchFactory, 'search');
+      spyOn(MarvelSearchFactory, 'reset');
 
       scope.searchString = 'Hul';
       scope.$apply();
