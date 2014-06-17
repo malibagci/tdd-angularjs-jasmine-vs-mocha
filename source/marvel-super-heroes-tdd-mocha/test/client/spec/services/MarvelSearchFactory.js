@@ -71,6 +71,15 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
       assert.lengthOf(MarvelSearchFactory.searchResults, 2);
     });
 
+    test( 'if the result of a search has a name (String), an id (Number) and ' +
+      'a thumbnail (Object)', function() {
+        MarvelSearchFactory.search();
+        $httpBackend.flush();
+        assert.isString(MarvelSearchFactory.searchResults[0].name);
+        assert.isNumber(MarvelSearchFactory.searchResults[0].id);
+        assert.isObject(MarvelSearchFactory.searchResults[0].thumbnail);
+    });
+
   });
 
 });
