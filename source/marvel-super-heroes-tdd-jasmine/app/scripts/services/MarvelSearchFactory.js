@@ -22,6 +22,7 @@ angular.module( 'app.services' )
       });
 
       request.success( function(data) {
+        factory.isSearching = false;
         angular.forEach(data.data.results, function(result) {
           factory.searchResults.push(result);
         });
