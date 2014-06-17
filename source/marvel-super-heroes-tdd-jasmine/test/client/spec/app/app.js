@@ -36,6 +36,18 @@ describe( 'Testing modules:', function() {
       expect(hasModule('ngResource')).toBeTruthy();
     });
 
+    it( 'should have a registered dependency to ngSanitize', function() {
+      expect(hasModule('ngSanitize')).toBeTruthy();
+    });
+
+    it( 'should have a registered dependency to ngAnimate', function() {
+      expect(hasModule('ngAnimate')).toBeTruthy();
+    });
+
+    it( 'should have a registered dependency to ui.bootstrap', function() {
+      expect(hasModule('ui.bootstrap')).toBeTruthy();
+    });
+
   });
 
 });
