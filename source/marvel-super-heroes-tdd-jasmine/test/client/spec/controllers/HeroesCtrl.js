@@ -7,7 +7,7 @@ describe( 'Testing HeroesCtrl Controller:', function() {
 
   beforeEach( module('marvelSuperHeroesApp') );
 
-  beforeEach( inject(function($controller, $rootScope) {
+  beforeEach( inject( function($controller, $rootScope) {
     scope = $rootScope.$new();
     HeroesCtrl = $controller( 'HeroesCtrl', {
       $scope: scope
