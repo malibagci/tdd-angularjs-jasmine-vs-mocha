@@ -9,13 +9,19 @@ module.exports = function(config) {
     autoWatch: true,
 
     // base path, that will be used to resolve files and exclude
-    basePath: '',
+    basePath: '../',
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
 
     // list of files / patterns to load in the browser
-    files: [],
+    files: [
+      // third party libraries
+      'app/bower_components/angular/angular.js',
+
+      // test-specific files
+      'test/client/spec/**/*.js'
+    ],
 
     // list of files / patterns to exclude
     exclude: [],

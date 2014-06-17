@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('marvelSuperHeroesApp', []);
+// angular.module('marvelSuperHeroesApp', []);
