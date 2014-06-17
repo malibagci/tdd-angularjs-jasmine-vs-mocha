@@ -1265,8 +1265,156 @@ Die folgende Liste von verfügbar Assertions bezieht sich auf \cite{Chai:Assert}
 \end{itemize}
 
 \newpage
-\subsection{Gegenüberstellung}
- - Gegenüberstellung -
+\section{Gegenüberstellung - Die Marvel Super Heroes Applikation}
+\label{Gegenüberstellung}
+ Die Gegenüberstellung der Frameworks \glqq{Jasmine\grqq} und \glqq{Mocha\grqq} erfolgt durch einen praktischen Vergleich. Eine Applikation wurde zwei mal mit identischen Anforderungen test-driven mit AngularJS und dem jeweiligem Testing Framework entwickelt.
+
+ \subsection{Anforderungen}
+ Die Applikation \glqq{Marvel Super Heroes\grqq} soll folgende Features erfüllen:
+ \begin{enumerate}
+   \item Das Suchen nach Charakteren aus dem Marvel Comic Universum und das Darstellen eines gefundenen Charakters soll möglich sein.
+   \item Das Hinzufügen eines Charakters zu persistenten Favoriten soll möglich sein.
+   \item Das Entfernen eines Charakters aus persistenten Favoriten soll möglich sein.
+ \end{enumerate}
+
+ \subsection{Setup}
+ Die Applikation wurde mit dem Yeoman Generator \glqq{generator-angular-fullstack\grqq} erstellt. Dieser beinhaltet unter anderem folgende Basis-Komponenten:
+ \begin{itemize}
+   \item Ein Basis AngularJS Setup mit einer Standardkonfiguration.
+   \item Ein Basis Express(link) Setup für das Node Backend.
+   \item Ein Beispiel-Mongoose(link)-Schema für das Arbeiten mit einer MongoDB(link) Datenbank.
+   \item Eine standard Testkonfiguration und Beispiel-Testeinträge für Frontend- sowie Backend-Tests (Standardmäßig mit Karma und Jasmine).
+   \item Ein Bower(link)-File für die Frontend-Ressourcen.
+   \item Ein package.json-File für die Node-Ressourcen(link).
+   \item Ein bootstrap Paket für Standard-Styleeigenschaften.
+   \item Ein Gruntfile mit vorkunfigurierten Tasks (zum Beispiel \glqq{grunt serve\grqq} oder \glqq{grunt test\grqq}).
+ \end{itemize}
+
+ Das Setup für beide Varianten der Applikation wurde mit diesem Generator erstellt. Bei der Variante für TDD mit Mocha wurde die Testkonfiguration angepasst (von Jasmine auf Mocha und Chai).
+
+ Um die fertigen Applikationen sowie die Tests starten beziehungsweise ausführen zu können, muss das in der Einleitung angeführte Github-Repository geklont werden. Anschließend muss in den Verzeichnissen der einzelnen Applikationen die Befehle \glqq{npm install\grqq} und \glqq{bower install\grqq} ausgeführt werden.
+
+ \subsection{Voraussetzungen}
+ \begin{itemize}
+   \item NodeJS und npm (link) müssen auf dem Betriebssystem vorhanden sein.
+   \item grunt-cli muss global vorhanden sein.
+   \item MongoDB muss global vorhanden und gestartet sein.
+ \end{itemize}
+
+ \subsection{Struktur}
+
+ \dirtree{%
+  .1 source/marvel-super-heroes-tdd-*.
+  .2 app.
+  .3 bower\_components\DTcomment{notwendigen Frontend Libs (z.B. Angular)}.
+  .3 fonts\DTcomment{Iconfont für Bootstrap}.
+  .3 scripts.
+  .4 app.js\DTcomment{Angular-Konfiguration (Abhängigkeiten, Routen)}.
+  .4 controllers.
+  .4 services\DTcomment{Angular-Services}.
+  .3 styles\DTcomment{Eigene Styles}.
+  .3 views.
+  .4 404.html.
+  .4 index.html\DTcomment{Layout, in welches die Partials geladen werden}.
+  .4 partials\DTcomment{Partials für die einzelnen Seiten}.
+  .2 bower.json.
+  .2 Gruntfile.js.
+  .2 lib\DTcomment{beinhaltet die Konfiguration für Express (inklusive Routen) für die API und für die Mongoose Anbindung an MongoDB}.
+  .2 node\_modules.
+  .2 package.json.
+  .2 server.js.
+  .2 test.
+  .3 client.
+  .4 spec\DTcomment{alle relevanten Tests, welche während TDD enstanden sind}.
+  .3 karma.conf.js\DTcomment{Karma Konfiguration für Tests (Framework, Browser)}.
+  .3 server\DTcomment{mögliche Express und API Tests, irrelevant für das Thema}.
+  }
+
+\subsection{Marvel Comics API \& Express Backend}
+Die Marvel Comics API bietet gratis 3000 mögliche Requests pro Tag an. Sie beinhlatet Charaktere, Comics, Stories, Events und Series. Der eigene API-Schlüssel kann unter \glqq{http://developer.marvel.com/\grqq} angefordert werden.
+
+Ein HTTP-GET Request auf diese API setzt sich wie folgt zusammen:
+\begin{itemize}
+  \item API-URL: \textit{http://gateway.marvel.com:80/v1/public/characters}
+  \item Limit: \textit{limit=<limit>}
+  \item Suchparameter: \textit{<suchtyp>=<suchwert>}
+  \item Api-Key: \textit{apikey=<apikey>}
+\end{itemize}
+
+Beispiels-Request um nach einem Charakter zu suchen, dessen Name mit \glqq{Hulk\grqq} anfängt:
+\begin{lstlisting}
+  HTTP-GET Request: http://gateway.marvel.com:80/v1/public/characters?limit=20&nameStartsWith=Hulk&apikey=<apikey>
+\end{lstlisting}
+
+Der Response ist folgendermaßen aufgebaut:
+\begin{lstlisting}
+  {
+    "code": 200,
+    "status": "Ok",
+    "copyright": "\copyright 2014 MARVEL",
+    "attributionText": "Data provided by Marvel. \copyright 2014 MARVEL",
+    "attributionHTML": "<a href=\"http://marvel.com\">Data provided by Marvel. \copyright 2014 MARVEL</a>",
+    "etag": "c9b59bef911704028559e3c27c2b835eff7a3ad8",
+    "data": {
+      "offset": 0, "limit": 20, "total": 9, "count": 9,
+      "results": [
+        {
+          "id": 0, "name": "", "description": "...", "modified": "",
+          "thumbnail": {
+            "path": "",
+            "extension": ""
+          },
+          "resourceURI": "",
+          "comics": { ... },
+          "series": { ... },
+          "stories": { ... },
+          "events": { ... },
+          "urls": [ ... ]
+        },
+        ...
+      ]
+    }
+  }
+\end{lstlisting}
+
+Das Express Backend der Marvel Super Heroes Applikation bietet einen Restfull \glqq{Heroes\grqq} Service an, welcher die Daten in eine MongoDB Datenbank speichert, beziehungsweise von einer MongoDB Datenbank ausliest.
+\begin{itemize}
+  \item \textit{GET Request \glqq{/api/heroes\grqq}} - gibt eine Liste aller gespeicherten Heroes zurück.
+  \item \textit{GET Request \glqq{/api/heroes/:id\grqq}} - gibt einen spezifischen Hero anhand der ID zurück.
+  \item \textit{POST Request \glqq{/api/heroes\grqq}} - speichert einen neuen Hero.
+  \item \textit{DELETE Request \glqq{/api/heroes/:id\grqq}} - löscht einen spezifischen Hero anhand der ID.
+  % \item \textit{PUT Request \glqq{nicht definiert\grqq}} - wird für dieses Beispiel nicht benötigt.
+\end{itemize}
+
+\subsection{Starten \& Testen}
+Die Applikation wird mit dem Kommando \glqq{grunt serve\grqq} im jeweiligen Applikations-Root gestartet. Dieses Kommando startet den Express Server auf dem Port 9000 und öffnet anschließend die Applikation im Standard-Browser des Betriebssystems.
+
+Mit dem Befehl \glqq{grunt test:client\grqq} werden alle Tests ausgeführt. Dieser Grunt Task verwendet die Konfigurationsdatei \glqq{test/karma.conf.js\grqq}.
+Die Testkonfiguration beinhaltet in beiden Varianten der Applikation:
+\begin{itemize}
+  \item \textit{browsers: ['PhantomJS']} - definiert, in welchen Browsern getestet werden soll. PhantomJS ist ein headless Browser.
+  \item \textit{files: []} - beinhaltet alle notwendigen Dateien (3rd Party Libraries, zu testende Code Dateien und Test Dateien).
+  \item \textit{singleRun: false} sowie \textit{autoWatch: true} - mit dieser Konfiguration lässt Karma die Testsitzung offen nachdem alle Tests abgeschlossen wurden. Sobald es Änderungen in den betreffenden Dateien gibt, werden alle Tests erneut durchgeführt.
+\end{itemize}
+
+\paragraph{Anmerkung zu Karma}
+Die Konfiguration von \glqq{singleRun\grqq} und \glqq{autoWatch\grqq} passt sehr gut zum Entwicklungsprozess von TDD. Egal ob die Tests in einer IDE (Integrated Development Environment) oder in einem Terminal laufen, sobald es Änderungen an einer beteiligten Datei gibt, werden sofort alle Tests ausgeführt und Feedback (rot/grün) dargestellt.
+
+\subsection{Sonstiges}
+Die Applikationen wurden mit GitHubs Code-Editor \glqq{Atom\grqq} (https://atom.io) auf der Linux Distribution \glqq{Ubuntu 14.04 Trusty Tahr 64bit\grqq} entwickelt. Während des Entwicklungsprozesses liefen bei jeder Änderung die Tests im Linux Terminal parallel zum Code-Editor.
+
+Es wurden die Regeln des TDD-Prozesses eingehalten:
+\begin{itemize}
+  \item Es wurde keine Zeile Code implementiert, ohne dass ein Test diese forderte.
+  \item Es wurden kurze Iterationen zwischen den Rot- und Grün-Phasen eingehalten.
+  \item Es wurden bei jeder Änderung alle Tests durchlaufen.
+\end{itemize}
+
+\subsection{Jasmine}
+
+\newpage
+\subsection{Mocha}
+
 \newpage
 \section{Conclusio}
  - Conclusio -
