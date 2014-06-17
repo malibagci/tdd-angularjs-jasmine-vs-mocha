@@ -12,10 +12,13 @@ module.exports = function(config) {
     basePath: '../',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'chai'],
 
     // list of files / patterns to load in the browser
     files: [
+        // configure mocha to use tdd
+        'test/mocha.conf.js',
+
         // third party libraries
         'app/bower_components/angular/angular.js',
         'app/bower_components/angular-mocks/angular-mocks.js',
@@ -27,9 +30,6 @@ module.exports = function(config) {
         'test/client/spec/**/*.js'
 
     ],
-
-    // list of files / patterns to exclude
-    exclude: [],
 
     // web server port
     port: 8080,
@@ -49,7 +49,8 @@ module.exports = function(config) {
     // Which plugins to enable
     plugins: [
       'karma-phantomjs-launcher',
-      'karma-mocha'
+      'karma-mocha',
+      'karma-chai'
     ],
 
     // Continuous Integration mode
