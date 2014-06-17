@@ -3,8 +3,12 @@
 'use strict';
 
 angular.module( 'app.controllers' )
-  .controller( 'NavbarCtrl', function($scope) {
+  .controller( 'NavbarCtrl', function($scope, MarvelSearchFactory) {
 
-    $scope.searchString = "";
+    $scope.searchString = '';
+
+    $scope.$watch( 'searchString', function(value) {
+      MarvelSearchFactory.search();
+    });
 
   });
