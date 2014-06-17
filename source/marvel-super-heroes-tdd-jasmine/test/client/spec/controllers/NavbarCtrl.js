@@ -30,10 +30,22 @@ describe( 'Testing NavbarCtrl Controller:', function() {
 
       spyOn(MarvelSearchFactory, 'search');
 
-      scope.searchString = "Hulk";
+      scope.searchString = 'Hulk';
       scope.$apply();
 
       expect(MarvelSearchFactory.search).toHaveBeenCalled();
+
+  });
+
+  it( 'should only call search, when the inputString is greater equal 4 ' + 
+    'characters', function() {
+
+      spyOn(MarvelSearchFactory, 'search');
+
+      scope.searchString = 'Hul';
+      scope.$apply();
+
+      expect(MarvelSearchFactory.search).not.toHaveBeenCalled();
 
   });
 
