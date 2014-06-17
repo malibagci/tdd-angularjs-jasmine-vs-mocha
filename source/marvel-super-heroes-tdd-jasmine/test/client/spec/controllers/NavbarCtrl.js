@@ -49,4 +49,16 @@ describe( 'Testing NavbarCtrl Controller:', function() {
 
   });
 
+  it( 'should call "reset", when the inputString is smaller than 4 characters', 
+    function() {
+
+      spyOn(MarvelSearchFactory, 'search');
+
+      scope.searchString = 'Hul';
+      scope.$apply();
+
+      expect(MarvelSearchFactory.reset).toHaveBeenCalled();
+
+  });
+
 });
