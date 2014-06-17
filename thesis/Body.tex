@@ -1137,16 +1137,134 @@ describe("Spying on an ajax callback", function() {
 \paragraph{jasmine.createSpy \& jasmine.createSpyObj}
 Wenn spyOn verwendet wird, wird immer eine bestehende Funktion oder ein bestehendes Objekt mit einem Spy ersetzt. Jasmine bietet zusätzlich die Möglichkeit, auch ohne bereits existierenden Funktionen oder Objekten, Spies zu erstellen. Mit \glqq{jasmine.createSpy\grqq} für Funktionen und vice versa mit \glqq{jasmine.createSpyObj\grqq} für Objekte.
 
+\newpage
 \subsection{Mocha}
- - Mocha -
+Mocha ist das zweite JavaScript Testing Framework, mit welchem in dieser Arbeit eine AngularJS Applikation test-driven entwickelt wird. Die Flexiblität Mochas wird auf der offiziellen Webseite des Testing Frameworks \glqq{http://visionmedia.github.io/mocha/\grqq} betont. Die folgenden Kapitel erläutern die Flexiblität des Frameworks und die damit-einhergehenden Unterschiede zu Jasmine.
 
-\subsubsection{Hintergründe}
- - Hintergründe -
-\subsubsection{Funktionen}
- - Funktionen -
-\subsubsection{Testen von asynchronem Javascript}
- - Testen von asynchronem Javascript -
+\subsubsection{Interfaces}
+Mocha erlaubt die Auswahl eines Testing Interfaces. Damit ist der Stil, in welchem die Tests verfasst werden gemeint. Jasmine gibt den Stil \glqq{BDD\grqq} vor. Folgende Interfaces sind bei Mocha verfügbar:
+\begin{itemize}
+  \item BDD (describe(), it(), beforeEach(), afterEach())
+  \item TDD (suite(), test(), setup(), teardown())
+  \item exports (mit den Keys 'before' und 'after' -- Objekte als Keys sind Suites und Funktionen als Keys sind Tests)
+\end{itemize}
 
+Die Syntax für eine Mocha Test-Suite mit dem TDD-Stil sieht wie folgt aus:
+\begin{lstlisting}
+
+suite('My Test-Suite', function() {
+
+  setup( function() {
+    // initialize test relevant objects (mocks, etc)
+  });
+
+  test( 'some component to do something' ,function() {
+    // do the actual test
+  });
+
+  teardown( function() {
+    // reset test relevant objects for the next test
+  });
+
+});
+
+\end{lstlisting}
+
+\subsubsection{Matcher}
+Anders als bei Jasmine wird Mocha nicht mit einer vordefinierten Assertion-Bibliothek oder Matchern ausgeliefert. Es erlaubt der/m EntwicklerIn sich selbst für eine Bibliothek zu entscheiden. Für diesen Zweck können entweder die Standard-Assertions von NodeJS verwendet werden, oder eine der folgenden Bibliotheken:
+
+\begin{itemize}
+  \item should.js (https://github.com/visionmedia/should.js)
+  \item Chai (http://chaijs.com/)
+  \item expect.js (https://github.com/LearnBoost/expect.js/)
+  \item better-assert (https://github.com/visionmedia/better-assert)
+\end{itemize}
+
+Es ist zwar für das Testen von AngularJS Applikationen nicht zwingend erforderlich, eine dieser Bibliotheken zu verwenden, es werden jedoch im praktischen Teil dieser Arbeit die zuvor erläuterten \glqq{Spies\grqq} verwendet. Dies wäre mit Mocha alleine nicht möglich \autocite{Mocha:Spies}. Es wird empfohlen eine Bibliothek für diese Zwecke zu verwenden.
+
+Für diese Arbeit wird Mocha mit der Bibliothek Chai verwendet, denn diese verfügt über Assertions/Matcher im TDD-Stil und über ist erweiterbar um ein Modul, welches die Verwendung von Spies ermöglicht.
+
+\subsubsection{Chai}
+Chai zielt ähnlich wie Mocha auf Flexiblität ab. Es verfügt über mehrere Assertion Stile, welche passend zum gewählten Interface von Mocha ausgewählt werden können.
+Verfügbar sind:
+\begin{itemize}
+  \item Assert
+  \item BDD
+  \begin{itemize}
+    \item Expect
+    \item Should
+  \end{itemize}
+\end{itemize}
+
+Das Mocha Interface BDD in Kombination mit dem Chai Assertion Stil BDD-Expect ist syntaktisch  sehr ähnlich wie Jasmine. Für diese Arbeit ist die richtige Auswahl das Mocha Interface TDD und der Assertion Stil Assert.
+
+\paragraph{Assert}
+Dieser Chai Assertion Stil ähnelt sehr dem Standard NodeJS-Assertion-Stil, wurde jedoch um Assert-Funktionalität erweitert und ist \glqq{Browser-Kompatibel\grqq} \autocite{Chai:AssertBrowser}.
+
+Dieses Kapitel ist das Mocha-Chai Äquivalent zu dem Kapitel \glqq{Jasmine -- Matcher\grqq}. Anders als den Matchern von Jasmine oder anderen Assertion Stilen (BDD-Expect/BDD-Should) ist Assert der einzige Stil, in welchem die Assertions nicht \glqq{chainable\grqq} -- also nicht aneinander kettbar -- sind. Es ist jedoch bei jeder Assertion optional möglich eine Nachricht als Argument mitzugeben.
+
+Alle Asserts dieses Moduls entsprechen folgender Syntax.
+\begin{lstlisting}
+
+var assert = require('chai').assert;
+var foo = 'foo'; // object to be tested
+var bar = 'bar'; // object to be compared with
+
+assert.typeOf(foo, 'string', 'optional message: foo is a string'); // success
+assert.notTypeOf(foo, 'number'); // success
+
+assert.equal(foo, bar); // failure
+assert.notEqual(foo, bar); // success
+
+\end{lstlisting}
+
+Die folgende Liste von verfügbar Assertions bezieht sich auf \cite{Chai:Assert}. Da dieser Stil nicht chainable ist, gibt es -- anders als bei Jasmine -- nicht die Möglichkeit eine \glqq{not()\grqq} Funktion vorzustellen. Das bedeutet weiters, dass jede der folgenden Assertions über eine gegenteilige Assertion verfügt.
+
+\begin{itemize}
+  \item \textbf{assert(expression, message)} -- ermöglicht es, eigene Test-Ausdrücke zu verfassen.
+
+  \item \textbf{assert.ok/notOk} -- evaluiert, ob ein übergebenes Objekt true, beziehungsweise false ist.
+  
+  \item \textbf{assert.equal/notEqual} -- überprüft nicht-strikte Gleichheit zweier übergebener Objekte (\glqq{==\grqq}/\glqq{!=\grqq})
+  
+  \item \textbf{assert.strictEqual/notStrictEqual} -- überprüft strikte Gleichheit (\glqq{===\grqq}/\glqq{!==\grqq}).
+  
+  \item \textbf{assert.deepEqual/notDeepEqual} -- Da .equal und .strictEqual direkt auf den JavaScript Operator == beziehungsweise === beruhen, ist es mit ihnen nur möglich die Typen number, string, boolean, null oder undefined zu vergleichen. Bei Arrays oder anderen Objekten wird nur die Referenz verglichen und somit eventuell ein unerwünschter Fehler hervorgerufen, wenn es sich nicht um die gleiche Referenz handelt. deepEqual/notDeepEqual kann verwendet werden, um Arrays und andere Objekt zu vergleichen.
+  
+  \item \textbf{assert.isTrue/isFalse} -- evaluiert, ob ein übergebener Wert true/false ist.
+  
+  \item \textbf{Typ-Assertions}
+  \begin{itemize}
+    \item \textbf{isNull/isNotNull} und \textbf{isDefined/isUndefined}
+    \item \textbf{isObject/isNotObject}, \textbf{isArray/isNotArray} und \textbf{isFunction/isNotFunction}
+    \item \textbf{isNumber/isNotNumber}, \textbf{isString/isNotString} und \textbf{isBoolean/isNotBoolean}
+    \item \textbf{typeOf/notTypeOf} -- überprüft ob ein übergebenes Objekt einem übergebenem Typ entspricht. Der übergebene Typ (beispielsweise 'string') wird nach 'Object.prototype.x' (beispielsweise 'Object.prototype.string') aufgelöst.
+    \item \textbf{instanceOf/notInstanceOf} -- überprüft ob ein der Typ eines übergebenen Objekts einem übergebenem Konstruktor entspricht.
+  \end{itemize}
+  
+  \item \textbf{include/notInclude} -- evaluiert, ob ein übergebener Eintrag/Charakter in einem übergebenem Array/String vorhanden ist.
+  
+  \item \textbf{match/notMatch} -- ermöglicht eine Überprüfung auf eine Regaular Expression.
+  
+  \item \textbf{property/notProperty} -- überprüft, ob ein übergebenes Objekt über eine spezielle Property verfügt.
+  
+  \item \textbf{deepProperty/notDeepProperty} -- ermöglicht es, Properties von verschachtelten Objekten zu überprüfen.
+  
+  \item \textbf{propertyVal/propertyNotVal} und \textbf{deepPropertyVal/deepPropertyNotVal}
+  
+  \item \textbf{lengthOf}
+  
+  \item \textbf{throws/doesNotThrow} -- evaluiert, ob eine übergebene Funktion einen Error wirft, oder nicht. Es ist möglich, auf einen spezifischen Error zu überprüfen (beispielsweise auf einen \glqq{ReferenceError\grqq}).
+  
+  \item \textbf{operator} -- vergleicht zwei Werte aufgrund eines übergebenen Operators (\glqq{<\grqq}, \glqq{>\grqq}, ...).
+  
+  \item \textbf{closeTo} -- überprüft, ob sich ein Wert nahe zu einem anderen befindet. Die Nähe wird über eine übergebene Delta-Reichweite definiert.
+  
+  \item \textbf{sameMembers/includeMembers} -- evaluiert, ob zwei Arrays die gleichen Einträge enthalten, beziehungsweise ob ein Array ein Subset eines anderen enthält.
+  
+\end{itemize}
+
+\newpage
 \subsection{Gegenüberstellung}
  - Gegenüberstellung -
 \newpage
