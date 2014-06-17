@@ -61,4 +61,15 @@ describe( 'Testing NavbarCtrl Controller:', function() {
 
   });
 
+  it( 'should call "search" with a given string', function() {
+
+    spyOn(MarvelSearchFactory, 'search');
+
+      scope.searchString = 'Hulk';
+      scope.$apply();
+
+      expect(MarvelSearchFactory.search).toHaveBeenCalledWith('Hulk');
+
+  });
+
 });
