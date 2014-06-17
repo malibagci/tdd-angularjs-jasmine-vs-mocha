@@ -86,6 +86,16 @@ describe( 'Testing HeroesCtrl Controller:', function() {
 
     });
 
+    it( 'should call the save function of the HeroesFactory on addToFavorites', 
+      function() {
+
+        spyOn(HeroesFactory, 'save');
+        scope.addToFavorites();
+
+        expect(HeroesFactory.save).toHaveBeenCalled();
+
+    });
+
   });
 
 });
