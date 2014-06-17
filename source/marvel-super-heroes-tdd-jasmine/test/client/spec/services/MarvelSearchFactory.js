@@ -95,6 +95,17 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
           .toEqual(jasmine.any(Object));
     });
 
+    it( 'should reset the searchResults when reset has been called', 
+      function() {
+
+        MarvelSearchFactory.search();
+        $httpBackend.flush();
+        expect(MarvelSearchFactory.searchResults.length).toEqual(2);
+        MarvelSearchFactory.reset();
+        expect(MarvelSearchFactory.searchResults.length).toEqual(0);
+
+    });
+
 
   });
 
