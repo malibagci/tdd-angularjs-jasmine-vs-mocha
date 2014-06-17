@@ -87,6 +87,19 @@ describe( 'Testing HeroesFactory Service', function() {
 
     });
 
+    it( 'should make a DELETE Request when remove is called', function() {
+
+      var $httpBackend;
+      inject( function(_$httpBackend_) {
+        $httpBackend = _$httpBackend_;
+        $httpBackend.expectDELETE('/heroes/1').respond('');
+      });
+
+      HeroesFactory.remove(1);
+      $httpBackend.flush();
+
+    });
+
   });
 
 });
