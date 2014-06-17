@@ -7,5 +7,6 @@ angular.module( 'app.controllers' )
 
     $scope.searchResults = MarvelSearchFactory.searchResults;
     $scope.isSearching = MarvelSearchFactory.isSearching;
+    $scope.heroes = [];
 
   });
