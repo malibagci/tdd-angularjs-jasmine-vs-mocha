@@ -24,4 +24,46 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
     assert.isFunction(MarvelSearchFactory.search);
   });
 
+  suite( 'Searching:', function() {
+
+    var $httpBackend;
+
+    setup( inject(function(_$httpBackend_) {
+      $httpBackend = _$httpBackend_;
+
+      var apikey = '28969060faef0943a7c866a98e465269';
+      var requestURI = 'http://gateway.marvel.com:80/v1/public/characters';
+      requestURI += '?limit=20&nameStartsWith=Hulk&apikey=' + apikey;
+
+      $httpBackend.expectGET(requestURI).respond({
+        data: {
+          results: [
+            {
+              id: 1,
+              name: 'Hulk',
+              thumbnail: {
+                path: 'path_to_thumbnail',
+                extension: 'extension_of_thumbnail'
+              }
+            },
+            {
+              id: 2,
+              name: 'Hulkling',
+              thumbnail: {
+                path: 'path_to_thumbnail',
+                extension: 'extension_of_thumbnail'
+              }
+            }
+          ]
+        }
+      });
+    }));
+
+    test( 'if it makes a HTTP-GET request when search is called', function() {
+      MarvelSearchFactory.search();
+      $httpBackend.flush();
+    });
+
+  });
+
 });
