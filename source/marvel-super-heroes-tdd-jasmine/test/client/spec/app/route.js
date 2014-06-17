@@ -2,18 +2,25 @@
 
 describe( 'Testing routes:', function() {
 
+  var $route;
+
   beforeEach( function() {
     module( 'marvelSuperHeroesApp' );
+    inject( function(_$route_) {
+      $route = _$route_
+    });
   });
 
   describe( 'Testing root route:', function() {
 
     it( 'should have a working root path route', function() {
-      inject( function($route) {
-        expect($route.routes['/']).toBeDefined();
-      });
+      expect($route.routes['/']).toBeDefined();
     });
-  
+
+    it( 'should have a the correct templateUrl ("partial/heroes")', function() {
+      expect($route.routes['/'].templateUrl).toEqual('partial/heroes');
+    });
+
   });
 
 
