@@ -3,12 +3,13 @@
 'use strict';
 
 angular.module( 'app.controllers' )
-  .controller( 'HeroesCtrl', function($scope, MarvelSearchFactory) {
+  .controller( 'HeroesCtrl', function($scope, MarvelSearchFactory, 
+    HeroesFactory) {
 
-    $scope.searchResults = MarvelSearchFactory.searchResults;
-    $scope.isSearching = MarvelSearchFactory.isSearching;
-    $scope.heroes = [];
+      $scope.searchResults = MarvelSearchFactory.searchResults;
+      $scope.isSearching = MarvelSearchFactory.isSearching;
+      $scope.heroes = HeroesFactory.heroes;
 
-    $scope.addToFavorites = function() {};
+      $scope.addToFavorites = function() {};
 
   });
