@@ -5,6 +5,7 @@ angular.module( 'app.services', [] );
 
 angular.module('marvelSuperHeroesApp', [
   'ngRoute',
+  'ngResource',
   'app.controllers',
   'app.services'
 ]).config( function($routeProvider) {

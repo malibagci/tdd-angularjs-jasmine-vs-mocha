@@ -18,8 +18,9 @@ module.exports = function(config) {
     files: [
       // third party libraries
       'app/bower_components/angular/angular.js',
-      'app/bower_components/angular-mocks/angular-mocks.js',
+      'app/bower_components/angular-resource/angular-resource.js',
       'app/bower_components/angular-route/angular-route.js',
+      'app/bower_components/angular-mocks/angular-mocks.js',
 
       // app-specific files
       'app/scripts/**/*.js',
