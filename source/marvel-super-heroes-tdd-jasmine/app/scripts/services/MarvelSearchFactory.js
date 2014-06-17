@@ -11,14 +11,14 @@ angular.module( 'app.services' )
     factory.searchResults = [];
     factory.isSearching = false;
 
-    factory.search = function() {
+    factory.search = function(value) {
 
       factory.isSearching = true;
 
       var request = $http({
         method: 'GET',
         url: 'http://gateway.marvel.com:80/v1/public/characters?' +
-          'limit=20' + '&nameStartsWith=Hulk' + '&apikey=' + apikey
+          'limit=20' + '&nameStartsWith=' + value + '&apikey=' + apikey
       });
 
       request.success( function(data) {

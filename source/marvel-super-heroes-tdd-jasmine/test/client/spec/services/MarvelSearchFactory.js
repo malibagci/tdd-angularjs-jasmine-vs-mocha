@@ -72,7 +72,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
     it( 'should make a GET Request if search is called', function() {
 
-      MarvelSearchFactory.search();
+      MarvelSearchFactory.search('Hulk');
       $httpBackend.flush();
 
     });
@@ -81,7 +81,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
       function() {
 
         expect(MarvelSearchFactory.searchResults.length).toEqual(0);
-        MarvelSearchFactory.search();
+        MarvelSearchFactory.search('Hulk');
         $httpBackend.flush();
         expect(MarvelSearchFactory.searchResults.length).toEqual(2);
 
@@ -90,7 +90,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
     it( 'should have results with names, ids and thumbnails after searching',
       function() {
 
-        MarvelSearchFactory.search();
+        MarvelSearchFactory.search('Hulk');
         $httpBackend.flush();
         expect(MarvelSearchFactory.searchResults[0].name)
           .toEqual(jasmine.any(String));
@@ -103,7 +103,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
     it( 'should reset the searchResults when reset has been called', 
       function() {
 
-        MarvelSearchFactory.search();
+        MarvelSearchFactory.search('Hulk');
         $httpBackend.flush();
         expect(MarvelSearchFactory.searchResults.length).toEqual(2);
         MarvelSearchFactory.reset();
@@ -115,7 +115,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
       function() {
 
         expect(MarvelSearchFactory.isSearching).toBeFalsy();
-        MarvelSearchFactory.search();
+        MarvelSearchFactory.search('Hulk');
         expect(MarvelSearchFactory.isSearching).toBeTruthy();
 
     });
@@ -124,7 +124,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
       function() {
         
         expect(MarvelSearchFactory.isSearching).toBeFalsy();
-        MarvelSearchFactory.search();
+        MarvelSearchFactory.search('Hulk');
         $httpBackend.flush();
         expect(MarvelSearchFactory.isSearching).toBeFalsy();
 
