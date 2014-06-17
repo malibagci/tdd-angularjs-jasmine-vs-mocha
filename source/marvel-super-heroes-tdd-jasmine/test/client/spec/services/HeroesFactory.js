@@ -45,4 +45,13 @@ describe( 'Testing HeroesFactory Service', function() {
 
   });
 
+  describe( 'Remove a hero', function() {
+
+    it( 'should hold a "save" function', function() {
+      expect(HeroesFactory.remove).toBeDefined();
+      expect(HeroesFactory.remove).toEqual(jasmine.any(Function));
+    });
+
+  });
+
 });
