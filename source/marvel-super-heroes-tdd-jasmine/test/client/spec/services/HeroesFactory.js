@@ -21,6 +21,19 @@ describe( 'Testing HeroesFactory Service', function() {
 
   describe('Save a hero:', function() {
 
+    var hero;
+
+    beforeEach( function() {
+      hero = {
+        id: 1,
+          name: 'Hulk',
+          thumbnail: {
+            path: 'path_to_thumbnail',
+            extension: 'extension_of_thumbnail'
+          }
+      };
+    });
+
     it( 'should hold a "save" function', function() {
       expect(HeroesFactory.save).toBeDefined();
       expect(HeroesFactory.save).toEqual(jasmine.any(Function));
@@ -29,17 +42,21 @@ describe( 'Testing HeroesFactory Service', function() {
     it( 'should push a given hero when "save" is called', function() {
 
       expect(HeroesFactory.heroes.length).toEqual(0);
+      HeroesFactory.save(hero);
+      expect(HeroesFactory.heroes.length).toEqual(1);
 
-      HeroesFactory.save({
-        id: 1,
-          name: 'Hulk',
-          thumbnail: {
-            path: 'path_to_thumbnail',
-            extension: 'extension_of_thumbnail'
-          }
+    });
+
+    it( 'should make a POST Request when save is called', function() {
+
+      var $httpBackend;
+      inject( function(_$httpBackend_) {
+        $httpBackend = _$httpBackend_;
+        $httpBackend.expectPOST('/heroes').respond('');
       });
 
-      expect(HeroesFactory.heroes.length).toEqual(1);
+      HeroesFactory.save(hero);
+      $httpBackend.flush();
 
     });
 
