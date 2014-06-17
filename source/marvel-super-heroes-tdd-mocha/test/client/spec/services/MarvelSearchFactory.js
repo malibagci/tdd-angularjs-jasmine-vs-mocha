@@ -14,4 +14,9 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
     assert.isDefined(MarvelSearchFactory);
   });
 
+  test( 'if it holds a searchResults array', function() {
+    assert.isDefined(MarvelSearchFactory.searchResults);
+    assert.isArray(MarvelSearchFactory.searchResults);
+  });
+
 });
