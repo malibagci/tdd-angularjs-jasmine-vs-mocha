@@ -8,6 +8,8 @@ angular.module( 'app.services' )
 
     factory.heroes = [];
 
+    factory.heroes = HeroResource.query();
+
     factory.save = function(hero) {
       factory.heroes.push(hero);
       HeroResource.save(hero);
