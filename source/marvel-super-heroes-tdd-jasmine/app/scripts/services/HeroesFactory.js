@@ -14,6 +14,7 @@ angular.module( 'app.services' )
     };
 
     factory.remove = function(id) {
+      HeroResource.delete({id: id});
       angular.forEach(factory.heroes, function(hero, index) {
         if(hero.id === id) {
           factory.heroes.splice(index, 1);
