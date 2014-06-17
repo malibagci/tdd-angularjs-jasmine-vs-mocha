@@ -14,4 +14,9 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
     expect(MarvelSearchFactory).toBeDefined();
   });
 
+  it( 'should hold a searchResults array', function() {
+    expect(MarvelSearchFactory.searchResults).toBeDefined();
+    expect(MarvelSearchFactory.searchResults).toEqual(jasmine.any(Array));
+  });
+
 });
