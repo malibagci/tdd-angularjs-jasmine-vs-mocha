@@ -18,11 +18,6 @@ suite( 'Testing NavbarCtrl Controller:', function() {
     assert.isDefined(NavbarCtrl);
   });
 
-  test( 'if the scope holds a "searchResults" array', function() {
-    assert.isDefined(scope.searchResults);
-    assert.isArray(scope.searchResults);
-  });
-
   test( 'if the scope holds a "searchString" string', function() {
     assert.isDefined(scope.searchString);
     assert.isString(scope.searchString);
