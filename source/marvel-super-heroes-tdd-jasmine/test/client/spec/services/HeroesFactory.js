@@ -16,7 +16,7 @@ describe( 'Testing HeroesFactory Service', function() {
 
   it( 'should hold a "heroes" array', function() {
     expect(HeroesFactory.heroes).toBeDefined();
-    expect(HeroesFactory.heroes).toEqual(jasmine.Array);
+    expect(HeroesFactory.heroes).toEqual(jasmine.any(Array));
   });
 
 });
