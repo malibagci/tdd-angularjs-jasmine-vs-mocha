@@ -4,6 +4,7 @@ angular.module('marvelSuperHeroesApp', [
   'ngRoute'
 ]).config( function($routeProvider) {
   $routeProvider.when('/', {
-    templateUrl: 'partials/heroes'
+    templateUrl: 'partials/heroes',
+    controller: 'HeroesCtrl'
   });
 });
