@@ -10,9 +10,9 @@ angular.module('marvelSuperHeroesApp')
 
     this.resetService = function() {
       this.hero = HeroesService.get($routeParams.id);
-      this.comics = [];
-      this.events = [];
-      this.series = [];
+      this.comics.length = 0;
+      this.events.length = 0;
+      this.series.length = 0;
     };
 
     this.setRandomItemsByType = function(type, amount) {
@@ -47,14 +47,11 @@ angular.module('marvelSuperHeroesApp')
           itemData.$promise.then( function(data) {
             if(!data.notAvailable) {
               // item is available in db
-              console.log("item is available; no api call;")
               service[type].push(data);
             } else {
-              console.log("create new item; api call", item);
               // create new item
               HeroSearchFactory.getItemByResourceURI(item.resourceURI, function(resultItem) {
-              //
-                if(resultItem.thumbnail.path.indexOf("image_not_available") !== -1) {
+                if(resultItem.thumbnail.path.indexOf('image_not_available') !== -1) {
                   service.setRandomItemsByType(type, 1);
                 } else {
                   ItemResource.save(resultItem).$promise.then( function(promiseResult) {
@@ -66,7 +63,7 @@ angular.module('marvelSuperHeroesApp')
             setItem(++current);
           });
 
-        }
+        };
 
         setItem(0);
 

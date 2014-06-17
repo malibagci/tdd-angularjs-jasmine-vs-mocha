@@ -3,8 +3,8 @@
 angular.module('marvelSuperHeroesApp')
   .controller('HeroCtrl', function ($scope, HeroService, HeroesService, $routeParams, $location) {
 
-    if($routeParams.id === "") {
-      $location.path("/404");
+    if($routeParams.id === '') {
+      $location.path('/404');
       return;
     }
 
@@ -14,10 +14,9 @@ angular.module('marvelSuperHeroesApp')
     $scope.hero.$promise.then( function(hero) {
       if(hero.id) {
         // hero is ready
-        console.log(hero);
-        HeroService.setRandomItemsByType("comics", 6);
-        HeroService.setRandomItemsByType("events", 6);
-        HeroService.setRandomItemsByType("series", 12);
+        HeroService.setRandomItemsByType('comics', 6);
+        HeroService.setRandomItemsByType('events', 6);
+        HeroService.setRandomItemsByType('series', 12);
 
         $scope.comics = HeroService.comics;
         $scope.events = HeroService.events;
@@ -25,10 +24,10 @@ angular.module('marvelSuperHeroesApp')
 
         $scope.delete = function(hero) {
           HeroesService.delete(hero);
-          $location.path("/");
-        }
+          $location.path('/');
+        };
       } else {
-        $location.path("/404");
+        $location.path('/404');
         return;
       }
     });

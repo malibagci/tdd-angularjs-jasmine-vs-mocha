@@ -35,9 +35,9 @@ angular.module('marvelSuperHeroesApp')
       var fetch = $http(
         {
           method: 'GET',
-          url: resourceURI + "?apikey=" + apikey
+          url: resourceURI + '?apikey=' + apikey
         }
-      )
+      );
 
       fetch.success( function(data) {
         deferred.resolve(data.data.results);
@@ -48,7 +48,7 @@ angular.module('marvelSuperHeroesApp')
       });
 
       return deferred.promise;
-    }
+    };
 
     // Public API here
     return {
@@ -67,7 +67,7 @@ angular.module('marvelSuperHeroesApp')
 
         searchPromise = fetchItem(resourceURI);
         searchPromise.then( function(result) {
-          callback(result["0"]);
+          callback(result['0']);
         });
       }
     };

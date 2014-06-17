@@ -21,15 +21,15 @@ angular.module('marvelSuperHeroesApp')
 
     $scope.$watch( function() {
       return HeroesService.heroes;
-    }, function(new_heroes, old_heroes) {
+    }, function() {
       // reset search
       $scope.searchString = '';
-    }, true)
+    }, true);
 
     $scope.$watch( function() {
       return $location.path();
     }, function(path) {
-      $scope.showSearchField = (path === "/");
+      $scope.showSearchField = (path === '/');
     });
 
   });

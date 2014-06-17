@@ -34,7 +34,6 @@ angular.module('marvelSuperHeroesApp')
               }
             });
           });
-          console.log(searchResults);
           $rootScope.$broadcast('searchResultsChanged', searchResults);
           $rootScope.$broadcast('searching', false);
           if(searchResults.length === 0) {
@@ -63,6 +62,6 @@ angular.module('marvelSuperHeroesApp')
 
     this.get = function(id) {
       return Hero.get({id: id});
-    }
+    };
 
   });
