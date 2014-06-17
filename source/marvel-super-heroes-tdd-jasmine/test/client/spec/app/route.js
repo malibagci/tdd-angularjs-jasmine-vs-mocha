@@ -7,7 +7,7 @@ describe( 'Testing routes:', function() {
   beforeEach( function() {
     module( 'marvelSuperHeroesApp' );
     inject( function(_$route_) {
-      $route = _$route_
+      $route = _$route_;
     });
   });
 
