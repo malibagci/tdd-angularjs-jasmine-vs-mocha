@@ -64,6 +64,13 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
       $httpBackend.flush();
     });
 
+    test( 'if searching affects the searchResults array', function() {
+      assert.lengthOf(MarvelSearchFactory.searchResults, 0);
+      MarvelSearchFactory.search();
+      $httpBackend.flush();
+      assert.lengthOf(MarvelSearchFactory.searchResults, 2);
+    });
+
   });
 
 });
