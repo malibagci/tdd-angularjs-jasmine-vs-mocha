@@ -32,6 +32,10 @@ describe( 'Testing modules:', function() {
       expect(hasModule('app.services')).toBeTruthy();
     });
 
+    it( 'should have a registered dependency to ngResource', function() {
+      expect(hasModule('ngResource')).toBeTruthy();
+    });
+
   });
 
 });
