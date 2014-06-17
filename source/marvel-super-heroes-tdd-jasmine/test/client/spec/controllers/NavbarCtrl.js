@@ -23,4 +23,9 @@ describe( 'Testing NavbarCtrl Controller:', function() {
     expect(scope.searchResults).toEqual(jasmine.any(Array));
   });
 
+  it( 'should hold a "searchString" string in its scope', function() {
+    expect(scope.searchString).toBeDefined();
+    expect(scope.searchString).toEqual(jasmine.any(String));
+  });
+
 });
