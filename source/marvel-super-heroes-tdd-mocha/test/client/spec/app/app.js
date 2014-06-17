@@ -21,4 +21,9 @@ suite( 'Testing: App Module', function() {
     assert.ok(hasModule('ngRoute'));
   });
 
+  test( 'if the app has a registered dependency to "app.controllers"', 
+    function() {
+      assert.ok(hasModule('app.controllers'));
+  });
+
 });
