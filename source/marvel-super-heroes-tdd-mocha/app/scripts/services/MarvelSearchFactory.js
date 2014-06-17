@@ -6,5 +6,7 @@ angular.module( 'app.services' )
 
     factory.searchResults = [];
 
+    factory.search = function() {};
+
     return factory;
   });
