@@ -52,6 +52,24 @@ describe( 'Testing HeroesFactory Service', function() {
       expect(HeroesFactory.remove).toEqual(jasmine.any(Function));
     });
 
+    it( 'should remove an entry of the heroes array with a given hero id ' + 
+      '(not array index)', function() {
+
+        HeroesFactory.save({
+          id: 1,
+            name: 'Hulk',
+            thumbnail: {
+              path: 'path_to_thumbnail',
+              extension: 'extension_of_thumbnail'
+            }
+        });
+
+        expect(HeroesFactory.heroes.length).toEqual(1);
+        HeroesFactory.remove(1);
+        expect(HeroesFactory.heroes.length).toEqual(0);
+
+    });
+
   });
 
 });
