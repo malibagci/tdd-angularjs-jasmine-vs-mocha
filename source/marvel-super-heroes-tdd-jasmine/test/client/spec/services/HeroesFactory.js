@@ -19,4 +19,16 @@ describe( 'Testing HeroesFactory Service', function() {
     expect(HeroesFactory.heroes).toEqual(jasmine.any(Array));
   });
 
+  describe('Save a hero:', function() {
+
+    it( 'should hold a "save" function', function() {
+      expect(HeroesFactory.save).toBeDefined();
+      expect(HeroesFactory.save).toEqual(jasmine.any(Function));
+    });
+
+  });
+
+
+
+
 });
