@@ -13,6 +13,8 @@ angular.module( 'app.services' )
 
     factory.search = function() {
 
+      factory.isSearching = true;
+
       var request = $http({
         method: 'GET',
         url: 'http://gateway.marvel.com:80/v1/public/characters?' +
