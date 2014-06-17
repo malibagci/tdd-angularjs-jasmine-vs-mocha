@@ -22,6 +22,11 @@ suite('Testing App Routes:', function() {
         assert.equal($route.routes['/'].templateUrl, 'partials/heroes');
     });
 
+    test( 'if the root route has the correct controller ("HeroesCtrl")', 
+      function() {
+        assert.equal($route.routes['/'].controller, 'HeroesCtrl');
+    });
+
   });
 
 });
