@@ -96,6 +96,26 @@ describe( 'Testing HeroesCtrl Controller:', function() {
 
     });
 
+    it( 'should pass an object as argument on addToFavorites to the save ' +
+      'function of the HeroesFactory', function() {
+
+        spyOn(HeroesFactory, 'save');
+
+        var hero = {
+          id: 1,
+            name: 'Hulk',
+            thumbnail: {
+              path: 'path_to_thumbnail',
+              extension: 'extension_of_thumbnail'
+            }
+        };
+
+        scope.addToFavorites(hero);
+
+        expect(HeroesFactory.save).toHaveBeenCalledWith(hero);
+
+    });
+
   });
 
 });
