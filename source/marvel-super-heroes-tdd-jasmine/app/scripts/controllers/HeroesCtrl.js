@@ -10,8 +10,8 @@ angular.module( 'app.controllers' )
       $scope.isSearching = MarvelSearchFactory.isSearching;
       $scope.heroes = HeroesFactory.heroes;
 
-      $scope.addToFavorites = function() {
-        HeroesFactory.save();
+      $scope.addToFavorites = function(hero) {
+        HeroesFactory.save(hero);
       };
 
   });
