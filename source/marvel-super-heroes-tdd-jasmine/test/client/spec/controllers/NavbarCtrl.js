@@ -18,11 +18,6 @@ describe( 'Testing NavbarCtrl Controller:', function() {
     expect(NavbarCtrl).toBeDefined();
   });
 
-  it( 'should hold a "searchResults" array in its scope', function() {
-    expect(scope.searchResults).toBeDefined();
-    expect(scope.searchResults).toEqual(jasmine.any(Array));
-  });
-
   it( 'should hold a "searchString" string in its scope', function() {
     expect(scope.searchString).toBeDefined();
     expect(scope.searchString).toEqual(jasmine.any(String));

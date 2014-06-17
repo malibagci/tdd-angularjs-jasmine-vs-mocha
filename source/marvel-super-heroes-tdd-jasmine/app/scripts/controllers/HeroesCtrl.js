@@ -3,4 +3,8 @@
 'use strict';
 
 angular.module( 'app.controllers' )
-  .controller( 'HeroesCtrl', function() {});
+  .controller( 'HeroesCtrl', function($scope) {
+
+    $scope.searchResults = [];
+
+  });
