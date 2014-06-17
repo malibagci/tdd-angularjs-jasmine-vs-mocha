@@ -29,6 +29,11 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
     expect(MarvelSearchFactory.reset).toEqual(jasmine.any(Function));
   });
 
+  it( 'should hold a isSearching flag', function() {
+    expect(MarvelSearchFactory.flag).toBeDefined();
+    expect(MarvelSearchFactory.flag).toEqual(jasmine.any(Boolean));
+  });
+
   describe( 'Testing Marvel-API Search', function() {
 
     var $httpBackend;
