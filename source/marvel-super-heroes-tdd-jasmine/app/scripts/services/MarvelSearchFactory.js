@@ -25,7 +25,9 @@ angular.module( 'app.services' )
 
     };
 
-    factory.reset = function() {};
+    factory.reset = function() {
+      factory.searchResults.length = 0;
+    };
 
     return factory;
 
