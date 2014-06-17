@@ -23,4 +23,9 @@ suite( 'Testing NavbarCtrl Controller:', function() {
     assert.isArray(scope.searchResults);
   });
 
+  test( 'if the scope holds a "searchString" string', function() {
+    assert.isDefined(scope.searchString);
+    assert.isString(scope.searchString);
+  });
+
 });
