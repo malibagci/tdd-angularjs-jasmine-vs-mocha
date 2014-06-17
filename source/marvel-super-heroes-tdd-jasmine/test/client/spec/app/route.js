@@ -21,6 +21,10 @@ describe( 'Testing routes:', function() {
       expect($route.routes['/'].templateUrl).toEqual('partials/heroes');
     });
 
+    it( 'should have a the correct controller ("HeroesCtrl")', function() {
+      expect($route.routes['/'].controller).toEqual('HeroesCtrl');
+    });
+
   });
 
 
