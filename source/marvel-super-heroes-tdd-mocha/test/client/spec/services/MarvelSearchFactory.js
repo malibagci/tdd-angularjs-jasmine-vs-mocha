@@ -85,6 +85,14 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
         assert.isObject(MarvelSearchFactory.searchResults[0].thumbnail);
     });
 
+    test( 'if the reset function affects the searchResults array', function() {
+      MarvelSearchFactory.search();
+      $httpBackend.flush();
+      assert.lengthOf(MarvelSearchFactory.searchResults, 2);
+      MarvelSearchFactory.reset();
+      assert.lengthOf(MarvelSearchFactory.searchResults, 0);
+    });
+
   });
 
 });
