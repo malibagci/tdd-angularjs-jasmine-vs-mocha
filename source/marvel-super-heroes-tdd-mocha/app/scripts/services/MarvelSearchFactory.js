@@ -10,6 +10,7 @@ angular.module( 'app.services' )
     factory.isSearching = false;
 
     factory.search = function() {
+      factory.isSearching = true;
       var request = $http({
         method: 'GET',
         url: 'http://gateway.marvel.com:80/v1/public/characters?' +
@@ -17,6 +18,7 @@ angular.module( 'app.services' )
       });
 
       request.success( function(data) {
+        factory.isSearching = false;
         angular.forEach(data.data.results, function(result) {
           factory.searchResults.push(result);
         });
