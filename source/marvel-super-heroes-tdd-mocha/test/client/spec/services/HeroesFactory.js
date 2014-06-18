@@ -64,6 +64,13 @@ suite( 'Testing HeroesFactory Service:', function() {
 
   suite( 'Remove a hero', function() {
 
+    var $httpBackend;
+
+    setup( inject(function(_$httpBackend_) {
+      $httpBackend = _$httpBackend_;
+      $httpBackend.expectDELETE('/api/heroes/42').respond('');
+    }));
+
     test( 'if it holds a remove function', function() {
       assert.isDefined(HeroesFactory.remove);
       assert.isFunction(HeroesFactory.remove);
@@ -77,6 +84,11 @@ suite( 'Testing HeroesFactory Service:', function() {
       HeroesFactory.remove(42);
       assert.lengthOf(HeroesFactory.heroes, 0);
 
+    });
+
+    test( 'if a remove triggers a HTTP-DELETE request', function() {
+      HeroesFactory.remove(42);
+      $httpBackend.flush();
     });
 
   });
