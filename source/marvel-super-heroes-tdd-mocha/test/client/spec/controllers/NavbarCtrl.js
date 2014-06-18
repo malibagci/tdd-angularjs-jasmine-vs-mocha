@@ -33,10 +33,12 @@ suite( 'Testing NavbarCtrl Controller:', function() {
 
   suite( 'Testing search:', function() {
 
-    var searchStub;
+    var searchStub,
+      resetStub;
 
     setup( function() {
       searchStub = sinon.stub(MarvelSearchFactory, 'search');
+      resetStub = sinon.stub(MarvelSearchFactory, 'reset');
     });
 
     test( 'if changing the searchString calls "search" of the ' +
@@ -47,8 +49,8 @@ suite( 'Testing NavbarCtrl Controller:', function() {
         assert.ok(searchStub.called);        
     });
 
-    test( 'if search is fired when the input is smaller than 4 characters', 
-      function() {
+    test( 'if search is only called when the input is greater equal than 4 ' +
+      'characters', function() {
 
         scope.searchString = 'Hul';
         scope.$apply();
@@ -57,8 +59,19 @@ suite( 'Testing NavbarCtrl Controller:', function() {
 
     });
 
+    test( 'if reset is called when the input is smaller than 4 characters', 
+      function() {
+
+        scope.searchString = 'Hul';
+        scope.$apply();
+
+        assert.ok(resetStub.called);
+
+    });
+
     teardown( function() {
       searchStub.restore();
+      resetStub.restore();
     });
 
   });
