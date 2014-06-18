@@ -95,6 +95,12 @@ suite( 'Testing HeroesCtrl Controller:', function() {
         assert.ok(saveStub.calledWith(hero));
     });
 
+    test( 'if addToFavorites calls reset of MarvelSearchFactory', function() {
+      var resetStub = sinon.stub(MarvelSearchFactory, 'reset');
+      scope.addToFavorites();
+      assert.ok(resetStub.called);
+    });
+
   });
 
     
