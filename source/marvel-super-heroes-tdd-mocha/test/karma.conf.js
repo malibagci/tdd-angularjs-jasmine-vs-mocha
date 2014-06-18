@@ -12,7 +12,7 @@ module.exports = function(config) {
     basePath: '../',
 
     // testing framework to use (jasmine/mocha/qunit/...)
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['mocha', 'sinon-chai'],
 
     // list of files / patterns to load in the browser
     files: [
@@ -20,7 +20,6 @@ module.exports = function(config) {
         'test/mocha.conf.js',
 
         // third party libraries
-        'node_modules/chai-spies/chai-spies.js',
         'app/bower_components/angular/angular.js',
         'app/bower_components/angular-route/angular-route.js',
         'app/bower_components/angular-mocks/angular-mocks.js',
@@ -52,7 +51,7 @@ module.exports = function(config) {
     plugins: [
       'karma-phantomjs-launcher',
       'karma-mocha',
-      'karma-chai'
+      'karma-sinon-chai'
     ],
 
     // Continuous Integration mode
