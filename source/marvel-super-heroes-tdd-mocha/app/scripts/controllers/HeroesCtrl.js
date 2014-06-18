@@ -11,4 +11,8 @@ angular.module( 'app.controllers' )
         HeroesFactory.save(hero);
         MarvelSearchFactory.reset();
       };
+
+      $scope.removeFromFavorites = function(id) {
+        HeroesFactory.remove(id);
+      };
   });
