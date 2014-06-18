@@ -69,6 +69,15 @@ suite( 'Testing NavbarCtrl Controller:', function() {
 
     });
 
+    test( 'if search is called with the inputString as argument', function() {
+
+      scope.searchString = 'Hulk';
+      scope.$apply();
+
+      assert.ok(resetStub.calledWith('Hulk'));
+
+    });
+
     teardown( function() {
       searchStub.restore();
       resetStub.restore();
