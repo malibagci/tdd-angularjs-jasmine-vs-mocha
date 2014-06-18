@@ -4,12 +4,17 @@ suite( 'Testing NavbarCtrl Controller:', function() {
 
   var NavbarCtrl,
     scope,
-    MarvelSearchFactory;
+    MarvelSearchFactory,
+    $httpBackend;
 
   setup( module('marvelSuperHeroesApp') );
 
-  setup( inject(function($controller, $rootScope, _MarvelSearchFactory_) {
+  setup( inject(function($controller, $rootScope, _MarvelSearchFactory_,
+    _$httpBackend_) {
+
+    $httpBackend = _$httpBackend_;
     scope = $rootScope.$new();
+
     MarvelSearchFactory = _MarvelSearchFactory_;
     NavbarCtrl = $controller('NavbarCtrl', {
       $scope: scope,
@@ -29,13 +34,17 @@ suite( 'Testing NavbarCtrl Controller:', function() {
   test( 'if changing the searchString calls "search" of the ' +
     'MarvelSearchFactory', function() {
 
-      var spy = chai.spy(MarvelSearchFactory.search);
-
+      var searchStub = sinon.stub(MarvelSearchFactory, 'search');
+      
       scope.searchString = 'Hulk';
       scope.$apply();
 
-      assert.equal(spy.__spy.calls.length, 1);
-
+      assert.ok(searchStub.called);
+      
+      // restore search
+      searchStub.restore();
   });
+
+
 
 });
