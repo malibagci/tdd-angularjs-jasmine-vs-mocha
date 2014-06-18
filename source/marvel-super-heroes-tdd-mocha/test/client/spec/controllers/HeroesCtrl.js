@@ -103,6 +103,31 @@ suite( 'Testing HeroesCtrl Controller:', function() {
 
   });
 
-    
+
+  suite('Testing removeFromFavorites', function() {
+
+    var removeStub;
+    setup( function() {
+      removeStub = sinon.stub(HeroesFactory, 'remove');
+    });
+
+    test( 'if the scope holds a "removeFromFavorites" function', function() {
+      assert.isDefined(scope.addToFavorites);
+      assert.isFunction(scope.addToFavorites);
+    });
+
+    test( 'if removeFromFavorites calls the remove function of the HeroesFactory',
+      function() {
+        scope.removeFromFavorites();
+        assert.ok(removeStub.called);
+    });
+
+    test( 'if removeFromFavorites calls the remove function of the ' +
+      + 'HeroesFactory with a given id', function() {
+        scope.removeFromFavorites(1);
+        assert.ok(removeStub.calledWith(1));
+    });
+
+  });
 
 });
