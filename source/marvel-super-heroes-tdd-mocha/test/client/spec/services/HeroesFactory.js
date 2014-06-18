@@ -14,4 +14,9 @@ suite( 'Testing HeroesFactory Service:', function() {
     assert.isDefined(HeroesFactory);
   });
 
+  test( 'if it holds a heroes array', function() {
+    assert.isDefined(HeroesFactory.heroes);
+    assert.isArray(HeroesFactory.heroes);
+  });
+
 });
