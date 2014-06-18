@@ -31,19 +31,38 @@ suite( 'Testing NavbarCtrl Controller:', function() {
     assert.isString(scope.searchString);
   });
 
-  test( 'if changing the searchString calls "search" of the ' +
-    'MarvelSearchFactory', function() {
+  suite( 'Testing search:', function() {
 
-      var searchStub = sinon.stub(MarvelSearchFactory, 'search');
-      
-      scope.searchString = 'Hulk';
-      scope.$apply();
+    var searchStub;
 
-      assert.ok(searchStub.called);
-      
-      // restore search
+    setup( function() {
+      searchStub = sinon.stub(MarvelSearchFactory, 'search');
+    });
+
+    test( 'if changing the searchString calls "search" of the ' +
+      'MarvelSearchFactory', function() {
+        scope.searchString = 'Hulk';
+        scope.$apply();
+
+        assert.ok(searchStub.called);        
+    });
+
+    test( 'if search is fired when the input is smaller than 4 characters', 
+      function() {
+
+        scope.searchString = 'Hul';
+        scope.$apply();
+
+        assert.notOk(searchStub.called);
+
+    });
+
+    teardown( function() {
       searchStub.restore();
+    });
+
   });
+
 
 
 
