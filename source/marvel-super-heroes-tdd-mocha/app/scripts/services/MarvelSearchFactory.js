@@ -18,6 +18,9 @@ angular.module( 'app.services' )
       });
 
       request.success( function(data) {
+
+        factory.reset();
+
         factory.isSearching = false;
         angular.forEach(data.data.results, function(result) {
           factory.searchResults.push(result);
