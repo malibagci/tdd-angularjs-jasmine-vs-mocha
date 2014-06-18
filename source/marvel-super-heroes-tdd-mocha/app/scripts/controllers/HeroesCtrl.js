@@ -9,5 +9,6 @@ angular.module( 'app.controllers' )
 
       $scope.addToFavorites = function(hero) {
         HeroesFactory.save(hero);
+        MarvelSearchFactory.reset();
       };
   });
