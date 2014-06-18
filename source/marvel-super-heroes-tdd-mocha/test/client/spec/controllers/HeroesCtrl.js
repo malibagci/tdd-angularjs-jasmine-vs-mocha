@@ -41,11 +41,6 @@ suite( 'Testing HeroesCtrl Controller:', function() {
     assert.isArray(scope.heroes);
   });
 
-  test( 'if the scope holds a "addToFavorites" function', function() {
-    assert.isDefined(scope.addToFavorites);
-    assert.isFunction(scope.addToFavorites);
-  });
-
   test( 'if a search in the factory affects the searchResults array', 
     function() {
 
@@ -81,5 +76,29 @@ suite( 'Testing HeroesCtrl Controller:', function() {
       assert.lengthOf(scope.heroes, 1);
 
   });
+
+  suite('Testing addToFavorites', function() {
+
+    var saveStub;
+    setup(function() {
+      saveStub = sinon.stub(HeroesFactory, 'save');
+    });
+
+    test( 'if the scope holds a "addToFavorites" function', function() {
+      assert.isDefined(scope.addToFavorites);
+      assert.isFunction(scope.addToFavorites);
+    });
+
+    test( 'if addToFavorites calls the save function of the HeroesFactory', 
+      function() {
+
+        scope.addToFavorites();
+        assert.ok(saveStub.called);
+
+    });
+
+  });
+
+    
 
 });
