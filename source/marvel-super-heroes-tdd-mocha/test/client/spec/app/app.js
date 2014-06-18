@@ -33,4 +33,9 @@ suite( 'Testing: App Module', function() {
       assert.ok(hasModule('app.services'));
   });
 
+  test( 'if the app has a registered dependency to "ngResource"', 
+    function() {
+      assert.ok(hasModule('ngResource'));
+  });
+
 });
