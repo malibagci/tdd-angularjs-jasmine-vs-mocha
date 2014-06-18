@@ -26,6 +26,23 @@ suite( 'Testing HeroesFactory Service:', function() {
       assert.isFunction(HeroesFactory.save);
     });
 
+    test( 'if a save updates the heroes array', function() {
+
+      assert.lengthOf(HeroesFactory.heroes, 0);
+
+      HeroesFactory.save({
+        id: 1,
+          name: 'Hulk',
+          thumbnail: {
+            path: 'path_to_thumbnail',
+            extension: 'extension_of_thumbnail'
+          }
+       });
+
+      assert.lengthOf(HeroesFactory.heroes, 1);
+
+    });
+
   });
 
 });
