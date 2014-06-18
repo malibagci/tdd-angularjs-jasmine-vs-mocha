@@ -35,6 +35,11 @@ suite( 'Testing HeroesCtrl Controller:', function() {
     assert.isArray(scope.heroes);
   });
 
+  test( 'if the scope holds a "addToFavorites" function', function() {
+    assert.isDefined(scope.addToFavorites);
+    assert.isFunction(scope.addToFavorites);
+  });
+
   test( 'if a search in the factory affects the searchResults array', 
     function() {
 
