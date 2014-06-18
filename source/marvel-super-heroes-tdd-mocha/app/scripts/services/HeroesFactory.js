@@ -6,7 +6,7 @@ angular.module( 'app.services' )
     var factory = {};
     var HeroResource = $resource('/api/heroes/:id');
 
-    factory.heroes = [];
+    factory.heroes = HeroResource.query();
 
     factory.save = function(hero) {
       factory.heroes.push(hero);

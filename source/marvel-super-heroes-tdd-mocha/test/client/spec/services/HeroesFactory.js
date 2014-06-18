@@ -38,9 +38,7 @@ suite( 'Testing HeroesFactory Service:', function() {
 
   test( 'if it makes an initial request to get the persistent heroes', 
     function() {
-
       $httpBackend.flush();
-
   });
 
   suite( 'Save a hero:', function() {
@@ -71,7 +69,7 @@ suite( 'Testing HeroesFactory Service:', function() {
 
   suite( 'Remove a hero', function() {
 
-    setup( function(_$httpBackend_) {
+    setup( function() {
       $httpBackend.expectDELETE('/api/heroes/42').respond('');
     });
 
