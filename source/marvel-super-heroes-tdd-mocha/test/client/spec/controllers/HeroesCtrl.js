@@ -30,6 +30,11 @@ suite( 'Testing HeroesCtrl Controller:', function() {
     assert.isBoolean(scope.isSearching);
   });
 
+  test( 'if the scope holds a "heroes" array', function() {
+    assert.isDefined(scope.heroes);
+    assert.isArray(scope.heroes);
+  });
+
   test( 'if a search in the factory affects the searchResults array', 
     function() {
 
