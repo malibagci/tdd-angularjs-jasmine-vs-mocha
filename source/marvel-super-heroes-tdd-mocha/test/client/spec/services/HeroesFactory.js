@@ -52,6 +52,23 @@ suite( 'Testing HeroesFactory Service:', function() {
       assert.isFunction(HeroesFactory.remove);
     });
 
+    test( 'if it removes a hero by a given id', function() {
+
+      HeroesFactory.save({
+        id: 42,
+          name: 'Hulk',
+          thumbnail: {
+            path: 'path_to_thumbnail',
+            extension: 'extension_of_thumbnail'
+          }
+       });
+
+      assert.lengthOf(HeroesFactory.heroes, 1);
+      HeroesFactory.remove(42);
+      assert.lengthOf(HeroesFactory.heroes, 0);
+
+    });
+
   });
 
 });
