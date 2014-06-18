@@ -70,20 +70,20 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
     }));
 
     test( 'if it makes a HTTP-GET request when search is called', function() {
-      MarvelSearchFactory.search();
+      MarvelSearchFactory.search('Hulk');
       $httpBackend.flush();
     });
 
     test( 'if searching affects the searchResults array', function() {
       assert.lengthOf(MarvelSearchFactory.searchResults, 0);
-      MarvelSearchFactory.search();
+      MarvelSearchFactory.search('Hulk');
       $httpBackend.flush();
       assert.lengthOf(MarvelSearchFactory.searchResults, 2);
     });
 
     test( 'if the result of a search has a name (String), an id (Number) and ' +
       'a thumbnail (Object)', function() {
-        MarvelSearchFactory.search();
+        MarvelSearchFactory.search('Hulk');
         $httpBackend.flush();
         assert.isString(MarvelSearchFactory.searchResults[0].name);
         assert.isNumber(MarvelSearchFactory.searchResults[0].id);
@@ -91,7 +91,7 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
     });
 
     test( 'if the reset function affects the searchResults array', function() {
-      MarvelSearchFactory.search();
+      MarvelSearchFactory.search('Hulk');
       $httpBackend.flush();
       assert.lengthOf(MarvelSearchFactory.searchResults, 2);
       MarvelSearchFactory.reset();
@@ -101,7 +101,7 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
     test( 'if the isSearching flag is set properly', function() {
 
       assert.notOk(MarvelSearchFactory.isSearching);
-      MarvelSearchFactory.search();
+      MarvelSearchFactory.search('Hulk');
       assert.ok(MarvelSearchFactory.isSearching);
       $httpBackend.flush();
       assert.notOk(MarvelSearchFactory.isSearching);

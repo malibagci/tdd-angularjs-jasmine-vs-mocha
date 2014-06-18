@@ -74,7 +74,7 @@ suite( 'Testing NavbarCtrl Controller:', function() {
       scope.searchString = 'Hulk';
       scope.$apply();
 
-      assert.ok(resetStub.calledWith('Hulk'));
+      assert.ok(searchStub.calledWith('Hulk'));
 
     });
 
