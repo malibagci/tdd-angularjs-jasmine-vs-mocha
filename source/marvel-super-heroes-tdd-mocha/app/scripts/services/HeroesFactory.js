@@ -19,6 +19,7 @@ angular.module( 'app.services' )
           factory.heroes.splice(index, 1);
         }
       });
+      HeroResource.delete({id: id});
     };
 
     return factory;
