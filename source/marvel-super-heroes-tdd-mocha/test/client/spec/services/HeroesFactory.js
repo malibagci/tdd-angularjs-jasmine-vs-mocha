@@ -19,4 +19,13 @@ suite( 'Testing HeroesFactory Service:', function() {
     assert.isArray(HeroesFactory.heroes);
   });
 
+  suite( 'Save a hero:', function() {
+
+    test( 'if it holds a save function', function() {
+      assert.isDefined(HeroesFactory.save);
+      assert.isFunction(HeroesFactory.save);
+    });
+
+  });
+
 });
