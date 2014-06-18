@@ -7,6 +7,8 @@ angular.module( 'app.services' )
 
     factory.heroes = [];
 
+    factory.save = function() {};
+
     return factory;
 
   });
