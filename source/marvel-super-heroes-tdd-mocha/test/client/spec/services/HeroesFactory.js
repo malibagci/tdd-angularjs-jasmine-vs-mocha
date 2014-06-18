@@ -3,14 +3,19 @@
 suite( 'Testing HeroesFactory Service:', function() {
 
   var HeroesFactory,
-    hero;
+    hero,
+    $httpBackend;
 
   setup( module('marvelSuperHeroesApp') );
 
   setup( function() {
-    inject(function(_HeroesFactory_) {
+    inject(function(_HeroesFactory_, _$httpBackend_) {
       HeroesFactory = _HeroesFactory_;
+      $httpBackend = _$httpBackend_;
     });
+
+    // initial request fires each test (but is only tested when flush is called)
+    $httpBackend.expectGET('/api/heroes').respond('');
 
     hero = {
       id: 42,
@@ -31,14 +36,18 @@ suite( 'Testing HeroesFactory Service:', function() {
     assert.isArray(HeroesFactory.heroes);
   });
 
+  test( 'if it makes an initial request to get the persistent heroes', 
+    function() {
+
+      $httpBackend.flush();
+
+  });
+
   suite( 'Save a hero:', function() {
 
-    var $httpBackend;
-
-    setup( inject(function(_$httpBackend_) {
-      $httpBackend = _$httpBackend_;
+    setup( function() {
       $httpBackend.expectPOST('/api/heroes').respond('');
-    }));
+    });
 
     test( 'if it holds a save function', function() {
       assert.isDefined(HeroesFactory.save);
@@ -48,9 +57,7 @@ suite( 'Testing HeroesFactory Service:', function() {
     test( 'if a save updates the heroes array', function() {
 
       assert.lengthOf(HeroesFactory.heroes, 0);
-
       HeroesFactory.save(hero);
-
       assert.lengthOf(HeroesFactory.heroes, 1);
 
     });
@@ -64,12 +71,9 @@ suite( 'Testing HeroesFactory Service:', function() {
 
   suite( 'Remove a hero', function() {
 
-    var $httpBackend;
-
-    setup( inject(function(_$httpBackend_) {
-      $httpBackend = _$httpBackend_;
+    setup( function(_$httpBackend_) {
       $httpBackend.expectDELETE('/api/heroes/42').respond('');
-    }));
+    });
 
     test( 'if it holds a remove function', function() {
       assert.isDefined(HeroesFactory.remove);
