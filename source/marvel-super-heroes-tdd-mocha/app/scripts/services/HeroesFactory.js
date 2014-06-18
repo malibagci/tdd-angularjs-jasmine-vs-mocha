@@ -5,6 +5,8 @@ angular.module( 'app.services' )
 
     var factory = {};
 
+    factory.heroes = [];
+
     return factory;
 
   });
