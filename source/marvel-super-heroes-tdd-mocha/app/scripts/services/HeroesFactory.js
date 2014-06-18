@@ -11,6 +11,8 @@ angular.module( 'app.services' )
       factory.heroes.push(hero);
     };
 
+    factory.remove = function() {};
+
     return factory;
 
   });
