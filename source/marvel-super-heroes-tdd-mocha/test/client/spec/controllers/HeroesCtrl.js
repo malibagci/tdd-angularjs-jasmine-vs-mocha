@@ -5,7 +5,8 @@ suite( 'Testing HeroesCtrl Controller:', function() {
   var HeroesCtrl,
     scope,
     MarvelSearchFactory,
-    HeroesFactory;
+    HeroesFactory,
+    hero;
 
   setup( module('marvelSuperHeroesApp') );
 
@@ -20,6 +21,15 @@ suite( 'Testing HeroesCtrl Controller:', function() {
         MarvelSearchFactory: MarvelSearchFactory,
         HeroesFactory: HeroesFactory
       });
+
+      hero = {
+        id: 1,
+        name: 'Hulk',
+        thumbnail: {
+          path: 'path_to_thumbnail',
+          extension: 'extension_of_thumbnail'
+        }
+      }
   }));
 
   test( 'if it is present', function() {
@@ -46,14 +56,7 @@ suite( 'Testing HeroesCtrl Controller:', function() {
 
       assert.lengthOf(scope.searchResults, 0);
 
-      MarvelSearchFactory.searchResults.push({
-        id: 1,
-        name: 'Hulk',
-        thumbnail: {
-          path: 'path_to_thumbnail',
-          extension: 'extension_of_thumbnail'
-        }
-      });
+      MarvelSearchFactory.searchResults.push(hero);
 
       assert.lengthOf(scope.searchResults, 1);
 
@@ -63,16 +66,7 @@ suite( 'Testing HeroesCtrl Controller:', function() {
     'heroes array in the HeroesCtrl', function() {
 
       assert.lengthOf(scope.heroes, 0);
-
-      HeroesFactory.heroes.push({
-        id: 1,
-        name: 'Hulk',
-        thumbnail: {
-          path: 'path_to_thumbnail',
-          extension: 'extension_of_thumbnail'
-        }
-      });
-
+      HeroesFactory.heroes.push(hero);
       assert.lengthOf(scope.heroes, 1);
 
   });
@@ -91,10 +85,14 @@ suite( 'Testing HeroesCtrl Controller:', function() {
 
     test( 'if addToFavorites calls the save function of the HeroesFactory', 
       function() {
-
         scope.addToFavorites();
         assert.ok(saveStub.called);
+    });
 
+    test( 'if addToFavorites calls the save function of the HeroesFactory ' +
+      'with a hero argument', function() {
+        scope.addToFavorites(hero);
+        assert.ok(saveStub.calledWith(hero));
     });
 
   });
