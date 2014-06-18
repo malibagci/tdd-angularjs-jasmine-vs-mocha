@@ -98,6 +98,16 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
       assert.lengthOf(MarvelSearchFactory.searchResults, 0);
     });
 
+    test( 'if the isSearching flag is set properly', function() {
+
+      assert.notOk(MarvelSearchFactory.isSearching);
+      MarvelSearchFactory.search();
+      assert.ok(MarvelSearchFactory.isSearching);
+      $httpBackend.flush();
+      assert.notOk(MarvelSearchFactory.isSearching);
+
+    });
+
   });
 
 });
