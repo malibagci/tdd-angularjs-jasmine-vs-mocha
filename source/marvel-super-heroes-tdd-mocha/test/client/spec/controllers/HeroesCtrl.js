@@ -4,16 +4,22 @@ suite( 'Testing HeroesCtrl Controller:', function() {
 
   var HeroesCtrl,
     scope,
-    MarvelSearchFactory;
+    MarvelSearchFactory,
+    HeroesFactory;
 
   setup( module('marvelSuperHeroesApp') );
 
-  setup( inject(function($controller, $rootScope, _MarvelSearchFactory_) {
-    scope = $rootScope.$new();
-    MarvelSearchFactory = _MarvelSearchFactory_;
-    HeroesCtrl = $controller('HeroesCtrl', {
-      $scope: scope
-    });
+  setup( inject(function($controller, $rootScope, _MarvelSearchFactory_,
+    _HeroesFactory_) {
+      scope = $rootScope.$new();
+      MarvelSearchFactory = _MarvelSearchFactory_;
+      HeroesFactory = _HeroesFactory_;
+
+      HeroesCtrl = $controller('HeroesCtrl', {
+        $scope: scope,
+        MarvelSearchFactory: MarvelSearchFactory,
+        HeroesFactory: HeroesFactory
+      });
   }));
 
   test( 'if it is present', function() {
@@ -55,6 +61,24 @@ suite( 'Testing HeroesCtrl Controller:', function() {
       });
 
       assert.lengthOf(scope.searchResults, 1);
+
+  });
+
+  test( 'if a change of the heroes array in the HeroesFactory affects the ' + 
+    'heroes array in the HeroesCtrl', function() {
+
+      assert.lengthOf(scope.heroes, 0);
+
+      HeroesFactory.heroes.push({
+        id: 1,
+        name: 'Hulk',
+        thumbnail: {
+          path: 'path_to_thumbnail',
+          extension: 'extension_of_thumbnail'
+        }
+      });
+
+      assert.lengthOf(scope.heroes, 1);
 
   });
 
