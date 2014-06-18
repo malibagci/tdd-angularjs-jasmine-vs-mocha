@@ -38,4 +38,19 @@ suite( 'Testing: App Module', function() {
       assert.ok(hasModule('ngResource'));
   });
 
+  test( 'if the app has a registered dependency to "ngSanitize"', 
+    function() {
+      assert.ok(hasModule('ngSanitize'));
+  });
+
+  test( 'if the app has a registered dependency to "ngAnimate"', 
+    function() {
+      assert.ok(hasModule('ngAnimate'));
+  });
+
+  test( 'if the app has a registered dependency to "ui.bootstrap"', 
+    function() {
+      assert.ok(hasModule('ui.bootstrap'));
+  });
+
 });
