@@ -45,4 +45,13 @@ suite( 'Testing HeroesFactory Service:', function() {
 
   });
 
+  suite( 'Remove a hero', function() {
+
+    test( 'if it holds a remove function', function() {
+      assert.isDefined(HeroesFactory.remove);
+      assert.isFunction(HeroesFactory.remove);
+    });
+
+  });
+
 });
