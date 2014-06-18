@@ -29,6 +29,11 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
     assert.isFunction(MarvelSearchFactory.reset);
   });
 
+  test( 'if it holds a isSearching flag', function() {
+    assert.isDefined(MarvelSearchFactory.isSearching);
+    assert.isBoolean(MarvelSearchFactory.isSearching);
+  });
+
   suite( 'Searching:', function() {
 
     var $httpBackend;
