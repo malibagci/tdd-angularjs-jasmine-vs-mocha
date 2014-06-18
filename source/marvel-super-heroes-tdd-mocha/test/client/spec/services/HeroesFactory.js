@@ -2,13 +2,25 @@
 
 suite( 'Testing HeroesFactory Service:', function() {
 
-  var HeroesFactory;
+  var HeroesFactory,
+    hero;
 
   setup( module('marvelSuperHeroesApp') );
 
-  setup( inject(function(_HeroesFactory_) {
-    HeroesFactory = _HeroesFactory_;
-  }));
+  setup( function() {
+    inject(function(_HeroesFactory_) {
+      HeroesFactory = _HeroesFactory_;
+    });
+
+    hero = {
+      id: 42,
+      name: 'Hulk',
+      thumbnail: {
+        path: 'path_to_thumbnail',
+        extension: 'extension_of_thumbnail'
+      }
+    }
+  });
 
   test( 'if it is present', function() {
     assert.isDefined(HeroesFactory);
@@ -21,6 +33,13 @@ suite( 'Testing HeroesFactory Service:', function() {
 
   suite( 'Save a hero:', function() {
 
+    var $httpBackend;
+
+    setup( inject(function(_$httpBackend_) {
+      $httpBackend = _$httpBackend_;
+      $httpBackend.expectPOST('/api/heroes').respond('');
+    }));
+
     test( 'if it holds a save function', function() {
       assert.isDefined(HeroesFactory.save);
       assert.isFunction(HeroesFactory.save);
@@ -30,17 +49,15 @@ suite( 'Testing HeroesFactory Service:', function() {
 
       assert.lengthOf(HeroesFactory.heroes, 0);
 
-      HeroesFactory.save({
-        id: 1,
-          name: 'Hulk',
-          thumbnail: {
-            path: 'path_to_thumbnail',
-            extension: 'extension_of_thumbnail'
-          }
-       });
+      HeroesFactory.save(hero);
 
       assert.lengthOf(HeroesFactory.heroes, 1);
 
+    });
+
+    test( 'if a save triggers a HTTP-POST request', function() {
+      HeroesFactory.save(hero);
+      $httpBackend.flush();
     });
 
   });
@@ -54,14 +71,7 @@ suite( 'Testing HeroesFactory Service:', function() {
 
     test( 'if it removes a hero by a given id', function() {
 
-      HeroesFactory.save({
-        id: 42,
-          name: 'Hulk',
-          thumbnail: {
-            path: 'path_to_thumbnail',
-            extension: 'extension_of_thumbnail'
-          }
-       });
+      HeroesFactory.save(hero);
 
       assert.lengthOf(HeroesFactory.heroes, 1);
       HeroesFactory.remove(42);
