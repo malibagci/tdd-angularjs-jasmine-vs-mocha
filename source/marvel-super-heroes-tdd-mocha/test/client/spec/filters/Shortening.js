@@ -14,4 +14,10 @@ suite( 'Testing Shortening Filter:', function() {
     assert.isDefined(ShorteningFilter);
   });
 
+  test( 'if it shortens a string by a given length and appends three dots',
+    function() {
+      assert.equal( ShorteningFilter( 'Hulk (Marvel: Avengers Alliance)', 
+        10), 'Hulk (Marv...' );
+  });
+
 });
