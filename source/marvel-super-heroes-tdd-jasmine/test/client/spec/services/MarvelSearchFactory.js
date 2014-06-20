@@ -130,8 +130,19 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
     });
 
+    it( 'should have a favorite flag for each result in searchResults', 
+      function() {
+        MarvelSearchFactory.search('Hulk');
+        $httpBackend.flush();
+
+        expect(MarvelSearchFactory.searchResults[0].favorite).toBeDefined();
+        expect(MarvelSearchFactory.searchResults[0].favorite).toEqual(
+          jasmine.any(Boolean));
+        expect(MarvelSearchFactory.searchResults[1].favorite).toBeDefined();
+        expect(MarvelSearchFactory.searchResults[1].favorite).toEqual(
+          jasmine.any(Boolean));
+    });
 
   });
-
 
 });
