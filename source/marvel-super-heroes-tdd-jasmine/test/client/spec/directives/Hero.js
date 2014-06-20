@@ -36,4 +36,8 @@ describe( 'Testing Hero Directive:', function() {
       'src="path_to_thumbnail.extension_of_thumbnail"' );
   });
 
+  it( 'should contain a button to save/delete a hero', function() {
+    expect( hero.html() ).toContain('<button>');
+  });
+
 });
