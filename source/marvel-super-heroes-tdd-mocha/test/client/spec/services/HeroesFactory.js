@@ -65,6 +65,14 @@ suite( 'Testing HeroesFactory Service:', function() {
       $httpBackend.flush();
     });
 
+    test( 'it it appends a favorite flag to a hero on save', function() {
+      HeroesFactory.save(hero);
+      $httpBackend.flush();
+
+      assert.isDefined(HeroesFactory.heroes[0].favorite);
+      assert.isBoolean(HeroesFactory.heroes[0].favorite);
+    });
+
   });
 
   suite( 'Remove a hero', function() {
