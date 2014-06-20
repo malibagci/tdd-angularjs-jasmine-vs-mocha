@@ -8,7 +8,9 @@ angular.module( 'app.directives' )
         '<div class="thumbnail">' +
           '<img ng-src="{{hero.thumbnail.path}}.' +
             '{{hero.thumbnail.extension}}"></img>' +
-          '<button></button>' +
+          '<button ng-if="!hero.favorite" class="" ' + // not favorite
+            'ng-click="addToFavorites(hero)"></button>' +
+          '<button></button>' + // favorite
           '<div class="caption">' +
             '<h3>{{hero.name}}</h3>' +
           '</div>' +
