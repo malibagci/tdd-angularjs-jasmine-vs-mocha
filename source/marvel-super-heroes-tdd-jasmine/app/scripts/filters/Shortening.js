@@ -2,5 +2,7 @@
 
 angular.module( 'app.filters' )
   .filter( 'Shortening', function() {
-    return function() {};
+    return function(input, length) {
+      return input.slice(0, length) + '...';
+    };
   });
