@@ -38,4 +38,9 @@ suite( 'Testing Hero Directive:', function() {
     assert.include( HeroDirective.html(), 'button' );
   });
 
+  test( 'if it contains addToFavorites if the hero is no favorite hero', 
+    function() {
+      assert.include( HeroDirective.html(), 'addToFavorites' );
+  });
+
 });
