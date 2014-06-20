@@ -40,7 +40,7 @@ suite( 'Testing Hero Directive:', function() {
 
   test( 'if it contains addToFavorites if the hero is no favorite hero', 
     function() {
-      assert.include( HeroDirective.html(), 'addToFavorites' );
+      assert.include( HeroDirective.html(), 'addToFavorites(hero)' );
   });
 
 });
