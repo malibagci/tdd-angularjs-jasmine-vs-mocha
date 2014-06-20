@@ -30,7 +30,6 @@ angular.module( 'app.services' )
             result.favorite = false;
             angular.forEach( HeroesFactory.heroes, function(hero) {
               if(result.id === hero.id) {
-                console.log("HIT");
                 result.favorite = true;
               }
             });
