@@ -36,16 +36,18 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
   describe( 'Testing Marvel-API Search', function() {
 
-    var $httpBackend;
+    var $httpBackend,
+      requestURI,
+      reponse;
 
     beforeEach( inject(function(_$httpBackend_) {
       $httpBackend = _$httpBackend_;
 
       var apikey = '28969060faef0943a7c866a98e465269';
-      var requestURI = 'http://gateway.marvel.com:80/v1/public/characters';
+      requestURI = 'http://gateway.marvel.com:80/v1/public/characters';
       requestURI += '?limit=20&nameStartsWith=Hulk&apikey=' + apikey;
 
-      $httpBackend.expectGET(requestURI).respond({
+      response = {
         data: {
           results: [
             {
@@ -66,8 +68,10 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
             }
           ]
         }
-      });
+      }
 
+      $httpBackend.expectGET('/api/heroes').respond('');
+      $httpBackend.expectGET(requestURI).respond(response);
     }));
 
     it( 'should make a GET Request if search is called', function() {
@@ -141,6 +145,49 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
         expect(MarvelSearchFactory.searchResults[1].favorite).toBeDefined();
         expect(MarvelSearchFactory.searchResults[1].favorite).toEqual(
           jasmine.any(Boolean));
+    });
+
+    it( 'should set the favorite flag for each result to true if the results ' +
+      'is already in the heroes array in HeroesFactory', function() {
+
+        $httpBackend.resetExpectations();
+
+        $httpBackend.expectGET('/api/heroes').respond('');
+        $httpBackend.expectPOST('/api/heroes').respond('');
+        console.log(response);
+        $httpBackend.expectGET(requestURI).respond(response);
+
+        var HeroesCtrl,
+          HeroesFactory,
+          scope;
+
+        inject( function(_HeroesFactory_, $controller, $rootScope) {
+
+          HeroesFactory = _HeroesFactory_;
+          scope = $rootScope.$new();
+
+          HeroesCtrl = $controller( 'HeroesCtrl', {
+            $scope: scope,
+            MarvelSearchFactory: MarvelSearchFactory,
+            HeroesFactory: HeroesFactory
+          });
+
+          scope.addToFavorites({
+            id: 1,
+            name: 'Hulk'
+          });
+
+          MarvelSearchFactory.search('Hulk');
+
+          $httpBackend.flush();
+
+          expect( MarvelSearchFactory.searchResults[0].favorite ).toBeTruthy();
+          expect( MarvelSearchFactory.searchResults[1].favorite ).toBeFalsy();
+
+        });
+
+
+
     });
 
   });

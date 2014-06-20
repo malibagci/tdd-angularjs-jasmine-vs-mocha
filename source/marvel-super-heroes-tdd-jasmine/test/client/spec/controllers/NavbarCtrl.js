@@ -8,12 +8,16 @@ describe( 'Testing NavbarCtrl Controller:', function() {
 
   beforeEach( module('marvelSuperHeroesApp') );
 
-  beforeEach( inject( function($controller, $rootScope, _MarvelSearchFactory_) {
+  beforeEach( inject( function($controller, $rootScope, _MarvelSearchFactory_,
+    $httpBackend) {
     scope = $rootScope.$new();
     MarvelSearchFactory = _MarvelSearchFactory_;
     NavbarCtrl = $controller( 'NavbarCtrl', {
       $scope: scope
     });
+
+    // mock the initial request of HeroesFactory
+    $httpBackend.expectGET('/api/heroes').respond('');
   }));
 
   it( 'should be present', function() {
@@ -65,10 +69,10 @@ describe( 'Testing NavbarCtrl Controller:', function() {
 
     spyOn(MarvelSearchFactory, 'search');
 
-      scope.searchString = 'Hulk';
-      scope.$apply();
+    scope.searchString = 'Hulk';
+    scope.$apply();
 
-      expect(MarvelSearchFactory.search).toHaveBeenCalledWith('Hulk');
+    expect(MarvelSearchFactory.search).toHaveBeenCalledWith('Hulk');
 
   });
 
