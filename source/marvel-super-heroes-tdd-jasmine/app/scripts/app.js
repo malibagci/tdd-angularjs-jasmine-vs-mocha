@@ -3,6 +3,7 @@
 angular.module( 'app.controllers', [] );
 angular.module( 'app.services', [] );
 angular.module( 'app.filters', [] );
+angular.module( 'app.directives', [] );
 
 angular.module('marvelSuperHeroesApp', [
   'ngRoute',
@@ -12,6 +13,7 @@ angular.module('marvelSuperHeroesApp', [
   'app.controllers',
   'app.services',
   'app.filters',
+  'app.directives',
   'ui.bootstrap'
 ]).config( function($routeProvider) {
   $routeProvider.when('/', {
