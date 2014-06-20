@@ -20,4 +20,9 @@ describe( 'Testing Shortening Filter', function() {
         .toEqual( 'Hulk (Marv...' );
   });
 
+  it( 'should return the input string when the length is smaller than the ' +
+    'given length', function() {
+      expect( ShorteningFilter( 'Hulk', 10 ) ).toEqual( 'Hulk' );
+  });
+
 });
