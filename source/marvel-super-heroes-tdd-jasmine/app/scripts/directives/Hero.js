@@ -4,7 +4,7 @@ angular.module( 'app.directives' )
   .directive( 'hero', function() {
 
     return {
-      template: '<div></div>',
+      template: '<div>{{hero.name}}</div>',
       restrict: 'E'
     };
 
