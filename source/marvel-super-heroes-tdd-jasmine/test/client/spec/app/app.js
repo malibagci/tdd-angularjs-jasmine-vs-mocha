@@ -36,6 +36,10 @@ describe( 'Testing modules:', function() {
       expect(hasModule('app.filters')).toBeTruthy();
     });
 
+    it( 'should have a registered dependency to app.directives', function() {
+      expect(hasModule('app.directives')).toBeTruthy();
+    });
+
     it( 'should have a registered dependency to ngResource', function() {
       expect(hasModule('ngResource')).toBeTruthy();
     });
