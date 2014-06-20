@@ -28,6 +28,7 @@ angular.module( 'app.services' )
         factory.isSearching = false;
         factory.reset();
         angular.forEach(data.data.results, function(result) {
+          result.favorite = false;
           factory.searchResults.push(result);
         });
       });
