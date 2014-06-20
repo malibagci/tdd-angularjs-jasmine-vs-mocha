@@ -45,7 +45,15 @@ describe( 'Testing Hero Directive:', function() {
       hero.favorite = false;
       $scope.$apply();
 
-      expect( hero.html() ).toContain('addToFavorites');
+      expect( hero.html() ).toContain('addToFavorites(hero)');
+  });
+
+  it( 'should contain a button to remove a hero when s_he is favorite', 
+    function() {
+      hero.favorite = true;
+      $scope.$apply();
+
+      expect( hero.html() ).toContain('removeFromFavorites(hero.id)');
   });
 
 });
