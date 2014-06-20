@@ -15,4 +15,8 @@ suite( 'Testing Hero Directive:', function() {
     assert.include( HeroDirective.html(), 'div' );
   });
 
+  test( 'if it contains the given name of a hero', function() {
+    assert.include( HeroDirective.html(), 'Hulk' );
+  });
+
 });
