@@ -11,9 +11,16 @@ describe( 'Testing Hero Directive:', function() {
   beforeEach( inject( function(_$compile_, _$rootScope_) {
     $compile = _$compile_;
     $scope = _$rootScope_.$new();
-    $scope.hero = {};
+    $scope.hero = {
+      name: 'Hulk',
+      thumbnail: {
+        path: 'path_to_thumbnail',
+        extension: 'extension_of_thumbnail'
+      }
+    };
 
     hero = $compile( '<hero></hero>' )($scope);
+    $scope.$apply();
   }));
 
   it( 'should return at least one html div', function() {
@@ -21,9 +28,12 @@ describe( 'Testing Hero Directive:', function() {
   });
 
   it( 'should contain the name of a hero', function() {
-    $scope.hero.name = 'Hulk';
-    $scope.$apply();
     expect( hero.html() ).toContain( 'Hulk' );
+  });
+
+  it( 'should contain an image with the src of hero.thumbnail', function() {
+    expect( hero.html() ).toContain( 
+      '<img src="path_to_thumbnail.extension_of_thumbnail"></img>' );
   });
 
 });

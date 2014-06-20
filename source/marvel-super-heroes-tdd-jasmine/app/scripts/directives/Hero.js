@@ -4,7 +4,10 @@ angular.module( 'app.directives' )
   .directive( 'hero', function() {
 
     return {
-      template: '<div>{{hero.name}}</div>',
+      template:
+        '<div class="caption">' +
+          '<h3>{{hero.name}}</h3>' +
+        '</div>',
       restrict: 'E'
     };
 
