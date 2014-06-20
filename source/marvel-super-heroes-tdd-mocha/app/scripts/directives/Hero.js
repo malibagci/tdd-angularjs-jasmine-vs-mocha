@@ -7,6 +7,7 @@ angular.module( 'app.directives' )
         '<div>' + 
           '<img ng-src="{{hero.thumbnail.path}}.' +
             '{{hero.thumbnail.extension}}">' +
+          '<button></button>' +
           '<div class="caption">' +
             '<h3 ng-bind="hero.name"></h3>' +
           '</div>' +
