@@ -3,6 +3,10 @@
 angular.module( 'app.filters' )
   .filter( 'Shortening', function() {
     return function(input, length) {
-      return input.slice(0, length) + '...';
+      var postFix = '';
+      if(input.length > length) {
+        postFix = '...';
+      }
+      return input.slice(0, length) + postFix;
     };
   });
