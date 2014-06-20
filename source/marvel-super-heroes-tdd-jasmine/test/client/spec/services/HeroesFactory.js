@@ -25,9 +25,7 @@ describe( 'Testing HeroesFactory Service', function() {
   });
 
   it( 'should make an initial request to /api/heroes', function() {
-
     $httpBackend.flush();
-
   });
 
   describe('Save a hero:', function() {
@@ -51,17 +49,21 @@ describe( 'Testing HeroesFactory Service', function() {
     });
 
     it( 'should push a given hero when "save" is called', function() {
-
       expect(HeroesFactory.heroes.length).toEqual(0);
       HeroesFactory.save(hero);
       expect(HeroesFactory.heroes.length).toEqual(1);
-
     });
 
     it( 'should make a POST Request when save is called', function() {
       $httpBackend.expectPOST('/api/heroes').respond('');
       HeroesFactory.save(hero);
       $httpBackend.flush();
+    });
+
+    it( 'should add a "favorite" flag to a hero when s_he is saved', 
+      function() {
+        HeroesFactory.save(hero);
+        expect(HeroesFactory.heroes[0].favorite).toBeDefined();
     });
 
   });
