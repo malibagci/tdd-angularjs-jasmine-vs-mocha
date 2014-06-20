@@ -25,4 +25,8 @@ suite( 'Testing Shortening Filter:', function() {
     assert.equal( ShorteningFilter( 'Hulk', 10), 'Hulk');
   });
 
+  test( 'if it returns the input string when no length is defined', function() {
+    assert.equal( ShorteningFilter( 'Hulk' ), 'Hulk');
+  });
+
 });
