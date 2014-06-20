@@ -64,6 +64,7 @@ describe( 'Testing HeroesFactory Service', function() {
       function() {
         HeroesFactory.save(hero);
         expect(HeroesFactory.heroes[0].favorite).toBeDefined();
+        expect(HeroesFactory.heroes[0].favorite).toEqual(jasmine.any(Boolean));
     });
 
   });
