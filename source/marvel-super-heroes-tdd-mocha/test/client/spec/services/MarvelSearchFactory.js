@@ -70,6 +70,8 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
         }
       }
 
+      // initial GET request of HeroesFactory
+      $httpBackend.expectGET('/api/heroes').respond('');
       $httpBackend.expectGET(requestURI).respond(response);
     }));
 

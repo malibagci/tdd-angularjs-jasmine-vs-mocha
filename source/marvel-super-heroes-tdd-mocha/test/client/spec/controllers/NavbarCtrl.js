@@ -20,6 +20,9 @@ suite( 'Testing NavbarCtrl Controller:', function() {
       $scope: scope,
       MarvelSearchFactory: MarvelSearchFactory
     });
+
+    // initial GET request of HeroesFactory
+    $httpBackend.expectGET('/api/heroes').respond('');
   }));
 
   test( 'if it is present', function() {
