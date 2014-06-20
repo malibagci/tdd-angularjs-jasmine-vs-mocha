@@ -108,6 +108,16 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
 
     });
 
+    test( 'if it appends a favorite flag to each search result', function() {
+
+      MarvelSearchFactory.search('Hulk');
+      $httpBackend.flush();
+
+      assert.isDefined( MarvelSearchFactory.searchResults[0].favorite );
+      assert.isBoolean( MarvelSearchFactory.searchResults[0].favorite );
+
+    });
+
   });
 
 });
