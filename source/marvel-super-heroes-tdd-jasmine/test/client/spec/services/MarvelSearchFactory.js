@@ -154,7 +154,6 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
         $httpBackend.expectGET('/api/heroes').respond('');
         $httpBackend.expectPOST('/api/heroes').respond('');
-        console.log(response);
         $httpBackend.expectGET(requestURI).respond(response);
 
         var HeroesCtrl,
