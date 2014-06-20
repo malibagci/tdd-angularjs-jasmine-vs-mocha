@@ -38,6 +38,11 @@ suite( 'Testing: App Module', function() {
       assert.ok(hasModule('app.filters'));
   });
 
+  test( 'if the app has a registered dependency to "app.directives"',
+    function() {
+      assert.ok(hasModule('app.directives'));
+  });
+
   test( 'if the app has a registered dependency to "ngResource"', 
     function() {
       assert.ok(hasModule('ngResource'));
