@@ -1,8 +1,10 @@
 // test/client/spec/filters/Shortening.js
 
-suite( 'Testing Shortening Filter', function() {
+suite( 'Testing Shortening Filter:', function() {
 
   var ShorteningFilter;
+
+  setup( module( 'marvelSuperHeroesApp' ) );
 
   setup( inject( function( $filter) {
     ShorteningFilter = $filter( 'Shortening' );
