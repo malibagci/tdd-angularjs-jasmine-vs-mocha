@@ -29,4 +29,9 @@ suite( 'Testing Hero Directive:', function() {
     assert.include( HeroDirective.html(), 'Hulk' );
   });
 
+  test( 'if it contains an image with the correct src', function() {
+    assert.include( HeroDirective.html(), 
+      'path_to_thumbnail.extension_of_thumbnail' );
+  });
+
 });
