@@ -20,29 +20,32 @@ describe( 'Testing Hero Directive:', function() {
     };
 
     hero = $compile( '<hero></hero>' )($scope);
-    $scope.$apply();
   }));
 
   it( 'should return at least one html div', function() {
+    $scope.$apply();
     expect( hero.html() ).toContain( 'div' );
   });
 
   it( 'should contain the name of a hero', function() {
+    $scope.$apply();
     expect( hero.html() ).toContain( 'Hulk' );
   });
 
   it( 'should contain an image with the src of hero.thumbnail', function() {
+    $scope.$apply();
     expect( hero.html() ).toContain( 
       'src="path_to_thumbnail.extension_of_thumbnail"' );
   });
 
   it( 'should contain a button to save/delete a hero', function() {
-    expect( hero.html() ).toContain('<button>');
+    $scope.$apply();
+    expect( hero.html() ).toContain('<button');
   });
 
   it( 'should contain a button to save a hero when s_he is not favorite', 
     function() {
-      hero.favorite = false;
+      $scope.hero.favorite = false;
       $scope.$apply();
 
       expect( hero.html() ).toContain('addToFavorites(hero)');
@@ -50,7 +53,7 @@ describe( 'Testing Hero Directive:', function() {
 
   it( 'should contain a button to remove a hero when s_he is favorite', 
     function() {
-      hero.favorite = true;
+      $scope.hero.favorite = true;
       $scope.$apply();
 
       expect( hero.html() ).toContain('removeFromFavorites(hero.id)');
