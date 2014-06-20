@@ -20,4 +20,9 @@ suite( 'Testing Shortening Filter:', function() {
         10), 'Hulk (Marv...' );
   });
 
+  test( 'if it returns the input string when the length is smaller than the ' +
+    'given length', function() {
+    assert.equal( ShorteningFilter( 'Hulk', 10), 'Hulk');
+  });
+
 });
