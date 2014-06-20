@@ -34,4 +34,8 @@ suite( 'Testing Hero Directive:', function() {
       'path_to_thumbnail.extension_of_thumbnail' );
   });
 
+  test( 'if it contains a button to save/delete a hero', function() {
+    assert.include( HeroDirective.html(), 'button' );
+  });
+
 });
