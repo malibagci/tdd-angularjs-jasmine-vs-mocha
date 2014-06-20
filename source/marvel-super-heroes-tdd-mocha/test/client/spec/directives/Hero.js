@@ -9,6 +9,16 @@ suite( 'Testing Hero Directive:', function() {
   setup( inject(function($compile, $rootScope) {
     $scope = $rootScope.$new();
     HeroDirective = $compile('<hero></hero>')($scope);
+
+    $scope.hero = {
+      name: 'Hulk',
+      thumbnail: {
+        path: 'path_to_thumbnail',
+        extension: 'extension_of_thumbnail'
+      }
+    }
+
+    $scope.$apply();
   }));
 
   test( 'if it contains at least one div element', function() {
