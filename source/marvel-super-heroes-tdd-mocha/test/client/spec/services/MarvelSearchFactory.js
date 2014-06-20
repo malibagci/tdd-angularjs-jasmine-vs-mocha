@@ -36,16 +36,18 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
 
   suite( 'Searching:', function() {
 
-    var $httpBackend;
+    var $httpBackend,
+      requestURI,
+      response;
 
     setup( inject(function(_$httpBackend_) {
       $httpBackend = _$httpBackend_;
 
       var apikey = '28969060faef0943a7c866a98e465269';
-      var requestURI = 'http://gateway.marvel.com:80/v1/public/characters';
+      requestURI = 'http://gateway.marvel.com:80/v1/public/characters';
       requestURI += '?limit=20&nameStartsWith=Hulk&apikey=' + apikey;
 
-      $httpBackend.expectGET(requestURI).respond({
+      response = {
         data: {
           results: [
             {
@@ -66,7 +68,9 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
             }
           ]
         }
-      });
+      }
+
+      $httpBackend.expectGET(requestURI).respond(response);
     }));
 
     test( 'if it makes a HTTP-GET request when search is called', function() {
@@ -116,6 +120,36 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
       assert.isDefined( MarvelSearchFactory.searchResults[0].favorite );
       assert.isBoolean( MarvelSearchFactory.searchResults[0].favorite );
 
+    });
+
+    test( 'if it sets the favorite flag to true when the hero is already in ' +
+      'the heroes array in the HeroesFactory', function() {
+
+        var HeroesFactory,
+          scope;
+
+        // reconfigure httpBackend mock
+        $httpBackend.resetExpectations();
+
+        $httpBackend.expectGET('/api/heroes').respond('');
+        $httpBackend.expectPOST('/api/heroes').respond('');
+        $httpBackend.expectGET(requestURI).respond(response);
+
+        inject( function(_HeroesFactory_) {
+          HeroesFactory = _HeroesFactory_;
+
+          HeroesFactory.save({
+            id: 1,
+            name: 'Hulk'
+          });
+
+          MarvelSearchFactory.search('Hulk');
+          $httpBackend.flush();
+
+          assert.ok(MarvelSearchFactory.searchResults[0].favorite);
+          assert.notOk(MarvelSearchFactory.searchResults[1].favorite);
+
+        });
     });
 
   });
