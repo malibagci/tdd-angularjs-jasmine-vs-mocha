@@ -3,11 +3,9 @@
 'use strict';
 
 angular.module( 'app.services' )
-  .service( 'MarvelSearchFactory', function MarvelSearchFactory($http, $rootScope) {
+  .service( 'MarvelSearchFactory', function MarvelSearchFactory($http, HeroesFactory) {
 
     var factory = {};
-
-    // var service = this;
 
     var apikey = "28969060faef0943a7c866a98e465269";
 
@@ -29,6 +27,12 @@ angular.module( 'app.services' )
         factory.reset();
         angular.forEach(data.data.results, function(result) {
           result.favorite = false;
+          angular.forEach( HeroesFactory.heroes, function(hero) {
+            if(result.id === hero.id) {
+              console.log("HIT");
+              result.favorite = true;
+            }
+          });
           factory.searchResults.push(result);
         });
       });
