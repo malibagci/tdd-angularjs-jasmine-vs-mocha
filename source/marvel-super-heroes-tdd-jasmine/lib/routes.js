@@ -9,9 +9,6 @@ var api = require('./controllers/api'),
 module.exports = function(app) {
 
   // Server API Routes
-  app.route('/api/awesomeThings')
-    .get(api.awesomeThings);
-
   app.route('/api/heroes')
     .get(api.heroes)
     .post(api.createHero);

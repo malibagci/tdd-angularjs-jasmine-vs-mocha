@@ -1,33 +1,16 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Thing = mongoose.model('Thing'),
     HeroModel = mongoose.model('Hero'),
     ComicModel = mongoose.model('Comic'),
     EventModel = mongoose.model('Event'),
     SeriesModel = mongoose.model('Series');
 
-/**
- * Get awesome things
- */
-exports.awesomeThings = function(req, res) {
-  return Thing.find(function (err, things) {
-    if (!err) {
-      return res.json(things);
-    } else {
-      return res.send(err);
-    }
-  });
-};
-
 exports.heroes = function(req, res) {
   return HeroModel.find(function (err, heroes) {
-    console.log("ihi")
     if (!err) {
-      console.log("aha")
       return res.json(heroes);
     } else {
-      console.log("uhu")
       return res.send(err);
     }
   });
