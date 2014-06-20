@@ -43,4 +43,9 @@ suite( 'Testing Hero Directive:', function() {
       assert.include( HeroDirective.html(), 'addToFavorites(hero)' );
   });
 
+  test( 'if it contains removeFromFavorites if the hero is a favorite hero', 
+    function() {
+      assert.include( HeroDirective.html(), 'removeFromFavorites(hero.id)' );
+  });
+
 });
