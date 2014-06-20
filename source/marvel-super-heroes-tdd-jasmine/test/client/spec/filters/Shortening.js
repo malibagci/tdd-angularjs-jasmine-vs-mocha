@@ -14,4 +14,10 @@ describe( 'Testing Shortening Filter', function() {
     expect(ShorteningFilter).toBeDefined();
   });
 
+  it( 'should shorten an input string to the given length and append three ' + 
+    'dots', function() {
+      expect( ShorteningFilter( 'Hulk (Marvel: Avengers Alliance)', 10) )
+        .toEqual( 'Hulk (Marv...' );
+  });
+
 });
