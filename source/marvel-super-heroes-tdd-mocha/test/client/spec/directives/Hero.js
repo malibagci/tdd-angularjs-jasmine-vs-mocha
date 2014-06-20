@@ -15,7 +15,8 @@ suite( 'Testing Hero Directive:', function() {
       thumbnail: {
         path: 'path_to_thumbnail',
         extension: 'extension_of_thumbnail'
-      }
+      },
+      favorite: false
     }
 
     $scope.$apply();
@@ -45,6 +46,8 @@ suite( 'Testing Hero Directive:', function() {
 
   test( 'if it contains removeFromFavorites if the hero is a favorite hero', 
     function() {
+      $scope.hero.favorite = true;
+      $scope.$apply();
       assert.include( HeroDirective.html(), 'removeFromFavorites(hero.id)' );
   });
 

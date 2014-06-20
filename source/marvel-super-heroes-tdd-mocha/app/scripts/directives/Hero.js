@@ -7,9 +7,15 @@ angular.module( 'app.directives' )
         '<div>' + 
           '<img ng-src="{{hero.thumbnail.path}}.' +
             '{{hero.thumbnail.extension}}">' +
-          '<button></button>' +
+          // favorite
+          '<button ng-if="hero.favorite" class="" ' +
+            'ng-click="removeFromFavorites(hero.id)">' +
+              '<span class="glyphicon glyphicon-star"></span>' +
+              '<span ng-bind="\'Remove from favorites\'"></span>' +
+          '</button>' +
           // not favorite
-          '<button ng-if="!hero.favorite" ng-click="addToFavorites(hero)">' +
+          '<button ng-if="!hero.favorite" class="" ' +
+            'ng-click="addToFavorites(hero)">' +
             '<span class="glyphicon glyphicon-star-empty"></span>' +
             '<span ng-bind="\'Add to favorites\'"></span>' +
           '</button>' +
