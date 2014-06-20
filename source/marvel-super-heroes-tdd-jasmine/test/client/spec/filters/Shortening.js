@@ -25,4 +25,9 @@ describe( 'Testing Shortening Filter', function() {
       expect( ShorteningFilter( 'Hulk', 10 ) ).toEqual( 'Hulk' );
   });
 
+  it( 'should return the input string when the length is not defined', 
+    function() {
+      expect( ShorteningFilter( 'Hulk' ) ).toEqual( 'Hulk' );
+  });
+
 });
