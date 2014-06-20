@@ -40,4 +40,12 @@ describe( 'Testing Hero Directive:', function() {
     expect( hero.html() ).toContain('<button>');
   });
 
+  it( 'should contain a button to save a hero when s_he is not favorite', 
+    function() {
+      hero.favorite = false;
+      $scope.$apply();
+
+      expect( hero.html() ).toContain('addToFavorites');
+  });
+
 });
