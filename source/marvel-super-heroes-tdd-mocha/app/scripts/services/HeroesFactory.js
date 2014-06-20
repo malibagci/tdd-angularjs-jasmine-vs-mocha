@@ -9,6 +9,7 @@ angular.module( 'app.services' )
     factory.heroes = HeroResource.query();
 
     factory.save = function(hero) {
+      hero.favorite = true;
       factory.heroes.push(hero);
       HeroResource.save(hero);
     };
