@@ -33,7 +33,7 @@ describe( 'Testing Hero Directive:', function() {
 
   it( 'should contain an image with the src of hero.thumbnail', function() {
     expect( hero.html() ).toContain( 
-      '<img src="path_to_thumbnail.extension_of_thumbnail"></img>' );
+      'src="path_to_thumbnail.extension_of_thumbnail"' );
   });
 
 });

@@ -5,8 +5,12 @@ angular.module( 'app.directives' )
 
     return {
       template:
-        '<div class="caption">' +
-          '<h3>{{hero.name}}</h3>' +
+        '<div class="thumbnail">' +
+          '<img ng-src="{{hero.thumbnail.path}}.' +
+            '{{hero.thumbnail.extension}}"></img>' +
+          '<div class="caption">' +
+            '<h3>{{hero.name}}</h3>' +
+          '</div>' +
         '</div>',
       restrict: 'E'
     };
