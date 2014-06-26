@@ -22,7 +22,7 @@ The practical part of this thesis may be found in the directory "source/" and ma
 * "source/simple-tests": The tests in this folder help to understand the concepts and patterns of TDD
 * "source/marvel-super-heroes-tdd-jasmine" and "source/marvel-super-heroes-tdd-jasmine": In this folders are the AngularJS applications which have been developed test-driven (as mentioned in the abstract) located.
 
-**Note**: The data about the marvel universe is provided Marvel. © 2014 Marvel
+**Note**: The data about the marvel universe are provided by © 2014 Marvel.
 
 ### Prerequisites
 In order to try the simple-tests, the AngularJS applications, and the tests for them you need:
@@ -42,7 +42,13 @@ In order to try the simple-tests, the AngularJS applications, and the tests for 
     * `npm install && bower install`
 
 ### Run the tests/start the applications
-
+* simple-tests:
+  * navigate to the directory (e.g. `cd source/simple-tests/green-bar-patterns/fake-it`
+  * run `karma start karma.conf.js`
+* marvel-super-heroes-tdd-*:
+  * navigate to the directory (`cd source/marvel-super-heroes-tdd-jasmine (or -mocha)`
+  * to start the application run: `grunt serve`
+  * to run the tests run: `grunt test`
 
 
 
