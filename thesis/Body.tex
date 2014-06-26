@@ -20,7 +20,7 @@ Aus der Relevanz von TDD mit AngularJS ergibt sich die Problemstellung der Auswa
 \subsection{Methodenüberblick}
 \begin{itemize}
   \item \textbf{Test-driven Development (TDD)}: Eine theoretische Einführung in TDD ist grundlegend für den weiteren Inhalt der Arbeit.
-  \item \textbf{AngularJS}: AngularJS wird zusammen mit den dazugehörigen Komponenten theoretisch und praktisch dargestellt Theorie und Praxis arbeiten hier sehr dicht zusammen, um im Vorfeld alle Facetten des MVC/W-Frameworks abzuklären.
+  \item \textbf{AngularJS}: AngularJS wird zusammen mit den dazugehörigen Komponenten theoretisch und praktisch dargestellt. Theorie und Praxis arbeiten hier sehr dicht zusammen, um im Vorfeld alle Facetten des MVC/W-Frameworks abzuklären.
   \item \textbf{Testing Frameworks}: Um abklären zu können, welches der beiden JavaScript Testing-Frameworks {\glqq Jasmine\grqq} und {\glqq Mocha\grqq} besser geeignet ist, um alle Eigenschaften von AngularJS abzudecken, wird ein direkter theoretischer Vergleich der Frameworks und deren Eigenschaften gegeben. Darüber hinaus wird eine Applikation test-driven mit beiden Frameworks entwickelt. Die Applikation wird alle der relevanten Eigenschaften von AngularJS behandeln.
 \end{itemize}
 
@@ -47,13 +47,13 @@ In der Webentwicklung gibt es laut \cite[3]{Johansen:2011} ein Test-Schema, welc
   \item die geschriebenen Änderungen überprüfen
   \item wiederholen
 \end{enumerate}
-Wird dieses Schema angewandt, so spricht man von \glqq{manuellem\grqq} Testen. Manuelles Testen ist jedoch zeit-intensiv, nicht reproduzierbar und fehleranfällig \autocite[3]{Johansen:2011}. Wenn eine Webapplikation manuell getestset wird, und es kommt zu einer Änderung, so muss jegliche Funktionalität, welche von der Änderung abhängt oder beinflusst wird, ebenfalls manuell getestet werden. Dazu kommt noch, dass unterschiedliche Browser JavaScript unterschiedlich interpretieren, dass heißt, es müssen alle Änderungen manuell in mehreren Browsern getestet werden. Eine erhöhte Fehleranfälligkeit erklärt sich dadurch, dass es nicht ausschließbar ist, dass bei dem einen oder anderen manuellen Test, etwaige Eventualitäten übersehen werden, welche bei vorhergehenden Durchläufen getestet wurden.
+Wird dieses Schema angewandt, so spricht man von \glqq{manuellem\grqq} Testen. Manuelles Testen ist jedoch zeit-intensiv, nicht reproduzierbar und fehleranfällig \autocite[3]{Johansen:2011}. Wenn eine Webapplikation manuell getestet wird, und es kommt zu einer Änderung, so muss jegliche Funktionalität, welche von der Änderung abhängt oder beinflusst wird, ebenfalls manuell getestet werden. Dazu kommt noch, dass unterschiedliche Browser JavaScript unterschiedlich interpretieren, dass heißt, es müssen alle Änderungen manuell in mehreren Browsern getestet werden. Eine erhöhte Fehleranfälligkeit erklärt sich dadurch, dass es nicht ausschließbar ist, dass bei dem einen oder anderen manuellen Test, etwaige Eventualitäten übersehen werden, welche bei vorhergehenden Durchläufen getestet wurden.
 
 Dem manuellen Testen steht das automatisierte Testen gegenüber. Beim automatisierten Testen werden Tests geschrieben, welche die Korrektheit einer Software, beziehungsweise einer Software-Komponente, überprüfen sollen. Wenn eine Änderung stattfindet, werden die geschriebenen Tests ausgeführt und die/der EntwicklerIn erhält direkt positives oder negatives Feedback. Automatisiertes Testen ermöglicht es, Tests zu reproduzieren, und ist somit auch nicht so zeit-intensiv wie manuelles Testen. Die Tests sorgen darüber hinaus für eine geringere Fehleranfälligkeit, da immer alle Tests ausgeführt werden und somit auch keine Eventualität, welche beim letzten Durchlauf getestet wurde, übersehen wird.
 
-Da das Test-Schema des manuellen Testens auf Dauer zu viele Probleme mit sich bringt, wurden laut \cite[xix]{Johansen:2011} viele Tools, welche aus anderen Programmiersprachen bekannt sind, entwickelt, um JavaScript-EntwicklerInnen das Programmieren zu vereinfachen. Dieses Tools sind beispielsweise Debugger, Profiler oder Testing-Frameworks. Testing-Frameworks, wie beispielsweise \glqq{Jasmine\grqq} oder \glqq{Mocha\grqq}, bieten die notwendige Funktionalität an, um JavaScript automatisiert Testen zu können.
+Da das Test-Schema des manuellen Testens auf Dauer zu viele Probleme mit sich bringt, wurden laut \cite[xix]{Johansen:2011} viele Tools, welche aus anderen Programmiersprachen bekannt sind, entwickelt, um JavaScript-EntwicklerInnen das Programmieren zu vereinfachen. Diese Tools sind beispielsweise Debugger, Profiler oder Testing-Frameworks. Testing-Frameworks, wie \glqq{Jasmine\grqq} oder \glqq{Mocha\grqq}, bieten die notwendige Funktionalität an, um JavaScript automatisiert Testen zu können.
 
-Auch das Ausführen der Tests wird vereinfacht. Um den Entwicklungsprozess optimieren zu können, ist es bei einigen JavaScript-IDEs (Integrated Development Environment, beispielsweise \glqq{WebStorm\grqq}\footnote{http://www.jetbrains.com/webstorm/}) möglich, die Tests via Shortcut zu starten. Wenn keine IDE, sondern ein simpler Code-Editor (wie \glqq{Sublime-Text\grqq}\footnote{http://www.sublimetext.com/}) bevorzugt wird, bieten einige Frameworks die Möglichkeit an, gewisse Code- und Test-Dateien auf Änderungen zu überwachen. Wenn eine Änderung durchgeführt wurde, werden automatisch alle Tests durchgeführt.
+Auch das Ausführen der Tests wird vereinfacht. Um den Entwicklungsprozess optimieren zu können, ist es bei einigen JavaScript-IDEs (Integrated Development Environment, beispielsweise \glqq{WebStorm\grqq}\footnote{http://www.jetbrains.com/webstorm/}) möglich, die Tests via Shortcut zu starten. Wenn keine IDE, sondern ein Code-Editor (wie \glqq{Sublime-Text\grqq}\footnote{http://www.sublimetext.com/}) bevorzugt wird, bieten einige Frameworks die Möglichkeit an, gewisse Code- und Test-Dateien auf Änderungen zu überwachen. Wenn eine Änderung durchgeführt wurde, werden automatisch alle Tests durchgeführt.
 
 Ein weiteres Tool, um das automatisierte Testen von JavaScript zu vereinfachen, ist ein \glqq{Test-Runner\grqq} -- beispielsweise \glqq{Karma\grqq}\footnote{http://karma-runner.github.io/0.12/}. Ein Test-Runner startet einen oder mehrere Browser und führt die geschriebenen Tests in diesem/n aus. Dadurch wird auch die Problematik der unterschiedlichen JavaScript-Interpretation gelöst, denn es können gleichzeitig verschiedene Browser gestartet werden.
 
@@ -77,7 +77,7 @@ Unit-Tests können zu jeder Zeit ausgeführt werden, ...
 \subsubsection{Integration-Tests}
 Um beispielsweise eine Uhr zu testen, benötigt man beides, Unit- sowie Integration-Tests. Unit-Tests sind für das Testen der einzelnen Zahnräder der Uhr zuständig. Diese werden isoliert auf ihre Korrektheit getestet. Integration-Tests hingegen testen, wie die Zähne der einzelnen Zahnräder ineinandergreifen und ob die Uhr als ganzes richtig funktioniert.
 
-Der Nachteil von Integrations-Tests ist, dass diese im Vergleich zu Unit-Tests eher langsam sind. Mit Integration-Tests können dafür Verbindungen und Abhängigkeiten zwischen einzelnen Komponenten getestet werden. 
+Der Nachteil von Integration-Tests ist, dass diese im Vergleich zu Unit-Tests eher langsam sind. Mit Integration-Tests können dafür Verbindungen und Abhängigkeiten zwischen einzelnen Komponenten getestet werden. 
 
 \subsubsection{End-to-End-Tests}
 Eine weitere Art von Tests, von welcher in der Webentwicklung gesprochen wird, ist das \glqq{End-to-End (E2E)\grqq}-Testing. Beim E2E-Testing werden ähnlich zum Integration-Test auch Abhängigkeiten getestet. Der Unterschied ist jedoch, dass beim E2E-Test eine Webapplikation im Browser getestet wird. Es werden beispielsweise Aktionen simuliert, welche von einer/m NutzerIn erwartet werden (Klicks oder das Abschicken von Formularen), das DOM inspiziert und überprüft, oder Routen getestet.
@@ -177,7 +177,7 @@ describe("Calculus - Simple addition", function() {
 });
 \end{lstlisting}
 
-Dieser Test (Listing \ref{listing:tdd-simple-addition}) wird per Kommandozeile im Browser \glqq{PhantomJS\grqq} ausgeführt. Der Befehl dafür lautet: \glqq{karma start karma-simple.conf.js\grqq}. Der erste Test ist geschrieben, jedoch gibt es noch keine Implementierung, dass heißt hier wird ein negatives Testergebnis erwartet. Das erwartet Ergebnis ist auf Abbildung \ref{figure:tdd-simple-step-1-1} zu sehen.
+Dieser Test (Listing \ref{listing:tdd-simple-addition}) wird per Kommandozeile im Browser \glqq{PhantomJS\grqq} ausgeführt. Der Befehl dafür lautet: \glqq{karma start karma.conf.js\grqq}. Der erste Test ist geschrieben, jedoch gibt es noch keine Implementierung, dass heißt hier wird ein negatives Testergebnis erwartet. Das erwartete Ergebnis ist auf Abbildung \ref{figure:tdd-simple-step-1-1} zu sehen.
 
 \begin{figure}[H]
   \centering
@@ -275,7 +275,7 @@ Wie bereits erwähnt, geht es bei TDD nicht nur um eine möglichst hohe Test-Dic
 Eine weitere Methode TDD einzusetzen, betrifft das Lernen des Umgangs mit einem neuen Appliation Programming Interface (API) oder einer neuen Bibliothek. Wenn man eine neue Bibliothek verwendet, bietet es sich an, für diese Tests zu schreiben, anstatt direkt Implementierungen damit vorzunehmen -- ansonsten sollten keine Tests für externe Software notwendig sein.
 
 \paragraph{Regression Test}
-Wenn ein Fehler in einer Applikation auftritt, so ist eine Variante, dieses Problem zu lösen, direkt den Fehler zu finden, zu behen, zu überprüfen und damit den Fehler abzuhaken. Mit dieser Variante gibt es allerdings keine Möglichkeit, zu garantieren, dass dieser Fehler (durch Abhängigkeiten zu anderen Komponenten) nicht erneut auftritt.
+Wenn ein Fehler in einer Applikation auftritt, so ist eine Variante, dieses Problem zu lösen, direkt den Fehler zu finden, zu beheben, zu überprüfen und damit den Fehler abzuhaken. Mit dieser Variante gibt es allerdings keine Möglichkeit, zu garantieren, dass dieser Fehler (durch Abhängigkeiten zu anderen Komponenten) nicht erneut auftritt.
 
 Auch TDD kann keine 100\%-ige Fehler-Freiheit garantieren. Sollte ein Problem berichtet werden, ist der erste Schritt, einen neuen Test für dieses Problem zu verfassen. Der Test muss den einfachsten Fall, welcher das Fehlverhalten hervorruft, behandeln. Durch das nachträgliche Absolvieren des TDD-Kreislaufs wird sichergestellt, dass genau dieser Fehler nicht erneut auftritt.
 
@@ -288,7 +288,7 @@ Die \glqq{Red Bar Patterns\grqq} helfen dabei, die notwendigen Tests zu verfasse
 
 Um die Abstände der \glqq{Rot-Grün-Refactoring\grqq} Zyklen so gering wie möglich zu halten, wird immer die einfachste Variante aller möglichen Implementierungen verwendet: Eine Konstante zurückgeben.
 
-Nachdem der Test grün ist, wird Schritt für Schritt die Implementierung richtig gestellt und die Konstante mit Variablen in einen Ausdruck gewandelt. Hier stellt sich jedoch die Frage \glqq{Wieso offensichtlich falschen Code schreiben?\grqq} -- Die Antwort darauf lautet: \glqq{Um den Test schnell erfolgreich laufen zu lassen.\grqq}
+Nachdem der Test grün ist, wird Schritt für Schritt die Implementierung richtig gestellt und die Konstante mit Variablen in einen Ausdruck gewandelt. Hier stellt sich jedoch die Frage \glqq{Wieso offensichtlich falschen Code schreiben?\grqq} -- Die Antwort darauf lautet: \glqq{Um den Test schnell positiv abschließen zu können.\grqq}
 
 Laut \cite[152]{Beck:2003} hat dieses Muster zwei starke Effekte. Wenn der Test grün ist, fühlt man sich sicher. Man kann sich voll und ganz auf das richtige Refactoring konzentrieren. Also einerseits erfüllt \glqq{Fake it\grqq} einen psychologischen Effekt. Andererseits hilft es bei der Abgrenzung von zukünftigen Problemen. Wie schon erwähnt, dient TDD auch dazu, den Fokus und die Konzentration immer bei dem aktuellen Problem zu halten. Als ersten Schritt eine Konstante zurückzugeben, unterstützt die/den EntwicklerIn dabei.
 
@@ -398,7 +398,7 @@ var sum = function(augend, addend) {
 
 \paragraph{Obvious Implementation}
 
-Wie die bisherigen Beispiele für \glqq{Fake it\grqq} und \glqq{Triangulate\grqq} zeigen, handelt es sich dabei um wirklich kleine Schritte. Speziell anhand dieses Beispiels lässt sich das dritte Green Bar Patterns erklären: \glqq{Obvious Implementation\grqq}.
+Wie die bisherigen Beispiele für \glqq{Fake it\grqq} und \glqq{Triangulate\grqq} zeigen, handelt es sich dabei um wirklich kleine Schritte. Speziell anhand dieses Beispiels lässt sich das dritte Green Bar Pattern erklären: \glqq{Obvious Implementation\grqq}.
 
 Wenn eine Operation so einfach ist, wie in dem vorangegangenem Beispiel, spricht nichts dagegen, die offensichtliche Implementierung direkt zu verwenden.
 Wenn die Probleme allerdings komplizierter werden, ist es oft schwierig, die Eigenschaften \glqq{sauber\grqq} und \glqq{funktionierend\grqq} gleichzeitig zu erreichen. Außerdem soll der Abstand zwischen den Zyklen möglichst gering gehalten werden, was bei einer offensichtlichen Lösung für ein großes Problem eventuell nicht eingehalten werden kann.
@@ -509,7 +509,7 @@ var sum = function(numbersToSumUp) {
 
 \newpage
 \subsubsection{Mocks, Stubs \& Spies}
-In der Entwicklung werden Komponenten mit unterschiedlicher Komplexität verwendet. Es gilt allerdings, alle Komponenten (insbesondere bei TDD) zu testen. Das bedeutet, dass manche Komponenten ressourcen-intensivere Objekte verwenden als andere. Viele ressourcen-intensive Objekte in einem Test zu verwenden, wirkt sich negativ auf die Testdauer aus. Eine längere Testdauer führt dazu, dass diese Tests von EntwicklerInnen tendenziell seltener ausgeführt werden \autocite[4]{Johansen:2011}. Für das Entwickeln mittels TDD bedeutet es längere Rot-Grün-Refactoring Phasen und verzögertes Feedback für die/ den EntwicklerIn.
+In der Entwicklung werden Komponenten mit unterschiedlicher Komplexität verwendet. Es gilt allerdings, alle Komponenten (insbesondere bei TDD) zu testen. Das bedeutet, dass manche Komponenten ressourcen-intensivere Objekte verwenden als andere. Viele ressourcen-intensive Objekte in einem Test zu verwenden, wirkt sich negativ auf die Testdauer aus. Eine längere Testdauer führt dazu, dass diese Tests von EntwicklerInnen tendenziell seltener ausgeführt werden \autocite[4]{Johansen:2011}. Für das Entwickeln mittels TDD bedeutet es längere Rot-Grün-Refactoring Phasen und verzögertes Feedback für die/den EntwicklerIn.
 
 Um langsame Tests zu vermeiden, werden die ressourcen-intensiven Objekte oft durch \glqq{Fake Objects\grqq}, also gefälschte Objekte, ersetzt. Es gibt einige Varianten, um Objekte für das Testen zu immitieren, die wichtigsten sind:
 
@@ -556,7 +556,7 @@ Die dritte Variante von Fake Objects sind \glqq{Spies\grqq}. Spies -- oder auch 
 Spies werden oft durch Stubs, welche die Aufrufe aufzeichnen und danach überprüfen, implementiert.
 
 \subsection{Refactoring}
-Nachdem die rote sowie grüne Phase des TDD-Kreislauf absolviert wurden, kommt es zu dritten Phase: Dem Refactoring. Da der Fokus dieser Arbeit auf dem Testen liegt, wird dieses Kapitel lediglich einen Überblick über Refactoring geben.
+Nachdem die rote sowie grüne Phase des TDD-Kreislauf absolviert wurden, kommt es zur dritten Phase: Dem Refactoring. Da der Fokus dieser Arbeit auf dem Testen liegt, wird dieses Kapitel lediglich einen Überblick über Refactoring geben.
 
 \glqq{Refactoring\grqq} ist eine Änderung einer Software, welche in der internen Struktur gemacht wurde, um diese verständlicher und leichter modifizierbar zu machen, ohne dass nach außen sichtbare Verhalten zu ändern \autocite[53]{Fowler:2012}. Das Verb \glqq{refactor\grqq} bedeutet, Software durch die Anwendung einer Serie von Refactorings umzustrukturieren, ohne das nach außen sichtbare Verhalten zu ändern \autocite[54]{Fowler:2012}.
 
@@ -626,9 +626,9 @@ AngularJS verfolgt laut \cite[13]{Kozlowski:2013} einen \glqq{pragmatischeren An
 \subsubsection{Data-Binding}
 In der klassischen Web Entwicklung war es üblich ein \glqq{User-Interace (UI)\grqq} zu erstellen, indem Daten und HTML am Server verschmolzen und abschließend an den Browser zur Darstellung ausgeliefert werden. So wurde das UI den NutzerInnen präsentiert. Das \glqq{Asynchronous JavaScript and XML\grqq} (AJAX) Konzept erweitert dies und ermöglicht es, nur einzelne Teile des UIs vom Client aus zu aktualisieren. Neue Daten können vom Server beantragt und anschließend damit das UI durch DOM-Manipulation aktualisiert werden.
 
-Diese Methode, um Daten zu aktualisieren, ist durchaus gängig, birgt aber folgende Problematik: Wenn neue Daten angefordert werden, muss sicher gestellt werden, dass die Daten in den korrekten Status für das UI (die Präsentation) sowie für die betreffenden JavaScript Objekt-Eigenschaften gesetzt werden.
+Diese Methode um Daten zu aktualisieren ist durchaus gängig, birgt aber folgende Problematik: Wenn neue Daten angefordert werden, muss sicher gestellt werden, dass die Daten in den korrekten Status für das UI (die Präsentation) sowie für die betreffenden JavaScript Objekt-Eigenschaften gesetzt werden.
 
-Angular löst dieses Problem durch \glqq{(Two-way) Data-Binding\grqq}. Im UI wird definiert, welche Teile zu welchen JavaScript Objekt.Eigenschaften gehören. Ändern sich nun die Daten an einer Stelle -- egal ob im UI oder in der Objekt-Eigenschaft -- so wird automatisch synchronisiert (deshalb auch \glqq{Two-way\grqq}). Dadurch werden DOM-Zugriffe und Event-Handler wie beispielsweise \glqq{onChange()\grqq} eliminiert. Werden neue Daten von Server angefragt, so müssen diese lediglich in die betreffende JavaScript Objekt-Eigenschaft gesetzt werden und das Data-Binding sorgt dafür, dass das UI dementsprechend synchronisiert wird.
+Angular löst dieses Problem durch \glqq{(Two-way) Data-Binding\grqq}. Im UI wird definiert, welche Teile zu welchen JavaScript Objekt-Eigenschaften gehören. Ändern sich nun die Daten an einer Stelle -- egal ob im UI oder in der Objekt-Eigenschaft -- so wird automatisch synchronisiert (deshalb auch \glqq{Two-way\grqq}). Dadurch werden DOM-Zugriffe und Event-Handler wie beispielsweise \glqq{onChange()\grqq} eliminiert. Werden neue Daten von Server angefragt, so müssen diese lediglich in die betreffende JavaScript Objekt-Eigenschaft gesetzt werden und das Data-Binding sorgt dafür, dass das UI dementsprechend synchronisiert wird.
 
 \subsubsection{Dependency Injection}
 Angulars Dependency Injection System folgt dem Design Pattern \glqq{Law of Demeter\grqq}, welches auch unter \glqq{Principle of least Knowledge\grqq} bekannt ist. Es müssen keine Abhängigkeiten erstellt werden (wie zum Beispiel \glqq{Klasse foo benötigt Abhängigkeiten zu den Modulen bar und foobar\grqq}), sondern die Klassen fragen direkt nach den Modulen, welche sie benötigen.
@@ -690,30 +690,26 @@ Angular wird bereits mit einigen nützlichen Filtern ausgeliefert. Beispielsweis
 \subsubsection{Services}
 Ein Angular Service wird verwendet, um Code oder verschiedene Stati über eine Angular Applikation teilen zu können. Sie werden über Angulars Dependency Injection instanziiert.
 
-Folgendes Beispiel verdeutlicht die Funktionsweise und Verwendung von Services:
+Listing \ref{listing:angular-services} verdeutlicht die Funktionsweise und Verwendung von Services:
 
 Controller \glqq{FooCtrl\grqq} und Controller \glqq{BarCtrl\grqq} sind beide abhängig von dem Status des Models \glqq{FooBar\grqq}. Es wird ein Service \glqq{FooBarService\grqq} erstellt, um den Status teilen zu können. Die Controller verwenden den Service via Dependency Injection:
 
-\begin{lstlisting}[language=JavaScript, caption=AngularJS - Services]
+\begin{lstlisting}[language=JavaScript, caption=AngularJS - Services, label=listing:angular-services]
 
 angular.module('App', []).
   service('FooBarService', function(FooBarService) {
     this.fooBar = false;
-
-    this.setFooBar = function(state) {
-      this.fooBar = state;
-    }
   }).
-  controller('FooCtrl', function(FooCtrl, FooBarService) {
-    $scope.fooBar = FooBarService.fooBar;
+  controller('FooCtrl', function($scope, FooBarService) {
+    $scope.fooBarService = FooBarService;
   }).
-  controller('BarCtrl', function(BarCtrl, FooBarService) {
-    $scope.fooBar = FooBarService.fooBar;
+  controller('BarCtrl', function($scope, FooBarService) {
+    $scope.fooBarService = FooBarService;
   });
 
 \end{lstlisting}
 
-Wenn nun der \glqq{FooCtrl\grqq} Controller \glqq{FooBarService.setFooBar(true)\grqq} aufruft, so wird automatisch der \$scope des \glqq{BarCtrl\grqq} Controllers aktualisiert.
+Wenn nun der \glqq{FooCtrl\grqq} Controller \glqq{\$scope.fooBarService.fooBar = true\grqq} aufruft, so wird automatisch der \$scope des \glqq{BarCtrl\grqq} Controllers aktualisiert.
 
 Services sind \autocite[Services]{Angular:DevGuide}...
 \begin{itemize}
@@ -1047,7 +1043,7 @@ describe("A spy", function() {
 
 \newpage
 \subsection{Mocha}
-Mocha ist das zweite JavaScript Testing Framework, mit welchem in dieser Arbeit eine AngularJS Applikation test-driven entwickelt wird. Die Flexiblität Mochas wird auf der offiziellen Webseite des Testing Frameworks \glqq{http://visionmedia.github.io/mocha/\grqq} betont. Die folgenden Kapitel erläutern die Flexiblität des Frameworks und die damit-einhergehenden Unterschiede zu Jasmine.
+Mocha ist das zweite JavaScript Testing Framework, mit welchem in dieser Arbeit eine AngularJS Applikation test-driven entwickelt wird. Die Flexiblität Mochas wird auf der offiziellen Webseite des Testing Frameworks\footnote{http://visionmedia.github.io/mocha/} betont. Die folgenden Kapitel erläutern die Flexiblität des Frameworks und die damit-einhergehenden Unterschiede zu Jasmine.
 
 \subsubsection{Interfaces}
 Mocha erlaubt die Auswahl eines Testing Interfaces. Damit ist der Stil, in welchem die Tests verfasst werden, gemeint. Jasmine gibt den Stil \glqq{BDD\grqq} vor. Folgende Interfaces sind bei Mocha verfügbar:
@@ -1190,20 +1186,20 @@ Auch hier wird bei Jasmine eine komplette Asertion-Bibliothek mit fertigen Match
 
 Mocha wird nicht mit einer fertigen Assertion-Bibliothek angeboten. Es stehen einige zur Auswahl, in dieser Arbeit wurde Chai verwendet. Chai wiederum bietet verschiedene Assertion-Stile an -- BDD (expect, should) und TDD (assert).
 
-Beide Frameworks bieten praktische Assertions/Matcher und es gibt bei beiden auch die Möglichkeit, eigene hinzuzufügen. Bei der theoretischen Analyse fiel auf, dass die Chai-Assertion \glqq{assert.equal\grqq} bei Objekten und Arrays lediglich die Referenz des Objekts vergleicht -- um Arrays oder andere Objekte vergleichen zu können, muss \glqq{assert.deepEqual\grqq} verwendet werden. Jasmine bietet zu diesem Zweck die Matcher \glqq{toEqual\grqq} und \glqq{toBe\grqq} (vergleicht die Referenz) an. Da toEqual JavaScript Primitive, Objekte sowie Arrays und toBe die Referenz, und dies für die Verwendung praktischer ist, ist Jasmine hier leicht im Vorteil.
+Beide Frameworks bieten praktische Assertions/Matcher und es gibt bei beiden auch die Möglichkeit, eigene hinzuzufügen. Bei der theoretischen Analyse fiel auf, dass die Chai-Assertion \glqq{assert.equal\grqq} bei Objekten und Arrays lediglich die Referenz des Objekts vergleicht -- um Arrays oder andere Objekte vergleichen zu können, muss \glqq{assert.deepEqual\grqq} verwendet werden. Jasmine bietet zu diesem Zweck die Matcher \glqq{toEqual\grqq} und \glqq{toBe\grqq} an. Da toEqual JavaScript Primitive, Objekte sowie Arrays vergleicht, toBe hingegen die Referenz darauf, und dies für die Verwendung praktischer ist, ist Jasmine hier leicht im Vorteil.
 
-Die Flexibilität hinsichtlich der Auswahl verschiedener Assertion-Stile, könnte bei diesem Punkt wieder zu einem Vorteil von Mocha gegenüber Jasmine führen, es gibt jedoch folgendes Problem: Weder Mocha noch Chai bieten zusätzliche Test-Funktionalität, wie Stubs oder Spies, an. Dies führt dazu, dass für das Testen einer AngularJS Applikation noch mindestens eine weitere Bibliothek ausgewählt werden muss. Chai bietet dafür Plugins an\footnote{http://chaijs.com/plugins}. Es gibt jedoch für diese Plugins keine Richtlinie, welche besagt, dass ein Plugin alle Assertion-Stile unterstützen muss. Die meisten Plugins (wie beispielsweise \glqq{chai-spies\grqq}) unterstützen nur die expect oder should Schreibweise. Für den assert-Stil müssen eigene Assertions geschrieben werden und dies verkompliziert den Entwicklungsprozess.
+Die Flexibilität hinsichtlich der Auswahl verschiedener Assertion-Stile könnte bei diesem Punkt wieder zu einem Vorteil von Mocha gegenüber Jasmine führen, es gibt jedoch folgendes Problem: Weder Mocha noch Chai bieten zusätzliche Test-Funktionalität, wie Stubs oder Spies, an. Dies führt dazu, dass für das Testen einer AngularJS Applikation noch mindestens eine weitere Bibliothek ausgewählt werden muss. Chai bietet dafür Plugins an\footnote{http://chaijs.com/plugins}. Es gibt jedoch für diese Plugins keine Richtlinie, welche besagt, dass ein Plugin alle Assertion-Stile unterstützen muss. Die meisten Plugins (wie beispielsweise \glqq{chai-spies\grqq}) unterstützen nur die expect oder should Schreibweise. Für den assert-Stil müssen eigene Assertions geschrieben werden und dies verkompliziert den Entwicklungsprozess.
 
 \subsection{Spies \& Stubs}
 Aus der praktischen Gegenüerstellung geht hervor, dass Spies und Stubs bei dem Testen einer AngularJS Applikation relativ häufig verwendet werden
  
-Jasmine bietet nur Spies an und lässt diese noch weiter konfigurieren (and.returns und and.callFake. Somit können Spies bei Jasmine auch als Stubs verwendet werden.
+Jasmine bietet nur Spies an und lässt diese noch weiter konfigurieren (and.returns und and.callFake). Somit können Spies bei Jasmine auch als Stubs verwendet werden.
 
 Da Mocha und Chai über keine Spies oder Stubs verfügen, und das Chai-Plugin chai-spies den assert-Stil nicht unterstützt, wurde in dieser Arbeit die Bibliothek Sinon.JS verwendet. Sinon.JS und das Plugin chai-spies haben Spies nicht als Stubs implementiert, sondern erweitern das eigentliche Objekt um Spy-Funktionalität. Dies bedeutet weiters, dass diese Spies die Funktionalität des eigentlichen Objekts nach wie vor ausführen (bei Jasmine ist dies durch and.callThrough() ebenfalls möglich).
 
 Um das gewünschte Verhalten erzielen zu können, wurden die Stubs von Sinon.JS verwendet, denn diese verfügen zusätzlich zur Standard-Stub Funktionalität über die Funktionalität von Spies \autocite{Sinon:Documentation}.
 
-Hier ist wegen der unerwarteten Funktionalität seitens chai-spies und Sinon.JS Jasmine im Vorteil.
+An diesem Punkt wird klar, dass für das Testen einer AngularJS Applikation mit Mocha, mindestens zwei weitere Bibliotheken notwendig sind. Dies stellt gegenüber Jasmines Gesamtpaket einen Nachteil für Mocha dar. Mehr Abhängigkeiten bedeuten erhöhten Aufwand um bei jeder Bibliothek am aktuellen Stand zu bleiben oder eventuelle Versionskonflikte bei Updates. Ein Gesamtpaket wie es Jasmine bietet, bringt auch den Vorteil, dass ein Stil vorgegeben und durchgezogen wird. Durch die Auswahl verschiedener zusätzlicher Bibliotheken werden eventuell auch Stile gemischt.
 
 \subsection{Mocks}
 Beide Frameworks (beziehungsweise Jasmine und Sinon.JS) bieten mehrere Mocks an. Diese werden jedoch in dieser Arbeit nicht behandelt, denn wie aus der praktischen Gegenüberstellung hervorgeht, bringt AngularJS die notwendigen Mocks (zum Beispiel \$httpBackend) selber mit.
@@ -1245,10 +1241,10 @@ Die Applikation wurde mit dem Yeoman Generator \glqq{generator-angular-fullstack
 \begin{itemize}
  \item Ein Basis AngularJS Setup mit einer Standardkonfiguration.
  \item Ein Basis Express\footnote{http://expressjs.com/} Setup für das Node Backend.
- \item Ein Beispiel-Mongoose(link)-Schema für das Arbeiten mit einer MongoDB\footnote{http://mongoosejs.com/} Datenbank.
+ \item Ein Beispiel-Mongoose\footnote{http://mongoosejs.com/}-Schema für das Arbeiten mit einer MongoDB Datenbank.
  \item Eine standard Testkonfiguration und Beispiel-Testeinträge für Frontend- sowie Backend-Tests (standardmäßig mit Karma und Jasmine).
  \item Ein Bower\footnote{http://bower.io/}-File für die Frontend-Ressourcen.
- \item Ein package.json-File für die Node\footnote{http://nodejs.org/}-Ressourcen.
+ \item Ein package.json-File für die Node\footnote{http://nodejs.org/}-Pakete.
  \item Ein Bootstrap\footnote{http://getbootstrap.com/} Paket für Standard-Styleeigenschaften.
  \item Ein Gruntfile mit vorkunfigurierten Tasks (zum Beispiel \glqq{grunt serve\grqq} oder \glqq{grunt test\grqq}).
 \end{itemize}
@@ -1262,12 +1258,14 @@ Um die fertigen Applikationen sowie die Tests starten beziehungsweise ausführen
 \dirtree{%
 .1 source/marvel-super-heroes-tdd-*.
 .2 app.
-.3 bower\_components\DTcomment{notwendigen Frontend Libs (z.B. Angular)}.
+.3 bower\_components\DTcomment{notwendigen Frontend Bibliotheken (z.B. Angular)}.
 .3 fonts\DTcomment{Iconfont für Bootstrap}.
 .3 scripts.
 .4 app.js\DTcomment{Angular-Konfiguration (Abhängigkeiten, Routen)}.
 .4 controllers.
-.4 services\DTcomment{Angular-Services}.
+.4 directives.
+.4 filters.
+.4 services.
 .3 styles\DTcomment{Eigene Styles}.
 .3 views.
 .4 404.html.
@@ -1283,11 +1281,10 @@ Um die fertigen Applikationen sowie die Tests starten beziehungsweise ausführen
 .3 client.
 .4 spec\DTcomment{alle relevanten Tests, welche während TDD enstanden sind}.
 .3 karma.conf.js\DTcomment{Karma Konfiguration für Tests (Framework, Browser)}.
-.3 server\DTcomment{mögliche Express und API Tests, irrelevant für das Thema}.
 }
 
 \subsubsection{Marvel Comics API \& Express Backend}
-Die Marvel Comics API bietet gratis 3000 mögliche Requests pro Tag an. Sie beinhaltet Charaktere, Comics, Stories, Events und Series. Der eigene API-Schlüssel kann unter \glqq{http://developer.marvel.com/\grqq} angefordert werden.
+Die Marvel Comics API bietet gratis 3000 mögliche Requests pro Tag an. Sie beinhaltet Charaktere, Comics, Stories, Events und Series. Der eigene API-Schlüssel kann unter \glqq{http://developer.marvel.com/\grqq} angefordert werden ein öffentlicher API-Schlüssel befindet sich jedoch im Versionskontrollsystem, damit die Applikationen problemlos nachgeschlagen und ausprobiert sowie getestet werden können.
 
 Ein HTTP-GET Request auf diese API setzt sich wie folgt zusammen:
 \begin{itemize}
@@ -1456,7 +1453,7 @@ Die folgenden Code-Auszüge betreffen entweder Jasmine oder Chai. Das heißt, es
 
 \newpage
 \subsubsection{Das Testen von Routen}
-Wie bereits in der Einleitung dieses Kapitels erwähnt, werden aufgrund der erhöhten Testdauer keine e2e-Tests verwendet. Um die Routen einer AngularJS Applikation zu testen, kann jedoch manuell der \$routeProvider injiziert und anschließend inspiziert werden.
+Wie bereits in der Einleitung dieses Kapitels erwähnt, werden aufgrund der erhöhten Testdauer keine E2E-Tests verwendet. Um die Routen einer AngularJS Applikation zu testen, kann jedoch manuell der \$routeProvider injiziert und anschließend inspiziert werden.
 
 \paragraph{Test -- Jasmine}
 \begin{lstlisting}[language=JavaScript, caption=TDD AngularJS - Routes]
@@ -1762,7 +1759,7 @@ angular.module( 'app.directives' )
             'ng-click="addToFavorites(hero)">' +
             '<span class="glyphicon glyphicon-star-empty"></span>' +
             '<span ng-bind="\'Add to favorites\'"></span>' +
-          '</button>' +
+          '</button>',
       restrict: 'E'
     }
   });
@@ -1771,7 +1768,7 @@ angular.module( 'app.directives' )
 
 \newpage
 \section{Conclusio}
-Die Forschungsfrage dieser Arbeit behandelt einerseits den Stand der Möglichkeit AngularJS test-driven zu entwickeln und andererseits einen Vergleich zweier, Testing-Frameworks um herauszufinden, welches der Frameworks geeigneter ist.
+Die Forschungsfrage dieser Arbeit behandelt einerseits den Stand der Möglichkeit AngularJS test-driven zu entwickeln und andererseits einen Vergleich zweier Testing-Frameworks, um herauszufinden welches der Frameworks geeigneter ist.
 
 Die theoretischen sowie praktischen Ausführungen über \glqq{Testing im Web\grqq}, \glqq{TDD\grqq} sowie \glqq{AngularJS\grqq} ergaben, dass TDD mit AngularJS bereits sehr gut möglich ist. Da das Framework schon einiges an Basis-Funktionalität bietet, kann anders als beim herkömmlichen TDD die kleine Schrittweise, welche unter anderem von \cite{Beck:2003} empfohlen wird, nicht immer eingehalten werden. AngularJS zeichnet sich besonders durch die nützlichen Mocks aus, welche mitausgeliefert werden, denn diese erleichtern das Testen sehr.
 
