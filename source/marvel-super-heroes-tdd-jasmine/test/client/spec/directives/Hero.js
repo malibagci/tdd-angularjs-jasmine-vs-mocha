@@ -1,5 +1,7 @@
 // test/client/spec/directives/Hero.js
 
+'use strict';
+
 describe( 'Testing Hero Directive:', function() {
 
   var $compile,
@@ -34,7 +36,7 @@ describe( 'Testing Hero Directive:', function() {
 
   it( 'should contain an image with the src of hero.thumbnail', function() {
     $scope.$apply();
-    expect( hero.html() ).toContain( 
+    expect( hero.html() ).toContain(
       'src="path_to_thumbnail.extension_of_thumbnail"' );
   });
 
@@ -43,20 +45,20 @@ describe( 'Testing Hero Directive:', function() {
     expect( hero.html() ).toContain('<button');
   });
 
-  it( 'should contain a button to save a hero when s_he is not favorite', 
+  it( 'should contain a button to save a hero when s_he is not favorite',
     function() {
       $scope.hero.favorite = false;
       $scope.$apply();
 
       expect( hero.html() ).toContain('addToFavorites(hero)');
-  });
+    });
 
-  it( 'should contain a button to remove a hero when s_he is favorite', 
+  it( 'should contain a button to remove a hero when s_he is favorite',
     function() {
       $scope.hero.favorite = true;
       $scope.$apply();
 
       expect( hero.html() ).toContain('removeFromFavorites(hero.id)');
-  });
+    });
 
 });

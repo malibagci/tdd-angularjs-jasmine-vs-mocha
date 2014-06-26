@@ -1,5 +1,7 @@
 // test/client/spec/controllers/HeroesCtrl.js
 
+'use strict';
+
 describe( 'Testing HeroesCtrl Controller:', function() {
 
   var HeroesCtrl,
@@ -22,7 +24,7 @@ describe( 'Testing HeroesCtrl Controller:', function() {
         HeroesFactory: HeroesFactory
       });
 
-  }));
+    }));
 
   it( 'should be present', function() {
     expect(HeroesCtrl).toBeDefined();
@@ -59,7 +61,7 @@ describe( 'Testing HeroesCtrl Controller:', function() {
 
       expect(scope.searchResults.length).toEqual(1);
 
-  });
+    });
 
   describe( 'Add a hero to favorites:', function() {
 
@@ -84,9 +86,9 @@ describe( 'Testing HeroesCtrl Controller:', function() {
 
         expect(scope.heroes.length).toEqual(1);
 
-    });
+      });
 
-    it( 'should call the save function of the HeroesFactory on addToFavorites', 
+    it( 'should call the save function of the HeroesFactory on addToFavorites',
       function() {
 
         spyOn(HeroesFactory, 'save');
@@ -94,7 +96,7 @@ describe( 'Testing HeroesCtrl Controller:', function() {
 
         expect(HeroesFactory.save).toHaveBeenCalled();
 
-    });
+      });
 
     it( 'should pass an object as argument on addToFavorites to the save ' +
       'function of the HeroesFactory', function() {
@@ -103,18 +105,18 @@ describe( 'Testing HeroesCtrl Controller:', function() {
 
         var hero = {
           id: 1,
-            name: 'Hulk',
-            thumbnail: {
-              path: 'path_to_thumbnail',
-              extension: 'extension_of_thumbnail'
-            }
+          name: 'Hulk',
+          thumbnail: {
+            path: 'path_to_thumbnail',
+            extension: 'extension_of_thumbnail'
+          }
         };
 
         scope.addToFavorites(hero);
 
         expect(HeroesFactory.save).toHaveBeenCalledWith(hero);
 
-    });
+      });
 
   });
 

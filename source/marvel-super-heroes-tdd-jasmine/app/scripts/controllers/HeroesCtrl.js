@@ -3,7 +3,7 @@
 'use strict';
 
 angular.module( 'app.controllers' )
-  .controller( 'HeroesCtrl', function($scope, MarvelSearchFactory, 
+  .controller( 'HeroesCtrl', function($scope, MarvelSearchFactory,
     HeroesFactory) {
     
       $scope.searchResults = MarvelSearchFactory.searchResults;
@@ -19,4 +19,4 @@ angular.module( 'app.controllers' )
         HeroesFactory.remove(id);
       };
 
-  });
+    });

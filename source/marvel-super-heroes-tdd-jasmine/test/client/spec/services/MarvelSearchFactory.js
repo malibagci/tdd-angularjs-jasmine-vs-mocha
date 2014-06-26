@@ -1,5 +1,7 @@
 // test/client/spec/services/MarvelSearchFactory.js
 
+'use strict';
+
 describe( 'Testing MarvelSearchFactory Service:', function() {
 
   var MarvelSearchFactory;
@@ -38,7 +40,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
     var $httpBackend,
       requestURI,
-      reponse;
+      response;
 
     beforeEach( inject(function(_$httpBackend_) {
       $httpBackend = _$httpBackend_;
@@ -68,7 +70,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
             }
           ]
         }
-      }
+      };
 
       $httpBackend.expectGET('/api/heroes').respond('');
       $httpBackend.expectGET(requestURI).respond(response);
@@ -81,7 +83,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
     });
 
-    it( 'should push results of a GET Request in the searchResults array', 
+    it( 'should push results of a GET Request in the searchResults array',
       function() {
 
         expect(MarvelSearchFactory.searchResults.length).toEqual(0);
@@ -89,7 +91,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
         $httpBackend.flush();
         expect(MarvelSearchFactory.searchResults.length).toEqual(2);
 
-    });
+      });
 
     it( 'should have results with names, ids and thumbnails after searching',
       function() {
@@ -102,9 +104,9 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
           .toEqual(jasmine.any(Number));
         expect(MarvelSearchFactory.searchResults[0].thumbnail)
           .toEqual(jasmine.any(Object));
-    });
+      });
 
-    it( 'should reset the searchResults when reset has been called', 
+    it( 'should reset the searchResults when reset has been called',
       function() {
 
         MarvelSearchFactory.search('Hulk');
@@ -113,18 +115,18 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
         MarvelSearchFactory.reset();
         expect(MarvelSearchFactory.searchResults.length).toEqual(0);
 
-    });
+      });
 
-    it( 'should set the isSearching flag to true, when search is called', 
+    it( 'should set the isSearching flag to true, when search is called',
       function() {
 
         expect(MarvelSearchFactory.isSearching).toBeFalsy();
         MarvelSearchFactory.search('Hulk');
         expect(MarvelSearchFactory.isSearching).toBeTruthy();
 
-    });
+      });
 
-    it( 'should set the isSearching flag to false, when the search is finished', 
+    it( 'should set the isSearching flag to false, when the search is finished',
       function() {
         
         expect(MarvelSearchFactory.isSearching).toBeFalsy();
@@ -132,9 +134,9 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
         $httpBackend.flush();
         expect(MarvelSearchFactory.isSearching).toBeFalsy();
 
-    });
+      });
 
-    it( 'should have a favorite flag for each result in searchResults', 
+    it( 'should have a favorite flag for each result in searchResults',
       function() {
         MarvelSearchFactory.search('Hulk');
         $httpBackend.flush();
@@ -145,7 +147,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
         expect(MarvelSearchFactory.searchResults[1].favorite).toBeDefined();
         expect(MarvelSearchFactory.searchResults[1].favorite).toEqual(
           jasmine.any(Boolean));
-    });
+      });
 
     it( 'should set the favorite flag for each result to true if the results ' +
       'is already in the heroes array in HeroesFactory', function() {
@@ -185,9 +187,7 @@ describe( 'Testing MarvelSearchFactory Service:', function() {
 
         });
 
-
-
-    });
+      });
 
   });
 

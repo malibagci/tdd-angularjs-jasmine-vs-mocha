@@ -1,5 +1,7 @@
 // test/client/spec/controllers/NavbarCtrl.js
 
+'use strict';
+
 suite( 'Testing NavbarCtrl Controller:', function() {
 
   var NavbarCtrl,
@@ -49,8 +51,8 @@ suite( 'Testing NavbarCtrl Controller:', function() {
         scope.searchString = 'Hulk';
         scope.$apply();
 
-        assert.ok(searchStub.called);        
-    });
+        assert.ok(searchStub.called);
+      });
 
     test( 'if search is only called when the input is greater equal than 4 ' +
       'characters', function() {
@@ -60,9 +62,9 @@ suite( 'Testing NavbarCtrl Controller:', function() {
 
         assert.notOk(searchStub.called);
 
-    });
+      });
 
-    test( 'if reset is called when the input is smaller than 4 characters', 
+    test( 'if reset is called when the input is smaller than 4 characters',
       function() {
 
         scope.searchString = 'Hul';
@@ -70,7 +72,7 @@ suite( 'Testing NavbarCtrl Controller:', function() {
 
         assert.ok(resetStub.called);
 
-    });
+      });
 
     test( 'if search is called with the inputString as argument', function() {
 

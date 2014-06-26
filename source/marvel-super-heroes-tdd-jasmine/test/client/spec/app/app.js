@@ -1,5 +1,7 @@
 // test/client/spec/app/app.js
 
+'use strict';
+
 describe( 'Testing modules:', function() {
 
   describe( 'App module:', function() {

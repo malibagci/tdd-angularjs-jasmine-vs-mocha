@@ -1,5 +1,7 @@
 // app/scripts/directives/Hero.js
 
+'use strict';
+
 angular.module( 'app.directives' )
   .directive( 'hero', function() {
 

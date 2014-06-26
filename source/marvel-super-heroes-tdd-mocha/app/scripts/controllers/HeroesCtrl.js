@@ -1,7 +1,9 @@
 // app/scripts/controllers/HeroesCtrl.js
 
+'use strict';
+
 angular.module( 'app.controllers' )
-  .controller( 'HeroesCtrl', function($scope, MarvelSearchFactory, 
+  .controller( 'HeroesCtrl', function($scope, MarvelSearchFactory,
     HeroesFactory) {
       $scope.searchResults = MarvelSearchFactory.searchResults;
       $scope.isSearching = MarvelSearchFactory.isSearching;
@@ -15,4 +17,4 @@ angular.module( 'app.controllers' )
       $scope.removeFromFavorites = function(id) {
         HeroesFactory.remove(id);
       };
-  });
+    });

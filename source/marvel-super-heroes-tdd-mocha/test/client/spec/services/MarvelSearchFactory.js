@@ -1,5 +1,7 @@
 // test/client/spec/services/MarvelSearchFactory.js
 
+'use strict';
+
 suite( 'Testing MarvelSearchFactory Service:', function() {
 
   var MarvelSearchFactory;
@@ -68,7 +70,7 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
             }
           ]
         }
-      }
+      };
 
       // initial GET request of HeroesFactory
       $httpBackend.expectGET('/api/heroes').respond('');
@@ -94,7 +96,7 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
         assert.isString(MarvelSearchFactory.searchResults[0].name);
         assert.isNumber(MarvelSearchFactory.searchResults[0].id);
         assert.isObject(MarvelSearchFactory.searchResults[0].thumbnail);
-    });
+      });
 
     test( 'if the reset function affects the searchResults array', function() {
       MarvelSearchFactory.search('Hulk');
@@ -127,8 +129,7 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
     test( 'if it sets the favorite flag to true when the hero is already in ' +
       'the heroes array in the HeroesFactory', function() {
 
-        var HeroesFactory,
-          scope;
+        var HeroesFactory;
 
         // reconfigure httpBackend mock
         $httpBackend.resetExpectations();
@@ -152,7 +153,7 @@ suite( 'Testing MarvelSearchFactory Service:', function() {
           assert.notOk(MarvelSearchFactory.searchResults[1].favorite);
 
         });
-    });
+      });
 
   });
 

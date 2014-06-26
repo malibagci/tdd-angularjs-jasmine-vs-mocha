@@ -1,5 +1,7 @@
 // test/client/spec/directives/Hero.js
 
+'use strict';
+
 suite( 'Testing Hero Directive:', function() {
 
   var HeroDirective,
@@ -17,7 +19,7 @@ suite( 'Testing Hero Directive:', function() {
         extension: 'extension_of_thumbnail'
       },
       favorite: false
-    }
+    };
 
     $scope.$apply();
   }));
@@ -31,7 +33,7 @@ suite( 'Testing Hero Directive:', function() {
   });
 
   test( 'if it contains an image with the correct src', function() {
-    assert.include( HeroDirective.html(), 
+    assert.include( HeroDirective.html(),
       'path_to_thumbnail.extension_of_thumbnail' );
   });
 
@@ -39,16 +41,16 @@ suite( 'Testing Hero Directive:', function() {
     assert.include( HeroDirective.html(), 'button' );
   });
 
-  test( 'if it contains addToFavorites if the hero is no favorite hero', 
+  test( 'if it contains addToFavorites if the hero is no favorite hero',
     function() {
       assert.include( HeroDirective.html(), 'addToFavorites(hero)' );
-  });
+    });
 
-  test( 'if it contains removeFromFavorites if the hero is a favorite hero', 
+  test( 'if it contains removeFromFavorites if the hero is a favorite hero',
     function() {
       $scope.hero.favorite = true;
       $scope.$apply();
       assert.include( HeroDirective.html(), 'removeFromFavorites(hero.id)' );
-  });
+    });
 
 });

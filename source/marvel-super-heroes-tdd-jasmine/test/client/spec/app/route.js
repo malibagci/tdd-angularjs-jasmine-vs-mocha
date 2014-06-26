@@ -1,5 +1,7 @@
 // test/client/spec/app/route.js
 
+'use strict';
+
 describe( 'Testing routes:', function() {
 
   var $route;

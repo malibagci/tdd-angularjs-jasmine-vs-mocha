@@ -1,5 +1,7 @@
 // test/client/spec/services/HeroesFactory.js
 
+'use strict';
+
 describe( 'Testing HeroesFactory Service', function() {
 
   beforeEach( module('marvelSuperHeroesApp') );
@@ -35,11 +37,11 @@ describe( 'Testing HeroesFactory Service', function() {
     beforeEach( function() {
       hero = {
         id: 1,
-          name: 'Hulk',
-          thumbnail: {
-            path: 'path_to_thumbnail',
-            extension: 'extension_of_thumbnail'
-          }
+        name: 'Hulk',
+        thumbnail: {
+          path: 'path_to_thumbnail',
+          extension: 'extension_of_thumbnail'
+        }
       };
     });
 
@@ -60,12 +62,12 @@ describe( 'Testing HeroesFactory Service', function() {
       $httpBackend.flush();
     });
 
-    it( 'should add a "favorite" flag to a hero when s_he is saved', 
+    it( 'should add a "favorite" flag to a hero when s_he is saved',
       function() {
         HeroesFactory.save(hero);
         expect(HeroesFactory.heroes[0].favorite).toBeDefined();
         expect(HeroesFactory.heroes[0].favorite).toEqual(jasmine.any(Boolean));
-    });
+      });
 
   });
 
@@ -76,23 +78,23 @@ describe( 'Testing HeroesFactory Service', function() {
       expect(HeroesFactory.remove).toEqual(jasmine.any(Function));
     });
 
-    it( 'should remove an entry of the heroes array with a given hero id ' + 
+    it( 'should remove an entry of the heroes array with a given hero id ' +
       '(not array index)', function() {
 
         HeroesFactory.save({
           id: 1,
-            name: 'Hulk',
-            thumbnail: {
-              path: 'path_to_thumbnail',
-              extension: 'extension_of_thumbnail'
-            }
+          name: 'Hulk',
+          thumbnail: {
+            path: 'path_to_thumbnail',
+            extension: 'extension_of_thumbnail'
+          }
         });
 
         expect(HeroesFactory.heroes.length).toEqual(1);
         HeroesFactory.remove(1);
         expect(HeroesFactory.heroes.length).toEqual(0);
 
-    });
+      });
 
     it( 'should make a DELETE Request when remove is called', function() {
       $httpBackend.expectDELETE('/api/heroes/1').respond('');

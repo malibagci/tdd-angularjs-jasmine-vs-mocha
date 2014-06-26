@@ -1,5 +1,7 @@
 // test/client/spec/controllers/NavbarCtrl.js
 
+'use strict';
+
 describe( 'Testing NavbarCtrl Controller:', function() {
 
   var NavbarCtrl,
@@ -29,7 +31,7 @@ describe( 'Testing NavbarCtrl Controller:', function() {
     expect(scope.searchString).toEqual(jasmine.any(String));
   });
 
-  it( 'should call the "search" function from MarvelSearchFactory, ' + 
+  it( 'should call the "search" function from MarvelSearchFactory, ' +
     'when the searchString changes', function() {
 
       spyOn(MarvelSearchFactory, 'search');
@@ -39,9 +41,9 @@ describe( 'Testing NavbarCtrl Controller:', function() {
 
       expect(MarvelSearchFactory.search).toHaveBeenCalled();
 
-  });
+    });
 
-  it( 'should only call search, when the inputString is greater equal 4 ' + 
+  it( 'should only call search, when the inputString is greater equal 4 ' +
     'characters', function() {
 
       spyOn(MarvelSearchFactory, 'search');
@@ -51,9 +53,9 @@ describe( 'Testing NavbarCtrl Controller:', function() {
 
       expect(MarvelSearchFactory.search).not.toHaveBeenCalled();
 
-  });
+    });
 
-  it( 'should call "reset", when the inputString is smaller than 4 characters', 
+  it( 'should call "reset", when the inputString is smaller than 4 characters',
     function() {
 
       spyOn(MarvelSearchFactory, 'reset');
@@ -63,7 +65,7 @@ describe( 'Testing NavbarCtrl Controller:', function() {
 
       expect(MarvelSearchFactory.reset).toHaveBeenCalled();
 
-  });
+    });
 
   it( 'should call "search" with a given string', function() {
 

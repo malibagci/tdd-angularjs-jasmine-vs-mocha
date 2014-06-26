@@ -1,5 +1,7 @@
 // app/scripts/filters/Shortening.js
 
+'use strict';
+
 angular.module( 'app.filters' )
   .filter( 'Shortening', function() {
     return function(input, length) {

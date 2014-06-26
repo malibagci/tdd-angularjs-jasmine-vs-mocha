@@ -1,10 +1,12 @@
 // app/scripts/directives/Hero.js
 
+'use strict';
+
 angular.module( 'app.directives' )
   .directive( 'hero', function() {
     return {
-      template: 
-        '<div class="thumbnail" ng-class="{\'favorite\':hero.favorite}">' + 
+      template:
+        '<div class="thumbnail" ng-class="{\'favorite\':hero.favorite}">' +
           '<img ng-src="{{hero.thumbnail.path}}.' +
             '{{hero.thumbnail.extension}}">' +
           // favorite
@@ -24,5 +26,5 @@ angular.module( 'app.directives' )
           '</div>' +
         '</div>',
       restrict: 'E'
-    }
+    };
   });

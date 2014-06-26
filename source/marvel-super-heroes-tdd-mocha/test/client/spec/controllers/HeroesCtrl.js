@@ -1,5 +1,7 @@
 // test/client/spec/controllers/HeroesCtrl.js
 
+'use strict';
+
 suite( 'Testing HeroesCtrl Controller:', function() {
 
   var HeroesCtrl,
@@ -29,8 +31,8 @@ suite( 'Testing HeroesCtrl Controller:', function() {
           path: 'path_to_thumbnail',
           extension: 'extension_of_thumbnail'
         }
-      }
-  }));
+      };
+    }));
 
   test( 'if it is present', function() {
     assert.isDefined(HeroesCtrl);
@@ -51,25 +53,23 @@ suite( 'Testing HeroesCtrl Controller:', function() {
     assert.isArray(scope.heroes);
   });
 
-  test( 'if a search in the factory affects the searchResults array', 
+  test( 'if a search in the factory affects the searchResults array',
     function() {
 
       assert.lengthOf(scope.searchResults, 0);
-
       MarvelSearchFactory.searchResults.push(hero);
-
       assert.lengthOf(scope.searchResults, 1);
 
-  });
+    });
 
-  test( 'if a change of the heroes array in the HeroesFactory affects the ' + 
+  test( 'if a change of the heroes array in the HeroesFactory affects the ' +
     'heroes array in the HeroesCtrl', function() {
 
       assert.lengthOf(scope.heroes, 0);
       HeroesFactory.heroes.push(hero);
       assert.lengthOf(scope.heroes, 1);
 
-  });
+    });
 
   suite('Testing addToFavorites', function() {
 
@@ -83,17 +83,17 @@ suite( 'Testing HeroesCtrl Controller:', function() {
       assert.isFunction(scope.addToFavorites);
     });
 
-    test( 'if addToFavorites calls the save function of the HeroesFactory', 
+    test( 'if addToFavorites calls the save function of the HeroesFactory',
       function() {
         scope.addToFavorites();
         assert.ok(saveStub.called);
-    });
+      });
 
     test( 'if addToFavorites calls the save function of the HeroesFactory ' +
       'with a hero argument', function() {
         scope.addToFavorites(hero);
         assert.ok(saveStub.calledWith(hero));
-    });
+      });
 
     test( 'if addToFavorites calls reset of MarvelSearchFactory', function() {
       var resetStub = sinon.stub(MarvelSearchFactory, 'reset');
@@ -116,17 +116,17 @@ suite( 'Testing HeroesCtrl Controller:', function() {
       assert.isFunction(scope.addToFavorites);
     });
 
-    test( 'if removeFromFavorites calls the remove function of the HeroesFactory',
-      function() {
+    test( 'if removeFromFavorites calls the remove function of the ' +
+      'HeroesFactory', function() {
         scope.removeFromFavorites();
         assert.ok(removeStub.called);
-    });
+      });
 
     test( 'if removeFromFavorites calls the remove function of the ' +
-      + 'HeroesFactory with a given id', function() {
+      'HeroesFactory with a given id', function() {
         scope.removeFromFavorites(1);
         assert.ok(removeStub.calledWith(1));
-    });
+      });
 
   });
 

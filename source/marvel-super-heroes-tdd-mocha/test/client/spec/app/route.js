@@ -1,5 +1,7 @@
 // test/client/spec/app/route.js
 
+'use strict';
+
 suite('Testing App Routes:', function() {
 
   var $route;
@@ -17,15 +19,15 @@ suite('Testing App Routes:', function() {
       assert.isDefined($route.routes['/']);
     });
 
-    test( 'if the root route has the correct templateUrl ("partials/heroes")', 
+    test( 'if the root route has the correct templateUrl ("partials/heroes")',
       function() {
         assert.equal($route.routes['/'].templateUrl, 'partials/heroes');
-    });
+      });
 
-    test( 'if the root route has the correct controller ("HeroesCtrl")', 
+    test( 'if the root route has the correct controller ("HeroesCtrl")',
       function() {
         assert.equal($route.routes['/'].controller, 'HeroesCtrl');
-    });
+      });
 
   });
 

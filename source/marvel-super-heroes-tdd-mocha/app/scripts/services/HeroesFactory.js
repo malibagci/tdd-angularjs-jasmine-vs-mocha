@@ -1,5 +1,7 @@
 // app/scripts/services/HeroesFactory.js
 
+'use strict';
+
 angular.module( 'app.services' )
   .factory( 'HeroesFactory', function($resource) {
 

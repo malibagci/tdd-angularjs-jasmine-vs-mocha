@@ -1,5 +1,7 @@
 // test/client/spec/services/HeroesFactory.js
 
+'use strict';
+
 suite( 'Testing HeroesFactory Service:', function() {
 
   var HeroesFactory,
@@ -24,7 +26,7 @@ suite( 'Testing HeroesFactory Service:', function() {
         path: 'path_to_thumbnail',
         extension: 'extension_of_thumbnail'
       }
-    }
+    };
   });
 
   test( 'if it is present', function() {
@@ -36,10 +38,10 @@ suite( 'Testing HeroesFactory Service:', function() {
     assert.isArray(HeroesFactory.heroes);
   });
 
-  test( 'if it makes an initial request to get the persistent heroes', 
+  test( 'if it makes an initial request to get the persistent heroes',
     function() {
       $httpBackend.flush();
-  });
+    });
 
   suite( 'Save a hero:', function() {
 
