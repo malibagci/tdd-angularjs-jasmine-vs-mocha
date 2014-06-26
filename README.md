@@ -43,10 +43,10 @@ In order to try the simple-tests, the AngularJS applications, and the tests for 
 
 ### Run the tests/start the applications
 * simple-tests:
-  * navigate to the directory (e.g. `cd source/simple-tests/green-bar-patterns/fake-it`
+  * navigate to the directory e.g. `cd source/simple-tests/green-bar-patterns/fake-it`
   * run `karma start karma.conf.js`
 * marvel-super-heroes-tdd-*:
-  * navigate to the directory (`cd source/marvel-super-heroes-tdd-jasmine (or -mocha)`
+  * navigate to the directory `cd source/marvel-super-heroes-tdd-jasmine (or -mocha)`
   * to start the application run: `grunt serve`
   * to run the tests run: `grunt test`
 
