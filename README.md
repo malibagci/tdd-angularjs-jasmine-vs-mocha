@@ -35,7 +35,7 @@ In order to try the simple-tests, the AngularJS applications, and the tests for 
 1. Clone this repository: `git clone git@github.com:Calvitium/tdd-angularjs-jasmine-vs-mocha.git && cd tdd-angular-jasmine-vs-mocha`
 2. Install dependencies:
   * simple-tests:
-    * `npm install -g karma karma-jasmine karma-jasmine-launcher`
+    * `npm install -g karma karma-jasmine karma-phantomjs-launcher`
   * marvel-super-heroes-tdd-*:
     * `npm install -g grunt-cli`
     * `cd source/marvel-super-heroes-tdd-jasmine (or -mocha)`
