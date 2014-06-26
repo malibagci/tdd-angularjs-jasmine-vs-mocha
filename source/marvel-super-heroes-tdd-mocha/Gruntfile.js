@@ -462,26 +462,12 @@ module.exports = function (grunt) {
     grunt.task.run(['serve']);
   });
 
-  grunt.registerTask('test', function(target) {
-    if (target === 'server') {
-      return grunt.task.run([
-        'env:test',
-        'mochaTest'
-      ]);
-    }
-
-    else if (target === 'client') {
-      return grunt.task.run([
-        'clean:server',
-        'concurrent:test',
-        'autoprefixer',
-        'karma'
-      ]);
-    }
-
-    else grunt.task.run([
-      'test:server',
-      'test:client'
+  grunt.registerTask('test', function() {
+    grunt.task.run([
+      'clean:server',
+      'concurrent:test',
+      'autoprefixer',
+      'karma'
     ]);
   });
 
