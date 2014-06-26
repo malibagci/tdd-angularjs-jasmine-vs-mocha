@@ -22,7 +22,7 @@ The practical part of this thesis may be found in the directory "source/" and ma
 * "source/simple-tests": The tests in this folder help to understand the concepts and patterns of TDD
 * "source/marvel-super-heroes-tdd-jasmine" and "source/marvel-super-heroes-tdd-jasmine": In this folders are the AngularJS applications which have been developed test-driven (as mentioned in the abstract) located.
 
-**Note**: The data about the marvel universe are provided by © 2014 Marvel.
+**Note**: The data about the marvel universe for the AngularJS application "marvel super heroes" are provided by © 2014 Marvel.
 
 ### Prerequisites
 In order to try the simple-tests, the AngularJS applications, and the tests for them you need:
