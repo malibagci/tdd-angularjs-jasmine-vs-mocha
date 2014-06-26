@@ -1,4 +1,4 @@
-# Test-Driven Development with AngularJS
+# Bachelor Thesis: Test-Driven Development with AngularJS
 ## A Comparison of the Testing-Frameworks Jasmine and Mocha
 
 ## Abstract
