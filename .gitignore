@@ -56,5 +56,6 @@ node_modules
 literature
 *.pdf
 *.run.xml
+thesis-signed/
 
 # angular-full-stack has its own .gitignore, see "/source/marvel-super-heroes/.gitignore" for further information
